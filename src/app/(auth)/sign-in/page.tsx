@@ -3,7 +3,6 @@
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,13 +17,14 @@ import { Icons } from '@/components/Icons'
 import { useState } from 'react'
 import FloatingLink from '@/components/FloatingLink'
 import Separator from '@/components/Separator'
+import { ArrowRight } from 'lucide-react'
 
 const Page = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const isGerente = searchParams.get('as') === 'gerente'
   const isFuncionario = searchParams.get('as') === 'funcionario'
-  const origin = searchParams.get('origin') // to make redirections
+  const origin = searchParams.get('origin')
   const [isLoading, setIsLoading] = useState(false)
 
   const continueAsFuncionario = () => {

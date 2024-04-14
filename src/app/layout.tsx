@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar/Navbar'
 import { cn } from '@/lib/utils'
 import { Toaster } from 'sonner'
 import Footer from '@/components/Footer'
+import Loader from '@/components/Loader'
 
 export const metadata: Metadata = {
   title: 'Four Parks',
@@ -38,7 +39,9 @@ export default function RootLayout({
         >
           <main className='relative flex flex-col min-h-screen'>
             <Navbar />
-            <div className='mx-10 mt-10 mb-20'>{children}</div>
+            <Loader>
+              <div className='mx-10 mt-10 mb-20'>{children}</div>
+            </Loader>
             <Footer />
           </main>
           <Toaster position='bottom-left' richColors />
