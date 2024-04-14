@@ -7,7 +7,7 @@ const Separator = () => {
         <span className='w-full border-t' />
       </div>
       <div className='relative flex justify-center text-xs uppercase'>
-        <span className='bg-background px-2 text-muted-foreground'>
+        <span className='bg-background-contrast px-2 text-muted-foreground'>
           <TrafficCone className='text-yellow-300' />
         </span>
       </div>
