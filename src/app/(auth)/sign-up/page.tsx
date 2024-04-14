@@ -15,7 +15,7 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import { useState } from 'react'
-import FloatingLink from '@/components/FloatingLink'
+import FloatingLink from '@/components/Buttons/FloatingButton'
 import Separator from '@/components/Separator'
 
 interface MonthOption {

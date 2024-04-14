@@ -4,10 +4,10 @@ import './globals.css'
 import { ThemeProvider } from '@/hooks/useThemeProvider'
 import Navbar from '@/components/Navbar/Navbar'
 import { cn } from '@/lib/utils'
-import { Toaster } from 'sonner'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
 import { Suspense } from 'react'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
   title: 'Four Parks',
@@ -45,7 +45,7 @@ export default function RootLayout({
             </Suspense>
             <Footer />
           </main>
-          <Toaster position='bottom-left' richColors />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

@@ -12,12 +12,14 @@ import {
   AuthCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { toast } from 'sonner'
 import { Icons } from '@/components/Icons'
 import { useState } from 'react'
-import FloatingLink from '@/components/FloatingLink'
+import FloatingLink from '@/components/Buttons/FloatingButton'
 import Separator from '@/components/Separator'
 import { ArrowRight } from 'lucide-react'
+import PrimaryButton from '@/components/Buttons/PrimaryButton'
+import SecondaryButton from '@/components/Buttons/SecondaryButton'
+import { toast } from 'sonner'
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -76,6 +78,15 @@ const Page = () => {
   // })
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+      toast('Haz iniciado sesión con exito!', {
+        description:
+          'Ahora puedes hacer uso de las funciones de nuestro sistema!',
+      })
+    }, 2000)
+
     // signIn({ email, password })
   }
 
@@ -130,9 +141,7 @@ const Page = () => {
                   </p>
                 )}
               </div>
-              <Button className='tracking-widest dark:font-semibold'>
-                INGRESAR
-              </Button>
+              <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
             </div>
             {!isFuncionario && !isGerente && (
               <div className='flex justify-center'>
@@ -154,64 +163,46 @@ const Page = () => {
 
           {isGerente && (
             <div className='w-full flex flex-col gap-2'>
-              <Button
+              <SecondaryButton
                 onClick={continueAsUsuario}
-                variant='secondary'
-                disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
-              >
-                CONTINUAR COMO USUARIO
-              </Button>
-              <Button
+                isLoading={isLoading}
+                text='CONTINUAR COMO USUARIO'
+              />
+              <SecondaryButton
                 onClick={continueAsFuncionario}
-                variant='secondary'
-                disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
-              >
-                CONTINUAR COMO FUNCIONARIO
-              </Button>
+                isLoading={isLoading}
+                text='CONTINUAR COMO FUNCIONARIO'
+              />
             </div>
           )}
 
           {isFuncionario && (
             <div className='w-full flex flex-col gap-2'>
-              <Button
+              <SecondaryButton
                 onClick={continueAsUsuario}
-                variant='secondary'
-                disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
-              >
-                CONTINUAR COMO USUARIO
-              </Button>
-              <Button
+                isLoading={isLoading}
+                text='CONTINUAR COMO USUARIO'
+              />
+              <SecondaryButton
                 onClick={continueAsGerente}
-                variant='secondary'
-                disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
-              >
-                CONTINUAR COMO GERENTE
-              </Button>
+                isLoading={isLoading}
+                text='CONTINUAR COMO GERENTE'
+              />
             </div>
           )}
 
           {!isFuncionario && !isGerente && (
             <div className='w-full flex flex-col gap-2'>
-              <Button
+              <SecondaryButton
                 onClick={continueAsFuncionario}
-                variant='secondary'
-                disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
-              >
-                CONTINUAR COMO FUNCIONARIO
-              </Button>
-              <Button
+                isLoading={isLoading}
+                text='CONTINUAR COMO FUNCIONARIO'
+              />
+              <SecondaryButton
                 onClick={continueAsGerente}
-                variant='secondary'
-                disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
-              >
-                CONTINUAR COMO GERENTE
-              </Button>
+                isLoading={isLoading}
+                text='CONTINUAR COMO GERENTE'
+              />
             </div>
           )}
         </div>
