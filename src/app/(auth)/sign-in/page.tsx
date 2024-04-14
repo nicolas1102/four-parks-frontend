@@ -83,7 +83,7 @@ const Page = () => {
     <div className='container relative flex flex-col items-center justify-center lg:px-0'>
       <FloatingLink text='REGISTRARSE' href='./sign-up' direction='right' />
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5'>
+      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 '>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
             <Icons.logo className='text-yellow-300' />
@@ -158,7 +158,7 @@ const Page = () => {
                 onClick={continueAsUsuario}
                 variant='secondary'
                 disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-secondary-foreground hover:text-secondary'
+                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
               >
                 CONTINUAR COMO USUARIO
               </Button>
@@ -166,7 +166,7 @@ const Page = () => {
                 onClick={continueAsFuncionario}
                 variant='secondary'
                 disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-secondary-foreground hover:text-secondary'
+                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
               >
                 CONTINUAR COMO FUNCIONARIO
               </Button>
@@ -179,7 +179,7 @@ const Page = () => {
                 onClick={continueAsUsuario}
                 variant='secondary'
                 disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-secondary-foreground hover:text-secondary w-full'
+                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
               >
                 CONTINUAR COMO USUARIO
               </Button>
@@ -187,7 +187,7 @@ const Page = () => {
                 onClick={continueAsGerente}
                 variant='secondary'
                 disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-secondary-foreground hover:text-secondary w-full'
+                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
               >
                 CONTINUAR COMO GERENTE
               </Button>
@@ -200,7 +200,7 @@ const Page = () => {
                 onClick={continueAsFuncionario}
                 variant='secondary'
                 disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-secondary-foreground hover:text-secondary w-full'
+                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
               >
                 CONTINUAR COMO FUNCIONARIO
               </Button>
@@ -208,7 +208,7 @@ const Page = () => {
                 onClick={continueAsGerente}
                 variant='secondary'
                 disabled={isLoading}
-                className='tracking-widest dark:font-semibold hover:bg-secondary-foreground hover:text-secondary w-full'
+                className='tracking-widest dark:font-semibold hover:bg-yellow-300 bg-yellow-100 w-full border border-input dark:border-primary hover:border-primary dark:text-black dark:bg-yellow-200 dark:hover:bg-yellow-300'
               >
                 CONTINUAR COMO GERENTE
               </Button>

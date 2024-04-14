@@ -97,7 +97,7 @@ const Page = () => {
       <div className='container relative flex flex-col items-center justify-center lg:px-0 '>
         <FloatingLink text='INGRESAR' href='./sign-in' direction='left' />
 
-        <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5'>
+        <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 '>
           <div className='flex flex-col items-center space-y-2 text-center'>
             <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
               <Icons.logo className='text-yellow-300' />

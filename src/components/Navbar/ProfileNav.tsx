@@ -18,7 +18,7 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Link
-          className='bg-background hover:bg-accent hover:text-accent-foreground h-11 w-12 flex items-center justify-around p-1.5 border-2 border-yellow-300'
+          className='bg-background hover:bg-accent h-11 w-12 flex items-center justify-around p-1.5 border border-primary hover:bg-yellow-200 hover dark:hover:bg-yellow-300 dark:hover:text-background  '
           href='/sign-up'
         >
           <User />
