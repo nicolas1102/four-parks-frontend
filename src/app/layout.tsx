@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { Toaster } from 'sonner'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Four Parks',
@@ -39,9 +40,9 @@ export default function RootLayout({
         >
           <main className='relative flex flex-col min-h-screen'>
             <Navbar />
-            <Loader>
+            <Suspense fallback={<Loader />}>
               <div className='mx-10 mt-10 mb-20'>{children}</div>
-            </Loader>
+            </Suspense>
             <Footer />
           </main>
           <Toaster position='bottom-left' richColors />
