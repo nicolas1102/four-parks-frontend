@@ -17,7 +17,6 @@ import { Icons } from '@/components/Icons'
 import { useState } from 'react'
 import FloatingLink from '@/components/FloatingLink'
 import Separator from '@/components/Separator'
-import Loader from '@/components/Loader'
 
 interface MonthOption {
   value: number

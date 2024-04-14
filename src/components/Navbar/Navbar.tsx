@@ -21,10 +21,10 @@ export const PAGES_INFO = [
 
 const Navbar = async () => {
   return (
-    <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 bg-background'>
+    <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='w-full text-center p-1 bg-yellow-300'>
       </div>
-      <div className='flex flex-row justify-around w-full p-1 content-center'>
+      <div className='flex flex-row justify-around w-full p-1 content-center '>
         <ModeToggle />
         <div className='flex flex-row justify-around w-full'>
           <NavItem
