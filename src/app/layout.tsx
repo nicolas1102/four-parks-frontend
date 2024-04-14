@@ -8,10 +8,12 @@ import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
 import { Suspense } from 'react'
 import { Toaster } from '@/components/ui/sonner'
+import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from './const'
+
 
 export const metadata: Metadata = {
-  title: 'Four Parks',
-  description: 'Tu parqueadero favorito.',
+  title: DEFAULT_SITE_TITLE,
+  description: DEFAULT_SITE_DESCRIPTION,
 }
 
 export const fontSans = FontSans({

@@ -1,6 +1,3 @@
-// import HomeItem from '@/components/HomeItem'
-// import { PAGES_INFO } from '@/config/const'
-
 export default function Home() {
   return (
     <div className='max-h-full m-auto flex flex-col gap-y-10'>

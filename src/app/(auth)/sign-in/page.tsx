@@ -141,7 +141,9 @@ const Page = () => {
                   </p>
                 )}
               </div>
+
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
+              
             </div>
             {!isFuncionario && !isGerente && (
               <div className='flex justify-center'>
