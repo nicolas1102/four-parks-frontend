@@ -1,6 +1,6 @@
 import NavItem from './NavItem'
 import Link from 'next/link'
-import { Icons } from '../Icons'
+import { Icons } from '../../Icons'
 import ModeToggle from './ModeToggle'
 import ProfileNav from './ProfileNav'
 
