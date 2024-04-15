@@ -7,8 +7,8 @@ import Loader from '@/components/Loader'
 import { Suspense } from 'react'
 import { Toaster } from '@/components/ui/sonner'
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from './const'
-import Navbar from '@/components/layout/navbar/Navbar'
-import Footer from '@/components/layout/Footer'
+import Navbar from '@/components/Layout/Navbar/Navbar'
+import Footer from '@/components/Layout/Footer'
 
 
 export const metadata: Metadata = {
