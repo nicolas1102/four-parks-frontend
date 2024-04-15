@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from './const'
 import Navbar from '@/components/Layout/Navbar/Navbar'
 import Footer from '@/components/Layout/Footer'
-
+import Providers from '../hooks/useProviders'
 
 export const metadata: Metadata = {
   title: DEFAULT_SITE_TITLE,
@@ -34,12 +34,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           <main className='relative flex flex-col min-h-screen'>
             <Navbar />
             <Suspense fallback={<Loader />}>
@@ -48,7 +43,7 @@ export default function RootLayout({
             <Footer />
           </main>
           <Toaster />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )
