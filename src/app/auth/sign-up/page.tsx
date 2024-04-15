@@ -18,7 +18,7 @@ import { useState } from 'react'
 import FloatingButton from '@/components/buttons/FloatingButton'
 import Separator from '@/components/Separator'
 import { toast } from 'sonner'
-import PrimaryButton from '@/components/buttons/PrimaryButton'
+import PrimaryButton from '@/components/Buttons/PrimaryButton'
 
 interface MonthOption {
   value: number
