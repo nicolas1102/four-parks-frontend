@@ -1,20 +1,20 @@
 'use client'
 
-import { createUsersRequest, deleteUserRequest, getOneUserRequest, getUsersRequest, updateUserRequest } from '@/api/request/users'
-import { User } from '@/interfaces/user.model'
+import {
+  createUsersRequest,
+  deleteUserRequest,
+  getOneUserByEmailRequest,
+  getOneUserRequest,
+  getUsersRequest,
+  updateUserRequest,
+} from '@/api/request/users'
+import { User } from '@/lib/interfaces/user.model'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 export function useUser() {
   const [users, setUsers] = useState<User[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const getUsersData = async () => {
-      await getUsers()
-    }
-    getUsersData()
-  }, [])
+  const [isLoading, setIsLoading] = useState(false)
 
   const getUsers = async () => {
     setIsLoading(true)
@@ -26,6 +26,17 @@ export function useUser() {
     } catch (error) {
       console.error('Error fetching users:', error)
       toast('No se pudo obtener los usuarios.')
+    }
+  }
+
+  const getOneUserByEmail = async (email: string) => {
+    try {
+      setIsLoading(true)
+      const res = await getOneUserByEmailRequest(email)
+      setIsLoading(false)
+      return res.data
+    } catch (error) {
+      console.error('Error fetching user:', error)
     }
   }
 
@@ -77,5 +88,5 @@ export function useUser() {
     }
   }
 
-  return { users, isLoading, getOneUser, createUser, updateUser, deleteUser }
+  return { users, isLoading, getOneUser, getOneUserByEmail, createUser, updateUser, deleteUser }
 }

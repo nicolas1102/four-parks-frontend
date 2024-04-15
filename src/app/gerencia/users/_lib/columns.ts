@@ -1,4 +1,4 @@
-import { User } from '@/interfaces/user.model'
+import { User } from '@/lib/interfaces/user.model'
 import { ColumnDef } from "@tanstack/react-table"
 
 

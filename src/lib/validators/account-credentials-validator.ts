@@ -11,14 +11,15 @@ export const AuthCredentialsValidator = z.object({
 
 export const SignUpCredentialsValidator = z.object({
   email: z.string().email({ message: 'Dirección de email invalida.' }),
-  nombre: z.string().min(1, { message: 'El nombre debe tener al menos 1 carácter.' }),
-  apellido: z.string().min(1, { message: 'El apellido debe tener al menos 1 carácter.' }),
-  nombreTarjeta: z.string().min(1, { message: 'El nombre de la tarjeta debe tener al menos 1 carácter.' }),
-  numeroTarjeta: z.number().min(1000000000000000, { message: 'El número de la tarjeta de la tarjeta es requerida.' }).max(9999999999999999, {message: 'No puede contener más de 12 digitos'}),
+  firstName: z.string().min(1, { message: 'Este campo es necesario.' }),
+  secondName: z.string(),
+  firstSurname: z.string().min(1, { message: 'Este campo es necesario.' }),
+  secondSurname: z.string().min(1, { message: 'Este campo es necesario.' }),
+  nombreTarjeta: z.string().min(1, { message: 'Este campo es necesario.' }),
+  numeroTarjeta: z.number().min(1000000000000000, { message: 'El número de la tarjeta de la tarjeta es requerida.' }).max(9999999999999999, { message: 'No puede contener más de 12 digitos' }),
   mesExpiracion: z.string().min(1, { message: 'El mes de expiración es requerido.' }),
   añoExpiracion: z.string().min(1, { message: 'El año de expiración es requerido.' }),
-  CVC: z.number().min(100, { message: 'El CVC es requerido.' }).max(999, {message: 'No puede contener más de 3 digitos'}),
-
+  CVC: z.number().min(100, { message: 'El CVC es requerido.' }).max(999, { message: 'No puede contener más de 3 digitos' }),
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 character long.' }),

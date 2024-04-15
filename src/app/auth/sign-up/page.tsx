@@ -19,6 +19,8 @@ import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
 import Separator from '@/components/Separator'
 import { toast } from 'sonner'
 import PrimaryButton from '@/components/ButtonsCustom/PrimaryButton'
+import { useUser } from '@/services/useUser'
+import { User } from '@/lib/interfaces/user.model'
 
 interface MonthOption {
   value: number
@@ -44,7 +46,7 @@ const Page = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const origin = searchParams.get('origin')
-  const [isLoading, setIsLoading] = useState(false)
+  const { isLoading, getOneUserByEmail, createUser } = useUser()
 
   const {
     register,
@@ -54,52 +56,48 @@ const Page = () => {
     resolver: zodResolver(SignUpCredentialsValidator),
   })
 
-  // const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({
-  //   onSuccess: () => {
-  //     toast.success('Signed in successfully')
-  //     router.refresh()
-
-  //     // we redirected back where the user was at, if he try to go to this page if he's logged in
-  //     if (origin) {
-  //       router.push(`/${origin}`)
-  //       return
-  //     }
-
-  //     if (isSeller) {
-  //       router.push('/sell')
-  //       return
-  //     }
-
-  //     // if the user is just an user
-  //     router.push('/')
-  //     router.refresh()
-  //   },
-  //   onError: (error) => {
-  //     if (error.data?.code === 'UNAUTHORIZED') {
-  //       toast.error('Invalid email or password')
-  //       return
-  //     }
-  //   },
-  // })
-
-  const onSubmit = ({
+  const onSubmit = async ({
     email,
-    nombre,
-    apellido,
+    firstName,
+    secondName,
+    firstSurname,
+    secondSurname,
     nombreTarjeta,
     numeroTarjeta,
     mesExpiracion,
     añoExpiracion,
     CVC,
   }: TSignUpCredentialsValidator) => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      // Checamos si ya existe el usuario
+      const userFound = await getOneUserByEmail(email)
+      if (userFound) {
+        toast('Ya existe un usuario con este e-mail!', {
+          description: 'Intenta con otro email',
+        })
+        return
+      }
+
+      // TODO: Tarjeta de credito parte
+
+      const userData = {
+        email: email,
+        firstName: firstName,
+        secondName: secondName,
+        firstSurname: firstSurname,
+        secondSurname: secondSurname,
+      } as User
+
+      await createUser(userData)
+
       toast('Te haz registrado con exito!', {
-        description: 'Revisa tu correo!',
+        description: `Revisa tu correo! Te hemos enviado tu contraseña a ${email}. `,
       })
-    }, 2000)
-    // signIn({ email, password })
+    } catch (error) {
+      toast('Ha ocurrido un error al intentar registrar usuario!', {
+        description: 'Por favor intentalo de nuevo.',
+      })
+    }
   }
 
   return (
@@ -134,32 +132,63 @@ const Page = () => {
                 )}
               </div>
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='nombre'>Nombre</Label>
+                <Label htmlFor='firstName'>Primer Nombre</Label>
                 <Input
-                  {...register('nombre')}
+                  {...register('firstName')}
                   className={cn({
-                    'focus-visible:ring-red-500': errors.nombre,
+                    'focus-visible:ring-red-500': errors.firstName,
                   })}
-                  placeholder='Lagrimón'
+                  placeholder='Andrés'
                 />
-                {errors?.nombre && (
+                {errors?.firstName && (
                   <p className='text-sm text-red-500'>
-                    {errors.nombre.message}
+                    {errors.firstName.message}
                   </p>
                 )}
               </div>
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='apellido'>Apellido</Label>
+                <Label htmlFor='secondName'>Segundo Nombre</Label>
                 <Input
-                  {...register('apellido')}
+                  {...register('secondName')}
                   className={cn({
-                    'focus-visible:ring-red-500': errors.apellido,
+                    'focus-visible:ring-red-500': errors.secondName,
+                  })}
+                  placeholder='El Lagrimón'
+                />
+                {errors?.secondName && (
+                  <p className='text-sm text-red-500'>
+                    {errors.secondName.message}
+                  </p>
+                )}
+              </div>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='firstSurname'>Primer Apellido</Label>
+                <Input
+                  {...register('firstSurname')}
+                  className={cn({
+                    'focus-visible:ring-red-500': errors.firstSurname,
                   })}
                   placeholder='Pacheco'
                 />
-                {errors?.apellido && (
+                {errors?.firstSurname && (
                   <p className='text-sm text-red-500'>
-                    {errors.apellido.message}
+                    {errors.firstSurname.message}
+                  </p>
+                )}
+              </div>
+
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='secondSurname'>Segundo Apellido</Label>
+                <Input
+                  {...register('secondSurname')}
+                  className={cn({
+                    'focus-visible:ring-red-500': errors.secondSurname,
+                  })}
+                  placeholder='Naranjo'
+                />
+                {errors?.secondSurname && (
+                  <p className='text-sm text-red-500'>
+                    {errors.secondSurname.message}
                   </p>
                 )}
               </div>

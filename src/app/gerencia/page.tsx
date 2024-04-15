@@ -1,7 +1,10 @@
-// import HomeItem from '@/components/HomeItem'
-// import { PAGES_INFO } from '@/config/const'
+'use client'
+
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
+  // const { data: session, status } = useSession()
+
   return (
     <div className='max-h-full m-auto flex flex-col gap-y-10'>
       <h1 className='text-sm tracking-widest text-center'>

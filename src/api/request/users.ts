@@ -1,5 +1,5 @@
 
-import { User } from '@/interfaces/user.model'
+import { User } from '@/lib/interfaces/user.model'
 import axios from 'axios'
 
 export const getUsersRequest = async () => {
@@ -11,6 +11,18 @@ export const getOneUserRequest = async (id: string) => {
   const res = await axios.get(`/usuarios/${id}`)
   return res.data
 }
+
+
+// TODO: Revisar
+export const getOneUserByEmailAndPasswordRequest = async (email: string, password: string) => {
+  const res = await axios.get(`/usuarios/email/${email}/${password}`);
+  return res.data;
+};
+
+export const getOneUserByEmailRequest = async (email: string) => {
+  const res = await axios.get(`/usuarios/email/${email}`);
+  return res.data;
+};
 
 export const createUsersRequest = async (User: User) => {
   const res = await axios.post('/usuarios', User)

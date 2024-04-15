@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { useUser } from '@/services/useUser'
-import { User } from '@/interfaces/user.model'
+import { User } from '@/lib/interfaces/user.model'
 import {
   ColumnDef,
   flexRender,

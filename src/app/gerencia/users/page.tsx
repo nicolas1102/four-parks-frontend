@@ -4,7 +4,7 @@ import Loader from '@/components/Loader'
 import { useUser } from '@/services/useUser'
 import { UsersTable } from './_components/UsersTable'
 import { Suspense } from 'react'
-import { User as UserModel } from '@/interfaces/user.model'
+import { User as UserModel } from '@/lib/interfaces/user.model'
 import { columns } from './_lib/columns'
 import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
 

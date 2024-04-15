@@ -20,6 +20,7 @@ import { ArrowRight } from 'lucide-react'
 import PrimaryButton from '@/components/ButtonsCustom/PrimaryButton'
 import SecondaryButton from '@/components/ButtonsCustom/SecondaryButton'
 import { toast } from 'sonner'
+import { signIn } from 'next-auth/react'
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -49,45 +50,51 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
-  // const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({
-  //   onSuccess: () => {
-  //     toast.success('Signed in successfully')
-  //     router.refresh()
+  const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
+    try {
+      setIsLoading(true)
 
-  //     // we redirected back where the user was at, if he try to go to this page if he's logged in
-  //     if (origin) {
-  //       router.push(`/${origin}`)
-  //       return
-  //     }
-
-  //     if (isSeller) {
-  //       router.push('/sell')
-  //       return
-  //     }
-
-  //     // if the user is just an user
-  //     router.push('/')
-  //     router.refresh()
-  //   },
-  //   onError: (error) => {
-  //     if (error.data?.code === 'UNAUTHORIZED') {
-  //       toast.error('Invalid email or password')
-  //       return
-  //     }
-  //   },
-  // })
-
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      toast('Haz iniciado sesión con exito!', {
-        description:
-          'Ahora puedes hacer uso de las funciones de nuestro sistema!',
+      // usamos metodo de next-auth para inicio de sesioon
+      const res = await signIn('credentials', {
+        email: email,
+        password: password,
+        redirect: false,
       })
-    }, 2000)
 
-    // signIn({ email, password })
+      setIsLoading(false)
+
+      if (res?.error) {
+        toast('Credenciales Invalidas!', {
+          description: 'Revisa tu usuario y contraseña.',
+        })
+      } else {
+        toast('Haz iniciado sesión con exito!', {
+          description:
+            'Ahora puedes hacer uso de las funciones de nuestro sistema!',
+        })
+
+        router.refresh()
+        if (origin) {
+          router.push(`/${origin}`)
+          return
+        }
+
+        if (isFuncionario || isFuncionario) {
+          router.push('/admin')
+          return
+        }
+
+        router.push('/')
+        router.refresh()
+      }
+      setIsLoading(false)
+    } catch (error) {
+      console.log('Ocurrió un error al intentar iniciar sesión: ', error)
+
+      toast('Ha ocurrido un error al intentar iniciar sesión!', {
+        description: 'Por favor intentalo de nuevo.',
+      })
+    }
   }
 
   return (
@@ -143,7 +150,6 @@ const Page = () => {
               </div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
-
             </div>
             {!isFuncionario && !isGerente && (
               <div className='flex justify-center'>
