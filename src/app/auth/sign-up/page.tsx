@@ -15,10 +15,10 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import { useState } from 'react'
-import FloatingButton from '@/components/buttons/FloatingButton'
+import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
 import Separator from '@/components/Separator'
 import { toast } from 'sonner'
-import PrimaryButton from '@/components/Buttons/PrimaryButton'
+import PrimaryButton from '@/components/ButtonsCustom/PrimaryButton'
 
 interface MonthOption {
   value: number
