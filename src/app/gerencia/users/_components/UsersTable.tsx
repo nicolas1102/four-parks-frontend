@@ -76,7 +76,7 @@ export function UsersTable<TData, TValue>({
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
-              <TableCell className='text-center flex gap-2'>
+              <TableCell className='text-center flex gap-2 justify-center'>
                 <Button variant='outline'>
                   <Link href={`/usuarios/edit/${row.id}`}>Editar</Link>
                 </Button>
