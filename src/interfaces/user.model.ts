@@ -2,9 +2,12 @@ export interface User {
   id?: string
   email: string
   password: string
-  name: string
-  lastName: string
+  firstName: string
+  secondName?: string
+  firstSurname: string
+  secondSurname?: string
   loginAttempts: number
   isActive: boolean
+  isFirstTime: boolean
 }
 

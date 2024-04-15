@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
-import FloatingLink from '@/components/Buttons/FloatingButton'
+import FloatingButton from '@/components/buttons/FloatingButton'
 
 export default function NotFound() {
   return (
     <div className='container relative flex flex-col items-center gap-2 pt-10'>
-      <FloatingLink text='PANTALLA DE INICIO' href='/' direction='left' />
+      <FloatingButton text='PANTALLA DE INICIO' href='/' direction='left' />
       <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
         <Icons.lost className='text-red-400' />
       </div>

@@ -14,11 +14,11 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import { useState } from 'react'
-import FloatingLink from '@/components/Buttons/FloatingButton'
+import FloatingButton from '@/components/buttons/FloatingButton'
 import Separator from '@/components/Separator'
 import { ArrowRight } from 'lucide-react'
-import PrimaryButton from '@/components/Buttons/PrimaryButton'
-import SecondaryButton from '@/components/Buttons/SecondaryButton'
+import PrimaryButton from '@/components/buttons/PrimaryButton'
+import SecondaryButton from '@/components/buttons/SecondaryButton'
 import { toast } from 'sonner'
 
 const Page = () => {
@@ -92,7 +92,7 @@ const Page = () => {
 
   return (
     <div className='container relative flex flex-col items-center justify-center lg:px-0'>
-      <FloatingLink text='REGISTRARSE' href='./sign-up' direction='right' />
+      <FloatingButton text='REGISTRARSE' href='./sign-up' direction='right' />
 
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>
         <div className='flex flex-col items-center space-y-2 text-center'>

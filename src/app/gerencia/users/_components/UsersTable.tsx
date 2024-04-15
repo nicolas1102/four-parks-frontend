@@ -50,7 +50,7 @@ export function UsersTable<TData, TValue>({
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
               return (
-                <TableHead key={header.id} className='text-center'>
+                <TableHead key={header.id} className='text-center text-xs'>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -60,7 +60,7 @@ export function UsersTable<TData, TValue>({
                 </TableHead>
               )
             })}
-            <TableHead className='text-center'>Acciones</TableHead>
+            <TableHead className='text-center text-xs'>Acciones</TableHead>
           </TableRow>
         ))}
       </TableHeader>
@@ -71,11 +71,30 @@ export function UsersTable<TData, TValue>({
               key={row.id}
               data-state={row.getIsSelected() && 'selected'}
             >
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id} className='text-center'>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
+              {row.getVisibleCells().map((cell) => {
+                if (cell.column.columnDef.header === 'Estado Cuenta') {
+                  return (
+                    <TableCell key={cell.id} className='text-center'>
+                      {cell.getValue() ? (
+                        'Activa'
+                      ) : (
+                        <span className='text-red-500 font-medium'>
+                          Inactiva
+                        </span>
+                      )}
+                    </TableCell>
+                  )
+                } else {
+                  return (
+                    <TableCell key={cell.id} className='text-center'>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  )
+                }
+              })}
               <TableCell className='text-center flex gap-2 justify-center'>
                 <Button variant='outline'>
                   <Link href={`/usuarios/edit/${row.id}`}>Editar</Link>

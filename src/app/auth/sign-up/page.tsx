@@ -15,10 +15,10 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import { useState } from 'react'
-import FloatingLink from '@/components/Buttons/FloatingButton'
+import FloatingButton from '@/components/buttons/FloatingButton'
 import Separator from '@/components/Separator'
 import { toast } from 'sonner'
-import PrimaryButton from '@/components/Buttons/PrimaryButton'
+import PrimaryButton from '@/components/buttons/PrimaryButton'
 
 interface MonthOption {
   value: number
@@ -104,7 +104,7 @@ const Page = () => {
 
   return (
     <div className='container relative flex flex-col items-center justify-center lg:px-0 '>
-      <FloatingLink text='INGRESAR' href='./sign-in' direction='left' />
+      <FloatingButton text='INGRESAR' href='./sign-in' direction='left' />
 
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>
         <div className='flex flex-col items-center space-y-2 text-center'>

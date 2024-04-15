@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
-const FloatingLink = ({
+const FloatingButton = ({
   text,
   href,
   direction,
@@ -27,4 +27,4 @@ const FloatingLink = ({
   )
 }
 
-export default FloatingLink
+export default FloatingButton

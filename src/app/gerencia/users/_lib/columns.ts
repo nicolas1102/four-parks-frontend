@@ -12,12 +12,20 @@ export const columns: ColumnDef<User>[] = [
     header: 'E-mail',
   },
   {
-    accessorKey: 'name',
-    header: 'Nombre',
+    accessorKey: 'firstName',
+    header: 'Primer Nombre',
   },
   {
-    accessorKey: 'lastName',
-    header: 'Apellido',
+    accessorKey: 'secondName',
+    header: 'Segundo Nombre',
+  },
+  {
+    accessorKey: 'firstSurname',
+    header: 'Primer Apellido',
+  },
+  {
+    accessorKey: 'secondSurname',
+    header: 'Segundo Apellido',
   },
   {
     accessorKey: 'loginAttempts',
