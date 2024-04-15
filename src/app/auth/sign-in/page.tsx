@@ -17,8 +17,8 @@ import { useState } from 'react'
 import FloatingButton from '@/components/buttons/FloatingButton'
 import Separator from '@/components/Separator'
 import { ArrowRight } from 'lucide-react'
-import PrimaryButton from '@/components/buttons/PrimaryButton'
-import SecondaryButton from '@/components/buttons/SecondaryButton'
+import PrimaryButton from '@/components/Buttons/PrimaryButton'
+import SecondaryButton from '@/components/Buttons/SecondaryButton'
 import { toast } from 'sonner'
 
 const Page = () => {
