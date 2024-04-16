@@ -9,5 +9,6 @@ export interface User {
   loginAttempts?: number
   isActive?: boolean
   isFirstTime?: boolean
+  role: 'USUARIO' | 'GERENTE' | 'FUNCIONARIO'
 }
 

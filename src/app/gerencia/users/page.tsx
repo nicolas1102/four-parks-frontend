@@ -19,6 +19,7 @@ const users: UserModel[] = [
     loginAttempts: 0,
     isActive: true,
     isFirstTime: true,
+    role: 'USUARIO',
   },
   {
     email: 'jane.smith@example.com',
@@ -29,6 +30,7 @@ const users: UserModel[] = [
     loginAttempts: 0,
     isActive: true,
     isFirstTime: false,
+    role: 'USUARIO',
   },
   {
     id: 'user456',
@@ -40,6 +42,7 @@ const users: UserModel[] = [
     loginAttempts: 1, // Simulate a login attempt
     isActive: false, // Simulate a deactivated user
     isFirstTime: false,
+    role: 'USUARIO',
   },
   {
     email: 'mary.williams@example.com',
@@ -50,6 +53,7 @@ const users: UserModel[] = [
     loginAttempts: 0,
     isActive: true,
     isFirstTime: true,
+    role: 'USUARIO',
   },
   {
     id: 'user789',
@@ -61,6 +65,7 @@ const users: UserModel[] = [
     loginAttempts: 0,
     isActive: true,
     isFirstTime: false,
+    role: 'USUARIO',
   },
 ]
 

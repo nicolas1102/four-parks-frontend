@@ -86,6 +86,7 @@ const Page = () => {
         secondName: secondName,
         firstSurname: firstSurname,
         secondSurname: secondSurname,
+        role: 'USUARIO',
       } as User
 
       await createUser(userData)

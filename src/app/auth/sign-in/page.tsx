@@ -50,14 +50,20 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
+  const defineRole = () => {
+    if(isGerente) return 'GERENTE'
+    if(isFuncionario) return 'FUNCIONARIO'
+    if(!isGerente && !isFuncionario) return 'USUARIO'
+  }
+
   const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
     try {
       setIsLoading(true)
-
       // usamos metodo de next-auth para inicio de sesioon
       const res = await signIn('credentials', {
         email: email,
         password: password,
+        role: defineRole(),
         redirect: false,
       })
 
@@ -74,15 +80,9 @@ const Page = () => {
         })
 
         router.refresh()
-        if (origin) {
-          router.push(`/${origin}`)
-          return
-        }
+        if (origin) return router.push(`/${origin}`)
 
-        if (isFuncionario || isFuncionario) {
-          router.push('/admin')
-          return
-        }
+        if (isFuncionario || isFuncionario) return router.push('/admin')
 
         router.push('/')
         router.refresh()

@@ -3,6 +3,20 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { toast } from 'sonner'
 
+const makeFetchAccordingRole = async (
+  email: string,
+  password: string,
+  role: string
+) => {
+  if (role === 'GERENTE') {
+    return await getOneUserByEmailAndPasswordRequest(email, password)
+  } else if (role === 'FUNCIONARIO') {
+    return await getOneUserByEmailAndPasswordRequest(email, password)
+  } else {
+    return await getOneUserByEmailAndPasswordRequest(email, password)
+  }
+}
+
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -23,17 +37,28 @@ const handler = NextAuth({
       // req son datos adicionales de la aplicación (ejemplo, las cookies)
       async authorize(credentials, req) {
         try {
-          const { email, password } = credentials as {
+          const { email, password, role } = credentials as {
             email: string
             password: string
+            role: string
           }
-          const userFound = await getOneUserByEmailAndPasswordRequest(email, password)
-          if (!userFound) throw new Error('Credenciales invalidas.')
+
+          const res = await makeFetchAccordingRole(email, password, role)
+
+          if (!res) throw new Error('Credenciales invalidas.')
+
+          if (!res) {
+            const user = await res.json()
+            if (user?.access_token && user?.refresh_token) {
+              // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
+              return user
+            }
+          }
+          // If response is not ok or does not contain a user token
+          const errorResponse = await res.json()
+          return Promise.reject(new Error(errorResponse?.detail))
 
           // console.log(userFound)
-
-          // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
-          return userFound
         } catch (e: any) {
           return Promise.reject(new Error(e?.message))
         }
@@ -51,11 +76,10 @@ const handler = NextAuth({
       return session
     },
   },
-  // pages: {
-  //   signIn: "/auth/sign-in",
-  //   // error: '/auth/error',
-  //   signOut: '/auth/sign-in'
-  // },
+  pages: {
+    signIn: '/auth/sign-in',
+    signOut: '/auth/sign-in',
+  },
 })
 
 export { handler as GET, handler as POST }
