@@ -90,7 +90,9 @@ const Page = () => {
 
       await createUser(userData)
 
-      toast('Te haz registrado con exito!', {
+      router.push('/')
+
+      toast('Te has registrado con exito!', {
         description: `Revisa tu correo! Te hemos enviado tu contraseña a ${email}. `,
       })
     } catch (error) {
@@ -131,66 +133,71 @@ const Page = () => {
                   <p className='text-sm text-red-500'>{errors.email.message}</p>
                 )}
               </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='firstName'>Primer Nombre</Label>
-                <Input
-                  {...register('firstName')}
-                  className={cn({
-                    'focus-visible:ring-red-500': errors.firstName,
-                  })}
-                  placeholder='Andrés'
-                />
-                {errors?.firstName && (
-                  <p className='text-sm text-red-500'>
-                    {errors.firstName.message}
-                  </p>
-                )}
-              </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='secondName'>Segundo Nombre</Label>
-                <Input
-                  {...register('secondName')}
-                  className={cn({
-                    'focus-visible:ring-red-500': errors.secondName,
-                  })}
-                  placeholder='El Lagrimón'
-                />
-                {errors?.secondName && (
-                  <p className='text-sm text-red-500'>
-                    {errors.secondName.message}
-                  </p>
-                )}
-              </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='firstSurname'>Primer Apellido</Label>
-                <Input
-                  {...register('firstSurname')}
-                  className={cn({
-                    'focus-visible:ring-red-500': errors.firstSurname,
-                  })}
-                  placeholder='Pacheco'
-                />
-                {errors?.firstSurname && (
-                  <p className='text-sm text-red-500'>
-                    {errors.firstSurname.message}
-                  </p>
-                )}
+
+              <div className='grid gap-2 justify-around grid-cols-2'>
+                <div className='grid gap-1 py-2'>
+                  <Label htmlFor='firstName'>Primer Nombre</Label>
+                  <Input
+                    {...register('firstName')}
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.firstName,
+                    })}
+                    placeholder='Andrés'
+                  />
+                  {errors?.firstName && (
+                    <p className='text-sm text-red-500'>
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+                <div className='grid gap-1 py-2'>
+                  <Label htmlFor='secondName'>Segundo Nombre</Label>
+                  <Input
+                    {...register('secondName')}
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.secondName,
+                    })}
+                    placeholder='El Lagrimón'
+                  />
+                  {errors?.secondName && (
+                    <p className='text-sm text-red-500'>
+                      {errors.secondName.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='secondSurname'>Segundo Apellido</Label>
-                <Input
-                  {...register('secondSurname')}
-                  className={cn({
-                    'focus-visible:ring-red-500': errors.secondSurname,
-                  })}
-                  placeholder='Naranjo'
-                />
-                {errors?.secondSurname && (
-                  <p className='text-sm text-red-500'>
-                    {errors.secondSurname.message}
-                  </p>
-                )}
+              <div className='grid gap-2 justify-around grid-cols-2'>
+                <div className='grid gap-1 py-2'>
+                  <Label htmlFor='firstSurname'>Primer Apellido</Label>
+                  <Input
+                    {...register('firstSurname')}
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.firstSurname,
+                    })}
+                    placeholder='Pacheco'
+                  />
+                  {errors?.firstSurname && (
+                    <p className='text-sm text-red-500'>
+                      {errors.firstSurname.message}
+                    </p>
+                  )}
+                </div>
+                <div className='grid gap-1 py-2'>
+                  <Label htmlFor='secondSurname'>Segundo Apellido</Label>
+                  <Input
+                    {...register('secondSurname')}
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.secondSurname,
+                    })}
+                    placeholder='Naranjo'
+                  />
+                  {errors?.secondSurname && (
+                    <p className='text-sm text-red-500'>
+                      {errors.secondSurname.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <Separator />
@@ -282,8 +289,6 @@ const Page = () => {
               <PrimaryButton text={'REGISTRARSE'} isLoading={isLoading} />
             </div>
 
-            {}
-
             <div className='flex justify-center'>
               <Link
                 className={buttonVariants({
@@ -293,7 +298,7 @@ const Page = () => {
                 href='/sign-in'
               >
                 <ArrowLeft className='h-4 w-4' />
-                Ya tienes una cuenta? Ingresa!
+                ¿Ya tienes una cuenta? Ingresa!
               </Link>
             </div>
           </form>

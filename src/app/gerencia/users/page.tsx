@@ -15,6 +15,7 @@ const users: UserModel[] = [
     password: '', // Replace with hashed password for security
     firstName: 'John',
     firstSurname: 'Doe',
+    secondSurname: 'Miller',
     loginAttempts: 0,
     isActive: true,
     isFirstTime: true,
@@ -35,6 +36,7 @@ const users: UserModel[] = [
     password: '', // Replace with hashed password for security
     firstName: 'Peter',
     firstSurname: 'Jones',
+    secondSurname: 'Miller',
     loginAttempts: 1, // Simulate a login attempt
     isActive: false, // Simulate a deactivated user
     isFirstTime: false,
@@ -44,6 +46,7 @@ const users: UserModel[] = [
     password: '', // Replace with hashed password for security
     firstName: 'Mary',
     firstSurname: 'Williams',
+    secondSurname: 'Miller',
     loginAttempts: 0,
     isActive: true,
     isFirstTime: true,
