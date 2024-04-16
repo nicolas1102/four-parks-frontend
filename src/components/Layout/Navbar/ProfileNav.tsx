@@ -34,7 +34,7 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
-                signOut
+                signOut()
               }}
               className='text-red-500 font-bold'
             >

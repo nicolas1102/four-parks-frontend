@@ -13,9 +13,8 @@ export const getOneUserRequest = async (id: string) => {
   return res.data
 }
 
-// TODO: Revisar (preguntar cómo se le pide la validacion del usuario)
-export const getOneUserByEmailAndPasswordRequest = async (email: string, password: string) => {
-  const res = await axios.get(baseURL + `/usuarios/email/${email}/${password}`);
+export const getAuthorizedUserRequest = async (email: string, password: string) => {
+  const res = await axios.post(baseURL + '/auth/log-in', { email, password });
   return res.data;
 };
 

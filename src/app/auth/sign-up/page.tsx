@@ -79,7 +79,7 @@ const Page = () => {
 
       const userData = {
         email: email,
-        password: '123',
+        password: '1234567',
         firstName: firstName,
         secondName: secondName,
         firstLastname: firstLastname,
@@ -90,11 +90,10 @@ const Page = () => {
       } as User
 
       const res = await createUser(userData)
-      console.log(res);
       
       if(!res) throw new Error
 
-      router.push('/')
+      router.push('/auth/log-in')
       toast('Te has registrado con exito!', {
         description: `Revisa tu correo! Te hemos enviado tu contraseña a ${email} para que puedas iniciar sesión por primera vez.`,
       })
@@ -107,7 +106,7 @@ const Page = () => {
 
   return (
     <div className='container relative flex flex-col items-center justify-center lg:px-0 '>
-      <FloatingButton text='INGRESAR' href='./auth/log-in' direction='left' />
+      <FloatingButton text='INGRESAR' href='/auth/log-in' direction='left' />
 
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>
         <div className='flex flex-col items-center space-y-2 text-center'>

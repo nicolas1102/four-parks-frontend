@@ -20,12 +20,13 @@ import { ArrowRight } from 'lucide-react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import SecondaryButton from '@/components/CustomButtons/SecondaryButton'
 import { toast } from 'sonner'
-import { signIn } from 'next-auth/react'
+import { signIn } from "next-auth/react";
+import { useUser } from '@/services/useUser'
 
 const Page = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const { isLoading, setIsLoading } = useUser()
   const isGerente = searchParams.get('as') === 'gerente'
   const isFuncionario = searchParams.get('as') === 'funcionario'
   const origin = searchParams.get('origin')
@@ -50,24 +51,15 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
-  const defineRole = () => {
-    if (isGerente) return 'GERENTE'
-    if (isFuncionario) return 'FUNCIONARIO'
-    if (!isGerente && !isFuncionario) return 'USUARIO'
-  }
-
   const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
     try {
       setIsLoading(true)
       // usamos metodo de next-auth para inicio de sesioon
-      const res = await signIn('credentials', {
+      const res = await signIn("credentials", {
         email: email,
         password: password,
-        roleRequest: {
-          roleListName: defineRole(),
-        },
         redirect: false,
-      })
+      });
 
       setIsLoading(false)
 

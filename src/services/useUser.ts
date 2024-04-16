@@ -88,5 +88,5 @@ export function useUser() {
     }
   }
 
-  return { users, getUsers, isLoading, getOneUser, getOneUserByEmail, createUser, updateUser, deleteUser }
+  return { users, getUsers, isLoading, setIsLoading, getOneUser, getOneUserByEmail, createUser, updateUser, deleteUser }
 }

@@ -1,21 +1,6 @@
-import { getOneUserByEmailAndPasswordRequest } from '@/app/api/routers/users.router'
+import { getAuthorizedUserRequest } from '@/app/api/routers/users.router'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
-// TODO: Revisar (preguntar cómo se le pide la validacion del usuario)
-const makeFetchAccordingRole = async (
-  email: string,
-  password: string,
-  role: string
-) => {
-  if (role === 'GERENTE') {
-    return await getOneUserByEmailAndPasswordRequest(email, password)
-  } else if (role === 'FUNCIONARIO') {
-    return await getOneUserByEmailAndPasswordRequest(email, password)
-  } else {
-    return await getOneUserByEmailAndPasswordRequest(email, password)
-  }
-}
 
 const handler = NextAuth({
   providers: [
@@ -37,26 +22,25 @@ const handler = NextAuth({
       // req son datos adicionales de la aplicación (ejemplo, las cookies)
       async authorize(credentials, req) {
         try {
-          const { email, password, role } = credentials as {
+          const { email, password } = credentials as {
             email: string
             password: string
-            role: string
           }
+          const userFound = await getAuthorizedUserRequest(email, password)
 
-          const res = await makeFetchAccordingRole(email, password, role)
+          if (!userFound) throw new Error('Credenciales invalidas.')
 
-          if (!res) throw new Error('Credenciales invalidas.')
-
-          if (!res) {
-            const user = await res.json()
-            if (user?.access_token && user?.refresh_token) {
-              // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
-              return user
-            }
-          }
-          // If response is not ok or does not contain a user token
-          const errorResponse = await res.json()
-          return Promise.reject(new Error(errorResponse?.detail))
+          // if (!res) {
+          //   const user = await res.json()
+          //   if (user?.access_token && user?.refresh_token) {
+          //     // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
+          //     return user
+          //   }
+          // }
+          // // If response is not ok or does not contain a user token
+          // const errorResponse = await res.json()
+          // return Promise.reject(new Error(errorResponse?.detail))
+          return userFound
         } catch (e: any) {
           return Promise.reject(new Error(e?.message))
         }
@@ -77,6 +61,9 @@ const handler = NextAuth({
   pages: {
     signIn: '/auth/log-in',
     signOut: '/auth/log-in',
+  },
+  session: {
+    strategy: 'jwt',
   },
 })
 
