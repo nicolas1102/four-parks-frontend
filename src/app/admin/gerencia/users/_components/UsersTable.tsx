@@ -19,6 +19,15 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { MoreHorizontal } from 'lucide-react'
 
 interface UsersTableInterface {
   users: Array<User>
@@ -72,14 +81,28 @@ export function UsersTable<TData, TValue>({
               data-state={row.getIsSelected() && 'selected'}
             >
               {row.getVisibleCells().map((cell) => {
-                if (cell.column.columnDef.header === 'Estado Cuenta') {
+                if (cell.column.columnDef.header === 'Cuenta Activada') {
                   return (
                     <TableCell key={cell.id} className='text-center'>
                       {cell.getValue() ? (
-                        'Activa'
+                        'Si'
                       ) : (
                         <span className='text-red-500 font-medium'>
-                          Inactiva
+                          No
+                        </span>
+                      )}
+                    </TableCell>
+                  )
+                } else if (
+                  cell.column.columnDef.header === 'Cuenta Bloqueada'
+                ) {
+                  return (
+                    <TableCell key={cell.id} className='text-center'>
+                      {cell.getValue() ? (
+                        'Si'
+                      ) : (
+                        <span className='text-red-500 font-medium'>
+                          No
                         </span>
                       )}
                     </TableCell>
@@ -108,6 +131,25 @@ export function UsersTable<TData, TValue>({
                 >
                   Eliminar
                 </Button>
+                {/* <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant='ghost' className='h-8 w-8 p-0'>
+                      <span className='sr-only'>Open menu</span>
+                      <MoreHorizontal className='h-4 w-4' />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align='end'>
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuItem
+                      onClick={() => navigator.clipboard.writeText(row.getValue(row.id))}
+                    >
+                      Copy payment ID
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>View customer</DropdownMenuItem>
+                    <DropdownMenuItem>View payment details</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu> */}
               </TableCell>
             </TableRow>
           ))
@@ -120,51 +162,5 @@ export function UsersTable<TData, TValue>({
         )}
       </TableBody>
     </Table>
-
-    // <Table className='border'>
-    //   <TableCaption>Una lista de todos los equipos.</TableCaption>
-    //   <TableHeader>
-    //     <TableRow>
-    //       {EQUIPOS_TABLA_COLUMNS.map((column: string) => (
-    //         <TableHead key={column}>{column}</TableHead>
-    //       ))}
-    //       <TableHead className='text-center'>Acciones</TableHead>
-    //     </TableRow>
-    //   </TableHeader>
-    //   <TableBody>
-    //     {equipos.map((equipo) => (
-    //       <TableRow key={equipo._id}>
-    //         <TableCell className='font-medium'>{equipo._id}</TableCell>
-    //         <TableCell>{equipo.nombre}</TableCell>
-    //         <TableCell className='truncate overflow-ellipsis max-w-xs'>
-    //           {equipo.himno}
-    //         </TableCell>
-    //         <TableCell>
-    //           {equipo.victorias} : {equipo.empates} : {equipo.derrotas}
-    //         </TableCell>
-    //         <TableCell className='text-center'>
-    //           {equipo.cantidad_titulos}
-    //         </TableCell>
-    //         <TableCell className='text-center'>
-    //           {equipo.cantidad_jugadores}
-    //         </TableCell>
-    //         <TableCell className='text-center flex gap-2'>
-    //           <Button variant='outline'>
-    //             <Link href={`/equipos/editar/${equipo._id}`}>Editar</Link>
-    //           </Button>
-
-    //           <Button
-    //             variant='destructive'
-    //             onClick={() => {
-    //               if (equipo._id) deleteEquipo(equipo._id)
-    //             }}
-    //           >
-    //             Eliminar
-    //           </Button>
-    //         </TableCell>
-    //       </TableRow>
-    //     ))}
-    //   </TableBody>
-    // </Table>
   )
 }

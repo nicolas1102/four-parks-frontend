@@ -8,7 +8,7 @@ export interface User {
   secondLastname: string
   loginAttempts?: number
   isActive?: boolean
-  isFirstTime?: boolean
+  isBlocked?: boolean
   roleRequest: {
     roleListName: [
       'USER' | 'GERENTE' | 'FUNCIONARIO'

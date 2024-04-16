@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { ArrowRight, User } from 'lucide-react'
 import Loader from '@/components/Loader'
@@ -18,9 +19,9 @@ const usersData: UserModel[] = [
     secondLastname: 'Miller',
     loginAttempts: 0,
     isActive: true,
-    isFirstTime: true,
+    isBlocked: true,
     roleRequest: {
-      roleListName: 'USUARIO',
+      roleListName: ['USER'],
     },
   },
   {
@@ -31,9 +32,9 @@ const usersData: UserModel[] = [
     secondLastname: 'Miller',
     loginAttempts: 0,
     isActive: true,
-    isFirstTime: false,
+    isBlocked: false,
     roleRequest: {
-      roleListName: 'USUARIO',
+      roleListName: ['USER'],
     },
   },
   {
@@ -45,9 +46,9 @@ const usersData: UserModel[] = [
     secondLastname: 'Miller',
     loginAttempts: 1, // Simulate a login attempt
     isActive: false, // Simulate a deactivated user
-    isFirstTime: false,
+    isBlocked: false,
     roleRequest: {
-      roleListName: 'USUARIO',
+      roleListName: ['USER'],
     },
   },
   {
@@ -58,9 +59,9 @@ const usersData: UserModel[] = [
     secondLastname: 'Miller',
     loginAttempts: 0,
     isActive: true,
-    isFirstTime: true,
+    isBlocked: true,
     roleRequest: {
-      roleListName: 'USUARIO',
+      roleListName: ['USER'],
     },
   },
   {
@@ -72,9 +73,9 @@ const usersData: UserModel[] = [
     secondLastname: 'Johnson',
     loginAttempts: 0,
     isActive: true,
-    isFirstTime: false,
+    isBlocked: false,
     roleRequest: {
-      roleListName: 'USUARIO',
+      roleListName: ['USER'],
     },
   },
 ]

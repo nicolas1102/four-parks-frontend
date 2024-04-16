@@ -33,6 +33,14 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: 'isActive',
-    header: 'Estado Cuenta',
+    header: 'Cuenta Activada',
+  },
+  {
+    accessorKey: 'isBlocked',
+    header: 'Cuenta Bloqueada',
+  },
+  {
+    accessorKey: 'roleRequest.roleListName',
+    header: 'Rol',
   },
 ]
