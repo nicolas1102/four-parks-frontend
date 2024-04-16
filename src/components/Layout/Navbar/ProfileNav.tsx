@@ -10,10 +10,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-// import { useAuth } from '@/hooks/user-auth'
+import { signOut } from 'next-auth/react'
 
 const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
-  // const { signOut } = useAuth()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,7 +33,9 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
               <Link href='/profile'>Perfil</Link>
             </DropdownMenuItem>
             <DropdownMenuItem
-              // onClick={signOut}
+              onClick={() => {
+                signOut
+              }}
               className='text-red-500 font-bold'
             >
               <LogOut className='mr-2 h-4 w-4' />
@@ -55,16 +56,6 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
         )}
       </DropdownMenuContent>
     </DropdownMenu>
-    // {isLoggedIn ? (
-    //   <Link
-    //     className='bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 flex items-center justify-around p-1.5'
-    //     href='/profile'
-    //   >
-    //     <User />
-    //   </Link>
-    // ) : (
-
-    // )}
   )
 }
 

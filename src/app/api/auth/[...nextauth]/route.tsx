@@ -1,7 +1,6 @@
 import { getOneUserByEmailAndPasswordRequest } from '@/api/request/users'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { toast } from 'sonner'
 
 const makeFetchAccordingRole = async (
   email: string,
