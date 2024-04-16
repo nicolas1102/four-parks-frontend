@@ -12,13 +12,12 @@ import {
   TSignUpCredentialsValidator,
   SignUpCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Icons } from '@/components/Icons'
-import { useState } from 'react'
-import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
+import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import Separator from '@/components/Separator'
 import { toast } from 'sonner'
-import PrimaryButton from '@/components/ButtonsCustom/PrimaryButton'
+import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { User } from '@/lib/interfaces/user.model'
 
@@ -43,9 +42,7 @@ const YearOptions: YearOption[] = Array.from({ length: 30 }, (_, i) => ({
 }))
 
 const Page = () => {
-  const searchParams = useSearchParams()
   const router = useRouter()
-  const origin = searchParams.get('origin')
   const { isLoading, getOneUserByEmail, createUser } = useUser()
 
   const {
@@ -60,8 +57,8 @@ const Page = () => {
     email,
     firstName,
     secondName,
-    firstSurname,
-    secondSurname,
+    firstLastname,
+    secondLastname,
     nombreTarjeta,
     numeroTarjeta,
     mesExpiracion,
@@ -70,31 +67,36 @@ const Page = () => {
   }: TSignUpCredentialsValidator) => {
     try {
       // Checamos si ya existe el usuario
-      const userFound = await getOneUserByEmail(email)
-      if (userFound) {
-        toast('Ya existe un usuario con este e-mail!', {
-          description: 'Intenta con otro email',
-        })
-        return
-      }
+      // const userFound = await getOneUserByEmail(email)
+      // if (userFound) {
+      //   toast('Ya existe un usuario con este e-mail!', {
+      //     description: 'Intenta con otro email',
+      //   })
+      //   return
+      // }
 
       // TODO: Tarjeta de credito parte
 
       const userData = {
         email: email,
+        password: '123',
         firstName: firstName,
         secondName: secondName,
-        firstSurname: firstSurname,
-        secondSurname: secondSurname,
-        role: 'USUARIO',
+        firstLastname: firstLastname,
+        secondLastname: secondLastname,
+        roleRequest: {
+          roleListName: ['USER'],
+        },
       } as User
 
-      await createUser(userData)
+      const res = await createUser(userData)
+      console.log(res);
+      
+      if(!res) throw new Error
 
       router.push('/')
-
       toast('Te has registrado con exito!', {
-        description: `Revisa tu correo! Te hemos enviado tu contraseña a ${email}. `,
+        description: `Revisa tu correo! Te hemos enviado tu contraseña a ${email} para que puedas iniciar sesión por primera vez.`,
       })
     } catch (error) {
       toast('Ha ocurrido un error al intentar registrar usuario!', {
@@ -105,7 +107,7 @@ const Page = () => {
 
   return (
     <div className='container relative flex flex-col items-center justify-center lg:px-0 '>
-      <FloatingButton text='INGRESAR' href='./sign-in' direction='left' />
+      <FloatingButton text='INGRESAR' href='./auth/log-in' direction='left' />
 
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>
         <div className='flex flex-col items-center space-y-2 text-center'>
@@ -170,32 +172,32 @@ const Page = () => {
 
               <div className='grid gap-2 justify-around grid-cols-2'>
                 <div className='grid gap-1 py-2'>
-                  <Label htmlFor='firstSurname'>Primer Apellido</Label>
+                  <Label htmlFor='firstLastname'>Primer Apellido</Label>
                   <Input
-                    {...register('firstSurname')}
+                    {...register('firstLastname')}
                     className={cn({
-                      'focus-visible:ring-red-500': errors.firstSurname,
+                      'focus-visible:ring-red-500': errors.firstLastname,
                     })}
                     placeholder='Pacheco'
                   />
-                  {errors?.firstSurname && (
+                  {errors?.firstLastname && (
                     <p className='text-sm text-red-500'>
-                      {errors.firstSurname.message}
+                      {errors.firstLastname.message}
                     </p>
                   )}
                 </div>
                 <div className='grid gap-1 py-2'>
-                  <Label htmlFor='secondSurname'>Segundo Apellido</Label>
+                  <Label htmlFor='secondLastname'>Segundo Apellido</Label>
                   <Input
-                    {...register('secondSurname')}
+                    {...register('secondLastname')}
                     className={cn({
-                      'focus-visible:ring-red-500': errors.secondSurname,
+                      'focus-visible:ring-red-500': errors.secondLastname,
                     })}
                     placeholder='Naranjo'
                   />
-                  {errors?.secondSurname && (
+                  {errors?.secondLastname && (
                     <p className='text-sm text-red-500'>
-                      {errors.secondSurname.message}
+                      {errors.secondLastname.message}
                     </p>
                   )}
                 </div>
@@ -221,7 +223,8 @@ const Page = () => {
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='numeroTarjeta'>Número Tarjeta</Label>
                 <Input
-                  {...register('numeroTarjeta', { valueAsNumber: true })}
+                  {...register('numeroTarjeta')}
+                  // {...register('numeroTarjeta', { valueAsNumber: true })}
                   className={cn({
                     'focus-visible:ring-red-500': errors.numeroTarjeta,
                   })}
@@ -275,7 +278,8 @@ const Page = () => {
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='CVC'>CVC</Label>
                   <Input
-                    {...register('CVC', { valueAsNumber: true })}
+                    {...register('CVC')}
+                    // {...register('CVC', { valueAsNumber: true })}
                     className={cn({
                       'focus-visible:ring-red-500': errors.CVC,
                     })}
@@ -296,7 +300,7 @@ const Page = () => {
                   variant: 'link',
                   className: 'gap-1.5',
                 })}
-                href='/sign-in'
+                href='/auth/log-in'
               >
                 <ArrowLeft className='h-4 w-4' />
                 ¿Ya tienes una cuenta? Ingresa!

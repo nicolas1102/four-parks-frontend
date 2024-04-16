@@ -1,14 +1,13 @@
+import './globals.css'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
-import './globals.css'
-import { ThemeProvider } from '@/hooks/useThemeProvider'
 import { cn } from '@/lib/utils'
-import Loader from '@/components/Loader'
 import { Suspense } from 'react'
 import { Toaster } from '@/components/ui/sonner'
-import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from './const'
+import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from '../lib/const'
 import Navbar from '@/components/Layout/Navbar/Navbar'
 import Footer from '@/components/Layout/Footer'
+import Loader from '@/components/Loader'
 import Providers from '../hooks/useProviders'
 
 export const metadata: Metadata = {

@@ -7,7 +7,7 @@ import {
   getOneUserRequest,
   getUsersRequest,
   updateUserRequest,
-} from '@/api/request/users'
+} from '@/app/api/routers/users.router'
 import { User } from '@/lib/interfaces/user.model'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -41,8 +41,8 @@ export function useUser() {
   }
 
   const getOneUser = async (id: string) => {
-    setIsLoading(true)
     try {
+      setIsLoading(true)
       const res = await getOneUserRequest(id)
       setIsLoading(false)
       return res.data
@@ -52,20 +52,20 @@ export function useUser() {
   }
 
   const createUser = async (user: User) => {
-    setIsLoading(true)
     try {
-      await createUsersRequest(user)
-      setIsLoading(false)
-      toast('Se creo el usuario con éxito!')
+      setIsLoading(true)
+      const res = await createUsersRequest(user)
+      return res
     } catch (error) {
       console.error('Error creating user:', error)
-      toast('No se pudo crear el usuario.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const updateUser = async (id: string, user: User) => {
-    setIsLoading(true)
     try {
+      setIsLoading(true)
       await updateUserRequest(id, user)
       setIsLoading(false)
       toast('Se actualizo el usuario con éxito!')
@@ -76,8 +76,8 @@ export function useUser() {
   }
 
   const deleteUser = async (id: string) => {
-    setIsLoading(true)
     try {
+      setIsLoading(true)
       await deleteUserRequest(id)
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
       setIsLoading(false)
@@ -88,5 +88,5 @@ export function useUser() {
     }
   }
 
-  return { users, isLoading, getOneUser, getOneUserByEmail, createUser, updateUser, deleteUser }
+  return { users, getUsers, isLoading, getOneUser, getOneUserByEmail, createUser, updateUser, deleteUser }
 }

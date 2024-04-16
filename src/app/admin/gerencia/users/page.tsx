@@ -3,74 +3,88 @@ import { ArrowRight, User } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { useUser } from '@/services/useUser'
 import { UsersTable } from './_components/UsersTable'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { User as UserModel } from '@/lib/interfaces/user.model'
 import { columns } from './_lib/columns'
-import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
+import FloatingButton from '@/components/CustomButtons/FloatingButton'
 
-const users: UserModel[] = [
+const usersData: UserModel[] = [
   {
     id: 'user123',
     email: 'john.doe@example.com',
     password: '', // Replace with hashed password for security
     firstName: 'John',
-    firstSurname: 'Doe',
-    secondSurname: 'Miller',
+    firstLastname: 'Doe',
+    secondLastname: 'Miller',
     loginAttempts: 0,
     isActive: true,
     isFirstTime: true,
-    role: 'USUARIO',
+    roleRequest: {
+      roleListName: 'USUARIO',
+    },
   },
   {
     email: 'jane.smith@example.com',
     password: '', // Replace with hashed password for security
     firstName: 'Jane',
-    firstSurname: 'Smith',
-    secondSurname: 'Miller',
+    firstLastname: 'Smith',
+    secondLastname: 'Miller',
     loginAttempts: 0,
     isActive: true,
     isFirstTime: false,
-    role: 'USUARIO',
+    roleRequest: {
+      roleListName: 'USUARIO',
+    },
   },
   {
     id: 'user456',
     email: 'peter.jones@example.com',
     password: '', // Replace with hashed password for security
     firstName: 'Peter',
-    firstSurname: 'Jones',
-    secondSurname: 'Miller',
+    firstLastname: 'Jones',
+    secondLastname: 'Miller',
     loginAttempts: 1, // Simulate a login attempt
     isActive: false, // Simulate a deactivated user
     isFirstTime: false,
-    role: 'USUARIO',
+    roleRequest: {
+      roleListName: 'USUARIO',
+    },
   },
   {
     email: 'mary.williams@example.com',
     password: '', // Replace with hashed password for security
     firstName: 'Mary',
-    firstSurname: 'Williams',
-    secondSurname: 'Miller',
+    firstLastname: 'Williams',
+    secondLastname: 'Miller',
     loginAttempts: 0,
     isActive: true,
     isFirstTime: true,
-    role: 'USUARIO',
+    roleRequest: {
+      roleListName: 'USUARIO',
+    },
   },
   {
     id: 'user789',
     email: 'david.miller@example.com',
     password: '', // Replace with hashed password for security
     firstName: 'David',
-    firstSurname: 'Miller',
-    secondSurname: 'Johnson',
+    firstLastname: 'Miller',
+    secondLastname: 'Johnson',
     loginAttempts: 0,
     isActive: true,
     isFirstTime: false,
-    role: 'USUARIO',
+    roleRequest: {
+      roleListName: 'USUARIO',
+    },
   },
 ]
 
 const Page = () => {
-  // const { users, isLoading } = useUser()
+  // const { users, getUsers } = useUser()
+
+  // useEffect(() => {
+  //   getUsers()
+  // }, [])
 
   return (
     <div className=' m-auto flex flex-col relative'>
@@ -81,7 +95,7 @@ const Page = () => {
       />
 
       <Suspense fallback={<Loader />}>
-        {users.length === 0 ? (
+        {usersData.length === 0 ? (
           <h1 className='text-sm tracking-widest text-center'>
             NO HAY USUARIOS.
           </h1>
@@ -96,7 +110,7 @@ const Page = () => {
                 Gestiona todos los usuarios.
               </p>
             </div>
-            <UsersTable columns={columns} data={users} />
+            <UsersTable columns={columns} data={usersData} />
           </>
         )}
       </Suspense>

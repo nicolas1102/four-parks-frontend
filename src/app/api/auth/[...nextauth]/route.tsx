@@ -1,7 +1,8 @@
-import { getOneUserByEmailAndPasswordRequest } from '@/api/request/users'
+import { getOneUserByEmailAndPasswordRequest } from '@/app/api/routers/users.router'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
+// TODO: Revisar (preguntar cómo se le pide la validacion del usuario)
 const makeFetchAccordingRole = async (
   email: string,
   password: string,
@@ -56,8 +57,6 @@ const handler = NextAuth({
           // If response is not ok or does not contain a user token
           const errorResponse = await res.json()
           return Promise.reject(new Error(errorResponse?.detail))
-
-          // console.log(userFound)
         } catch (e: any) {
           return Promise.reject(new Error(e?.message))
         }
@@ -76,8 +75,8 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: '/auth/sign-in',
-    signOut: '/auth/sign-in',
+    signIn: '/auth/log-in',
+    signOut: '/auth/log-in',
   },
 })
 

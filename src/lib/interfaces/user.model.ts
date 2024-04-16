@@ -4,11 +4,15 @@ export interface User {
   password: string
   firstName: string
   secondName?: string
-  firstSurname: string
-  secondSurname: string
+  firstLastname: string
+  secondLastname: string
   loginAttempts?: number
   isActive?: boolean
   isFirstTime?: boolean
-  role: 'USUARIO' | 'GERENTE' | 'FUNCIONARIO'
+  roleRequest: {
+    roleListName: [
+      'USER' | 'GERENTE' | 'FUNCIONARIO'
+    ],
+  },
 }
 

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/Icons'
-import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
+import FloatingButton from '@/components/CustomButtons/FloatingButton'
 
 export default function NotFound() {
   return (

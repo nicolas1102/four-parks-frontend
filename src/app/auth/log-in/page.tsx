@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
@@ -14,21 +14,21 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import { useState } from 'react'
-import FloatingButton from '@/components/ButtonsCustom/FloatingButton'
+import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import Separator from '@/components/Separator'
 import { ArrowRight } from 'lucide-react'
-import PrimaryButton from '@/components/ButtonsCustom/PrimaryButton'
-import SecondaryButton from '@/components/ButtonsCustom/SecondaryButton'
+import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
+import SecondaryButton from '@/components/CustomButtons/SecondaryButton'
 import { toast } from 'sonner'
 import { signIn } from 'next-auth/react'
 
 const Page = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
   const isGerente = searchParams.get('as') === 'gerente'
   const isFuncionario = searchParams.get('as') === 'funcionario'
   const origin = searchParams.get('origin')
-  const [isLoading, setIsLoading] = useState(false)
 
   const continueAsFuncionario = () => {
     router.push('?as=funcionario')
@@ -39,7 +39,7 @@ const Page = () => {
   }
 
   const continueAsUsuario = () => {
-    router.push('/sign-in', undefined) // undefined is to clear the url parameters
+    router.push('/auth/log-in', undefined) // undefined is to clear the url parameters
   }
 
   const {
@@ -51,9 +51,9 @@ const Page = () => {
   })
 
   const defineRole = () => {
-    if(isGerente) return 'GERENTE'
-    if(isFuncionario) return 'FUNCIONARIO'
-    if(!isGerente && !isFuncionario) return 'USUARIO'
+    if (isGerente) return 'GERENTE'
+    if (isFuncionario) return 'FUNCIONARIO'
+    if (!isGerente && !isFuncionario) return 'USUARIO'
   }
 
   const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
@@ -63,7 +63,9 @@ const Page = () => {
       const res = await signIn('credentials', {
         email: email,
         password: password,
-        role: defineRole(),
+        roleRequest: {
+          roleListName: defineRole(),
+        },
         redirect: false,
       })
 
@@ -158,7 +160,7 @@ const Page = () => {
                     variant: 'link',
                     className: 'gap-1.5',
                   })}
-                  href='/sign-up'
+                  href='/auth/sign-up'
                 >
                   ¿No tienes una cuenta? Registrate!
                   <ArrowRight className='h-4 w-4' />

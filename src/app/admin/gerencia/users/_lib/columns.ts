@@ -20,11 +20,11 @@ export const columns: ColumnDef<User>[] = [
     header: 'Segundo Nombre',
   },
   {
-    accessorKey: 'firstSurname',
+    accessorKey: 'firstLastname',
     header: 'Primer Apellido',
   },
   {
-    accessorKey: 'secondSurname',
+    accessorKey: 'secondLastname',
     header: 'Segundo Apellido',
   },
   {

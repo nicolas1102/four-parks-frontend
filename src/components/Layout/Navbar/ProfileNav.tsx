@@ -18,7 +18,7 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
       <DropdownMenuTrigger asChild>
         <Link
           className='bg-background hover:bg-accent h-11 w-12 flex items-center justify-around p-1.5 border border-primary hover:bg-yellow-200 hover dark:hover:bg-yellow-300 dark:hover:text-background  '
-          href='/sign-up'
+          href='/auth/sign-up'
         >
           <User />
         </Link>
@@ -46,11 +46,11 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <>
             <DropdownMenuItem>
               <LogIn className='mr-2 h-4 w-4' />
-              <Link href='/sign-in'>Ingresar</Link>
+              <Link href='/auth/log-in'>Ingresar</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <UserPlus className='mr-2 h-4 w-4' />
-              <Link href='/sign-up'>Registrarse</Link>
+              <Link href='/auth/sign-up'>Registrarse</Link>
             </DropdownMenuItem>
           </>
         )}
