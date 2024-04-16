@@ -1,6 +1,28 @@
 'use client'
-
-import Link from 'next/link'
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 import {
   Table,
   TableBody,
@@ -10,157 +32,630 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useUser } from '@/services/useUser'
 import { User } from '@/lib/interfaces/user.model'
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { MoreHorizontal } from 'lucide-react'
+import { useState } from 'react'
+import { useUser } from '@/services/useUser'
+import Link from 'next/link'
 
-interface UsersTableInterface {
-  users: Array<User>
-}
+const usersData: User[] = [
+  {
+    id: 'user123',
+    email: 'john.doe@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'John',
+    firstLastname: 'Doe',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'jane.smith@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Jane',
+    firstLastname: 'Smith',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user456',
+    email: 'peter.jones@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Peter',
+    firstLastname: 'Jones',
+    secondLastname: 'Miller',
+    loginAttempts: 1, // Simulate a login attempt
+    isActive: false, // Simulate a deactivated user
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'mary.williams@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Mary',
+    firstLastname: 'Williams',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user789',
+    email: 'david.miller@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'David',
+    firstLastname: 'Miller',
+    secondLastname: 'Johnson',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user123',
+    email: 'john.doe@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'John',
+    firstLastname: 'Doe',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'jane.smith@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Jane',
+    firstLastname: 'Smith',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user456',
+    email: 'peter.jones@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Peter',
+    firstLastname: 'Jones',
+    secondLastname: 'Miller',
+    loginAttempts: 1, // Simulate a login attempt
+    isActive: false, // Simulate a deactivated user
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'mary.williams@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Mary',
+    firstLastname: 'Williams',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user789',
+    email: 'david.miller@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'David',
+    firstLastname: 'Miller',
+    secondLastname: 'Johnson',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user123',
+    email: 'john.doe@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'John',
+    firstLastname: 'Doe',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'jane.smith@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Jane',
+    firstLastname: 'Smith',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user456',
+    email: 'peter.jones@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Peter',
+    firstLastname: 'Jones',
+    secondLastname: 'Miller',
+    loginAttempts: 1, // Simulate a login attempt
+    isActive: false, // Simulate a deactivated user
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'mary.williams@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Mary',
+    firstLastname: 'Williams',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user789',
+    email: 'david.miller@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'David',
+    firstLastname: 'Miller',
+    secondLastname: 'Johnson',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user123',
+    email: 'john.doe@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'John',
+    firstLastname: 'Doe',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'jane.smith@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Jane',
+    firstLastname: 'Smith',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user456',
+    email: 'peter.jones@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Peter',
+    firstLastname: 'Jones',
+    secondLastname: 'Miller',
+    loginAttempts: 1, // Simulate a login attempt
+    isActive: false, // Simulate a deactivated user
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    email: 'mary.williams@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Mary',
+    firstLastname: 'Williams',
+    secondLastname: 'Miller',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: true,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+  {
+    id: 'user789',
+    email: 'david.miller@example.com',
+    password: '', // Replace with hashed password for security
+    firstName: 'Goku',
+    firstLastname: 'Miller',
+    secondLastname: 'Johnson',
+    loginAttempts: 0,
+    isActive: true,
+    isBlocked: false,
+    roleRequest: {
+      roleListName: ['USER'],
+    },
+  },
+]
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-}
+export const columns: ColumnDef<User>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    cell: ({ row }) => <div>{row.getValue('id')}</div>,
+  },
+  {
+    accessorKey: 'email',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Email
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className='lowercase'>{row.getValue('email')}</div>,
+  },
+  {
+    accessorKey: 'firstName',
+    header: ({ column }) => {
+      return (
+        <Button
+          size={'sm'}
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Primer Nombre
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>{row.getValue('firstName')}</div>
+    ),
+  },
+  {
+    accessorKey: 'secondName',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Segundo Nombre
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>{row.getValue('secondName')}</div>
+    ),
+  },
+  {
+    accessorKey: 'firstLastname',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Primer Apeliido
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>{row.getValue('firstLastname')}</div>
+    ),
+  },
+  {
+    accessorKey: 'secondLastname',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Segundo Apellido
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>{row.getValue('secondLastname')}</div>
+    ),
+  },
+  {
+    accessorKey: 'loginAttempts',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          size={'sm'}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Intentos de Logueo
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>{row.getValue('loginAttempts')}</div>
+    ),
+  },
+  {
+    accessorKey: 'isActive',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Cuenta Activada
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>
+        {row.getValue('isActive') ? 'Si' : 'No'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'isBlocked',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Cuenta Bloqueada
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => (
+      <div className='text-center'>
+        {row.getValue('isBlocked') ? 'Si' : 'No'}
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'roleRequest.roleListName',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Rol
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const user = row.original
+      return (
+        <div className='lowercase text-center'>
+          {user.roleRequest.roleListName[0]}
+        </div>
+      )
+    },
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const user = row.original
 
-export function UsersTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='ghost' className='h-8 w-8 p-0'>
+              <span className='sr-only'>Abrir Menu</span>
+              <MoreHorizontal className='h-4 w-4' />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end'>
+            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => {
+                if (user?.id) navigator.clipboard.writeText(user.id)
+              }}
+            >
+              Copiar ID de usuario
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link href={`/usuarios/edit/${row.id}`}>Editar usuario</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                // if (row.id) deleteUser(row.id)
+              }}
+            >
+              <span className='text-red-600 font-medium'>Eliminar Usuario</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
+  },
+]
 
+export function UsersTable() {
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
   const { deleteUser } = useUser()
 
-  return (
-    <Table className='border'>
-      <TableCaption>Una lista de todos los usuarios.</TableCaption>
+  const table = useReactTable({
+    data: usersData,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  })
 
-      <TableHeader>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <TableRow key={headerGroup.id}>
-            {headerGroup.headers.map((header) => {
-              return (
-                <TableHead key={header.id} className='text-center text-xs'>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </TableHead>
-              )
-            })}
-            <TableHead className='text-center text-xs'>Acciones</TableHead>
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {table.getRowModel().rows?.length ? (
-          table.getRowModel().rows.map((row) => (
-            <TableRow
-              key={row.id}
-              data-state={row.getIsSelected() && 'selected'}
-            >
-              {row.getVisibleCells().map((cell) => {
-                if (cell.column.columnDef.header === 'Cuenta Activada') {
+  return (
+    <div className='w-full'>
+      <div className='flex items-center py-4'>
+        <Input
+          placeholder='Filter emails...'
+          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          onChange={(event) =>
+            table.getColumn('email')?.setFilterValue(event.target.value)
+          }
+          className='max-w-sm'
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='outline' className='ml-auto'>
+              Columnas <ChevronDown className='ml-2 h-4 w-4' />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end'>
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className='capitalize'
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className='rounded-md border'>
+        <Table>
+          <TableCaption>Una lista de todos los usuarios.</TableCaption>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <TableCell key={cell.id} className='text-center'>
-                      {cell.getValue() ? (
-                        'Si'
-                      ) : (
-                        <span className='text-red-500 font-medium'>
-                          No
-                        </span>
-                      )}
-                    </TableCell>
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
                   )
-                } else if (
-                  cell.column.columnDef.header === 'Cuenta Bloqueada'
-                ) {
-                  return (
-                    <TableCell key={cell.id} className='text-center'>
-                      {cell.getValue() ? (
-                        'Si'
-                      ) : (
-                        <span className='text-red-500 font-medium'>
-                          No
-                        </span>
-                      )}
-                    </TableCell>
-                  )
-                } else {
-                  return (
-                    <TableCell key={cell.id} className='text-center'>
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
                     </TableCell>
-                  )
-                }
-              })}
-              <TableCell className='text-center flex gap-2 justify-center'>
-                <Button variant='outline'>
-                  <Link href={`/usuarios/edit/${row.id}`}>Editar</Link>
-                </Button>
-
-                <Button
-                  variant='destructive'
-                  onClick={() => {
-                    if (row.id) deleteUser(row.id)
-                  }}
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className='h-24 text-center'
                 >
-                  Eliminar
-                </Button>
-                {/* <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant='ghost' className='h-8 w-8 p-0'>
-                      <span className='sr-only'>Open menu</span>
-                      <MoreHorizontal className='h-4 w-4' />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align='end'>
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem
-                      onClick={() => navigator.clipboard.writeText(row.getValue(row.id))}
-                    >
-                      Copy payment ID
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>View customer</DropdownMenuItem>
-                    <DropdownMenuItem>View payment details</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu> */}
-              </TableCell>
-            </TableRow>
-          ))
-        ) : (
-          <TableRow>
-            <TableCell colSpan={columns.length} className='h-24 text-center'>
-              No results.
-            </TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+                  Sin resultados.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className='flex items-center justify-end space-x-2 py-4'>
+        <div className='space-x-2'>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -8,6 +8,7 @@ import { Suspense, useEffect } from 'react'
 import { User as UserModel } from '@/lib/interfaces/user.model'
 import { columns } from './_lib/columns'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
+import { UsersTable1 } from './_components/UsersTable1'
 
 const usersData: UserModel[] = [
   {
