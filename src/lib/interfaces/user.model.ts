@@ -11,7 +11,7 @@ export interface User {
   isBlocked?: boolean
   roleRequest: {
     roleListName: [
-      'USER' | 'GERENTE' | 'FUNCIONARIO'
+      'USUARIO' | 'GERENTE' | 'FUNCIONARIO'
     ],
   },
 }
