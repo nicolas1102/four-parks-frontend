@@ -13,14 +13,14 @@ import {
 } from '@/lib/validators/account-credentials-validator'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import Separator from '@/components/Separator'
 import { ArrowRight } from 'lucide-react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import SecondaryButton from '@/components/CustomButtons/SecondaryButton'
 import { toast } from 'sonner'
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from 'next-auth/react'
 import { useUser } from '@/services/useUser'
 
 const Page = () => {
@@ -55,11 +55,11 @@ const Page = () => {
     try {
       setIsLoading(true)
       // usamos metodo de next-auth para inicio de sesioon
-      const res = await signIn("credentials", {
+      const res = await signIn('credentials', {
         email: email,
         password: password,
         redirect: false,
-      });
+      })
 
       setIsLoading(false)
 
@@ -141,6 +141,8 @@ const Page = () => {
                     {errors.password.message}
                   </p>
                 )}
+              </div>
+              <div className='grid gap-1 py-2'>
               </div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
