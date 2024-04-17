@@ -18,7 +18,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -31,7 +31,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -45,7 +45,7 @@ const usersData: User[] = [
     isActive: false, // Simulate a deactivated user
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -58,7 +58,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -72,7 +72,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -86,7 +86,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -99,7 +99,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -113,7 +113,7 @@ const usersData: User[] = [
     isActive: false, // Simulate a deactivated user
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -126,7 +126,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -140,7 +140,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -154,7 +154,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -167,7 +167,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -181,7 +181,7 @@ const usersData: User[] = [
     isActive: false, // Simulate a deactivated user
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -194,7 +194,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -208,7 +208,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -222,7 +222,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -235,7 +235,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -249,7 +249,7 @@ const usersData: User[] = [
     isActive: false, // Simulate a deactivated user
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -262,7 +262,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: true,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
   {
@@ -276,7 +276,7 @@ const usersData: User[] = [
     isActive: true,
     isBlocked: false,
     roleRequest: {
-      roleListName: ['USER'],
+      roleListName: ['USUARIO'],
     },
   },
 ]
