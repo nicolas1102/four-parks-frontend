@@ -37,281 +37,6 @@ import { useState } from 'react'
 import { useUser } from '@/services/useUser'
 import Link from 'next/link'
 
-const usersData: User[] = [
-  {
-    id: 'user123',
-    email: 'john.doe@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'John',
-    firstLastname: 'Doe',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'jane.smith@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Jane',
-    firstLastname: 'Smith',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user456',
-    email: 'peter.jones@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Peter',
-    firstLastname: 'Jones',
-    secondLastname: 'Miller',
-    loginAttempts: 1, // Simulate a login attempt
-    isActive: false, // Simulate a deactivated user
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'mary.williams@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Mary',
-    firstLastname: 'Williams',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user789',
-    email: 'david.miller@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'David',
-    firstLastname: 'Miller',
-    secondLastname: 'Johnson',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user123',
-    email: 'john.doe@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'John',
-    firstLastname: 'Doe',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'jane.smith@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Jane',
-    firstLastname: 'Smith',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user456',
-    email: 'peter.jones@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Peter',
-    firstLastname: 'Jones',
-    secondLastname: 'Miller',
-    loginAttempts: 1, // Simulate a login attempt
-    isActive: false, // Simulate a deactivated user
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'mary.williams@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Mary',
-    firstLastname: 'Williams',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user789',
-    email: 'david.miller@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'David',
-    firstLastname: 'Miller',
-    secondLastname: 'Johnson',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user123',
-    email: 'john.doe@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'John',
-    firstLastname: 'Doe',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'jane.smith@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Jane',
-    firstLastname: 'Smith',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user456',
-    email: 'peter.jones@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Peter',
-    firstLastname: 'Jones',
-    secondLastname: 'Miller',
-    loginAttempts: 1, // Simulate a login attempt
-    isActive: false, // Simulate a deactivated user
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'mary.williams@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Mary',
-    firstLastname: 'Williams',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user789',
-    email: 'david.miller@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'David',
-    firstLastname: 'Miller',
-    secondLastname: 'Johnson',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user123',
-    email: 'john.doe@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'John',
-    firstLastname: 'Doe',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'jane.smith@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Jane',
-    firstLastname: 'Smith',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user456',
-    email: 'peter.jones@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Peter',
-    firstLastname: 'Jones',
-    secondLastname: 'Miller',
-    loginAttempts: 1, // Simulate a login attempt
-    isActive: false, // Simulate a deactivated user
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    email: 'mary.williams@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Mary',
-    firstLastname: 'Williams',
-    secondLastname: 'Miller',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-  {
-    id: 'user789',
-    email: 'david.miller@example.com',
-    password: '', // Replace with hashed password for security
-    firstName: 'Goku',
-    firstLastname: 'Miller',
-    secondLastname: 'Johnson',
-    loginAttempts: 0,
-    isActive: true,
-    isBlocked: false,
-    roleRequest: {
-      roleListName: ['USER'],
-    },
-  },
-]
-
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'id',
@@ -459,7 +184,7 @@ export const columns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: 'roleRequest.roleListName',
+    accessorKey: 'Rol',
     header: ({ column }) => {
       return (
         <Button
@@ -489,7 +214,7 @@ export const columns: ColumnDef<User>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='ghost' className='h-8 w-8 p-0'>
+            <Button variant='outline' className='h-8 w-8 p-0'>
               <span className='sr-only'>Abrir Menu</span>
               <MoreHorizontal className='h-4 w-4' />
             </Button>
@@ -521,7 +246,7 @@ export const columns: ColumnDef<User>[] = [
   },
 ]
 
-export function UsersTable() {
+export function UsersTable({ data }: { data: User[] }) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -529,7 +254,7 @@ export function UsersTable() {
   const { deleteUser } = useUser()
 
   const table = useReactTable({
-    data: usersData,
+    data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -551,12 +276,20 @@ export function UsersTable() {
     <div className='w-full'>
       <div className='flex items-center py-4'>
         <Input
-          placeholder='Filter emails...'
+          placeholder='Filtrar por ID'
+          value={(table.getColumn('id')?.getFilterValue() as string) ?? ''}
+          onChange={(event) =>
+            table.getColumn('id')?.setFilterValue(event.target.value)
+          }
+          className='max-w-sm mr-2'
+        />
+        <Input
+          placeholder='Filtrar por email'
           value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn('email')?.setFilterValue(event.target.value)
           }
-          className='max-w-sm'
+          className='max-w-sm mr-2'
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -587,7 +320,11 @@ export function UsersTable() {
       </div>
       <div className='rounded-md border'>
         <Table>
-          <TableCaption>Una lista de todos los usuarios.</TableCaption>
+          <TableCaption>
+            <span className='font-medium'>
+              Una lista de todos los usuarios.
+            </span>{' '}
+          </TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -637,6 +374,9 @@ export function UsersTable() {
         </Table>
       </div>
       <div className='flex items-center justify-end space-x-2 py-4'>
+        <div className='flex-1 text-sm text-muted-foreground italic '>
+          Número de páginas: {table.getPageCount()}.
+        </div>
         <div className='space-x-2'>
           <Button
             variant='outline'
