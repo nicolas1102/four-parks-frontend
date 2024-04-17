@@ -79,13 +79,12 @@ const Page = () => {
 
       const userData = {
         email: email,
-        password: '1234567',
         firstName: firstName,
         secondName: secondName,
         firstLastname: firstLastname,
         secondLastname: secondLastname,
         roleRequest: {
-          roleListName: ['USER'],
+          roleListName: ['USUARIO'],
         },
       } as User
 

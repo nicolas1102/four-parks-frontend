@@ -6,7 +6,8 @@ export const AuthCredentialsValidator = z.object({
   email: z.string().email({ message: 'Dirección de email invalida.' }),
   password: z
     .string()
-    .min(5, { message: 'Recuerda que la contraseña debe tener mínimo 5 caracteres.' }).max(8, { message: 'Recuerda que la contraseña debe tener máximo 8 caracteres.' }),
+    .min(5, { message: 'Recuerda que la contraseña debe tener mínimo 5 caracteres.' })
+//.max(8, { message: 'Recuerda que la contraseña debe tener máximo 8 caracteres.' }),
 })
 
 export const SignUpCredentialsValidator = z.object({
