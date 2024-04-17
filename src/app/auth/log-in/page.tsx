@@ -17,14 +17,23 @@ import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import { ArrowRight } from 'lucide-react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { toast } from 'sonner'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { useUser } from '@/services/useUser'
+import { useEffect } from 'react'
 
 const Page = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { isLoading, setIsLoading } = useUser()
-  const origin = searchParams.get('origin')
+  const origin = searchParams.get('callbackUrl')
+  const { data: session } = useSession()
+
+  // if (session) {
+  //   router.push('/auth/unauthorized')
+  //   toast('Ya estás logueado!', {
+  //     description: 'Ya tienes una sesión en curso.',
+  //   })
+  // }
 
   const {
     register,
@@ -56,7 +65,14 @@ const Page = () => {
             'Ahora puedes hacer uso de las funciones de nuestro sistema!',
         })
 
-        if (origin) return router.push(`/${origin}`)
+        // callback a url de origen despues de loguearse correctamente
+        if (origin) {
+          const url = new URL(origin)
+          const path = url.pathname
+          console.log(path);
+          
+          return router.push(`${path}`)
+        }
 
         router.push('/')
         router.refresh()

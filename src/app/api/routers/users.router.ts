@@ -1,4 +1,4 @@
-import { User } from '@/lib/interfaces/user.model'
+import { User } from '@/lib/interfaces/user.interface'
 import axios from 'axios'
 
 const baseURL = 'http://localhost:8080/api/v1'

@@ -8,7 +8,7 @@ import {
   getUsersRequest,
   updateUserRequest,
 } from '@/app/api/routers/users.router'
-import { User } from '@/lib/interfaces/user.model'
+import { User } from '@/lib/interfaces/user.interface'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 

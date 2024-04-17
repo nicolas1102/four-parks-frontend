@@ -27,20 +27,17 @@ const handler = NextAuth({
             password: string
           }
           const userFound = await getAuthorizedUserRequest(email, password)
-
           if (!userFound) throw new Error('Credenciales invalidas.')
+          if (userFound?.jwt) {
+            // TODO: Borrar esto cuando el back envie el rol
+            const userWithRole = {...userFound, role: 'USUARIO'}
 
-          // if (!res) {
-          //   const user = await res.json()
-          //   if (user?.access_token && user?.refresh_token) {
-          //     // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
-          //     return user
-          //   }
-          // }
-          // // If response is not ok or does not contain a user token
-          // const errorResponse = await res.json()
-          // return Promise.reject(new Error(errorResponse?.detail))
-          return userFound
+            // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)            
+            return userWithRole
+          }
+
+          // If response is not ok or does not contain a user token
+          throw new Error('No se encontro el token.')
         } catch (e: any) {
           return Promise.reject(new Error(e?.message))
         }
@@ -49,12 +46,15 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ user, token }) {
-      if (user) token.user = user
+      if (user) {
+        token.user = user
+        // token.role = user.role
+      }
       return token
     },
     // para configurar los datos que se peueden usar en client
     session({ session, token }) {
-      session.user = token.user as any
+      if (session?.user) session.user = token.user as any
       return session
     },
   },

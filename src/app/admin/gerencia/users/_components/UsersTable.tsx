@@ -32,7 +32,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { User } from '@/lib/interfaces/user.model'
+import { User } from '@/lib/interfaces/user.interface'
 import { useState } from 'react'
 import { useUser } from '@/services/useUser'
 import Link from 'next/link'
