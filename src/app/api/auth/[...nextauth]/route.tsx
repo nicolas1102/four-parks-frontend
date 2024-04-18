@@ -47,6 +47,7 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ user, token }) {
       if (user) {
+        // TODO: Solucionar esto
         token.user = user
         // token.role = user.role
       }

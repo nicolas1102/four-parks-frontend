@@ -69,8 +69,6 @@ const Page = () => {
         if (origin) {
           const url = new URL(origin)
           const path = url.pathname
-          console.log(path);
-          
           return router.push(`${path}`)
         }
 
