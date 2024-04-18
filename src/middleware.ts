@@ -8,9 +8,9 @@ export default withAuth(
       || request.nextUrl.pathname.startsWith("/usuario"))
       && request.nextauth.token?.user.role !== "FUNCIONARIO"
       && request.nextauth.token?.user.role !== "GERENTE"
+      // TODO: DESPUES QUITAR ESTO Y REVISAR LAS RUTAS PERMITIDAS
       && request.nextauth.token?.user.role !== "USUARIO"
     ) {
-      
       return NextResponse.rewrite(
         new URL("/auth/unauthorized", request.url)
       )
