@@ -31,7 +31,7 @@ const StepItem = ({ number, title, description, image }: HomeItemInterface) => {
           </div>
           <div className='w-28 border border-primary'></div>
           <div className='w-28 h-28 flex items-center justify-center my-auto border-[2px] border-primary bg-yellow-300'>
-            <h3 className='text-5xl'>{number + 1}</h3>
+            <h3 className='text-5xl  font-semibold'>{number + 1}</h3>
           </div>
         </>
       )}
@@ -39,7 +39,7 @@ const StepItem = ({ number, title, description, image }: HomeItemInterface) => {
       {(number + 1) % 2 === 0 && (
         <>
           <div className='w-28 h-28 flex items-center justify-center my-auto border-[2px] border-primary bg-yellow-300'>
-            <h3 className='text-5xl'>{number + 1}</h3>
+            <h3 className='text-5xl font-semibold'>{number + 1}</h3>
           </div>
           <div className='w-28 border border-primary'></div>
           <div className='bg-yellow-300 w-[700px] border-2 border-primary flex flex-row content-center justify-between'>
