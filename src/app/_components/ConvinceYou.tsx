@@ -15,10 +15,10 @@ const ConvinceYou = () => {
   return (
     <div className=' bg-yellow-300 py-20 px-48 w-full grid grid-cols-12'>
       <div className='col-span-7 pr-10'>
-        <h2 className='text-3xl text-black tracking-widest font-medium'>
+        <h2 className='text-5xl text-black tracking-widest font-medium'>
           ¿TE CONVENCIMOS?
         </h2>
-        <p className='text-2xl text-black pt-3 tracking-wider pb-5'>
+        <p className='text-3xl text-black pt-3 tracking-wider pb-5'>
           REGÍSTRATE GRATIS Y COMIENZA A HACER USO DE NUESTROS PARQUEADEROS POR
           TODA COLOMBIA.
         </p>
@@ -40,7 +40,7 @@ const ConvinceYou = () => {
         </div>
       </div>
 
-      <div className='col-span-5 relative overflow-hidden h-[250px]'>
+      <div className='col-span-5 relative overflow-hidden h-[300px]'>
         <Image
           src='/thank-you-cbum.webp'
           className='w-full h-full object-cover object-center grayscale'

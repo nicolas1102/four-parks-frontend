@@ -35,7 +35,7 @@ const steps = [
 
 const Steps = () => {
   return (
-    <div className=' bg-yellow-300 py-20 px-10 w-full grid grid-cols-12'>
+    <div className=' bg-yellow-300 py-20 px-32 w-full grid grid-cols-12'>
       <div className='col-span-5 relative overflow-hidden h-[630px]'>
         <Image
           src='/thank-you-cbum.webp'

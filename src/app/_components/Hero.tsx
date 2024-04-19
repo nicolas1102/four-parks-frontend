@@ -15,20 +15,20 @@ const Hero = () => {
 
   return (
     <div className='h-[650px] w-full grid grid-cols-12 relative overflow-hidden'>
-      <div className='col-span-7 pr-4 m-6'>
-        <h1 className='text-7xl font-light tracking-wider'>
+      <div className='col-span-7 my-12 ml-32 mr-10'>
+        <h1 className='text-6xl font-light tracking-wider'>
           <span className=' font-bold'>¡</span>LA FORMA MÁS{' '}
-          <span className='font-bold '>FÁCIL</span>{' '}DE{' '}
-          <span className='font-bold '>ASEGURAR</span> TU{' '}
-          <span className='font-bold '>PARQUEADERO</span> DE TODA{' '}
-          <span className='font-bold '>
+          <span className='font-bold'>FÁCIL</span>{' '}DE{' '}
+          <span className='font-bold'>ASEGURAR</span> TU{' '}
+          <span className='font-bold'>PARQUEADERO</span> DE TODA{' '}
+          <span className='font-bold hover:animate-pulse'>
             <span className=' text-yellow-400'>COLO</span>
             <span className=' text-blue-700'>MB</span>
             <span className=' text-red-700'>IA</span>!
           </span>
         </h1>
 
-        <div className='pt-7'>
+        <div className='pt-12'>
           <p className='text-xl font-medium tracking-widest'>
             {/* Olvídate del estrés de buscar estacionamiento.  */}
             Ingresa, encuentra y reserva en segundos.
@@ -49,7 +49,7 @@ const Hero = () => {
               />
             </Link>
 
-            <Separator text={'¿Ya tienes una cuenta?'} />
+            <Separator text={'¿Ya tienes una cuenta?'} background='bg-background' />
 
             <Link href={'/auth/log-in'}>
               <PrimaryButton
