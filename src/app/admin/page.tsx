@@ -1,29 +1,4 @@
-'use client'
-
-import { Session } from 'next-auth'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-
 const Page = () => {
-  // const [sessionState, setSessionState] = useState<Session>();
-  // const [loading, setLoading] = useState(true);
-  // const { data: session } = useSession();
-  // const router = useRouter()
-
-  // useEffect(() => {
-  //   if (session) {
-  //     setSessionState(session);
-  //     setLoading(false);
-  //   }
-  // }, [session]);
-
-  // useEffect(() => {
-  //   // TODO: CAMBIAR A GERENTE
-  //   if (!loading && sessionState?.user.role !== 'USUARIO') {
-  //     router.push('/auth/unauthorized');
-  //   }
-  // }, [loading, router, sessionState]);
 
   return (
     <div className='max-h-full m-auto flex flex-col gap-y-10'>

@@ -12,7 +12,7 @@ import {
   TSignUpCredentialsValidator,
   SignUpCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import Separator from '@/components/Separator'
@@ -21,6 +21,7 @@ import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { User } from '@/lib/interfaces/user.interface'
 import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
 
 interface MonthOption {
   value: number
@@ -44,20 +45,16 @@ const YearOptions: YearOption[] = Array.from({ length: 30 }, (_, i) => ({
 
 const Page = () => {
   const { data: session } = useSession()
+  const searchParams = useSearchParams()
   const router = useRouter()
   const { isLoading, createUser } = useUser()
-
-  // if (session) {    
-  //   router.push('/auth/unauthorized')
-  //   toast('Ya estás logueado!', {
-  //     description: 'Ya tienes una sesión en curso.',
-  //   })
-  // }
+  const email = searchParams.get('email')
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<TSignUpCredentialsValidator>({
     resolver: zodResolver(SignUpCredentialsValidator),
   })
@@ -111,6 +108,10 @@ const Page = () => {
       })
     }
   }
+
+  useEffect(() => {
+    if (email) setValue('email', email)
+  }, [email, setValue])
 
   return (
     !session && (

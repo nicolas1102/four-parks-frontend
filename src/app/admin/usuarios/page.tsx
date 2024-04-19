@@ -1,13 +1,9 @@
-'use client'
 import { User as UserIcons } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { UsersTable } from './_components/UsersTable'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense } from 'react'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import { User } from '@/lib/interfaces/user.interface'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { Session } from 'next-auth'
 
 const usersData: User[] = [
   {
@@ -285,25 +281,6 @@ const usersData: User[] = [
 ]
 
 const Page = () => {
-  // const [sessionState, setSessionState] = useState<Session>();
-  // const [loading, setLoading] = useState(true);
-  // const { data: session } = useSession();
-  // const router = useRouter()
-
-  // useEffect(() => {
-  //   if (session) {
-  //     setSessionState(session);
-  //     setLoading(false);
-  //   } 
-  // }, [session]);
-
-  // useEffect(() => {    
-  //   // TODO: CAMBIAR A GERENTE
-  //   if (!loading && sessionState?.user.role !== 'USUARIO') {
-  //     router.push('/auth/unauthorized');
-  //   }
-  // }, [loading, router, sessionState]);
-
   return (
     <div className=' m-auto flex flex-col relative'>
       <FloatingButton
