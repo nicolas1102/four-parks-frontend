@@ -1,7 +1,7 @@
 const Page = () => {
 
   return (
-    <div className='max-h-full m-auto flex flex-col gap-y-10'>
+    <div className='max-h-full flex flex-col gap-y-10 m-10'>
       <h1 className='text-sm tracking-widest text-center'>
         Yo había ponido mi pagina de GERENTES aquí
       </h1>

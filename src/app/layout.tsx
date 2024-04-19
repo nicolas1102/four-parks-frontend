@@ -36,9 +36,7 @@ export default function RootLayout({
         <Providers>
           <main className='relative flex flex-col min-h-screen'>
             <Navbar />
-            <Suspense fallback={<Loader />}>
-              <div className='mx-10 mt-10 mb-20'>{children}</div>
-            </Suspense>
+            <Suspense fallback={<Loader />}>{children}</Suspense>
             <Footer />
           </main>
           <Toaster />

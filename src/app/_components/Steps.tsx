@@ -1,4 +1,4 @@
-import StepItem from './StepItem'
+import Image from 'next/image'
 
 const steps = [
   {
@@ -33,26 +33,47 @@ const steps = [
   },
 ]
 
-const Benefits = () => {
+const Steps = () => {
   return (
-    <div className='col-span-7 mt-4'>
-      <h2 className='mt-2 text-4xl tracking-wider'>
-        PARQUEA MEJOR, ASÍ DE FÁCIL
-      </h2>
+    <div className=' bg-yellow-300 py-20 px-10 w-full grid grid-cols-12'>
+      <div className='col-span-5 relative overflow-hidden h-[630px]'>
+        <Image
+          src='/thank-you-cbum.webp'
+          className='w-full h-full object-cover object-center grayscale'
+          alt='thank you for your order'
+          priority
+          width='300'
+          height='400'
+        />
+      </div>
 
-      <div className='pt-7 flex flex-col mx-16'>
-        {steps.map((item, index) => (
-          <StepItem
-            key={index}
-            number={index}
-            title={item.title}
-            description={item.description}
-            image={item.image}
-          />
-        ))}
+      <div className='col-span-7 pl-10'>
+        <h2 className='text-3xl text-black tracking-widest font-medium'>
+          PARQUEA MEJOR, ASÍ DE FÁCIL
+        </h2>
+        <p className='text-lg text-black'>
+          En solo unos pocos pasos estarás reservando tus parqueaderos en todo
+          Colombia.
+        </p>
+        <ul className='flex flex-col gap-4 py-4 pl-6'>
+          {steps.map((item, index) => (
+            <li
+              key={index}
+              className='flex flex-row text-black border border-black p-2 bg-yellow-200'
+            >
+              <p className='text-3xl font-semibold text-center'>{index + 1}.</p>
+              <div className='flex flex-col pl-4'>
+                <h3 className='font-semibold text-xl tracking-wide'>
+                  {item.title}
+                </h3>
+                <p className='text-lg'>{item.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
 }
 
-export default Benefits
+export default Steps

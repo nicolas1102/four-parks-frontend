@@ -282,7 +282,7 @@ const usersData: User[] = [
 
 const Page = () => {
   return (
-    <div className=' m-auto flex flex-col relative'>
+    <div className=' flex flex-col relative m-10'>
       <FloatingButton
         text='CREAR USUARIO'
         direction='right'

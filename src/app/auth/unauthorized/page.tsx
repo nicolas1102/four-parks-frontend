@@ -6,7 +6,7 @@ import FloatingButton from '@/components/CustomButtons/FloatingButton'
 
 export default function Page() {
   return (
-    <div className='container relative flex flex-col items-center gap-2 pt-10'>
+    <div className=' relative flex flex-col items-center gap-2 pt-10 m-10'>
       <FloatingButton text='PANTALLA DE INICIO' href='/' direction='left' />
       <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
         <Icons.lost className='text-red-400' />

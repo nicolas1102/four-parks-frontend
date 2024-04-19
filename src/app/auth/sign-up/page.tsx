@@ -116,7 +116,7 @@ const Page = () => {
   }, [email, setValue])
 
   return (
-    <div className='container relative flex flex-col items-center justify-center lg:px-0 '>
+    <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
       <FloatingButton text='INGRESAR' href='/auth/log-in' direction='left' />
 
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>

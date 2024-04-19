@@ -2,32 +2,24 @@
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import Separator from '@/components/Separator'
 import { Input } from '@/components/ui/input'
-import { Shield, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Hero = () => {
-  const router = useRouter()
   const [email, setEmail] = useState('')
 
-  const onSubmit = ({ email }: { email: string }) => {
-    router.push(`/auth/sign-up?email=${email}`)
-  }
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(email)
-
     setEmail(event.target.value)
   }
 
   return (
-    <div className='h-[600px] w-full grid grid-cols-12 relative'>
-      <div className='col-span-7 pr-4'>
-        <h1 className='mt-2 text-7xl font-light tracking-wider'>
-          <span className=' font-bold'>¡</span>LA FORMA MÁS FÁCIL DE{' '}
-          <span className='font-bold '>ASEGURAR</span>{' '}TU{' '}
+    <div className='h-[650px] w-full grid grid-cols-12 relative overflow-hidden'>
+      <div className='col-span-7 pr-4 m-6'>
+        <h1 className='text-7xl font-light tracking-wider'>
+          <span className=' font-bold'>¡</span>LA FORMA MÁS{' '}
+          <span className='font-bold '>FÁCIL</span>{' '}DE{' '}
+          <span className='font-bold '>ASEGURAR</span> TU{' '}
           <span className='font-bold '>PARQUEADERO</span> DE TODA{' '}
           <span className='font-bold '>
             <span className=' text-yellow-400'>COLO</span>
@@ -41,7 +33,7 @@ const Hero = () => {
             {/* Olvídate del estrés de buscar estacionamiento.  */}
             Ingresa, encuentra y reserva en segundos.
           </p>
-          <div className='pt-5 w-[500px]'>
+          <div className='pt-5 w-[450px]'>
             <Input
               type='email'
               placeholder='Tu email'
@@ -53,7 +45,7 @@ const Hero = () => {
               <PrimaryButton
                 text='COMIENZA A PARQUEAR MEJOR'
                 isLoading={false}
-                width={500}
+                width={450}
               />
             </Link>
 
@@ -63,7 +55,7 @@ const Hero = () => {
               <PrimaryButton
                 text='INGRESA A TU CUENTA'
                 isLoading={false}
-                width={500}
+                width={450}
               />
             </Link>
           </div>
@@ -76,7 +68,7 @@ const Hero = () => {
           alt='thank you for your order'
           priority
           width='500'
-          height='600'
+          height='650'
         />
       </div>
     </div>
