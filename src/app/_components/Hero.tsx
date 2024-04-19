@@ -26,11 +26,11 @@ const Hero = () => {
     <div className='h-[600px] w-full grid grid-cols-12 relative'>
       <div className='col-span-7 pr-4'>
         <h1 className='mt-2 text-7xl font-light tracking-wider'>
-          <span className=' font-bold'>¡</span>LA FORMA{' '}
-          <span className='font-bold '>MÁS RÁPIDA DE</span>{' '}
-          <span className='font-bold '>ESTACIONAR</span> TU VEHÍCULO EN{' '}
+          <span className=' font-bold'>¡</span>LA FORMA MÁS FÁCIL DE{' '}
+          <span className='font-bold '>ASEGURAR</span>{' '}TU{' '}
+          <span className='font-bold '>PARQUEADERO</span> DE TODA{' '}
           <span className='font-bold '>
-            TODA <span className=' text-yellow-400'>COLO</span>
+            <span className=' text-yellow-400'>COLO</span>
             <span className=' text-blue-700'>MB</span>
             <span className=' text-red-700'>IA</span>!
           </span>
@@ -39,8 +39,7 @@ const Hero = () => {
         <div className='pt-7'>
           <p className='text-xl font-medium tracking-widest'>
             {/* Olvídate del estrés de buscar estacionamiento.  */}
-            Ingresa, encuentra y
-            reserva en segundos.
+            Ingresa, encuentra y reserva en segundos.
           </p>
           <div className='pt-5 w-[500px]'>
             <Input
