@@ -46,7 +46,7 @@ const Hero = () => {
               placeholder='Tu email'
               value={email}
               onChange={handleChange}
-              className='mb-2'
+              className='mb-2 border-primary'
             />
             <Link href={`/auth/sign-up?email=${email}`}>
               <PrimaryButton
@@ -60,7 +60,7 @@ const Hero = () => {
 
             <Link href={'/auth/log-in'}>
               <PrimaryButton
-                text='COMIENZA A PARQUEAR MEJOR'
+                text='INGRESA A TU CUENTA'
                 isLoading={false}
                 width={500}
               />

@@ -1,4 +1,4 @@
-import Benefits from './_components/Benefits';
+import Benefits from './_components/Steps';
 import Hero from './_components/Hero';
 
 export default function Home() {
