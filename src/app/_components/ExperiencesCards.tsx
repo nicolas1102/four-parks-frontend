@@ -12,34 +12,34 @@ import Autoplay from 'embla-carousel-autoplay'
 
 const experiences = [
   {
-    name: 'Juan Pérez',
-    experience:
-      'Encontré un lugar de estacionamiento rápidamente y sin problemas. El sistema de pago fue muy fácil de usar.',
-    image: '/1.jpg',
-  },
-  {
-    name: 'María Gómez',
+    name: 'Hernesto',
     experience:
       'Me encantó la opción de reservar mi lugar de estacionamiento con anticipación. Esto me ahorró mucho tiempo y estrés.',
-    image: '/3.jpg',
-  },
-  {
-    name: 'Pedro Rodríguez',
-    experience:
-      'El sistema de navegación me guió directamente al parqueadero, sin necesidad de dar vueltas. ¡Muy útil!',
-    image: '/2.jpg',
-  },
-  {
-    name: 'Ana López',
-    experience:
-      'Los precios del estacionamiento son muy razonables, especialmente considerando la comodidad y seguridad que ofrece el servicio.',
     image: '/1.jpg',
   },
   {
-    name: 'David Sánchez',
+    name: 'Pancracio',
+    experience:
+      'El sistema de navegación me guió directamente al parqueadero, sin necesidad de dar vueltas. ¡Muy útil!',
+    image: '/3.jpg',
+  },
+  {
+    name: 'Andrés',
+    experience:
+      'Los precios del estacionamiento son muy razonables, especialmente considerando la comodidad y seguridad que ofrece el servicio.',
+    image: '/handi.jpeg',
+  },
+  {
+    name: 'Alejandro',
+    experience:
+      'Excelente servicio. El personal me ayudó a meter mi tractomula hasta el fondo del sótano sin problemas.',
+    image: '/alejandro.png',
+  },
+  {
+    name: 'Shara',
     experience:
       'El personal del parqueadero fue muy amable y servicial. Me ayudaron con mi equipaje y me proporcionaron información sobre la zona.',
-    image: '/3.jpg',
+    image: '/2.jpg',
   },
 ]
 
@@ -80,7 +80,9 @@ export function ExperiencesCards() {
                             height={160}
                           />
                         </div>
-                        <p className='uppercase tracking-widest pt-3 text-xl font-medium'>{item.name}</p>
+                        <p className='uppercase tracking-widest pt-3 text-xl font-medium'>
+                          {item.name}
+                        </p>
                       </div>
                       <div className=''>
                         <p className='mt-3 text-center'>

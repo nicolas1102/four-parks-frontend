@@ -11,7 +11,7 @@ const benefits = [
     title: 'INICIO DE SESIÓN CONFIABLE Y SEGURO.',
     image: (
       <LogIn
-        size={240}
+        size={184}
         strokeWidth={0.9}
         className='hover:animate-pulse text-black'
       />
@@ -21,7 +21,7 @@ const benefits = [
     title: 'VISUALIZA TODOS LOS PARQUEADEROS.',
     image: (
       <SquareParking
-        size={240}
+        size={184}
         strokeWidth={0.9}
         className='hover:animate-pulse text-black'
       />
@@ -31,7 +31,7 @@ const benefits = [
     title: 'SEGURIDAD EN TU MÉTODO DE PAGO.',
     image: (
       <CreditCard
-        size={240}
+        size={184}
         strokeWidth={0.9}
         className='hover:animate-pulse text-black'
       />
@@ -41,7 +41,7 @@ const benefits = [
     title: 'RESERVA EN POCOS SEGUNDOS.',
     image: (
       <BookmarkCheck
-        size={240}
+        size={184}
         strokeWidth={0.9}
         className='hover:animate-pulse text-black'
       />
@@ -51,7 +51,7 @@ const benefits = [
     title: 'ACTIVA TU RESERVA CON UN QR.',
     image: (
       <QrCode
-        size={240}
+        size={184}
         strokeWidth={0.9}
         className='hover:animate-pulse text-black'
       />
@@ -69,11 +69,11 @@ const Features = () => {
         {benefits.map((item, index) => (
           <li
             key={index}
-            className='border border-primary w-60 m-2 bg-yellow-300 '
+            className='border border-primary w-48 m-2 bg-yellow-300 '
           >
-            <p className='text-primary text-center bg-white'>{item.image}</p>
+            <p className='text-primary text-center bg-white p-2'>{item.image}</p>
             <div className='p-2'>
-              <h3 className='font-medium text-2xl tracking-wider text-black text-center'>
+              <h3 className='font-medium text-xl tracking-wider text-black text-center'>
                 {item.title}
               </h3>
             </div>

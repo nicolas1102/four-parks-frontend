@@ -5,7 +5,7 @@ export const FOOTER = 'FOUR PARKS, DONDE TU VEHÍCULO SIEMPRE ESTARÁ SEGURO.'
 
 const Footer = async () => {
   return (
-    <div className='inset-x-0 items-center justify-center w-full bottom-0 px-8 flex flex-col text-neutral-800'>
+    <div className='inset-x-0 items-center justify-center w-full bottom-0 px-8 flex flex-col text-neutral-800 dark:text-slate-50'>
       <div className='grid grid-cols-12 w-full pb-14 border-t border-primary py-8'>
         <div className='col-span-3'>
           <p className='text-2xl tracking-tighter font-bold leading-none'>

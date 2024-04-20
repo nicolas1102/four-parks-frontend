@@ -63,10 +63,10 @@ const Steps = () => {
             >
               <p className='text-3xl font-semibold text-center'>{index + 1}.</p>
               <div className='flex flex-col pl-4'>
-                <h3 className='font-semibold text-xl tracking-wide'>
+                <h3 className='font-semibold text-lg tracking-wide'>
                   {item.title}
                 </h3>
-                <p className='text-lg'>{item.description}</p>
+                <p className='text-base'>{item.description}</p>
               </div>
             </li>
           ))}

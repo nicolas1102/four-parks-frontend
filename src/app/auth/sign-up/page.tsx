@@ -108,7 +108,7 @@ const Page = () => {
       })
     }
   }
-  
+
   if (email) setValue('email', email)
 
   useEffect(() => {
@@ -119,9 +119,9 @@ const Page = () => {
     <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
       <FloatingButton text='INGRESAR' href='/auth/log-in' direction='left' />
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>
-        <div className='flex flex-col items-center space-y-2 text-center'>
-          <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
+      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-primary p-5 bg-background-contrast'>
+        <div className='flex flex-col items-center text-center'>
+          <div className='relative h-32 w-32 text-muted-foreground'>
             <Icons.logo className='text-yellow-300' />
           </div>
           <h1 className='text-2xl tracking-widest p-3'>REGISTARSE</h1>
@@ -137,7 +137,7 @@ const Page = () => {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                   {...register('email')}
-                  className={cn({
+                  className={cn('border-primary', {
                     'focus-visible:ring-red-500': errors.email,
                   })}
                   placeholder='youremail@example.com'
@@ -146,13 +146,12 @@ const Page = () => {
                   <p className='text-sm text-red-500'>{errors.email.message}</p>
                 )}
               </div>
-
               <div className='grid gap-2 justify-around grid-cols-2'>
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='firstName'>Primer Nombre</Label>
                   <Input
                     {...register('firstName')}
-                    className={cn({
+                    className={cn('border-primary', {
                       'focus-visible:ring-red-500': errors.firstName,
                     })}
                     placeholder='Andrés'
@@ -167,7 +166,7 @@ const Page = () => {
                   <Label htmlFor='secondName'>Segundo Nombre</Label>
                   <Input
                     {...register('secondName')}
-                    className={cn({
+                    className={cn('border-primary', {
                       'focus-visible:ring-red-500': errors.secondName,
                     })}
                     placeholder='El Lagrimón'
@@ -179,13 +178,12 @@ const Page = () => {
                   )}
                 </div>
               </div>
-
               <div className='grid gap-2 justify-around grid-cols-2'>
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='firstLastname'>Primer Apellido</Label>
                   <Input
                     {...register('firstLastname')}
-                    className={cn({
+                    className={cn('border-primary', {
                       'focus-visible:ring-red-500': errors.firstLastname,
                     })}
                     placeholder='Pacheco'
@@ -200,7 +198,7 @@ const Page = () => {
                   <Label htmlFor='secondLastname'>Segundo Apellido</Label>
                   <Input
                     {...register('secondLastname')}
-                    className={cn({
+                    className={cn('border-primary', {
                       'focus-visible:ring-red-500': errors.secondLastname,
                     })}
                     placeholder='Naranjo'
@@ -212,14 +210,12 @@ const Page = () => {
                   )}
                 </div>
               </div>
-
               <Separator />
-
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='nombreTarjeta'>Nombre Tarjeta</Label>
                 <Input
                   {...register('nombreTarjeta')}
-                  className={cn({
+                  className={cn('border-primary', {
                     'focus-visible:ring-red-500': errors.nombreTarjeta,
                   })}
                   placeholder='Mi Tarjeta'
@@ -235,7 +231,7 @@ const Page = () => {
                 <Input
                   {...register('numeroTarjeta')}
                   // {...register('numeroTarjeta', { valueAsNumber: true })}
-                  className={cn({
+                  className={cn('border-primary', {
                     'focus-visible:ring-red-500': errors.numeroTarjeta,
                   })}
                   placeholder='4242 4242 4242 4242'
@@ -246,12 +242,11 @@ const Page = () => {
                   </p>
                 )}
               </div>
-
               <div className='grid gap-2 justify-around grid-cols-3'>
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='mesExpiracion'>Mes Expiración</Label>
                   <select
-                    className='flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
+                    className='flex h-10 w-full items-center justify-between rounded-md border border-primary bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
                     {...register('mesExpiracion')}
                   >
                     {monthOptions.map((option) => (
@@ -269,7 +264,7 @@ const Page = () => {
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='añoExpiracion'>Año Expiración</Label>
                   <select
-                    className='flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
+                    className='flex h-10 w-full items-center justify-between rounded-md border border-primary bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
                     {...register('añoExpiracion')}
                   >
                     {YearOptions.map((option) => (
@@ -290,7 +285,7 @@ const Page = () => {
                   <Input
                     {...register('CVC')}
                     // {...register('CVC', { valueAsNumber: true })}
-                    className={cn({
+                    className={cn('border-primary', {
                       'focus-visible:ring-red-500': errors.CVC,
                     })}
                     placeholder='123'
@@ -300,8 +295,8 @@ const Page = () => {
                   )}
                 </div>
               </div>
-
-              <PrimaryButton text={'REGISTRARSE'} isLoading={isLoading} /> <p className='text-muted-foreground text-center pt-1'>
+              <PrimaryButton text={'REGISTRARSE'} isLoading={isLoading} />{' '}
+              <p className='text-muted-foreground text-center pt-1'>
                 Al continuar, estarás aceptando nuestros{' '}
                 <span className='underline'>Términos de Servicio</span> y{' '}
                 <span className='underline'>Política de Privacidad.</span>

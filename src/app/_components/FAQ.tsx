@@ -30,7 +30,7 @@ const questions = [
   },
   {
     question:
-      '¿CÓMO PUEDO OBTENER AYUDA SI TENGO PROBLEMAS CON FOUR-PARKS COLOMBIA?',
+      '¿CÓMO PUEDO OBTENER AYUDA SI TENGO PROBLEMAS CON FOUR PARKS?',
     answer:
       'Si tienes algún problema con FOUR-PARKS COLOMBIA, puedes contactarnos a través de la aplicación o por correo electrónico. Nuestro equipo de atención al cliente estará encantado de ayudarte.',
   },

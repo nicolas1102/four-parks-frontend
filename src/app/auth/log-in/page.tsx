@@ -81,9 +81,9 @@ const Page = () => {
     <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
       <FloatingButton text='REGISTRARSE' href='./sign-up' direction='right' />
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-input p-5 bg-background-contrast'>
-        <div className='flex flex-col items-center space-y-2 text-center'>
-          <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
+      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-primary p-5 bg-background-contrast'>
+        <div className='flex flex-col items-center text-center'>
+          <div className='relative h-32 w-32 text-muted-foreground'>
             <Icons.logo className='text-yellow-300' />
           </div>
           <h1 className='text-2xl tracking-widest p-3'>INGRESA A TU CUENTA</h1>
@@ -99,7 +99,7 @@ const Page = () => {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                   {...register('email')}
-                  className={cn({
+                  className={cn('border-primary', {
                     'focus-visible:ring-red-500': errors.email,
                   })}
                   placeholder='youremail@example.com'
@@ -113,7 +113,7 @@ const Page = () => {
                 <Input
                   {...register('password')}
                   type='password'
-                  className={cn({
+                  className={cn('border-primary', {
                     'focus-visible:ring-red-500': errors.password,
                   })}
                   placeholder='•••••••'
@@ -131,7 +131,7 @@ const Page = () => {
               <p className='text-muted-foreground text-center pt-1'>
                 Al continuar, estarás aceptando nuestros{' '}
                 <span className='underline'>Términos de Servicio</span> y{' '}
-                <span className='underline'>Política  de Privacidad.</span>
+                <span className='underline'>Política de Privacidad.</span>
               </p>
 
               <Separator />
