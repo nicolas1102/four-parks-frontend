@@ -19,19 +19,19 @@ const Footer = async () => {
         <div className='col-span-6 px-28 flex flex-col'>
           <Link
             href='/auth/sign-up'
-            className='tracking-widest border-b border-primary  py-2 hover:bg-yellow-200 duration-700'
+            className='tracking-widest border-b border-primary px-2 py-2 hover:bg-yellow-200 duration-700 dark:hover:text-black'
           >
             REGISTRARSE
           </Link>
           <Link
             href='/auth/log-in'
-            className='tracking-widest border-b border-primary  py-2 hover:bg-yellow-200 duration-700'
+            className='tracking-widest border-b border-primary px-2 py-2 hover:bg-yellow-200 duration-700 dark:hover:text-black'
           >
             INGRESAR
           </Link>
           <Link
             href='/parqueaderos'
-            className='tracking-widest border-b border-primary  py-2 hover:bg-yellow-200 duration-700'
+            className='tracking-widest border-b border-primary px-2 py-2 hover:bg-yellow-200 duration-700 dark:hover:text-black'
           >
             PARQUEADEROS
           </Link>
@@ -43,13 +43,13 @@ const Footer = async () => {
           </h3>
           <div className='flex flex-row gap-2'>
             <Link href=''>
-              <Instagram className='hover:bg-yellow-200 duration-700' />
+              <Instagram className='hover:bg-yellow-200 duration-700 dark:hover:text-black' />
             </Link>
             <Link href=''>
-              <Facebook className='hover:bg-yellow-200 duration-700' />
+              <Facebook className='hover:bg-yellow-200 duration-700 dark:hover:text-black' />
             </Link>
             <Link href=''>
-              <Linkedin className='hover:bg-yellow-200 duration-700' />
+              <Linkedin className='hover:bg-yellow-200 duration-700 dark:hover:text-black' />
             </Link>
           </div>
         </div>
