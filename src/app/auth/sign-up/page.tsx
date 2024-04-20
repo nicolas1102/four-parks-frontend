@@ -301,7 +301,11 @@ const Page = () => {
                 </div>
               </div>
 
-              <PrimaryButton text={'REGISTRARSE'} isLoading={isLoading} />
+              <PrimaryButton text={'REGISTRARSE'} isLoading={isLoading} /> <p className='text-muted-foreground text-center pt-1'>
+                Al continuar, estarás aceptando nuestros{' '}
+                <span className='underline'>Términos de Servicio</span> y{' '}
+                <span className='underline'>Política de Privacidad.</span>
+              </p>
             </div>
 
             <div className='flex justify-center'>

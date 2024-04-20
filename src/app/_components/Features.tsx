@@ -65,7 +65,7 @@ const Features = () => {
       <h2 className='text-3xl tracking-widest dark:font-normal font-medium'>
         MÁS QUE UN SIMPLE ESTACIONAMIENTO
       </h2>
-      <ul className='flex flex-row justify-between pt-6 flex-wrap'>
+      <ul className='flex flex-row justify-evenly pt-6 flex-wrap'>
         {benefits.map((item, index) => (
           <li
             key={index}

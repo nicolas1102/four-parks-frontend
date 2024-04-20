@@ -19,6 +19,7 @@ import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { toast } from 'sonner'
 import { signIn } from 'next-auth/react'
 import { useUser } from '@/services/useUser'
+import Separator from '@/components/Separator'
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -126,6 +127,14 @@ const Page = () => {
               <div className='grid gap-1 py-2'></div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
+
+              <p className='text-muted-foreground text-center pt-1'>
+                Al continuar, estarás aceptando nuestros{' '}
+                <span className='underline'>Términos de Servicio</span> y{' '}
+                <span className='underline'>Política  de Privacidad.</span>
+              </p>
+
+              <Separator />
             </div>
 
             <div className='flex justify-center'>
