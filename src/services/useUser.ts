@@ -7,14 +7,21 @@ import {
   getOneUserRequest,
   getUsersRequest,
   updateUserRequest,
+  updatePasswordUserRequest,
 } from '@/app/api/routers/users.router'
 import { User } from '@/lib/interfaces/user.interface'
-import { useEffect, useState } from 'react'
-import { toast } from 'sonner'
+import { useState } from 'react'
+import { useToast } from '@/components/ui/use-toast'
+import { ToastAction, ToastActionElement } from '@/components/ui/toast'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { title } from 'process'
 
 export function useUser() {
   const [users, setUsers] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
+  const router = useRouter()
 
   const getUsers = async () => {
     setIsLoading(true)
@@ -22,10 +29,8 @@ export function useUser() {
       const res = await getUsersRequest()
       setUsers(res.data)
       setIsLoading(false)
-      toast('Se obtuvieron todos los usuarios con éxito!')
     } catch (error) {
       console.error('Error fetching users:', error)
-      toast('No se pudo obtener los usuarios.')
     }
   }
 
@@ -55,9 +60,27 @@ export function useUser() {
     try {
       setIsLoading(true)
       const res = await createUsersRequest(user)
+      router.push('/auth/log-in')
+      toast({
+        title: 'Te has registrado con exito!',
+        description: `Revisa tu correo! Te hemos enviado tu contraseña a ${user.email} para que puedas iniciar sesión por primera vez.`,
+      })
       return res
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating user:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title: 'Ha ocurrido un error al intentar registrar usuario! Por favor intentalo de nuevo.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
     } finally {
       setIsLoading(false)
     }
@@ -66,27 +89,59 @@ export function useUser() {
   const updateUser = async (id: string, user: User) => {
     try {
       setIsLoading(true)
-      await updateUserRequest(id, user)
+      const res = await updateUserRequest(id, user)
       setIsLoading(false)
-      toast('Se actualizo el usuario con éxito!')
+      return res
     } catch (error) {
       console.error('Error updating user:', error)
-      toast('No se pudo actualizar el usuario.')
+    }
+  }
+
+  const updatePasswordUser = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {
+    try {
+      setIsLoading(true)
+      const res = await updatePasswordUserRequest(
+        email,
+        oldPassword,
+        newPassword,
+        confirmPassword)
+      router.push('/auth/log-in')
+      toast({
+        title: 'Se actualizó la contraseña con éxito!',
+        description: 'Ahora inicia sesión con tu nueva contraseña.',
+      })
+      return res
+    } catch (error: any) {
+      console.error('Error updating password:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title: 'No se pudo actualizar la contraseña. Por favor intentalo de nuevo.',
+          description: error.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const deleteUser = async (id: string) => {
     try {
       setIsLoading(true)
-      await deleteUserRequest(id)
+      const res = await deleteUserRequest(id)
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
       setIsLoading(false)
-      toast('Se eliminó el usuario con éxito!')
+      return res
     } catch (error) {
       console.error('Error deleting user:', error)
-      toast('No se pudo eliminar el usuario.')
     }
   }
 
-  return { users, getUsers, isLoading, setIsLoading, getOneUser, getOneUserByEmail, createUser, updateUser, deleteUser }
+  return { users, getUsers, isLoading, setIsLoading, getOneUser, getOneUserByEmail, createUser, updateUser, updatePasswordUser, deleteUser }
 }

@@ -16,7 +16,7 @@ import { Icons } from '@/components/Icons'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import { ArrowRight } from 'lucide-react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
-import { toast } from 'sonner'
+import { useToast } from '@/components/ui/use-toast'
 import { signIn } from 'next-auth/react'
 import { useUser } from '@/services/useUser'
 import Separator from '@/components/Separator'
@@ -26,6 +26,7 @@ const Page = () => {
   const router = useRouter()
   const { isLoading, setIsLoading } = useUser()
   const origin = searchParams.get('callbackUrl')
+  const { toast } = useToast()
 
   const {
     register,
@@ -47,12 +48,18 @@ const Page = () => {
 
       setIsLoading(false)
 
-      if (res?.error) {
-        toast('Credenciales Invalidas!', {
+      console.log(res);
+      
+      
+      if (res?.status === 401 ) {
+        toast( {
+          variant: 'destructive',
+          title: 'Ha ocurrido un error al intentar iniciar sesión! Por favor intentalo de nuevo.',
           description: 'Revisa tu usuario y contraseña.',
         })
       } else {
-        toast('Has iniciado sesión con exito!', {
+        toast({
+          title: 'Has iniciado sesión con exito!',
           description:
             'Ahora puedes hacer uso de las funciones de nuestro sistema!',
         })
@@ -68,11 +75,12 @@ const Page = () => {
         router.refresh()
       }
       setIsLoading(false)
-    } catch (error) {
+    } catch (error: any) {
       console.log('Ocurrió un error al intentar iniciar sesión: ', error)
-
-      toast('Ha ocurrido un error al intentar iniciar sesión!', {
-        description: 'Por favor intentalo de nuevo.',
+      toast({
+        variant: 'destructive',
+        title: 'Ha ocurrido un error al intentar iniciar sesión! Por favor intentalo de nuevo.',
+        description: error.response.data,
       })
     }
   }
@@ -124,7 +132,6 @@ const Page = () => {
                   </p>
                 )}
               </div>
-              <div className='grid gap-1 py-2'></div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
 

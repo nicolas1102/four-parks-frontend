@@ -15,31 +15,31 @@ const experiences = [
     name: 'Hernesto',
     experience:
       'Me encantó la opción de reservar mi lugar de estacionamiento con anticipación. Esto me ahorró mucho tiempo y estrés.',
-    image: '/1.jpg',
+    image: '/landing/experiences/1.jpg',
   },
   {
     name: 'Pancracio',
     experience:
       'El sistema de navegación me guió directamente al parqueadero, sin necesidad de dar vueltas. ¡Muy útil!',
-    image: '/3.jpg',
+    image: '/landing/experiences/3.jpg',
   },
   {
     name: 'Andrés',
     experience:
       'Los precios del estacionamiento son muy razonables, especialmente considerando la comodidad y seguridad que ofrece el servicio.',
-    image: '/handi.jpeg',
+    image: '/landing/experiences/handi.jpeg',
   },
   {
     name: 'Alejandro',
     experience:
       'Excelente servicio. El personal me ayudó a meter mi tractomula hasta el fondo del sótano sin problemas.',
-    image: '/alejandro.png',
+    image: '/landing/experiences/alejandro.png',
   },
   {
     name: 'Shara',
     experience:
       'El personal del parqueadero fue muy amable y servicial. Me ayudaron con mi equipaje y me proporcionaron información sobre la zona.',
-    image: '/2.jpg',
+    image: '/landing/experiences/2.jpg',
   },
 ]
 

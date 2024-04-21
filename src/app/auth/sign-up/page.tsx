@@ -20,7 +20,6 @@ import { toast } from 'sonner'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { User } from '@/lib/interfaces/user.interface'
-import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
 interface MonthOption {
@@ -44,7 +43,6 @@ const YearOptions: YearOption[] = Array.from({ length: 30 }, (_, i) => ({
 }))
 
 const Page = () => {
-  const { data: session } = useSession()
   const searchParams = useSearchParams()
   const router = useRouter()
   const { isLoading, createUser } = useUser()
@@ -71,42 +69,18 @@ const Page = () => {
     añoExpiracion,
     CVC,
   }: TSignUpCredentialsValidator) => {
-    try {
-      // Checamos si ya existe el usuario
-      // const userFound = await getOneUserByEmail(email)
-      // if (userFound) {
-      //   toast('Ya existe un usuario con este e-mail!', {
-      //     description: 'Intenta con otro email',
-      //   })
-      //   return
-      // }
-
-      // TODO: Tarjeta de credito parte
-
-      const userData = {
-        email: email,
-        firstName: firstName,
-        secondName: secondName,
-        firstLastname: firstLastname,
-        secondLastname: secondLastname,
-        roleRequest: {
-          roleListName: ['USUARIO'],
-        },
-      } as User
-
-      const res = await createUser(userData)
-
-      if (!res) throw new Error()
-
-      router.push('/auth/log-in')
-      toast('Te has registrado con exito!', {
-        description: `Revisa tu correo! Te hemos enviado tu contraseña a ${email} para que puedas iniciar sesión por primera vez.`,
-      })
-    } catch (error) {
-      toast('Ha ocurrido un error al intentar registrar usuario!', {
-        description: 'Por favor intentalo de nuevo.',
-      })
-    }
+    // TODO: Tarjeta de credito
+    const userData = {
+      email: email,
+      firstName: firstName,
+      secondName: secondName,
+      firstLastname: firstLastname,
+      secondLastname: secondLastname,
+      roleRequest: {
+        roleListName: ['USUARIO'],
+      },
+    } as User
+    await createUser(userData)
   }
 
   if (email) setValue('email', email)

@@ -63,12 +63,12 @@ const Hero = () => {
       </div>
       <div className='col-span-5 relative overflow-hidden'>
         <Image
-          src='/thank-you-cbum.webp'
-          className='w-full h-full object-cover object-center grayscale'
+          src='/landing/hero.jpg'
+          className='w-full h-full object-cover object-center '
           alt='thank you for your order'
           priority
-          width='500'
-          height='650'
+          width='1200'
+          height='1200'
         />
       </div>
     </div>

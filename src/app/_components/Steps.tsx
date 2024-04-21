@@ -38,12 +38,12 @@ const Steps = () => {
     <div className=' bg-yellow-300 py-20 px-32 w-full grid grid-cols-12'>
       <div className='col-span-5 relative overflow-hidden h-[630px]'>
         <Image
-          src='/thank-you-cbum.webp'
-          className='w-full h-full object-cover object-center grayscale'
+          src='/landing/steps.jpg'
+          className='w-full h-full object-cover object-center'
           alt='thank you for your order'
           priority
-          width='300'
-          height='400'
+          width='1200'
+          height='1200'
         />
       </div>
 

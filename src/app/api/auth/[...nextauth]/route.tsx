@@ -30,9 +30,9 @@ const handler = NextAuth({
           if (!userFound) throw new Error('Credenciales invalidas.')
           if (userFound?.jwt) {
             // TODO: Borrar esto cuando el back envie el rol
-            const userWithRole = {...userFound, role: 'USUARIO'}
+            const userWithRole = { ...userFound, role: 'USUARIO' }
 
-            // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)            
+            // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
             return userWithRole
           }
 

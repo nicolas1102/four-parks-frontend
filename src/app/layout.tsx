@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { Suspense } from 'react'
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from "@/components/ui/toaster"
 import { DEFAULT_SITE_DESCRIPTION, DEFAULT_SITE_TITLE } from '../lib/const'
 import Navbar from '@/components/Layout/Navbar/Navbar'
 import Footer from '@/components/Layout/Footer'
