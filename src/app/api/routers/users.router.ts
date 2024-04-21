@@ -14,8 +14,12 @@ export const getOneUserRequest = async (id: string) => {
 }
 
 export const getAuthorizedUserRequest = async (email: string, password: string) => {
-  const res = await axios.post(baseURL + '/auth/log-in', { email, password });
-  return res.data;
+  try {
+    const res = await axios.post(baseURL + '/auth/log-in', { email, password });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getOneUserByEmailRequest = async (email: string) => {
@@ -24,6 +28,7 @@ export const getOneUserByEmailRequest = async (email: string) => {
 };
 
 export const createUsersRequest = async (user: User) => {
+  console.log(user);
   const res = await axios.post(baseURL + '/auth/sign-up', user)
   return res
 }

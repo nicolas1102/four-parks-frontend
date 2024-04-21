@@ -48,14 +48,12 @@ const Page = () => {
 
       setIsLoading(false)
 
-      console.log(res);
-      
-      
-      if (res?.status === 401 ) {
-        toast( {
+      if (res?.status === 401) {
+        toast({
           variant: 'destructive',
-          title: 'Ha ocurrido un error al intentar iniciar sesión! Por favor intentalo de nuevo.',
-          description: 'Revisa tu usuario y contraseña.',
+          title:
+            'Ha ocurrido un error al intentar iniciar sesión! Por favor intentalo de nuevo.',
+          description: res.error,
         })
       } else {
         toast({
@@ -79,7 +77,8 @@ const Page = () => {
       console.log('Ocurrió un error al intentar iniciar sesión: ', error)
       toast({
         variant: 'destructive',
-        title: 'Ha ocurrido un error al intentar iniciar sesión! Por favor intentalo de nuevo.',
+        title:
+          'Ha ocurrido un error al intentar iniciar sesión! Por favor intentalo de nuevo.',
         description: error.response.data,
       })
     }

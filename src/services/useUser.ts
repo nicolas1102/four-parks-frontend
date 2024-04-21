@@ -56,7 +56,7 @@ export function useUser() {
     }
   }
 
-  const createUser = async (user: User) => {
+  const createUser = async (user: User) => {    
     try {
       setIsLoading(true)
       const res = await createUsersRequest(user)

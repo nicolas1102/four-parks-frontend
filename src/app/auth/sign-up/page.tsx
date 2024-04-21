@@ -21,30 +21,76 @@ import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { User } from '@/lib/interfaces/user.interface'
 import { useEffect } from 'react'
+import { CreditCard } from '@/lib/interfaces/creditCard.model'
 
 interface MonthOption {
-  value: number
+  value: string
   label: string // Optional label for accessibility
 }
 
-const monthOptions: MonthOption[] = Array.from({ length: 12 }, (_, i) => ({
-  value: i + 1, // Adjust for 1-based indexing
-  label: (i + 1).toString(), // Optional label for clarity
-}))
+const monthOptions: MonthOption[] = [
+  {
+    value: '01',
+    label: '01',
+  },
+  {
+    value: '02',
+    label: '02',
+  },
+  {
+    value: '03',
+    label: '03',
+  },
+  {
+    value: '04',
+    label: '04',
+  },
+  {
+    value: '05',
+    label: '05',
+  },
+  {
+    value: '06',
+    label: '06',
+  },
+  {
+    value: '07',
+    label: '07',
+  },
+  {
+    value: '08',
+    label: '08',
+  },
+  {
+    value: '09',
+    label: '09',
+  },
+  {
+    value: '10',
+    label: '10',
+  },
+  {
+    value: '11',
+    label: '11',
+  },
+  {
+    value: '12',
+    label: '12',
+  },
+]
 
 interface YearOption {
   value: number
   label: string // Optional label for accessibility
 }
 
-const YearOptions: YearOption[] = Array.from({ length: 30 }, (_, i) => ({
-  value: i + 2024,
-  label: (i + 2024).toString(), // Optional label for clarity
+const YearOptions: YearOption[] = Array.from({ length: 10 }, (_, i) => ({
+  value: i + 24,
+  label: (i + 24).toString(), // Optional label for clarity
 }))
 
 const Page = () => {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const { isLoading, createUser } = useUser()
   const email = searchParams.get('email')
 
@@ -63,23 +109,27 @@ const Page = () => {
     secondName,
     firstLastname,
     secondLastname,
-    nombreTarjeta,
-    numeroTarjeta,
-    mesExpiracion,
-    añoExpiracion,
-    CVC,
+    cardNumber,
+    expirationMonth,
+    expirationYear,
+    cvv,
   }: TSignUpCredentialsValidator) => {
-    // TODO: Tarjeta de credito
+    const creditCardData = {
+      cardNumber: cardNumber + '',
+      expirationDate: expirationMonth + '/' + expirationYear,
+      cvv: cvv + '',
+    } as CreditCard
+
     const userData = {
-      email: email,
-      firstName: firstName,
-      secondName: secondName,
-      firstLastname: firstLastname,
-      secondLastname: secondLastname,
-      roleRequest: {
-        roleListName: ['USUARIO'],
-      },
+      email,
+      firstName,
+      secondName,
+      firstLastname,
+      secondLastname,
+      creditCard: creditCardData,
+      roleList: ['USUARIO'],
     } as User
+
     await createUser(userData)
   }
 
@@ -186,42 +236,26 @@ const Page = () => {
               </div>
               <Separator />
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='nombreTarjeta'>Nombre Tarjeta</Label>
+                <Label htmlFor='cardNumber'>Número Tarjeta</Label>
                 <Input
-                  {...register('nombreTarjeta')}
+                  {...register('cardNumber', { valueAsNumber: true })}
                   className={cn('border-primary', {
-                    'focus-visible:ring-red-500': errors.nombreTarjeta,
-                  })}
-                  placeholder='Mi Tarjeta'
-                />
-                {errors?.nombreTarjeta && (
-                  <p className='text-sm text-red-500'>
-                    {errors.nombreTarjeta.message}
-                  </p>
-                )}
-              </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='numeroTarjeta'>Número Tarjeta</Label>
-                <Input
-                  {...register('numeroTarjeta')}
-                  // {...register('numeroTarjeta', { valueAsNumber: true })}
-                  className={cn('border-primary', {
-                    'focus-visible:ring-red-500': errors.numeroTarjeta,
+                    'focus-visible:ring-red-500': errors.cardNumber,
                   })}
                   placeholder='4242 4242 4242 4242'
                 />
-                {errors?.numeroTarjeta && (
+                {errors?.cardNumber && (
                   <p className='text-sm text-red-500'>
-                    {errors.numeroTarjeta.message}
+                    {errors.cardNumber.message}
                   </p>
                 )}
               </div>
               <div className='grid gap-2 justify-around grid-cols-3'>
                 <div className='grid gap-1 py-2'>
-                  <Label htmlFor='mesExpiracion'>Mes Expiración</Label>
+                  <Label htmlFor='expirationMonth'>Mes Expiración</Label>
                   <select
                     className='flex h-10 w-full items-center justify-between rounded-md border border-primary bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
-                    {...register('mesExpiracion')}
+                    {...register('expirationMonth')}
                   >
                     {monthOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -229,17 +263,17 @@ const Page = () => {
                       </option>
                     ))}
                   </select>
-                  {errors?.mesExpiracion && (
+                  {errors?.expirationMonth && (
                     <p className='text-sm text-red-500'>
-                      {errors.mesExpiracion.message}
+                      {errors.expirationMonth.message}
                     </p>
                   )}
                 </div>
                 <div className='grid gap-1 py-2'>
-                  <Label htmlFor='añoExpiracion'>Año Expiración</Label>
+                  <Label htmlFor='expirationYear'>Año Expiración</Label>
                   <select
                     className='flex h-10 w-full items-center justify-between rounded-md border border-primary bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
-                    {...register('añoExpiracion')}
+                    {...register('expirationYear')}
                   >
                     {YearOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -247,25 +281,24 @@ const Page = () => {
                       </option>
                     ))}
                   </select>
-                  {errors?.añoExpiracion && (
+                  {errors?.expirationYear && (
                     <p className='text-sm text-red-500'>
-                      {errors.añoExpiracion.message}
+                      {errors.expirationYear.message}
                     </p>
                   )}
                 </div>
 
                 <div className='grid gap-1 py-2'>
-                  <Label htmlFor='CVC'>CVC</Label>
+                  <Label htmlFor='cvv'>CVV</Label>
                   <Input
-                    {...register('CVC')}
-                    // {...register('CVC', { valueAsNumber: true })}
+                    {...register('cvv', { valueAsNumber: true })}
                     className={cn('border-primary', {
-                      'focus-visible:ring-red-500': errors.CVC,
+                      'focus-visible:ring-red-500': errors.cvv,
                     })}
                     placeholder='123'
                   />
-                  {errors?.CVC && (
-                    <p className='text-sm text-red-500'>{errors.CVC.message}</p>
+                  {errors?.cvv && (
+                    <p className='text-sm text-red-500'>{errors.cvv.message}</p>
                   )}
                 </div>
               </div>
