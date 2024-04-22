@@ -13,9 +13,9 @@ const usersData: UserInterface[] = [
     firstLastname: 'Doe',
     secondLastname: 'Miller',
     loginAttempts: 0,
-    isActive: true,
-    isBlocked: true,
-    roleListName: ['USUARIO'],
+    accountActive: true,
+    accountBlocked: true,
+    roleList: ['USUARIO'],
   },
 ]
 

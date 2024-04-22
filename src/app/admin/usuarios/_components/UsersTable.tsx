@@ -146,7 +146,7 @@ export const columns: ColumnDef<UserInterface>[] = [
     ),
   },
   {
-    accessorKey: 'isActive',
+    accessorKey: 'accountActive',
     header: ({ column }) => {
       return (
         <Button
@@ -160,12 +160,12 @@ export const columns: ColumnDef<UserInterface>[] = [
     },
     cell: ({ row }) => (
       <div className='text-center'>
-        {row.getValue('isActive') ? 'Si' : 'No'}
+        {row.getValue('accountActive') ? 'Si' : 'No'}
       </div>
     ),
   },
   {
-    accessorKey: 'isBlocked',
+    accessorKey: 'accountBlocked',
     header: ({ column }) => {
       return (
         <Button
@@ -179,7 +179,7 @@ export const columns: ColumnDef<UserInterface>[] = [
     },
     cell: ({ row }) => (
       <div className='text-center'>
-        {row.getValue('isBlocked') ? 'Si' : 'No'}
+        {row.getValue('accountBlocked') ? 'Si' : 'No'}
       </div>
     ),
   },
@@ -198,11 +198,7 @@ export const columns: ColumnDef<UserInterface>[] = [
     },
     cell: ({ row }) => {
       const user = row.original
-      return (
-        <div className='lowercase text-center'>
-          {user.roleRequest.roleListName[0]}
-        </div>
-      )
+      return <div className='capitalize text-center'>{user.roleList[0]}</div>
     },
   },
   {

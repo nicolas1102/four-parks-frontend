@@ -4,14 +4,12 @@ import Link from 'next/link'
 import { Icons } from '../../Icons'
 import ModeToggle from './ModeToggle'
 import ProfileNav from './ProfileNav'
-import { getServerSession } from 'next-auth'
 // import { OPTIONS } from '@/app/api/auth/[...nextauth]/route'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/dist/server/api-utils'
 
 const Navbar = () => {
   // const session = await getServerSession(OPTIONS)
-  const { data: session1 } = useSession()
+  const { data: session } = useSession()
 
   return (
     <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
@@ -30,25 +28,25 @@ const Navbar = () => {
           </Link>
         </div>
         <div className='flex flex-row justify-end gap-2 px-1'>
-          {session1?.role === 'USUARIO' && (
+          {session?.role === 'USUARIO' && (
             <>
               <NavItem title='PARQUEADEROS' link='/parqueaderos' />
               <span className='border-l border-primary'></span>
             </>
           )}
-          {session1?.role === 'FUNCIONARIO' && (
+          {session?.role === 'FUNCIONARIO' && (
             <>
               <NavItem title='MENU FUNCIONARIOS' link='/admin' />
               <span className='border-l border-primary'></span>
             </>
           )}
-          {session1?.role === 'GERENTE' && (
+          {session?.role === 'GERENTE' && (
             <>
               <NavItem title='MENU GERENTE' link='/admin' />
               <span className='border-l border-primary'></span>
             </>
           )}
-          <ProfileNav isLoggedIn={session1 ? true : false} />
+          <ProfileNav isLoggedIn={session ? true : false} />
           <span className='border-l border-primary'></span>
           <ModeToggle />
         </div>

@@ -8,12 +8,12 @@ export interface UserInterface {
   secondName?: string
   firstLastname: string
   secondLastname: string
-  // loginAttempts?: number
-  // isActive?: boolean
-  // isBlocked?: boolean
+  loginAttempts?: number
+  accountActive?: boolean
+  accountBlocked?: boolean
   roleList: [
     'USUARIO' | 'GERENTE' | 'FUNCIONARIO'
   ],
-  creditCard: CreditCard
+  creditCard?: CreditCard
 }
 
