@@ -1,21 +1,18 @@
+'use client'
 import NavItem from './NavItem'
 import Link from 'next/link'
 import { Icons } from '../../Icons'
 import ModeToggle from './ModeToggle'
 import ProfileNav from './ProfileNav'
 import { getServerSession } from 'next-auth'
+// import { OPTIONS } from '@/app/api/auth/[...nextauth]/route'
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/dist/server/api-utils'
 
-export const PAGES_INFO = [
-  {
-    title: 'PARQUEADEROS',
-    link: '/parqueaderos',
-    icon: 'Player',
-    text: 'Gestiona mejores jugadores de la historia del futbol.',
-  }
-]
+const Navbar = () => {
+  // const session = await getServerSession(OPTIONS)
+  const { data: session1 } = useSession()
 
-const Navbar = async () => {
-  const session = await getServerSession()
   return (
     <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='w-full text-center p-1 bg-yellow-300'></div>
@@ -33,10 +30,26 @@ const Navbar = async () => {
           </Link>
         </div>
         <div className='flex flex-row justify-end gap-2 px-1'>
-          <NavItem title={PAGES_INFO[0].title} link={PAGES_INFO[0].link} />
-          <span className='border'></span> 
-          <ProfileNav isLoggedIn={session ? true : false} />
-          <span className='border'></span> 
+          {session1?.role === 'USUARIO' && (
+            <>
+              <NavItem title='PARQUEADEROS' link='/parqueaderos' />
+              <span className='border-l border-primary'></span>
+            </>
+          )}
+          {session1?.role === 'FUNCIONARIO' && (
+            <>
+              <NavItem title='MENU FUNCIONARIOS' link='/admin' />
+              <span className='border-l border-primary'></span>
+            </>
+          )}
+          {session1?.role === 'GERENTE' && (
+            <>
+              <NavItem title='MENU GERENTE' link='/admin' />
+              <span className='border-l border-primary'></span>
+            </>
+          )}
+          <ProfileNav isLoggedIn={session1 ? true : false} />
+          <span className='border-l border-primary'></span>
           <ModeToggle />
         </div>
       </div>

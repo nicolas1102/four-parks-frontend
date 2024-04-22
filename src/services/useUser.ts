@@ -9,7 +9,7 @@ import {
   updateUserRequest,
   updatePasswordUserRequest,
 } from '@/app/api/routers/users.router'
-import { User } from '@/lib/interfaces/user.interface'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { ToastAction, ToastActionElement } from '@/components/ui/toast'
@@ -18,7 +18,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { title } from 'process'
 
 export function useUser() {
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<UserInterface[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
@@ -56,7 +56,7 @@ export function useUser() {
     }
   }
 
-  const createUser = async (user: User) => {    
+  const createUser = async (user: UserInterface) => {    
     try {
       setIsLoading(true)
       const res = await createUsersRequest(user)
@@ -86,7 +86,7 @@ export function useUser() {
     }
   }
 
-  const updateUser = async (id: string, user: User) => {
+  const updateUser = async (id: string, user: UserInterface) => {
     try {
       setIsLoading(true)
       const res = await updateUserRequest(id, user)

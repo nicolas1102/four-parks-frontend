@@ -1,6 +1,6 @@
 import { CreditCard } from './creditCard.model'
 
-export interface User {
+export interface UserInterface {
   id?: string
   email: string
   password?: string

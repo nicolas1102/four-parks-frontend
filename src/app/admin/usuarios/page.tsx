@@ -3,9 +3,9 @@ import Loader from '@/components/Loader'
 import { UsersTable } from './_components/UsersTable'
 import { Suspense } from 'react'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
-import { User } from '@/lib/interfaces/user.interface'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 
-const usersData: User[] = [
+const usersData: UserInterface[] = [
   {
     id: 'user123',
     email: 'john.doe@example.com',

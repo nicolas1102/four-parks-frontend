@@ -1,8 +1,8 @@
 import { getAuthorizedUserRequest } from '@/app/api/routers/users.router'
-import NextAuth from 'next-auth'
+import NextAuth, { User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-const handler = NextAuth({
+export const authOptions = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -32,10 +32,13 @@ const handler = NextAuth({
           }
           if (userFound?.jwt) {
             // TODO: Borrar esto cuando el back envie el rol
-            const userWithRole = { ...userFound, role: 'USUARIO' }
+            const userWithRole = {
+              ...userFound,
+              role: 'GERENTE',
+              expires: 'expires',
+            }
             return userWithRole // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
           }
-
           // If response is not ok or does not contain a user token
           throw new Error('No se encontro el token.')
         } catch (e: any) {
@@ -45,17 +48,27 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ user, token }) {
+    async jwt({ token, user }) {
       if (user) {
         // TODO: Solucionar esto
-        token.user = user
-        // token.role = user.role
+        token.role = user.role
+        token.jwt = user.jwt
+        token.role = user.role
+        token.ip = user.ip
       }
       return token
     },
     // para configurar los datos que se peueden usar en client
-    session({ session, token }) {
-      if (session?.user) session.user = token.user as any
+    session({ token, session }) {      
+      if (token) {
+        session.role = token.role
+        session.ip = token.ip
+        session.jwt = token.jwt
+        session.email = token.email
+        // session.user.id = token.id
+        // session.user.firstName = token.firstName
+        // session.user.firstLastname = token.firstLastname
+      }
       return session
     },
   },
@@ -68,4 +81,4 @@ const handler = NextAuth({
   },
 })
 
-export { handler as GET, handler as POST }
+export { authOptions as GET, authOptions as POST }

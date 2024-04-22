@@ -1,4 +1,4 @@
-import { User } from '@/lib/interfaces/user.interface'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 import axios from 'axios'
 
 const baseURL = 'http://localhost:8080/api/v1'
@@ -27,13 +27,13 @@ export const getOneUserByEmailRequest = async (email: string) => {
   return res;
 };
 
-export const createUsersRequest = async (user: User) => {
+export const createUsersRequest = async (user: UserInterface) => {
   console.log(user);
   const res = await axios.post(baseURL + '/auth/sign-up', user)
   return res
 }
 
-export const updateUserRequest = async (id: string, User: User) => {
+export const updateUserRequest = async (id: string, User: UserInterface) => {
   const res = await axios.put(baseURL + `/usuarios/${id}`, User)
   return res
 }

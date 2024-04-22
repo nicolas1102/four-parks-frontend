@@ -42,10 +42,10 @@ export default function Page() {
           <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
             <Icons.logo className='text-yellow-300' />
           </div>
-          <h1 className='text-2xl tracking-widest p-3'>¡ES TU PRIMERA VEZ!</h1>
+          <h1 className='text-2xl tracking-widest p-3'>¡BIENVENIDO!</h1>
           <p className='text-sm tracking-wider'>
             <span className='font-medium'>
-              Te damos la gran bienvenida a Four Parks.
+              Te damos una gran bienvenida a la familia Four Parks.
             </span>{' '}
             Antes de empezar a hacer uso de los servicios de{' '}
             <span className='font-medium'>Four Parks</span>, te invitamos a

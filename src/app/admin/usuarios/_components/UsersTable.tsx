@@ -32,12 +32,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { User } from '@/lib/interfaces/user.interface'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useState } from 'react'
 import { useUser } from '@/services/useUser'
 import Link from 'next/link'
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<UserInterface>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -246,7 +246,7 @@ export const columns: ColumnDef<User>[] = [
   },
 ]
 
-export function UsersTable({ data }: { data: User[] }) {
+export function UsersTable({ data }: { data: UserInterface[] }) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})

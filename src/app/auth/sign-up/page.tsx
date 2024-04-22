@@ -19,7 +19,7 @@ import Separator from '@/components/Separator'
 import { toast } from 'sonner'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
-import { User } from '@/lib/interfaces/user.interface'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect } from 'react'
 import { CreditCard } from '@/lib/interfaces/creditCard.model'
 
@@ -128,7 +128,7 @@ const Page = () => {
       secondLastname,
       creditCard: creditCardData,
       roleList: ['USUARIO'],
-    } as User
+    } as UserInterface
 
     await createUser(userData)
   }
