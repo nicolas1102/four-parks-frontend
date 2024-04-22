@@ -2,7 +2,7 @@ import { getAuthorizedUserRequest } from '@/app/api/routers/users.router'
 import NextAuth, { User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-export const authOptions = NextAuth({
+const authOptions = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
