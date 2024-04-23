@@ -9,7 +9,7 @@ const PrimaryButton = ({
 }: {
   text: string
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined
-  isLoading: boolean | undefined
+  isLoading?: boolean | undefined
   width?: number
 }) => {
   return (

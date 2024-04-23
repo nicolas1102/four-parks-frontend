@@ -41,7 +41,7 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <>
             <DropdownMenuItem>
               <User className='mr-2 h-4 w-4' />
-              <Link href='/profile'>Perfil</Link>
+              <Link href='/usuario'>Perfil</Link>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
