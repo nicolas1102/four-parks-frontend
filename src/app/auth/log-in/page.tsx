@@ -20,6 +20,11 @@ import { useToast } from '@/components/ui/use-toast'
 import { signIn } from 'next-auth/react'
 import { useUser } from '@/services/useUser'
 import Separator from '@/components/Separator'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { Suspense, useRef, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Theme } from 'next-auth'
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -27,6 +32,7 @@ const Page = () => {
   const { isLoading, setIsLoading } = useUser()
   const origin = searchParams.get('callbackUrl')
   const { toast } = useToast()
+  const [stateCaptcha, setStateCaptcha] = useState<string | null>(null)
 
   const {
     register,
@@ -38,6 +44,14 @@ const Page = () => {
 
   const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
     try {
+      if (!stateCaptcha) {
+        toast({
+          variant: 'destructive',
+          title: 'Recuerda llenar el captcha.',
+        })
+        return
+      }
+
       setIsLoading(true)
       // usamos metodo de next-auth para inicio de sesioon
       const res = await signIn('credentials', {
@@ -130,6 +144,14 @@ const Page = () => {
                     {errors.password.message}
                   </p>
                 )}
+              </div>
+              <div className='flex justify-center flex-col w-[407px] h-[78px]'>
+                <ReCAPTCHA
+                  className='flex justify-center mx-auto'
+                  size='normal'
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                  onChange={setStateCaptcha}
+                />
               </div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />

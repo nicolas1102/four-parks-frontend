@@ -34,7 +34,7 @@ const authOptions = NextAuth({
             // TODO: Borrar esto cuando el back envie el rol
             const userWithRole = {
               ...userFound,
-              role: 'FUNCIONARIO',
+              role: 'USUARIO',
               expires: 'expires',
             }
             return userWithRole // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
