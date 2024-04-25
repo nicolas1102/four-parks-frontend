@@ -20,7 +20,7 @@ const Hero = () => {
           <span className=' font-bold'>¡</span>LA FORMA MÁS{' '}
           <span className='font-bold'>FÁCIL</span>{' '}DE{' '}
           <span className='font-bold'>ASEGURAR</span> TU{' '}
-          <span className='font-bold'>PARQUEADERO</span> DE TODA{' '}
+          <span className='font-bold'>PARQUEADERO</span> EN TODA{' '}
           <span className='font-bold hover:animate-pulse'>
             <span className=' text-yellow-400'>COLO</span>
             <span className=' text-blue-700'>MB</span>

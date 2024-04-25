@@ -18,7 +18,15 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { signOut } from 'next-auth/react'
 
-const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+const Profile = ({
+  isLoggedIn,
+  name,
+  rol,
+}: {
+  isLoggedIn: boolean
+  name: string
+  rol: string
+}) => {
   // TODO: Logica del nombre de usar con useSession
   return (
     <DropdownMenu>
@@ -35,7 +43,14 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
         </Link>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuLabel>Perfil</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {name}
+          {rol !== 'USUARIO' ? (
+            <span className='text-yellow-300 font-medium'>{rol}</span>
+          ) : (
+            ''
+          )}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {isLoggedIn ? (
           <>

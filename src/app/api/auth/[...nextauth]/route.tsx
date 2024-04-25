@@ -31,11 +31,9 @@ const authOptions = NextAuth({
             throw new Error(userFound?.response?.data)
           }
           if (userFound?.jwt) {
-            // TODO: Borrar esto cuando el back envie el rol
             const userWithRole = {
               ...userFound,
-              role: 'USUARIO',
-              expires: 'expires',
+              // expires: 'expires',
             }
             return userWithRole // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
           }
@@ -50,24 +48,28 @@ const authOptions = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        // TODO: Solucionar esto
-        token.role = user.role
         token.jwt = user.jwt
-        token.role = user.role
+        token.role = user.rol
         token.ip = user.ip
+        token.email = user.email
+        token.firstName = user.firstName
+        token.secondName = user.secondName
+        token.firstLastname = user.firstLastname
+        token.secondLastname = user.secondLastname
       }
       return token
     },
     // para configurar los datos que se peueden usar en client
-    session({ token, session }) {      
-      if (token) {
-        session.role = token.role
+    session({ token, session }) {
+            if (token) {
+        session.rol = token.rol
         session.ip = token.ip
         session.jwt = token.jwt
         session.email = token.email
-        // session.user.id = token.id
-        // session.user.firstName = token.firstName
-        // session.user.firstLastname = token.firstLastname
+        session.secondName = token.secondName
+        session.firstName = token.firstName
+        session.firstLastname = token.firstLastname
+        session.secondLastname = token.secondLastname
       }
       return session
     },
