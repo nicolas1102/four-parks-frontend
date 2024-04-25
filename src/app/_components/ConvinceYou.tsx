@@ -13,7 +13,7 @@ const ConvinceYou = () => {
   }
 
   return (
-    <div className=' bg-yellow-300 py-20 px-48 w-full grid grid-cols-12'>
+    <div className=' bg-yellowFPC-400 py-20 px-48 w-full grid grid-cols-12'>
       <div className='col-span-7 pr-10'>
         <h2 className='text-4xl text-black tracking-widest font-medium'>
           ¿TE CONVENCIMOS?

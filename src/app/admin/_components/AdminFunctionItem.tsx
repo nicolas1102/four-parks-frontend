@@ -12,7 +12,7 @@ interface HomeItemInterface {
 const AdminFunctionItem = ({ title, link, icon, text }: HomeItemInterface) => {
   return (
     <Link
-      className='border border-primary bg-card text-card-foreground shadow flex flex-col justify-center p-4 w-72 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground hover:bg-accent transition-colors hover:bg-yellow-200 hover:text-black duration-500'
+      className='border border-primary bg-card text-card-foreground shadow flex flex-col justify-center p-4 w-72 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground hover:bg-accent transition-colors hover:bg-yellowFPC-200 hover:text-black duration-500'
       href={link}
     >
       {icon}

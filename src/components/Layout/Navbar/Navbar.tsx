@@ -15,9 +15,9 @@ const Navbar = () => {
   return (
     <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='grid grid-cols-4 w-full'>
-        <div className='col-span-2 text-center p-1 bg-yellow-300'></div>
-        <div className='col-span-1 text-center p-1 bg-blue-700'></div>
-        <div className='col-span-1 text-center p-1 bg-red-700'></div>
+        <div className='col-span-2 text-center p-1 bg-yellowFPC-400'></div>
+        <div className='col-span-1 text-center p-1 bg-blueFPC-400'></div>
+        <div className='col-span-1 text-center p-1 bg-redFPC-400'></div>
       </div>
 
       <div className='flex flex-row justify-between w-full p-1 content-center gap-2'>

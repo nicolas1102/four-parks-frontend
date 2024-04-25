@@ -40,7 +40,7 @@ export default function Page() {
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-primary p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
           <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
-            <Icons.logo className='text-yellow-300' />
+            <Icons.logo className='text-yellowFPC-400' />
           </div>
           <h1 className='text-2xl tracking-widest p-3'>¡BIENVENIDO!</h1>
           <p className='text-sm tracking-wider'>

@@ -102,10 +102,10 @@ const Page = () => {
     <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
       <FloatingButton text='REGISTRARSE' href='./sign-up' direction='right' />
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-primary p-5 bg-background-contrast'>
+      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-yellowFPC-400 p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
           <div className='relative h-32 w-32 text-muted-foreground'>
-            <Icons.logo className='text-yellow-300' />
+            <Icons.logo className='text-yellowFPC-400' />
           </div>
           <h1 className='text-2xl tracking-widest p-3'>INGRESA A TU CUENTA</h1>
           <p className='text-sm tracking-wider'>
@@ -120,7 +120,7 @@ const Page = () => {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                   {...register('email')}
-                  className={cn('border-primary', {
+                  className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.email,
                   })}
                   placeholder='youremail@example.com'
@@ -134,7 +134,7 @@ const Page = () => {
                 <Input
                   {...register('password')}
                   type='password'
-                  className={cn('border-primary', {
+                  className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.password,
                   })}
                   placeholder='•••••••'

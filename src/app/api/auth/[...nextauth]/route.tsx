@@ -49,7 +49,7 @@ const authOptions = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.jwt = user.jwt
-        token.role = user.rol
+        token.rol = user.rol
         token.ip = user.ip
         token.email = user.email
         token.firstName = user.firstName
@@ -61,7 +61,7 @@ const authOptions = NextAuth({
     },
     // para configurar los datos que se peueden usar en client
     session({ token, session }) {
-            if (token) {
+      if (token) {
         session.rol = token.rol
         session.ip = token.ip
         session.jwt = token.jwt
@@ -70,7 +70,7 @@ const authOptions = NextAuth({
         session.firstName = token.firstName
         session.firstLastname = token.firstLastname
         session.secondLastname = token.secondLastname
-      }
+      }      
       return session
     },
   },

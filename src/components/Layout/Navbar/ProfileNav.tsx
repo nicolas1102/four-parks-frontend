@@ -32,7 +32,7 @@ const Profile = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Link
-          className='bg-background hover:bg-accent h-12 w-auto flex items-center justify-around p-1.5 pr-2 border border-primary hover:bg-yellow-200 hover dark:hover:bg-yellow-300 dark:hover:text-background  '
+          className='bg-background hover:bg-accent h-12 w-auto flex items-center justify-around p-1.5 pr-2 border border-primary hover:bg-yellowFPC-200 hover dark:hover:bg-yellowFPC-400 dark:hover:text-background  '
           href='/auth/sign-up'
         >
           <p className='tracking-widest text-sm font-medium leading-none m-1'>
@@ -46,7 +46,7 @@ const Profile = ({
         <DropdownMenuLabel>
           {name}
           {rol !== 'USUARIO' ? (
-            <span className='text-yellow-300 font-medium'>{rol}</span>
+            <span className='dark:text-yellowFPC-400 text-blue-700 font-medium'>({rol})</span>
           ) : (
             ''
           )}

@@ -143,10 +143,10 @@ const Page = () => {
     <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
       <FloatingButton text='INGRESAR' href='/auth/log-in' direction='left' />
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-primary p-5 bg-background-contrast'>
+      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-blueFPC-400 p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
           <div className='relative h-32 w-32 text-muted-foreground'>
-            <Icons.logo className='text-yellow-300' />
+            <Icons.logo className='text-blueFPC-400' />
           </div>
           <h1 className='text-2xl tracking-widest p-3'>REGISTARSE</h1>
           <p className='text-sm tracking-wider'>
@@ -161,7 +161,7 @@ const Page = () => {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                   {...register('email')}
-                  className={cn('border-primary', {
+                  className={cn('border-blueFPC-400', {
                     'focus-visible:ring-red-500': errors.email,
                   })}
                   placeholder='youremail@example.com'
@@ -175,7 +175,7 @@ const Page = () => {
                   <Label htmlFor='firstName'>Primer Nombre</Label>
                   <Input
                     {...register('firstName')}
-                    className={cn('border-primary', {
+                    className={cn('border-blueFPC-400', {
                       'focus-visible:ring-red-500': errors.firstName,
                     })}
                     placeholder='Andrés'
@@ -190,7 +190,7 @@ const Page = () => {
                   <Label htmlFor='secondName'>Segundo Nombre</Label>
                   <Input
                     {...register('secondName')}
-                    className={cn('border-primary', {
+                    className={cn('border-blueFPC-400', {
                       'focus-visible:ring-red-500': errors.secondName,
                     })}
                     placeholder='El Lagrimón'
@@ -207,7 +207,7 @@ const Page = () => {
                   <Label htmlFor='firstLastname'>Primer Apellido</Label>
                   <Input
                     {...register('firstLastname')}
-                    className={cn('border-primary', {
+                    className={cn('border-blueFPC-400', {
                       'focus-visible:ring-red-500': errors.firstLastname,
                     })}
                     placeholder='Pacheco'
@@ -222,7 +222,7 @@ const Page = () => {
                   <Label htmlFor='secondLastname'>Segundo Apellido</Label>
                   <Input
                     {...register('secondLastname')}
-                    className={cn('border-primary', {
+                    className={cn('border-blueFPC-400', {
                       'focus-visible:ring-red-500': errors.secondLastname,
                     })}
                     placeholder='Naranjo'
@@ -234,12 +234,12 @@ const Page = () => {
                   )}
                 </div>
               </div>
-              <Separator />
+              <Separator lineColor='border-blueFPC-400' coneColor='text-blueFPC-400' />
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='cardNumber'>Número Tarjeta</Label>
                 <Input
                   {...register('cardNumber', { valueAsNumber: true })}
-                  className={cn('border-primary', {
+                  className={cn('border-blueFPC-400', {
                     'focus-visible:ring-red-500': errors.cardNumber,
                   })}
                   placeholder='4242 4242 4242 4242'
@@ -254,7 +254,7 @@ const Page = () => {
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='expirationMonth'>Mes Expiración</Label>
                   <select
-                    className='flex h-10 w-full items-center justify-between rounded-md border border-primary bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
+                    className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
                     {...register('expirationMonth')}
                   >
                     {monthOptions.map((option) => (
@@ -272,7 +272,7 @@ const Page = () => {
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='expirationYear'>Año Expiración</Label>
                   <select
-                    className='flex h-10 w-full items-center justify-between rounded-md border border-primary bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
+                    className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
                     {...register('expirationYear')}
                   >
                     {YearOptions.map((option) => (
@@ -292,7 +292,7 @@ const Page = () => {
                   <Label htmlFor='cvv'>CVV</Label>
                   <Input
                     {...register('cvv', { valueAsNumber: true })}
-                    className={cn('border-primary', {
+                    className={cn('border-blueFPC-400', {
                       'focus-visible:ring-red-500': errors.cvv,
                     })}
                     placeholder='123'

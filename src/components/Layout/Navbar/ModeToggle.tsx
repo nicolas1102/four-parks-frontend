@@ -22,7 +22,7 @@ const ModeToggle = () => {
         <Button
           variant='outline'
           size='icon'
-          className='h-12 w-12 hover:bg-yellow-200  dark:hover:bg-yellow-300 border-primary dark:hover:text-background'
+          className='h-12 w-12 hover:bg-yellowFPC-200  dark:hover:bg-yellowFPC-400 border-primary dark:hover:text-background'
         >
           <Sun className='h-[1.7rem] w-[1.7rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 m-1' />
           <Moon className='absolute h-[1.5rem] w-[1.5rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 m-1 ' />

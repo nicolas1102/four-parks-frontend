@@ -66,10 +66,10 @@ export function ExperiencesCards() {
             {experiences.map((item, index) => (
               <CarouselItem key={index} className='basis-1/2'>
                 <div className='p-1'>
-                  <Card className='bg-yellow-300 border border-primary'>
-                    <CardContent className='flex aspect-square content-start justify-center p-6 h-96 flex-col w-full text-black'>
+                  <Card className='bg-blueFPC-400 border border-primary'>
+                    <CardContent className='flex aspect-square content-start justify-center p-6 h-96 flex-col w-full text-white'>
                       <div className='flex justify-center flex-col items-center'>
-                        <div className='rounded-full relative overflow-hidden h-40 w-40 border-2 border-primary'>
+                        <div className='rounded-full relative overflow-hidden h-40 w-40 border-2 border-white'>
                           <Image
                             src={item.image}
                             alt={item.image}

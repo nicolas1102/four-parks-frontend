@@ -69,11 +69,11 @@ const Features = () => {
         {benefits.map((item, index) => (
           <li
             key={index}
-            className='border border-primary w-48 m-2 bg-yellow-300 '
+            className='border border-primary w-48 m-2 bg-redFPC-400 '
           >
             <p className='text-primary text-center bg-white p-2'>{item.image}</p>
             <div className='p-2'>
-              <h3 className='font-medium text-xl tracking-wider text-black text-center'>
+              <h3 className='font-medium text-xl tracking-wider text-white text-center'>
                 {item.title}
               </h3>
             </div>

@@ -31,7 +31,7 @@ export const SignUpCredentialsValidator = z.object({
   cvv: z
     .number()
     .min(100, { message: 'El CVV es requerido.' })
-    .max(999, { message: 'No puede contener más de 3 digitos' }),
+    .max(9999, { message: 'No puede contener más de 4 digitos' }),
 });
 
 export const ChangePasswordCredentialsValidator = z.object({

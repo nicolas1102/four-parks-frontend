@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -54,6 +54,21 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        yellowFPC: {
+          200: "#fef08a",
+          400: "#fde047",
+          600: "#776E3E",
+        },
+        blueFPC: {
+          200: "#dcf2ff",
+          400: "#1865a2",
+          600: "#3E4756",
+        },
+        redFPC: {
+          200: "",
+          400: "#c03131",
+          600: "",
         },
       },
       borderRadius: {

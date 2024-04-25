@@ -35,7 +35,7 @@ const steps = [
 
 const Steps = () => {
   return (
-    <div className=' bg-yellow-300 py-20 px-32 w-full grid grid-cols-12'>
+    <div className=' bg-blueFPC-400 py-20 px-32 w-full grid grid-cols-12'>
       <div className='col-span-5 relative overflow-hidden h-[630px]'>
         <Image
           src='/landing/steps.jpg'
@@ -59,7 +59,7 @@ const Steps = () => {
           {steps.map((item, index) => (
             <li
               key={index}
-              className='flex flex-row text-black border border-black p-2 bg-yellow-200'
+              className='flex flex-row text-black border border-black p-2 bg-blueFPC-200'
             >
               <p className='text-3xl font-semibold text-center'>{index + 1}.</p>
               <div className='flex flex-col pl-4'>

@@ -45,7 +45,7 @@ export function FAQ() {
       <div className='px-60 flex justify-center'>
         <Accordion type='single' collapsible className='my-6 w-full'>
           {questions.map((item, index) => (
-            <AccordionItem value={index + 1 + ''} key={index} className='border-b border-primary'>
+            <AccordionItem value={index + 1 + ''} key={index} className='border-b border-redFPC-400'>
               <AccordionTrigger className='font-normal text-lg tracking-widest'>
                 {item.question}
               </AccordionTrigger>
