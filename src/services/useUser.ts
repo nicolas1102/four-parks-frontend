@@ -2,20 +2,17 @@
 
 import {
   createUsersRequest,
-  deleteUserRequest,
-  getOneUserByEmailRequest,
-  getOneUserRequest,
-  getUsersRequest,
-  updateUserRequest,
+  // deleteUserRequest,
+  // getOneUserByEmailRequest,
+  // getOneUserRequest,
+  // getUsersRequest,
+  // updateUserRequest,
   updatePasswordUserRequest,
 } from '@/app/api/routers/users.router'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
-import { ToastAction, ToastActionElement } from '@/components/ui/toast'
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { title } from 'process'
+import { useRouter } from 'next/navigation'
 
 export function useUser() {
   const [users, setUsers] = useState<UserInterface[]>([])
@@ -23,40 +20,40 @@ export function useUser() {
   const { toast } = useToast()
   const router = useRouter()
 
-  const getUsers = async () => {
-    setIsLoading(true)
-    try {
-      const res = await getUsersRequest()
-      setUsers(res.data)
-      setIsLoading(false)
-    } catch (error) {
-      console.error('Error fetching users:', error)
-    }
-  }
+  // const getUsers = async () => {
+  //   setIsLoading(true)
+  //   try {
+  //     const res = await getUsersRequest()
+  //     setUsers(res.data)
+  //     setIsLoading(false)
+  //   } catch (error) {
+  //     console.error('Error fetching users:', error)
+  //   }
+  // }
 
-  const getOneUserByEmail = async (email: string) => {
-    try {
-      setIsLoading(true)
-      const res = await getOneUserByEmailRequest(email)
-      setIsLoading(false)
-      return res.data
-    } catch (error) {
-      console.error('Error fetching user:', error)
-    }
-  }
+  // const getOneUserByEmail = async (email: string) => {
+  //   try {
+  //     setIsLoading(true)
+  //     const res = await getOneUserByEmailRequest(email)
+  //     setIsLoading(false)
+  //     return res.data
+  //   } catch (error) {
+  //     console.error('Error fetching user:', error)
+  //   }
+  // }
 
-  const getOneUser = async (id: string) => {
-    try {
-      setIsLoading(true)
-      const res = await getOneUserRequest(id)
-      setIsLoading(false)
-      return res.data
-    } catch (error) {
-      console.error('Error fetching user:', error)
-    }
-  }
+  // const getOneUser = async (id: string) => {
+  //   try {
+  //     setIsLoading(true)
+  //     const res = await getOneUserRequest(id)
+  //     setIsLoading(false)
+  //     return res.data
+  //   } catch (error) {
+  //     console.error('Error fetching user:', error)
+  //   }
+  // }
 
-  const createUser = async (user: UserInterface) => {    
+  const createUser = async (user: UserInterface) => {
     try {
       setIsLoading(true)
       const res = await createUsersRequest(user)
@@ -86,16 +83,16 @@ export function useUser() {
     }
   }
 
-  const updateUser = async (id: string, user: UserInterface) => {
-    try {
-      setIsLoading(true)
-      const res = await updateUserRequest(id, user)
-      setIsLoading(false)
-      return res
-    } catch (error) {
-      console.error('Error updating user:', error)
-    }
-  }
+  // const updateUser = async (id: string, user: UserInterface) => {
+  //   try {
+  //     setIsLoading(true)
+  //     const res = await updateUserRequest(id, user)
+  //     setIsLoading(false)
+  //     return res
+  //   } catch (error) {
+  //     console.error('Error updating user:', error)
+  //   }
+  // }
 
   const updatePasswordUser = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {
     try {
@@ -131,17 +128,28 @@ export function useUser() {
     }
   }
 
-  const deleteUser = async (id: string) => {
-    try {
-      setIsLoading(true)
-      const res = await deleteUserRequest(id)
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
-      setIsLoading(false)
-      return res
-    } catch (error) {
-      console.error('Error deleting user:', error)
-    }
-  }
+  // const deleteUser = async (id: string) => {
+  //   try {
+  //     setIsLoading(true)
+  //     const res = await deleteUserRequest(id)
+  //     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
+  //     setIsLoading(false)
+  //     return res
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error)
+  //   }
+  // }
 
-  return { users, getUsers, isLoading, setIsLoading, getOneUser, getOneUserByEmail, createUser, updateUser, updatePasswordUser, deleteUser }
+  return {
+    users,
+    isLoading,
+    setIsLoading,
+    createUser,
+    updatePasswordUser,
+    // deleteUser,
+    // updateUser,
+    // getOneUserByEmail,
+    // getOneUser,
+    // getUsers,
+  }
 }

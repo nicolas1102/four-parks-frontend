@@ -14,8 +14,10 @@ const PrimaryButton = ({
 }) => {
   return (
     <Button
-    onClick={onClick}
-      className={`tracking-widest dark:font-semibold border border-primary w-[${width ? width : ''}px]`}
+      onClick={onClick}
+      className={`tracking-widest dark:font-semibold border border-primary ${
+        width ? `w-[${width}px]` : 'w-full'
+      }`}
       disabled={isLoading}
     >
       {text}

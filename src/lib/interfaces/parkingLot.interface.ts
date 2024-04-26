@@ -1,4 +1,4 @@
-export interface ParkingLot {
+export interface ParkingLotInterface {
   id?: string
   name: string
   lastName: string

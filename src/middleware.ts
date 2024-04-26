@@ -3,13 +3,20 @@ import { NextResponse } from "next/server"
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
-    
-    if ((request.nextUrl.pathname.startsWith("/admin")
-      || request.nextUrl.pathname.startsWith("/usuario"))
-      && request.nextauth.token?.role !== "FUNCIONARIO"
-      && request.nextauth.token?.role !== "GERENTE"
-      // TODO: DESPUES QUITAR ESTO Y REVISAR LAS RUTAS PERMITIDAS
-      && request.nextauth.token?.role !== "USUARIO"
+
+    if (request.nextUrl.pathname.startsWith("/usuario")
+      && request.nextauth.token?.rol !== "FUNCIONARIO"
+      && request.nextauth.token?.rol !== "GERENTE"
+      && request.nextauth.token?.rol !== "USUARIO"
+    ) {
+      return NextResponse.rewrite(
+        new URL("/auth/unauthorized", request.url)
+      )
+    }
+
+    if (request.nextUrl.pathname.startsWith("/admin")
+      && request.nextauth.token?.rol !== "FUNCIONARIO"
+      && request.nextauth.token?.rol !== "GERENTE"
     ) {
       return NextResponse.rewrite(
         new URL("/auth/unauthorized", request.url)
@@ -17,7 +24,7 @@ export default withAuth(
     }
 
     if (request.nextUrl.pathname.startsWith("/parqueaderos")
-      && request.nextauth.token?.role !== "USUARIO") {
+      && request.nextauth.token?.rol !== "USUARIO") {
       return NextResponse.rewrite(
         new URL("/auth/unauthorized", request.url)
       )

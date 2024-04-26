@@ -310,6 +310,7 @@ const Page = () => {
               </p>
             </div>
 
+            <Separator lineColor='border-blueFPC-400' coneColor='text-blueFPC-400' />
             <div className='flex justify-center'>
               <Link
                 className={buttonVariants({
