@@ -36,7 +36,7 @@ const GoogleMapView = ({
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyAwkHB_VUjLdIlMH7ua8MCgimHf5bIJFF8',
+    googleMapsApiKey: process.env.GOOGLE_MAPS_KEY_SECRET,
   })
 
   const [map, setMap] = useState(null)

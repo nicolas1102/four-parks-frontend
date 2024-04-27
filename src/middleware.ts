@@ -8,6 +8,7 @@ export default withAuth(
       && request.nextauth.token?.rol !== "FUNCIONARIO"
       && request.nextauth.token?.rol !== "GERENTE"
       && request.nextauth.token?.rol !== "USUARIO"
+
     ) {
       return NextResponse.rewrite(
         new URL("/auth/unauthorized", request.url)
@@ -40,6 +41,7 @@ export default withAuth(
 export const config = {
   matcher: [
     "/admin/:path*",
-    '/parqueaderos/:path*'
+    // '/parqueaderos/:path*',
+    '/usuario'
   ]
 };

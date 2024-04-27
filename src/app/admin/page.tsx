@@ -40,12 +40,12 @@ const Page = () => {
       <div className='flex flex-col'>
         <div className='pb-7'>
           <h1 className='text-4xl tracking-widest pb-1'>
-            MENU {session?.role === 'GERENTE' ? 'GERENTE' : 'FUNCIONARIO'}
+            MENU {session?.rol === 'GERENTE' ? 'GERENTE' : 'FUNCIONARIO'}
           </h1>
           <p className='text-base uppercase'>Este es el menu de </p>
         </div>
         <div className='flex flex-row flex-wrap gap-5'>
-          {session?.role === 'FUNCIONARIO' &&
+          {session?.rol === 'FUNCIONARIO' &&
             FUNCIONARIO_FUNCTIONS.map((item, index) => (
               <AdminFunctionItem
                 title={item.title}
@@ -55,7 +55,7 @@ const Page = () => {
                 key={index}
               />
             ))}
-            {session?.role === 'GERENTE' &&
+            {session?.rol === 'GERENTE' &&
               GERENTE_FUNCTIONS.map((item, index) => (
                 <AdminFunctionItem
                   title={item.title}
