@@ -23,12 +23,12 @@ export default withAuth(
       )
     }
 
-    if (request.nextUrl.pathname.startsWith("/parqueaderos")
-      && request.nextauth.token?.rol !== "USUARIO") {
-      return NextResponse.rewrite(
-        new URL("/auth/unauthorized", request.url)
-      )
-    }
+    // if (request.nextUrl.pathname.startsWith("/parqueaderos")
+    //   && request.nextauth.token?.rol !== "USUARIO") {
+    //   return NextResponse.rewrite(
+    //     new URL("/auth/unauthorized", request.url)
+    //   )
+    // }
   },
   {
     callbacks: {

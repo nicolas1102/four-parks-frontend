@@ -6,7 +6,7 @@ export default function Home() {
   const { data: session } = useSession()
   return (
     <div className='max-h-full m-auto flex flex-col gap-y-5 p-10'>
-      <div className='border  p-10 w-[1000px] border-yellowFPC-600 bg-yellowFPC-400'>
+      <div className='border  p-10 w-[1000px] border-yellowFPC-400 bg-yellowFPC-200'>
         <div>
           <h1 className='text-3xl tracking-widest font-medium pb-2'>
             MI CUENTA
@@ -19,7 +19,7 @@ export default function Home() {
 
       <div className='flex flex-row gap-5 flex-wrap max-w-[1000px]'>
 
-        <div className='border border-blueFPC-400 bg-blueFPC-200 p-10 w-[490px]'>
+        <div className='border border-primary p-10 w-[490px]'>
           <div className='col-span-1 row-span-1'>
             <h2 className='tracking-widest text-xl pb-2'>CUENTA</h2>
             <ul>
@@ -79,7 +79,7 @@ export default function Home() {
 
         {session?.rol === 'USUARIO' && (
           <>
-            <div className='border border-blueFPC-400 bg-blueFPC-200 p-10 w-[490px]'>
+            <div className='border border-primary p-10 w-[490px]'>
               <div className='col-span-1 row-span-1'>
                 <h2 className='tracking-widest text-xl pb-2'>
                   TARJETA DE CRÉDITO
@@ -114,7 +114,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className='border border-blueFPC-400 bg-blueFPC-200 p-10 w-[490px]'>
+            <div className='border border-primary p-10 w-[490px]'>
               <div className='col-span-1 row-span-1'>
                 <h2 className='tracking-widest text-xl pb-2'>CONTRASEÑA</h2>
                 <ul>

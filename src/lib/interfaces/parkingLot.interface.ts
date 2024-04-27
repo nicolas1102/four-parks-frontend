@@ -1,13 +1,13 @@
 export interface ParkingLotInterface {
-  id?: string
-  name: string
-  lastName: string
-  email: string
-  defaultPassword: string
-  password: string
-  loginAttempts: number
-  isBlocked: boolean
-  isUnactivaded: boolean
-  isShowed: boolean
+  id: string
+  nombre: string
+  direccion: string
+  ciudad: string
+  cuposVehiculos: number
+  cuposBicicletas: number
+  cuposMotos: number
+  imagen: string
+  lat: number
+  lng: number
 }
 

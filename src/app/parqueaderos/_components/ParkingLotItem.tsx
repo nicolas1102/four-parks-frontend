@@ -3,6 +3,8 @@ import { Bike, Car } from 'lucide-react'
 import Image from 'next/image'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import BookingSheet from './BookingSheet'
+import { Dispatch, SetStateAction } from 'react'
+import { ParkingLotInterface } from '@/lib/interfaces/parkingLot.interface'
 
 const ParkingLotItem = ({
   id,
@@ -15,6 +17,8 @@ const ParkingLotItem = ({
   cuposBicicletas,
   lat,
   lng,
+  isSelected,
+  setSelectedParkingLot,
 }: {
   id: string
   imagen: string
@@ -26,11 +30,31 @@ const ParkingLotItem = ({
   cuposBicicletas: number
   lat: number
   lng: number
+  isSelected?: boolean
+  setSelectedParkingLot: Dispatch<SetStateAction<ParkingLotInterface | null>>
 }) => {
   return (
     <div
-      className=' hover:bg-muted duration-500 border border-transparent'
+      className={`duration-500 border ${
+        isSelected
+          ? 'bg-yellowFPC-200 border-primary'
+          : 'border-transparent hover:bg-muted'
+      }`}
       key={id}
+      onClick={() => {
+        setSelectedParkingLot({
+          id,
+          imagen,
+          nombre,
+          direccion,
+          ciudad,
+          cuposVehiculos,
+          cuposMotos,
+          cuposBicicletas,
+          lat,
+          lng,
+        })
+      }}
     >
       <div className='col-span-4 relative overflow-hidden m-3 aspect-square border border-primary'>
         <Image
@@ -69,7 +93,7 @@ const ParkingLotItem = ({
             </div>
           </div>
           <div className='flex flex-row gap-1 py-1 flex-wrap'>
-            <Badge>Cubiertos</Badge>
+            <Badge variant='secondary'>Cubiertos</Badge>
             <Badge>Cubiertos</Badge>
           </div>
           <div className='py-3'>

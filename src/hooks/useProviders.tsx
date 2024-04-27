@@ -2,12 +2,34 @@
 
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from '@/hooks/useThemeProvider'
+import { UserLocationContext } from '@/context/UserLocationContext'
+import { useEffect, useState } from 'react'
 
 interface Props {
   children: React.ReactNode
 }
 
+interface userLocationInterface {
+  lat: number
+  lng: number
+}
+
 function Providers({ children }: Props) {
+  const [userLocation, setUserLocation] = useState<userLocationInterface>({
+    lat: 4.629618184116378,
+    lng: -74.06571387389643,
+  })
+  const getUserLocation = async () => {
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      setUserLocation({
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+      })
+    })
+  }
+  useEffect(() => {
+    getUserLocation()
+  }, [])
   return (
     <SessionProvider>
       <ThemeProvider
@@ -16,7 +38,9 @@ function Providers({ children }: Props) {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
+          {children}
+        </UserLocationContext.Provider>
       </ThemeProvider>
     </SessionProvider>
   )
