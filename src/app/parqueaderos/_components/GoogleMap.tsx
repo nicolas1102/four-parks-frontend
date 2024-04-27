@@ -51,10 +51,12 @@ const GoogleMapView = ({
         position={userLocation}
         icon={{
           url: '/map/circle-user-round.svg',
-          // TODO: Arreglar esta monda
           scaledSize: {
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
+            equals(other) {
+              return true
+            },
           },
         }}
       />
@@ -67,10 +69,12 @@ const GoogleMapView = ({
               parkingLot.id === selectedParkingLot?.id
                 ? '/map/selected-parking-map-pin.svg'
                 : '/map/parking-map-pin.svg',
-            // TODO: Arreglar esta monda
             scaledSize: {
-              width: 50,
-              height: 50,
+              width: 40,
+              height: 40,
+              equals(other) {
+                return true
+              },
             },
           }}
           onClick={() => setSelectedParkingLot(parkingLot)}
