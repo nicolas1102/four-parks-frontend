@@ -247,7 +247,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
-  const { deleteUser } = useUser()
+  // const { deleteUser } = useUser()
 
   const table = useReactTable({
     data,
