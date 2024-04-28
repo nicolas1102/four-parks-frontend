@@ -15,9 +15,12 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
+  useMemo,
   useState,
 } from 'react'
 import ParkingLotItem from './ParkingLotItem'
+import { useTheme } from 'next-themes'
 
 const GoogleMapView = ({
   parkingLots,
@@ -45,7 +48,7 @@ const GoogleMapView = ({
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={userLocation}
-      zoom={17}
+      zoom={13}
     >
       <MarkerF
         position={userLocation}
@@ -91,11 +94,6 @@ const GoogleMapView = ({
                   setSelectedParkingLot={setSelectedParkingLot}
                 />
               </div>
-              {/* <div className='absolute -left-14 -z-10 bg-background overflow-hidden text-ellipsis truncate p-1 border border-primary w-28 hover:scale-110'>
-                <h2 className='uppercase tracking-widest text-center'>
-                  {parkingLot.nombre}
-                </h2>
-              </div> */}
             </OverlayView>
           )}
         </MarkerF>
