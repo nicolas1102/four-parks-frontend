@@ -2,7 +2,7 @@
 
 import {
   createUsersRequest,
-  // deleteUserRequest,
+  deleteUserRequest,
   getOneUserByEmailRequest,
   getUsersByRoleRequest,
   // getOneUserRequest,
@@ -70,17 +70,6 @@ export function useUser() {
     }
   }
 
-  // const getOneUser = async (id: string) => {
-  //   try {
-  //     setIsLoading(true)
-  //     const res = await getOneUserRequest(id)
-  //     setIsLoading(false)
-  //     return res.data
-  //   } catch (error) {
-  //     console.error('Error fetching user:', error)
-  //   }
-  // }
-
   const createUser = async (user: UserInterface) => {
     try {
       setIsLoading(true)
@@ -110,17 +99,6 @@ export function useUser() {
       setIsLoading(false)
     }
   }
-
-  // const updateUser = async (id: string, user: UserInterface) => {
-  //   try {
-  //     setIsLoading(true)
-  //     const res = await updateUserRequest(id, user)
-  //     setIsLoading(false)
-  //     return res
-  //   } catch (error) {
-  //     console.error('Error updating user:', error)
-  //   }
-  // }
 
   const updatePasswordUser = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {
     try {
@@ -155,18 +133,59 @@ export function useUser() {
       setIsLoading(false)
     }
   }
-
-  // const deleteUser = async (id: string) => {
+  
+  // const updateUser = async (id: string, user: UserInterface) => {
   //   try {
   //     setIsLoading(true)
-  //     const res = await deleteUserRequest(id)
-  //     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
+  //     const res = await updateUserRequest(id, user)
   //     setIsLoading(false)
   //     return res
   //   } catch (error) {
-  //     console.error('Error deleting user:', error)
+  //     console.error('Error updating user:', error)
   //   }
   // }
+
+  // const getOneUser = async (id: string) => {
+  //   try {
+  //     setIsLoading(true)
+  //     const res = await getOneUserRequest(id)
+  //     setIsLoading(false)
+  //     return res.data
+  //   } catch (error) {
+  //     console.error('Error fetching user:', error)
+  //   }
+  // }
+
+  const deleteUser = async (email: string) => {
+    setIsLoading(true)
+    try {
+      const res = await deleteUserRequest(email)
+      setUsers((prevUsers) => prevUsers.filter((user) => user.email !== email))
+      setIsLoading(false)
+      toast({
+        title: 'Se eliminó el usuario con éxito!',
+        description: '',
+      })
+      return res
+    } catch (error: any) {
+      console.error('Error deleting user:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title: 'No se pudo eliminar el usuario. Por favor intentalo de nuevo.',
+          description: error.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return {
     users,
@@ -177,7 +196,7 @@ export function useUser() {
     getUsers,
     getOneUserByRole,
     getOneUserByEmail,
-    // deleteUser,
+    deleteUser,
     // updateUser,
     // getOneUser,
   }

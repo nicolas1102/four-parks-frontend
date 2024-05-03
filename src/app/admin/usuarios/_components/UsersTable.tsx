@@ -1,25 +1,11 @@
 'use client'
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
+import { flexRender } from '@tanstack/react-table'
+import { ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
@@ -33,244 +19,19 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { UserInterface } from '@/lib/interfaces/user.interface'
-import { useState } from 'react'
-import { useUser } from '@/services/useUser'
-import Link from 'next/link'
-
-export const columns: ColumnDef<UserInterface>[] = [
-  {
-    accessorKey: 'id',
-    header: 'ID',
-    cell: ({ row }) => <div>{row.getValue('id')}</div>,
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Email
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className='lowercase'>{row.getValue('email')}</div>,
-  },
-  {
-    accessorKey: 'firstName',
-    header: ({ column }) => {
-      return (
-        <Button
-          size={'sm'}
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Primer Nombre
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>{row.getValue('firstName')}</div>
-    ),
-  },
-  {
-    accessorKey: 'secondName',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Segundo Nombre
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>{row.getValue('secondName')}</div>
-    ),
-  },
-  {
-    accessorKey: 'firstLastname',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Primer Apeliido
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>{row.getValue('firstLastname')}</div>
-    ),
-  },
-  {
-    accessorKey: 'secondLastname',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Segundo Apellido
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>{row.getValue('secondLastname')}</div>
-    ),
-  },
-  {
-    accessorKey: 'loginAttempts',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          size={'sm'}
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Intentos de Logueo
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>{row.getValue('loginAttempts')}</div>
-    ),
-  },
-  {
-    accessorKey: 'accountActive',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Cuenta Activada
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>
-        {row.getValue('accountActive') ? 'Si' : 'No'}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'accountBlocked',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Cuenta Bloqueada
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='text-center'>
-        {row.getValue('accountBlocked') ? 'Si' : 'No'}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'Rol',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Rol
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const user = row.original
-      // TODO: Arreglar esto
-      return <div className='capitalize text-center'>{'Usuario'}</div>
-    },
-  },
-  {
-    id: 'actions',
-    enableHiding: false,
-    cell: ({ row }) => {
-      const user = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Abrir Menu</span>
-              <MoreHorizontal className='h-4 w-4' />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => {
-                if (user?.id) navigator.clipboard.writeText(user.id)
-              }}
-            >
-              Copiar ID de usuario
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={`/admin/usuarios/form?email=${user?.email}`}>
-                Editar usuario
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                // if (row.id) deleteUser(row.id)
-              }}
-            >
-              <span className='text-red-600 font-medium'>Eliminar Usuario</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
-]
+import UsersTableColumns from '../_lib/UsersTableColumns'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export function UsersTable({ data }: { data: UserInterface[] }) {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = useState({})
-  const {isLoading} = useUser()
-  // const { deleteUser } = useUser()
-
-  const table = useReactTable({
-    data,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  })
+  const { table, columns } = UsersTableColumns({ data })
 
   return (
     <div className='w-full'>
@@ -281,7 +42,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
           onChange={(event) =>
             table.getColumn('id')?.setFilterValue(event.target.value)
           }
-          className='max-w-sm mr-2'
+          className='max-w-sm mr-2 border border-blueFPC-400'
         />
         <Input
           placeholder='Filtrar por email'
@@ -289,11 +50,44 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
           onChange={(event) =>
             table.getColumn('email')?.setFilterValue(event.target.value)
           }
-          className='max-w-sm mr-2'
+          className='max-w-sm mr-2 border border-blueFPC-400'
         />
+        
+        {/* <Input
+          placeholder='Filtrar por rol'
+          value={(table.getColumn('role')?.getFilterValue() as string) ?? ''}
+          onChange={(event) =>
+            table.getColumn('role')?.setFilterValue(event.target.value)
+          }
+          className='max-w-sm mr-2 border border-blueFPC-400'
+        /> */}
+        {/* <div className='grid gap-1 py-2'>
+          <Select
+            onValueChange={(value) => {
+              table.getColumn('rol')?.setFilterValue(value)
+            }}
+            value={(table.getColumn('rol')?.getFilterValue() as string) ?? ''}
+          >
+            <SelectTrigger className='w-[180px] border border-blueFPC-400'>
+              <SelectValue placeholder='Filtrar por Rol' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Roles</SelectLabel>
+                <SelectItem value='.'>Cualquiera</SelectItem>
+                <SelectItem value='Usuario'>Usuario</SelectItem>
+                <SelectItem value='Funcionario'>Funcionario</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div> */}
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='ml-auto'>
+            <Button
+              variant='outline'
+              className='ml-auto border border-blueFPC-400'
+            >
               Columnas <ChevronDown className='ml-2 h-4 w-4' />
             </Button>
           </DropdownMenuTrigger>
@@ -319,13 +113,8 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
         </DropdownMenu>
       </div>
 
-      <div className='rounded-md border'>
+      <div className='border border-yellowFPC-400'>
         <Table>
-          <TableCaption>
-            <span className='font-medium'>
-              Una lista de todos los usuarios.
-            </span>{' '}
-          </TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

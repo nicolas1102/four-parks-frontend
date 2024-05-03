@@ -48,7 +48,7 @@ export const getOneUserByEmailRequest = async (email: string) => {
 // }
 
 
-// export const deleteUserRequest = async (id: string) => {
-//   const res = await axios.delete(baseURL + `/usuarios/${id}`)
-//   return res
-// }
+export const deleteUserRequest = async (email: string) => {  
+  const res = await axios.get(baseURL + `/users/deleteUser/${email}`)
+  return res
+}
