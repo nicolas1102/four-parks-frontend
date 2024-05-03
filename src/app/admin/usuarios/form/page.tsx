@@ -1,93 +1,37 @@
 'use client'
 
-import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import {
-  TSignUpCredentialsValidator,
-  SignUpCredentialsValidator,
-} from '@/lib/validators/account-credentials-validator'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
-import Separator from '@/components/Separator'
-import { toast } from 'sonner'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect } from 'react'
-import { CreditCard } from '@/lib/interfaces/creditCard.model'
+import {
+  CreateManagerValidator,
+  TCreateManagerValidator,
+} from '@/lib/validators/user-validators'
 
-interface MonthOption {
+interface ParkingOption {
   value: string
-  label: string // Optional label for accessibility
+  label: string
 }
 
-const monthOptions: MonthOption[] = [
+const parkingOptions: ParkingOption[] = [
   {
-    value: '01',
-    label: '01',
+    value: 'Calle 50',
+    label: 'Calle 50',
   },
   {
-    value: '02',
-    label: '02',
-  },
-  {
-    value: '03',
-    label: '03',
-  },
-  {
-    value: '04',
-    label: '04',
-  },
-  {
-    value: '05',
-    label: '05',
-  },
-  {
-    value: '06',
-    label: '06',
-  },
-  {
-    value: '07',
-    label: '07',
-  },
-  {
-    value: '08',
-    label: '08',
-  },
-  {
-    value: '09',
-    label: '09',
-  },
-  {
-    value: '10',
-    label: '10',
-  },
-  {
-    value: '11',
-    label: '11',
-  },
-  {
-    value: '12',
-    label: '12',
+    value: 'Avenida Cali',
+    label: 'Avenida Cali',
   },
 ]
-
-interface YearOption {
-  value: number
-  label: string // Optional label for accessibility
-}
-
-const YearOptions: YearOption[] = Array.from({ length: 10 }, (_, i) => ({
-  value: i + 24,
-  label: (i + 24).toString(), // Optional label for clarity
-}))
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -99,8 +43,8 @@ const Page = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<TSignUpCredentialsValidator>({
-    resolver: zodResolver(SignUpCredentialsValidator),
+  } = useForm<TCreateManagerValidator>({
+    resolver: zodResolver(CreateManagerValidator),
   })
 
   const onSubmit = async ({
@@ -109,37 +53,25 @@ const Page = () => {
     secondName,
     firstLastname,
     secondLastname,
-    cardNumber,
-    expirationMonth,
-    expirationYear,
-    cvv,
-  }: TSignUpCredentialsValidator) => {
-    const creditCardData = {
-      cardNumber: cardNumber + '',
-      expirationDate: expirationMonth + '/' + expirationYear,
-      cvv: cvv + '',
-    } as CreditCard
-
+    parking,
+  }: TCreateManagerValidator) => {
+    // TODO: Revisar esto dependiendo de cómo se va a crear los funcionarios
     const userData = {
       email,
       firstName,
       secondName,
       firstLastname,
       secondLastname,
-      creditCard: creditCardData,
       roleList: ['FUNCIONARIO'],
     } as UserInterface
-
     await createUser(userData)
   }
-
-  if (email) setValue('email', email)
 
   useEffect(() => {
     const fetchData = async () => {
       if (email) {
         const res = await getOneUserByEmail(email)
-
+        setValue('email', email)
       }
     }
     fetchData()
@@ -242,76 +174,23 @@ const Page = () => {
                   )}
                 </div>
               </div>
-              <Separator
-                lineColor='border-blueFPC-400'
-                coneColor='text-blueFPC-400'
-              />
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='cardNumber'>Número Tarjeta</Label>
-                <Input
-                  {...register('cardNumber', { valueAsNumber: true })}
-                  className={cn('border-blueFPC-400', {
-                    'focus-visible:ring-red-500': errors.cardNumber,
-                  })}
-                  placeholder='4242 4242 4242 4242'
-                />
-                {errors?.cardNumber && (
+                <Label htmlFor='expirationMonth'>Punto Parqueadero</Label>
+                <select
+                  className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
+                  {...register('parking')}
+                >
+                  {parkingOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                {errors?.parking && (
                   <p className='text-sm text-red-500'>
-                    {errors.cardNumber.message}
+                    {errors.parking.message}
                   </p>
                 )}
-              </div>
-              <div className='grid gap-2 justify-around grid-cols-3'>
-                <div className='grid gap-1 py-2'>
-                  <Label htmlFor='expirationMonth'>Mes Expiración</Label>
-                  <select
-                    className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
-                    {...register('expirationMonth')}
-                  >
-                    {monthOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {errors?.expirationMonth && (
-                    <p className='text-sm text-red-500'>
-                      {errors.expirationMonth.message}
-                    </p>
-                  )}
-                </div>
-                <div className='grid gap-1 py-2'>
-                  <Label htmlFor='expirationYear'>Año Expiración</Label>
-                  <select
-                    className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
-                    {...register('expirationYear')}
-                  >
-                    {YearOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {errors?.expirationYear && (
-                    <p className='text-sm text-red-500'>
-                      {errors.expirationYear.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className='grid gap-1 py-2'>
-                  <Label htmlFor='cvv'>CVV</Label>
-                  <Input
-                    {...register('cvv', { valueAsNumber: true })}
-                    className={cn('border-blueFPC-400', {
-                      'focus-visible:ring-red-500': errors.cvv,
-                    })}
-                    placeholder='123'
-                  />
-                  {errors?.cvv && (
-                    <p className='text-sm text-red-500'>{errors.cvv.message}</p>
-                  )}
-                </div>
               </div>
               <PrimaryButton text={'CREAR FUNCIONARIO'} isLoading={isLoading} />
             </div>

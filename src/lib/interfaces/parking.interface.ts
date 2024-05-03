@@ -15,6 +15,8 @@ export interface ParkingInterface {
   lng: number
 }
 
+
+// TODO: Actualizar esto
 export interface ParkingLotInterface {
   id?: string
   location: LocationInterface
