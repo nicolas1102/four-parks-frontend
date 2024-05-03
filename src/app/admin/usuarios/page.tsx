@@ -36,6 +36,7 @@ const Page = () => {
     // const res = getOneUserByEmail('admin@gmail.com')
     // const res2 = getOneUserByRole('1')
   }, [])
+
   return (
     <div className=' flex flex-col relative m-10'>
       <FloatingButton

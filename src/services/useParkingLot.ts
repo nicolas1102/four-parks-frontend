@@ -8,13 +8,13 @@ import {
   // getUsersRequest,
   // updateUserRequest,
 } from '@/app/api/routers/parkingLots.router'
-import { ParkingLotInterface } from '@/lib/interfaces/parkingLot.interface'
+import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 
 export function useParkingLot() {
-  const [parkings, setParkings] = useState<ParkingLotInterface[]>([])
+  const [parkings, setParkings] = useState<ParkingInterface[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
   const router = useRouter()

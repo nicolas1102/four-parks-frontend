@@ -1,7 +1,7 @@
 'use client'
 
 import { UserLocationContext } from '@/context/UserLocationContext'
-import { ParkingLotInterface } from '@/lib/interfaces/parkingLot.interface'
+import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import {
   GoogleMap,
   Marker,
@@ -27,9 +27,9 @@ const GoogleMapView = ({
   selectedParkingLot,
   setSelectedParkingLot,
 }: {
-  parkingLots: ParkingLotInterface[]
-  selectedParkingLot: ParkingLotInterface | null
-  setSelectedParkingLot: Dispatch<SetStateAction<ParkingLotInterface | null>>
+  parkingLots: ParkingInterface[]
+  selectedParkingLot: ParkingInterface | null
+  setSelectedParkingLot: Dispatch<SetStateAction<ParkingInterface | null>>
 }) => {
   const { userLocation, setUserLocation } = useContext(UserLocationContext)
   const containerStyle = {

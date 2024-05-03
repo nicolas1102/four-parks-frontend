@@ -1,9 +1,11 @@
 import { CreditCard } from './creditCard.model'
+import { RoleType } from './role.interface'
 
 export interface UserInterface {
   id?: string
   email: string
   password?: string
+  ip?: string
   firstName: string
   secondName?: string
   firstLastname: string
@@ -11,9 +13,6 @@ export interface UserInterface {
   loginAttempts?: number
   accountActive?: boolean
   accountBlocked?: boolean
-  roleList: [
-    'USUARIO' | 'GERENTE' | 'FUNCIONARIO'
-  ],
+  roleList: RoleType[],
   creditCard?: CreditCard
 }
-

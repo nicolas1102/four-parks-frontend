@@ -4,7 +4,7 @@ import { Bike, Car, ParkingSquare } from 'lucide-react'
 import { useEffect, useState, useMemo } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import ParkingLotItem from './_components/ParkingLotItem'
-import { ParkingLotInterface } from '@/lib/interfaces/parkingLot.interface'
+import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import GoogleMapView from './_components/GoogleMap'
 import { Input } from '@/components/ui/input'
 import { PiMotorcycleFill } from 'react-icons/pi'
@@ -25,7 +25,7 @@ export default function Home() {
   } = useParkingLotsFilters()
   
   const [selectedParkingLot, setSelectedParkingLot] =
-    useState<ParkingLotInterface | null>(null)
+    useState<ParkingInterface | null>(null)
 
   return (
     <div>

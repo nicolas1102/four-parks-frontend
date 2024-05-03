@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useMemo } from 'react'
-import { ParkingLotInterface } from '@/lib/interfaces/parkingLot.interface'
+import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 
 const parkingLotsData = [
   {
@@ -67,7 +67,7 @@ const parkingLotsData = [
 ]
 
 export function useParkingLotsFilters() {
-  const [parkingLots, setParkingLots] = useState<ParkingLotInterface[]>([])
+  const [parkingLots, setParkingLots] = useState<ParkingInterface[]>([])
   const [filterAddress, setFilterAddress] = useState<string | null>(null)
   const [filterCity, setFilterCity] = useState<string | null>(null)
   const [filterCarPlaces, setFilterCarPlaces] = useState<boolean>(false)

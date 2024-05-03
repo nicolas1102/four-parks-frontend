@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import BookingSheet from './BookingSheet'
 import { Dispatch, SetStateAction } from 'react'
-import { ParkingLotInterface } from '@/lib/interfaces/parkingLot.interface'
+import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 
 const ParkingLotItem = ({
   id,
@@ -31,7 +31,7 @@ const ParkingLotItem = ({
   lat: number
   lng: number
   isSelected?: boolean
-  setSelectedParkingLot: Dispatch<SetStateAction<ParkingLotInterface | null>>
+  setSelectedParkingLot: Dispatch<SetStateAction<ParkingInterface | null>>
 }) => {
   return (
     <div

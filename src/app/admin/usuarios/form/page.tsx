@@ -127,7 +127,7 @@ const Page = () => {
       firstLastname,
       secondLastname,
       creditCard: creditCardData,
-      roleList: ['USUARIO'],
+      roleList: ['FUNCIONARIO'],
     } as UserInterface
 
     await createUser(userData)
@@ -139,6 +139,7 @@ const Page = () => {
     const fetchData = async () => {
       if (email) {
         const res = await getOneUserByEmail(email)
+
       }
     }
     fetchData()
