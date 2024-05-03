@@ -129,7 +129,7 @@ export function useParkingLotsFilters() {
   ])
 
   useEffect(() => {
-    // fetch parking lots
+    // TODO: fetch parking lots
     setParkingLots(parkingLotsData)
   }, [parkingLots])
 

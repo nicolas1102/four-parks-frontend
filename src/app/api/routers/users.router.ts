@@ -22,21 +22,25 @@ export const updatePasswordUserRequest = async (email: string, oldPassword: stri
   return res
 }
 
-// export const getUsersRequest = async () => {
-//   const res = await axios.get(baseURL + '/usuarios')
-//   return res
-// }
+export const getUsersRequest = async () => {
+  const res = await axios.get(baseURL + '/users/allUsers')
+  return res
+}
+
+export const getUsersByRoleRequest = async (role: string) => {
+  const res = await axios.get(baseURL + `/users/userByRole/${role}`)
+  return res
+}
+
+export const getOneUserByEmailRequest = async (email: string) => {
+  const res = await axios.get(baseURL + `/users/getOneUser/${email}`);
+  return res;
+};
 
 // export const getOneUserRequest = async (id: string) => {
 //   const res = await axios.get(baseURL + `/usuarios/${id}`)
 //   return res
 // }
-
-// export const getOneUserByEmailRequest = async (email: string) => {
-//   const res = await axios.get(baseURL + `/usuarios/email/${email}`);
-//   return res;
-// };
-
 
 // export const updateUserRequest = async (id: string, User: UserInterface) => {
 //   const res = await axios.put(baseURL + `/usuarios/${id}`, User)

@@ -30,8 +30,8 @@ export default function Home() {
   return (
     <div>
       <div className='py-2 px-6 border-b flex flex-row gap-3'>
-        <h1 className='text-2xl tracking-widest flex content-center gap-x-2'>
-          <ParkingSquare size={34} />
+        <h1 className='text-3xl tracking-widest flex content-center gap-x-2'>
+          <ParkingSquare size={40} />
           PARQUEADEROS
         </h1>
         <span className='border-l border-primary h-auto'></span>
@@ -121,7 +121,7 @@ export default function Home() {
             )}
           </ScrollArea>
         </div>
-        
+
         <div className='col-span-5'>
           <GoogleMapView
             parkingLots={filteredParkingLots}

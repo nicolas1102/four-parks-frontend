@@ -198,7 +198,8 @@ export const columns: ColumnDef<UserInterface>[] = [
     },
     cell: ({ row }) => {
       const user = row.original
-      return <div className='capitalize text-center'>{user.roleList[0]}</div>
+      // TODO: Arreglar esto
+      return <div className='capitalize text-center'>{'Usuario'}</div>
     },
   },
   {
@@ -226,7 +227,9 @@ export const columns: ColumnDef<UserInterface>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`/usuarios/edit/${row.id}`}>Editar usuario</Link>
+              <Link href={`/admin/usuarios/form?email=${user?.email}`}>
+                Editar usuario
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
@@ -247,6 +250,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
+  const {isLoading} = useUser()
   // const { deleteUser } = useUser()
 
   const table = useReactTable({
@@ -314,6 +318,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
       <div className='rounded-md border'>
         <Table>
           <TableCaption>
@@ -369,6 +374,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
           </TableBody>
         </Table>
       </div>
+
       <div className='flex items-center justify-end space-x-2 py-4'>
         <div className='flex-1 text-sm text-muted-foreground italic '>
           Número de páginas: {table.getPageCount()}.

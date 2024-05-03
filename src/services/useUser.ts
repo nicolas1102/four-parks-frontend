@@ -3,9 +3,10 @@
 import {
   createUsersRequest,
   // deleteUserRequest,
-  // getOneUserByEmailRequest,
+  getOneUserByEmailRequest,
+  getUsersByRoleRequest,
   // getOneUserRequest,
-  // getUsersRequest,
+  getUsersRequest,
   // updateUserRequest,
   updatePasswordUserRequest,
 } from '@/app/api/routers/users.router'
@@ -20,27 +21,54 @@ export function useUser() {
   const { toast } = useToast()
   const router = useRouter()
 
-  // const getUsers = async () => {
-  //   setIsLoading(true)
-  //   try {
-  //     const res = await getUsersRequest()
-  //     setUsers(res.data)
-  //     setIsLoading(false)
-  //   } catch (error) {
-  //     console.error('Error fetching users:', error)
-  //   }
-  // }
+  const getUsers = async () => {
+    setIsLoading(true)
+    try {
+      const res = await getUsersRequest()
+      setUsers(res.data)
+    } catch (error: any) {
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title: 'Ha ocurrido un error al intentar obtener los usuarios! Por favor intentalo más tarde.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+      console.error('Error fetching users:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
-  // const getOneUserByEmail = async (email: string) => {
-  //   try {
-  //     setIsLoading(true)
-  //     const res = await getOneUserByEmailRequest(email)
-  //     setIsLoading(false)
-  //     return res.data
-  //   } catch (error) {
-  //     console.error('Error fetching user:', error)
-  //   }
-  // }
+  const getOneUserByEmail = async (email: string) => {
+    try {
+      setIsLoading(true)
+      const res = await getOneUserByEmailRequest(email)
+      return res.data
+    } catch (error) {
+      console.error('Error fetching user:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const getOneUserByRole = async (role: string) => {
+    try {
+      setIsLoading(true)
+      const res = await getUsersByRoleRequest(role)
+      return res.data
+    } catch (error) {
+      console.error('Error fetching user:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   // const getOneUser = async (id: string) => {
   //   try {
@@ -146,10 +174,11 @@ export function useUser() {
     setIsLoading,
     createUser,
     updatePasswordUser,
+    getUsers,
+    getOneUserByRole,
+    getOneUserByEmail,
     // deleteUser,
     // updateUser,
-    // getOneUserByEmail,
     // getOneUser,
-    // getUsers,
   }
 }

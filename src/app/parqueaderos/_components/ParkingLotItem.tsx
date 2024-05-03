@@ -37,7 +37,7 @@ const ParkingLotItem = ({
     <div
       className={`duration-500 border ${
         isSelected
-          ? 'bg-yellowFPC-200 border-primary text-black'
+          ? 'bg-blueFPC-400 border-primary text-white'
           : 'border-transparent hover:bg-muted'
       }`}
       key={id}
