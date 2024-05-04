@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 
-export function EditUserDialog({ user }: { user: UserInterface }) {
+export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
   const router = useRouter()
   const { updateUser, isLoading } = useUser()
   const {
@@ -56,7 +56,7 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
     router.refresh()
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     setValue('firstName', user.firstName)
     if (user?.secondName) setValue('secondName', user.secondName)
     setValue('firstLastname', user.firstLastname)

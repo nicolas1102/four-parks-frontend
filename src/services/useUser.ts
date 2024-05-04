@@ -7,6 +7,7 @@ import {
   getUsersByRoleRequest,
   // getOneUserRequest,
   getUsersRequest,
+  unblockUserAccountRequest,
   // updateUserRequest,
   updatePasswordUserRequest,
   updateUserRequest,
@@ -103,7 +104,7 @@ export function useUser() {
 
   const updatePasswordUser = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {
     console.log('goku');
-    
+
     try {
       setIsLoading(true)
       const res = await updatePasswordUserRequest(
@@ -136,7 +137,7 @@ export function useUser() {
       setIsLoading(false)
     }
   }
-  
+
   const updateUser = async (user: UserInterface) => {
     setIsLoading(true)
     try {
@@ -165,14 +166,14 @@ export function useUser() {
     } finally {
       setIsLoading(false)
     }
-  //   try {
-  //     setIsLoading(true)
-  //     const res = await updateUserRequest(id, user)
-  //     setIsLoading(false)
-  //     return res
-  //   } catch (error) {
-  //     console.error('Error updating user:', error)
-  //   }
+    //   try {
+    //     setIsLoading(true)
+    //     const res = await updateUserRequest(id, user)
+    //     setIsLoading(false)
+    //     return res
+    //   } catch (error) {
+    //     console.error('Error updating user:', error)
+    //   }
   }
 
   // const getOneUser = async (id: string) => {
@@ -217,6 +218,36 @@ export function useUser() {
     }
   }
 
+  const unblockUserAccount = async (email: string, token: string) => {
+    setIsLoading(true)
+    try {
+      const res = await unblockUserAccountRequest(email, token)
+      setIsLoading(false)
+      toast({
+        title: 'Se activo la cuenta del usuario con éxito!',
+        description: '',
+      })
+      return res
+    } catch (error: any) {      
+      console.error('Error activating user account:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title: 'No se pudo activar la cuenta del usuario. Por favor intentalo de nuevo.',
+          description: error.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return {
     users,
     isLoading,
@@ -229,5 +260,6 @@ export function useUser() {
     deleteUser,
     updateUser,
     // getOneUser,
+    unblockUserAccount,
   }
 }

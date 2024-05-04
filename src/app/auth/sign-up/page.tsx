@@ -4,7 +4,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ArrowLeft } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, MONTH_OPTIONS, YEAR_OPTIONS } from '@/lib/utils'
 import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -22,72 +22,6 @@ import { useUser } from '@/services/useUser'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect } from 'react'
 import { CreditCard } from '@/lib/interfaces/creditCard.model'
-
-interface MonthOption {
-  value: string
-  label: string // Optional label for accessibility
-}
-
-const monthOptions: MonthOption[] = [
-  {
-    value: '01',
-    label: '01',
-  },
-  {
-    value: '02',
-    label: '02',
-  },
-  {
-    value: '03',
-    label: '03',
-  },
-  {
-    value: '04',
-    label: '04',
-  },
-  {
-    value: '05',
-    label: '05',
-  },
-  {
-    value: '06',
-    label: '06',
-  },
-  {
-    value: '07',
-    label: '07',
-  },
-  {
-    value: '08',
-    label: '08',
-  },
-  {
-    value: '09',
-    label: '09',
-  },
-  {
-    value: '10',
-    label: '10',
-  },
-  {
-    value: '11',
-    label: '11',
-  },
-  {
-    value: '12',
-    label: '12',
-  },
-]
-
-interface YearOption {
-  value: number
-  label: string // Optional label for accessibility
-}
-
-const YearOptions: YearOption[] = Array.from({ length: 10 }, (_, i) => ({
-  value: i + 24,
-  label: (i + 24).toString(), // Optional label for clarity
-}))
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -255,7 +189,7 @@ const Page = () => {
                     className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
                     {...register('expirationMonth')}
                   >
-                    {monthOptions.map((option) => (
+                    {MONTH_OPTIONS.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
@@ -273,7 +207,7 @@ const Page = () => {
                     className='flex h-10 w-full items-center justify-between rounded-md border border-blueFPC-400 bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 text-center  tracking-widest p-3'
                     {...register('expirationYear')}
                   >
-                    {YearOptions.map((option) => (
+                    {YEAR_OPTIONS.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>

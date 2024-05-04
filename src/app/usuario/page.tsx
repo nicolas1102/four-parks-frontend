@@ -5,8 +5,9 @@ import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useUser } from '@/services/useUser'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { EditUserDialog } from './_components/EditUserDialog'
+import { EditPersonalInfoUserDialog } from './_components/EditPersonalInfoUserDialog'
 import { EditPasswordUserDialog } from './_components/EditPasswordUserDialog'
+import { EditCreditCardUserDialog } from './_components/EditCreditCardUserDialog'
 
 export default function Home() {
   const { data: session } = useSession()
@@ -101,7 +102,7 @@ export default function Home() {
 
               {session?.rol === 'USUARIO' && (
                 <div className='col-span-1 pt-8 flex flex-row justify-end'>
-                  <EditUserDialog user={user} />
+                  <EditPersonalInfoUserDialog user={user} />
                 </div>
               )}
             </div>
@@ -141,7 +142,7 @@ export default function Home() {
                     </ul>
                   </div>
                   <div className='col-span-1 pt-8 flex flex-row justify-end'>
-                    {/* <EditCreditCardUserDialog user={user} /> */}
+                    <EditCreditCardUserDialog user={user} />
                   </div>
                 </div>
 

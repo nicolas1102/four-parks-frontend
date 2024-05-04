@@ -25,13 +25,15 @@ import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useState } from 'react'
 import { useUser } from '@/services/useUser'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
-  const { deleteUser } = useUser()
+  const { deleteUser, unblockUserAccount } = useUser()
+  const { data: session } = useSession()
 
   const columns: ColumnDef<UserInterface>[] = [
     {
@@ -197,14 +199,17 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
       cell: ({ row }) => {
         const user = row.original as any
         // TODO: Arreglar esto
-        return <div className='capitalize text-center'>{user.roles[0].roleEnum}</div>
+        return (
+          <div className='capitalize text-center'>{user.roles[0].roleEnum}</div>
+        )
       },
     },
     {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const user = row.original
+        // TODO: Arreglar esto
+        const user = row.original as any
 
         return (
           <DropdownMenu>
@@ -223,12 +228,24 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
               >
                 Copiar ID de usuario
               </DropdownMenuItem>
+              {user.roles[0].roleEnum === 'USUARIO' && user.accountBlocked && (
+                // {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
+                <DropdownMenuItem
+                  onClick={() => {
+                    if (session) unblockUserAccount(user.email, session?.jwt)
+                  }}
+                  className='bg-yellowFPC-200'
+                >
+                  <span>Desbloquear cuenta</span>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link href={`/admin/usuarios/form?email=${user?.email}`}>
                   Editar usuario
                 </Link>
               </DropdownMenuItem>
+
               <DropdownMenuItem
                 onClick={() => {
                   if (user?.email) deleteUser(user?.email)

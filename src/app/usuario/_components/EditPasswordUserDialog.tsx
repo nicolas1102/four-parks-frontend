@@ -45,15 +45,13 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
     newPassword,
     confirmPassword,
   }: TChangePasswordCredentialsValidator) => {
-    console.log('gokasdf')
-
-    await updatePasswordUser(
+    const res = await updatePasswordUser(
       email,
       oldPassword,
       newPassword,
       confirmPassword
     )
-    // if() signOut()
+    if(res?.status === 200) signOut()
   }
 
   useEffect(() => {

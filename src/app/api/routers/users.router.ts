@@ -43,11 +43,23 @@ export const getOneUserByEmailRequest = async (email: string) => {
 // }
 
 export const updateUserRequest = async (User: UserInterface) => {
-  const res = await axios.put(baseURL + '/users/modifyUser/', User)
+  const res = await axios.put(baseURL + '/users/modifyUser', User)
   return res
 }
 
 export const deleteUserRequest = async (email: string) => {
   const res = await axios.get(baseURL + `/users/deleteUser/${email}`)
+  return res
+}
+
+export const unblockUserAccountRequest = async (email: string, token: string) => {  
+  console.log(token);
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };  
+  const res = await axios.post(baseURL + '/auth/unlock', email, config)
   return res
 }
