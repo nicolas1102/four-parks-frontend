@@ -1,1 +1,1 @@
-export type RoleType = 'USUARIO' | 'GERENTE' | 'FUNCIONARIO'
+export type RoleType = 'USUARIO' | 'GERENTE' | 'ADMINISTRADOR'

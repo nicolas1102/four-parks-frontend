@@ -42,13 +42,12 @@ export const getOneUserByEmailRequest = async (email: string) => {
 //   return res
 // }
 
-// export const updateUserRequest = async (id: string, User: UserInterface) => {
-//   const res = await axios.put(baseURL + `/usuarios/${id}`, User)
-//   return res
-// }
+export const updateUserRequest = async (User: UserInterface) => {
+  const res = await axios.put(baseURL + '/users/modifyUser/', User)
+  return res
+}
 
-
-export const deleteUserRequest = async (email: string) => {  
+export const deleteUserRequest = async (email: string) => {
   const res = await axios.get(baseURL + `/users/deleteUser/${email}`)
   return res
 }

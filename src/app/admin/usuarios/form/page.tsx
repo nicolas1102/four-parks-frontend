@@ -62,7 +62,7 @@ const Page = () => {
       secondName,
       firstLastname,
       secondLastname,
-      roleList: ['FUNCIONARIO'],
+      roleList: ['ADMINISTRADOR'],
     } as UserInterface
     await createUser(userData)
   }
@@ -70,8 +70,13 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (email) {
-        const res = await getOneUserByEmail(email)
-        setValue('email', email)
+        const userData = await getOneUserByEmail(email)         
+        setValue('email', userData.email)
+        setValue('firstName', userData.firstName)
+        setValue('secondName', userData?.secondName)
+        setValue('firstLastname', userData.firstLastname)
+        setValue('secondLastname', userData.secondLastname)
+        // setValue('parking', firstLastname)
       }
     }
     fetchData()
@@ -87,7 +92,7 @@ const Page = () => {
             <Icons.logo className='text-blueFPC-400' />
           </div>
           <h1 className='text-2xl tracking-widest p-3'>
-            {email ? 'EDITAR USUARIO' : 'CREAR FUNCIONARIO'}
+            {email ? 'EDITAR USUARIO' : 'CREAR ADMINISTRADOR'}
           </h1>
           <p className='text-sm tracking-wider'>
             Por favor llena todos los campos.{' '}
@@ -192,7 +197,7 @@ const Page = () => {
                   </p>
                 )}
               </div>
-              <PrimaryButton text={'CREAR FUNCIONARIO'} isLoading={isLoading} />
+              <PrimaryButton text={'CREAR ADMINISTRADOR'} isLoading={isLoading} />
             </div>
           </form>
         </div>

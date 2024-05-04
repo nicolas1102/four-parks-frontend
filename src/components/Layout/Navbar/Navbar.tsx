@@ -10,7 +10,7 @@ import { Session } from 'next-auth'
 
 const Navbar = () => {
   // const session = await getServerSession(OPTIONS)
-  const { data: session } = useSession()
+  const { data: session } = useSession() 
 
   return (
     <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
@@ -39,9 +39,9 @@ const Navbar = () => {
               <span className='border-l border-primary'></span>
             </>
           )}
-          {session?.rol === 'FUNCIONARIO' && (
+          {session?.rol === 'ADMINISTRADOR' && (
             <>
-              <NavItem title='MENU FUNCIONARIOS' link='/admin' />
+              <NavItem title='MENU ADMINISTRADOR' link='/admin' />
               <span className='border-l border-primary'></span>
             </>
           )}

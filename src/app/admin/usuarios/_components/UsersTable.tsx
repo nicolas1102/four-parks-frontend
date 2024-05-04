@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -20,15 +19,6 @@ import {
 } from '@/components/ui/table'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import UsersTableColumns from '../_lib/UsersTableColumns'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 
 export function UsersTable({ data }: { data: UserInterface[] }) {
   const { table, columns } = UsersTableColumns({ data })
@@ -52,7 +42,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
           }
           className='max-w-sm mr-2 border border-blueFPC-400'
         />
-        
+
         {/* <Input
           placeholder='Filtrar por rol'
           value={(table.getColumn('role')?.getFilterValue() as string) ?? ''}
@@ -76,7 +66,7 @@ export function UsersTable({ data }: { data: UserInterface[] }) {
                 <SelectLabel>Roles</SelectLabel>
                 <SelectItem value='.'>Cualquiera</SelectItem>
                 <SelectItem value='Usuario'>Usuario</SelectItem>
-                <SelectItem value='Funcionario'>Funcionario</SelectItem>
+                <SelectItem value='Administrador'>Administrador</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

@@ -133,8 +133,6 @@ const Page = () => {
     await createUser(userData)
   }
 
-  if (email) setValue('email', email)
-
   useEffect(() => {
     if (email) setValue('email', email)
   }, [email, setValue])

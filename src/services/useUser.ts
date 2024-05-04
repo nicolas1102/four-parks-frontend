@@ -9,6 +9,7 @@ import {
   getUsersRequest,
   // updateUserRequest,
   updatePasswordUserRequest,
+  updateUserRequest,
 } from '@/app/api/routers/users.router'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useState } from 'react'
@@ -101,6 +102,8 @@ export function useUser() {
   }
 
   const updatePasswordUser = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {
+    console.log('goku');
+    
     try {
       setIsLoading(true)
       const res = await updatePasswordUserRequest(
@@ -134,7 +137,34 @@ export function useUser() {
     }
   }
   
-  // const updateUser = async (id: string, user: UserInterface) => {
+  const updateUser = async (user: UserInterface) => {
+    setIsLoading(true)
+    try {
+      const res = await updateUserRequest(user)
+      setIsLoading(false)
+      toast({
+        title: 'Se actualizó la información del usuario con éxito!',
+        description: '',
+      })
+      return res
+    } catch (error: any) {
+      console.error('Error deleting user:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title: 'No se pudo actualizar la información del usuario. Por favor intentalo de nuevo.',
+          description: error.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+    } finally {
+      setIsLoading(false)
+    }
   //   try {
   //     setIsLoading(true)
   //     const res = await updateUserRequest(id, user)
@@ -143,7 +173,7 @@ export function useUser() {
   //   } catch (error) {
   //     console.error('Error updating user:', error)
   //   }
-  // }
+  }
 
   // const getOneUser = async (id: string) => {
   //   try {
@@ -197,7 +227,7 @@ export function useUser() {
     getOneUserByRole,
     getOneUserByEmail,
     deleteUser,
-    // updateUser,
+    updateUser,
     // getOneUser,
   }
 }
