@@ -37,7 +37,9 @@ interface UserContextType {
   ) => Promise<AxiosResponse<UserInterface>>
   getUsers: () => Promise<void>
   getUsersByRole: (role: string) => Promise<UserInterface[]>
-  getOneUserByEmail: (email: string) => Promise<AxiosResponse<UserInterface>>
+  getOneUserByEmail: (
+    email: string
+  ) => Promise<AxiosResponse<UserInterface> | UserInterface>
   updateUser: (user: UserInterface) => Promise<AxiosResponse<UserInterface>>
   deleteUser: (email: string) => Promise<AxiosResponse<UserInterface>>
   unblockUserAccount: (
@@ -92,7 +94,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneUserByEmailRequest(email)
-      return res.data
+      return res.data as UserInterface
     } catch (error) {
       console.error('Error fetching user:', error)
     } finally {
@@ -191,9 +193,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
       setUsers((prevUsers) => {
         const userIndex = prevUsers.findIndex(
           (userItem) => userItem.email === user.email
-        ) 
-        const updatedUsers = [...prevUsers] 
-        updatedUsers[userIndex] = user 
+        )
+        const updatedUsers = [...prevUsers]
+        updatedUsers[userIndex] = user
         return updatedUsers
       })
       toast({

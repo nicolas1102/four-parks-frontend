@@ -51,12 +51,17 @@ export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
       secondLastname,
       roleList: ['USUARIO'],
     } as UserInterface
-    // await updatePersonalInfoUser(userData)
-    console.log(userData)
-    router.refresh()
+    const res = await updateUser(userData)
+    if (res.status === 200) {
+      user.email = userData.email
+      user.firstName = userData.firstName
+      user.secondName = userData.secondName
+      user.firstLastname = userData.firstLastname
+      user.secondLastname = userData.secondLastname
+    }
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     setValue('firstName', user.firstName)
     if (user?.secondName) setValue('secondName', user.secondName)
     setValue('firstLastname', user.firstLastname)

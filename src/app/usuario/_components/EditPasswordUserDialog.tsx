@@ -33,7 +33,7 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm<TChangePasswordCredentialsValidator>({
     resolver: zodResolver(ChangePasswordCredentialsValidator),
   })
@@ -51,7 +51,9 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
       newPassword,
       confirmPassword
     )
-    if(res?.status === 200) signOut()
+    if (res?.status === 200) {
+      signOut()
+    }
   }
 
   useEffect(() => {

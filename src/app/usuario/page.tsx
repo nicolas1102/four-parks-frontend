@@ -16,7 +16,8 @@ export default function Home() {
 
   useEffect(() => {
     const fetchUser = async (email: string) => {
-      setUser(await getOneUserByEmail(email))
+      const userData = await getOneUserByEmail(email)
+      if (userData !== null) setUser(userData as UserInterface)
     }
     if (session) {
       fetchUser(session.email)

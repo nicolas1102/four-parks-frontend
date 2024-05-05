@@ -34,8 +34,6 @@ export const getUsersByRoleRequest = async (role: string) => {
 
 export const getOneUserByEmailRequest = async (email: string) => {
   const res = await axios.get(baseURL + `/users/getOneUser/${email}`)
-  console.log(res);
-  
   return res;
 };
 
@@ -49,6 +47,7 @@ export const updateUserRequest = async (user: UserInterface) => {
   return res 
 }
 
+// TODO: Terminar
 export const deleteUserRequest = async (email: string) => {
   const res = await axios.get(baseURL + `/users/deleteUser/${email}`)
   return res

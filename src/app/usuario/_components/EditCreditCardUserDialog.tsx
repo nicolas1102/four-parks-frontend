@@ -58,9 +58,10 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
       roleList: ['USUARIO'],
       creditCard: creditCardData,
     } as UserInterface
-    // await updateUser(userData)
-    console.log(userData)
-    router.refresh()
+    const res = await updateUser(userData)
+    if (res.status === 200) {
+      user.creditCard = creditCardData
+    }
   }
 
   useEffect(() => {
@@ -157,10 +158,10 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
               </div>
             </div>
             {/* <DialogClose asChild> */}
-              <PrimaryButton
-                text={'CONFIRMAR DATOS PERSONALES'}
-                isLoading={isLoading}
-              />
+            <PrimaryButton
+              text={'CONFIRMAR DATOS PERSONALES'}
+              isLoading={isLoading}
+            />
             {/* </DialogClose> */}
           </div>
         </form>
