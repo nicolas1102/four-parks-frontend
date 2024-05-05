@@ -3,23 +3,36 @@
 import { User as UserIcons } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { UsersTable } from './_components/UsersTable'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import { CreateAdminDialog } from './_components/CreateAdminDialog'
 
 const Page = () => {
   const { users, isLoading, getUsersByRole, setUsers } = useUser()
+  const [role, setRole] = useState('ALL')
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const mangersData = await getUsersByRole('2')
-      const usersData = await getUsersByRole('3')
-      if (mangersData.length > 0 || usersData.length > 0) {
-        setUsers([...mangersData, ...usersData])
+      if (role === 'ALL') {
+        const mangersData = await getUsersByRole('2')
+        const usersData = await getUsersByRole('3')
+        if (mangersData.length > 0 || usersData.length > 0) {
+          setUsers([...mangersData, ...usersData])
+        }
+      } else if (role === 'USUARIO') {
+        const usersData = await getUsersByRole('3')
+        if (usersData.length > 0) {
+          setUsers([...usersData])
+        }
+      } else {
+        const mangersData = await getUsersByRole('2')
+        if (mangersData.length > 0) {
+          setUsers([...mangersData])
+        }
       }
     }
     fetchUsers()
-  }, [])
+  }, [role])
 
   return (
     <div className=' flex flex-col relative m-10'>
@@ -43,7 +56,7 @@ const Page = () => {
               Gestiona todos los usuarios.
             </p>
           </div>
-          <UsersTable data={users} />
+          <UsersTable data={users} role={role} setRole={setRole} />
         </>
       )}
     </div>

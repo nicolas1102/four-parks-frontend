@@ -311,7 +311,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
         getOneUserByEmail,
         deleteUser,
         updateUser,
-        // getOneUser,
         unblockUserAccount,
       }}
     >

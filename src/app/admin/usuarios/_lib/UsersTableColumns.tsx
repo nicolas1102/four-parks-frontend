@@ -200,7 +200,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
       },
       cell: ({ row }) => {
         const user = row.original
-        return <div className='capitalize text-center'>{user.roleList[0]}</div>
+        return <div className='capitalize text-center'>{'USUARIO'}</div>
       },
     },
     {

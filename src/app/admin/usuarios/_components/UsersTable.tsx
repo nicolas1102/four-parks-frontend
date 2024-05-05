@@ -19,58 +19,24 @@ import {
 } from '@/components/ui/table'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import UsersTableColumns from '../_lib/UsersTableColumns'
+import { useState } from 'react'
+import { UserFiltersDialog } from './UserFiltersDialog'
 
-export function UsersTable({ data }: { data: UserInterface[] }) {
+export function UsersTable({
+  data,
+  role,
+  setRole,
+}: {
+  data: UserInterface[]
+  role: string
+  setRole: (role: string) => void
+}) {
   const { table, columns } = UsersTableColumns({ data })
 
   return (
-    <div className='w-full'>
+    <div className='w-full gap-2'>
       <div className='flex items-center py-4'>
-        <Input
-          placeholder='Filtrar por ID'
-          value={(table.getColumn('id')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('id')?.setFilterValue(event.target.value)
-          }
-          className='max-w-sm mr-2 border border-blueFPC-400'
-        />
-        <Input
-          placeholder='Filtrar por email'
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
-          }
-          className='max-w-sm mr-2 border border-blueFPC-400'
-        />
-
-        {/* <Input
-          placeholder='Filtrar por rol'
-          value={(table.getColumn('role')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('role')?.setFilterValue(event.target.value)
-          }
-          className='max-w-sm mr-2 border border-blueFPC-400'
-        /> */}
-        {/* <div className='grid gap-1 py-2'>
-          <Select
-            onValueChange={(value) => {
-              table.getColumn('rol')?.setFilterValue(value)
-            }}
-            value={(table.getColumn('rol')?.getFilterValue() as string) ?? ''}
-          >
-            <SelectTrigger className='w-[180px] border border-blueFPC-400'>
-              <SelectValue placeholder='Filtrar por Rol' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Roles</SelectLabel>
-                <SelectItem value='.'>Cualquiera</SelectItem>
-                <SelectItem value='Usuario'>Usuario</SelectItem>
-                <SelectItem value='Administrador'>Administrador</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div> */}
+        <UserFiltersDialog table={table} role={role} setRole={setRole}/>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
