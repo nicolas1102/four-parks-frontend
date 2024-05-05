@@ -44,7 +44,7 @@ interface UserContextType {
   ) => Promise<UserInterface | undefined> | UserInterface
   updateUser: (
     user: UserInterface
-  ) => Promise<AxiosResponse<any, any> | undefined>
+  ) => Promise<AxiosResponse<UserInterface, any> | undefined>
   deleteUser: (email: string) => Promise<AxiosResponse<any, any> | undefined>
   unblockUserAccount: (
     email: string,
@@ -206,7 +206,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         title: 'Se actualizó la información del usuario con éxito!',
         description: '',
       })
-      return res
+      return res as AxiosResponse<any, any>
     } catch (error: any) {
       console.error('Error deleting user:', error)
       if (error?.response?.data) {

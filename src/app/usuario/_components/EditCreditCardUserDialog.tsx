@@ -23,6 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { cn, MONTH_OPTIONS, YEAR_OPTIONS } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { CreditCard } from '@/lib/interfaces/creditCard.model'
+import { AxiosResponse } from 'axios'
 
 export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
   const router = useRouter()
@@ -58,7 +59,7 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
       roleList: ['USUARIO'],
       creditCard: creditCardData,
     } as UserInterface
-    const res = await updateUser(userData)
+    const res = (await updateUser(userData)) as AxiosResponse
     if (res.status === 200) {
       user.creditCard = creditCardData
     }

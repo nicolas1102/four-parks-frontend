@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import { AxiosResponse } from 'axios'
 
 export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
   const router = useRouter()
@@ -51,7 +52,7 @@ export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
       secondLastname,
       roleList: ['USUARIO'],
     } as UserInterface
-    const res = await updateUser(userData)
+    const res = (await updateUser(userData)) as AxiosResponse
     if (res.status === 200) {
       user.email = userData.email
       user.firstName = userData.firstName
