@@ -185,22 +185,30 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
         </div>
       ),
     },
+    // {
+    //   accessorKey: 'role',
+    //   header: ({ column }) => {
+    //     return (
+    //       <Button
+    //         variant='ghost'
+    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    //       >
+    //         Rol
+    //         <ArrowUpDown className='ml-2 h-4 w-4' />
+    //       </Button>
+    //     )
+    //   },
+    //   cell: ({ row }) => {
+    //     const user = row.original
+    //     return <div className='capitalize text-center'>{'USUARIO'}</div>
+    //   },
+    // },
     {
       accessorKey: 'role',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant='ghost'
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Rol
-            <ArrowUpDown className='ml-2 h-4 w-4' />
-          </Button>
-        )
-      },
+      header: 'Rol',
       cell: ({ row }) => {
         const user = row.original
-        return <div className='capitalize text-center'>{'USUARIO'}</div>
+        return <div className=''>{user.roleList[0]}</div>
       },
     },
     {
@@ -228,7 +236,6 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                   Copiar ID de usuario
                 </DropdownMenuItem>
                 {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
-                  // {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
                   <DropdownMenuItem
                     onClick={() => {
                       if (session) unblockUserAccount(user.email, session?.jwt)

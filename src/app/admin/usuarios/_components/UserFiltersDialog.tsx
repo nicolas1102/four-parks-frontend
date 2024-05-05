@@ -147,7 +147,7 @@ export function UserFiltersDialog({
             </div>
           </div>
 
-          <Separator lineColor='border-yellowFPC-400' />
+          <Separator lineColor='border-blueFPC-400' coneColor='text-blueFPC-400' />
 
           <div className='grid gap-2 justify-around grid-cols-3'>
             <div className='grid gap-1 py-2'>

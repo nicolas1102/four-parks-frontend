@@ -1,4 +1,5 @@
 'use client'
+
 import { flexRender } from '@tanstack/react-table'
 import { ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -36,7 +37,7 @@ export function UsersTable({
   return (
     <div className='w-full gap-2'>
       <div className='flex items-center py-4'>
-        <UserFiltersDialog table={table} role={role} setRole={setRole}/>
+        <UserFiltersDialog table={table} role={role} setRole={setRole} />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -44,7 +45,8 @@ export function UsersTable({
               variant='outline'
               className='ml-auto border border-blueFPC-400'
             >
-              Columnas <ChevronDown className='ml-2 h-4 w-4' />
+              <p className='tracking-widest'>COLUMNAS </p>
+              <ChevronDown className='ml-2 h-4 w-4' />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
