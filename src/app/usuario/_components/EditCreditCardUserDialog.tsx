@@ -4,7 +4,6 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -17,9 +16,7 @@ import { useEffect } from 'react'
 import { useUser } from '@/services/useUser'
 import {
   EditCreditCardValidator,
-  EditPersonalInfoValidator,
   TEditCreditCardValidator,
-  TEditPersonalInfoValidator,
 } from '@/lib/validators/user-validators'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -62,7 +59,8 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
       creditCard: creditCardData,
     } as UserInterface
     // await updateUser(userData)
-    // router.refresh()
+    console.log(userData)
+    router.refresh()
   }
 
   useEffect(() => {
@@ -158,18 +156,12 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
                 )}
               </div>
             </div>
-            <PrimaryButton
-              text={'CONFIRMAR DATOS DE TARJETA'}
-              isLoading={isLoading}
-            />
-            {/* <DialogFooter className='sm:justify-start'>
-              <DialogClose asChild>
-                <PrimaryButton
-                  text={'CONFIRMAR DATOS PERSONALES'}
-                  isLoading={isLoading}
-                />
-              </DialogClose>
-            </DialogFooter> */}
+            {/* <DialogClose asChild> */}
+              <PrimaryButton
+                text={'CONFIRMAR DATOS PERSONALES'}
+                isLoading={isLoading}
+              />
+            {/* </DialogClose> */}
           </div>
         </form>
       </DialogContent>

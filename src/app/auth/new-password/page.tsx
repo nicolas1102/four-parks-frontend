@@ -37,7 +37,7 @@ export default function Page() {
     <div className=' relative flex flex-col items-center gap-2 m-10'>
       <FloatingButton text='PANTALLA DE INICIO' href='/' direction='left' />
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-primary p-5 bg-background-contrast'>
+      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-yellowFPC-400 p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
           <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
             <Icons.logo className='text-yellowFPC-400' />
@@ -60,7 +60,7 @@ export default function Page() {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                   {...register('email')}
-                  className={cn('border-primary', {
+                  className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.email,
                   })}
                   placeholder='youremail@example.com'
@@ -74,7 +74,7 @@ export default function Page() {
                 <Input
                   {...register('oldPassword')}
                   type='password'
-                  className={cn('border-primary', {
+                  className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.oldPassword,
                   })}
                   placeholder='•••••••'
@@ -86,14 +86,14 @@ export default function Page() {
                 )}
               </div>
 
-              <Separator />
+              <Separator lineColor='border-yellowFPC-400' />
 
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='newPassword'>Nueva Contraseña</Label>
                 <Input
                   {...register('newPassword')}
                   type='password'
-                  className={cn('border-primary', {
+                  className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.newPassword,
                   })}
                   placeholder='•••••••'
@@ -109,7 +109,7 @@ export default function Page() {
                 <Input
                   {...register('confirmPassword')}
                   type='password'
-                  className={cn('border-primary', {
+                  className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.confirmPassword,
                   })}
                   placeholder='•••••••'

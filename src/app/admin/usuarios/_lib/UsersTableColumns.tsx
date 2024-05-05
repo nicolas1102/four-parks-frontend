@@ -22,10 +22,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { UserInterface } from '@/lib/interfaces/user.interface'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { EditUserDialog } from '../_components/EditUserDialog'
+import { Dialog } from '@/components/ui/dialog'
 
 const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -197,66 +199,63 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
         )
       },
       cell: ({ row }) => {
-        const user = row.original as any
-        // TODO: Arreglar esto
-        return (
-          <div className='capitalize text-center'>{user.roles[0].roleEnum}</div>
-        )
+        const user = row.original
+        return <div className='capitalize text-center'>{user.roleList[0]}</div>
       },
     },
     {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        // TODO: Arreglar esto
-        const user = row.original as any
-
+        const user = row.original
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='outline' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Abrir Menu</span>
-                <MoreHorizontal className='h-4 w-4' />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => {
-                  if (user?.id) navigator.clipboard.writeText(user.id)
-                }}
-              >
-                Copiar ID de usuario
-              </DropdownMenuItem>
-              {user.roles[0].roleEnum === 'USUARIO' && user.accountBlocked && (
-                // {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
+          <Dialog>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant='outline' className='h-8 w-8 p-0'>
+                  <p className='sr-only'>Abrir Menu</p>
+                  <MoreHorizontal className='h-4 w-4' />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent sideOffset={5}>
+                <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                <DropdownMenuItem
+                  className='cursor-pointer'
+                  onClick={() => {
+                    if (user?.id) navigator.clipboard.writeText(user.id)
+                  }}
+                >
+                  Copiar ID de usuario
+                </DropdownMenuItem>
+                {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
+                  // {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
+                  <DropdownMenuItem
+                    onClick={() => {
+                      if (session) unblockUserAccount(user.email, session?.jwt)
+                    }}
+                    className='bg-yellowFPC-200'
+                  >
+                    <span>Desbloquear cuenta</span>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+                <div className='relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-muted'>
+                  <EditUserDialog user={user} />
+                </div>
+
                 <DropdownMenuItem
                   onClick={() => {
-                    if (session) unblockUserAccount(user.email, session?.jwt)
+                    if (user?.email) deleteUser(user?.email)
                   }}
-                  className='bg-yellowFPC-200'
+                  className='cursor-pointer'
                 >
-                  <span>Desbloquear cuenta</span>
+                  <span className='text-red-600 font-medium'>
+                    Eliminar Usuario
+                  </span>
                 </DropdownMenuItem>
-              )}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href={`/admin/usuarios/form?email=${user?.email}`}>
-                  Editar usuario
-                </Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem
-                onClick={() => {
-                  if (user?.email) deleteUser(user?.email)
-                }}
-              >
-                <span className='text-red-600 font-medium'>
-                  Eliminar Usuario
-                </span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </Dialog>
         )
       },
     },

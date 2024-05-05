@@ -22,11 +22,11 @@ const Navbar = () => {
       <div className='flex flex-row justify-between w-full p-1 content-center gap-2'>
         <div className='flex flex-row px-4'>
           <Link href='/' className='flex flex-row justify-center'>
-            <p className='text-4xl font-medium tracking-wider text-center text-primary  pr-2'>
+            <p className='text-5xl font-medium tracking-wider text-center text-primary  pr-2'>
               FOUR
             </p>
-            <Icons.logo className=' w-11 h-11 text-yellow-400 hover:-rotate-45 transition-all' />
-            <p className=' text-4xl font-medium tracking-wider text-center text-primary '>
+            <Icons.logo className=' w-[48px] h-[48px] text-yellow-400 hover:-rotate-45 transition-all' />
+            <p className=' text-5xl font-medium tracking-wider text-center text-primary '>
               ARKS
             </p>
           </Link>

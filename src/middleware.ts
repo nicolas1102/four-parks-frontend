@@ -39,8 +39,8 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/admin/:path*",
-    '/parqueaderos/:path*',
+    // "/admin/:path*",
+    // '/parqueaderos/:path*',
     '/usuario'
   ]
 };

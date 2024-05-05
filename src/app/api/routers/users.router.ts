@@ -33,7 +33,9 @@ export const getUsersByRoleRequest = async (role: string) => {
 }
 
 export const getOneUserByEmailRequest = async (email: string) => {
-  const res = await axios.get(baseURL + `/users/getOneUser/${email}`);
+  const res = await axios.get(baseURL + `/users/getOneUser/${email}`)
+  console.log(res);
+  
   return res;
 };
 
@@ -42,9 +44,9 @@ export const getOneUserByEmailRequest = async (email: string) => {
 //   return res
 // }
 
-export const updateUserRequest = async (User: UserInterface) => {
-  const res = await axios.put(baseURL + '/users/modifyUser', User)
-  return res
+export const updateUserRequest = async (user: UserInterface) => {
+  const res = await axios.post(baseURL + '/users/modifyUser', user)
+  return res 
 }
 
 export const deleteUserRequest = async (email: string) => {
@@ -52,9 +54,8 @@ export const deleteUserRequest = async (email: string) => {
   return res
 }
 
-export const unblockUserAccountRequest = async (email: string, token: string) => {  
-  console.log(token);
-  
+// TODO: Terminar
+export const unblockUserAccountRequest = async (email: string, token: string) => {    
   const config = {
     headers: {
       Authorization: `Bearer ${token}`

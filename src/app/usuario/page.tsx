@@ -28,7 +28,7 @@ export default function Home() {
         <Loader />
       ) : (
         <div className='max-h-full m-auto flex flex-col gap-y-5 p-10'>
-          <div className='border  p-10 w-[1000px] border-yellowFPC-400 bg-yellowFPC-200'>
+          <div className='border  p-10 w-[1000px] border-blueFPC-400 bg-blueFPC-200'>
             <div>
               <h1 className='text-3xl tracking-widest font-medium pb-2'>
                 MI CUENTA
@@ -46,7 +46,7 @@ export default function Home() {
           </div>
 
           <div className='flex flex-row gap-5 flex-wrap max-w-[1000px]'>
-            <div className='border border-primary p-10 w-[490px]'>
+            <div className='p-10 w-[490px] border border-blueFPC-400'>
               <div className='col-span-1 row-span-1'>
                 <h2 className='tracking-widest text-xl pb-2'>CUENTA</h2>
                 <ul>
@@ -90,13 +90,13 @@ export default function Home() {
                       {user?.secondLastname}
                     </p>
                   </li>
-                  <li>
+                  {/* <li>
                     <p className='uppercase'>
                       <span className='font-medium tracking-widest'>Rol:</span>{' '}
-                      {/* TODO: Arreglar esta respuesta */}
-                      {/* {user?.roleList[0]} */}
+                      // TODO: Arreglar esta respuesta
+                      // {user?.roleList[0]}
                     </p>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 
@@ -109,7 +109,7 @@ export default function Home() {
 
             {session?.rol === 'USUARIO' && (
               <>
-                <div className='border border-primary p-10 w-[490px]'>
+                <div className='border border-blueFPC-400 p-10 w-[490px]'>
                   <div className='col-span-1 row-span-1'>
                     <h2 className='tracking-widest text-xl pb-2'>
                       TARJETA DE CRÉDITO
@@ -120,7 +120,7 @@ export default function Home() {
                           <span className='font-medium tracking-widest'>
                             Número de tarjeta:
                           </span>{' '}
-                          (valorcito)
+                          ••••••••••••••
                         </p>
                       </li>
                       <li>
@@ -128,7 +128,7 @@ export default function Home() {
                           <span className='font-medium tracking-widest'>
                             Fecha de expritación:
                           </span>{' '}
-                          (valorcito)
+                          ••••••••••••••
                         </p>
                       </li>
                       <li>
@@ -136,7 +136,7 @@ export default function Home() {
                           <span className='font-medium tracking-widest'>
                             CVV:
                           </span>{' '}
-                          (valorcito)
+                          ••••••••••••••
                         </p>
                       </li>
                     </ul>
@@ -146,7 +146,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className='border border-primary p-10 w-[490px]'>
+                <div className='border border-blueFPC-400 p-10 w-[490px]'>
                   <div className='col-span-1 row-span-1'>
                     <h2 className='tracking-widest text-xl pb-2'>CONTRASEÑA</h2>
                     <ul>

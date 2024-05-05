@@ -4,26 +4,26 @@ import { User as UserIcons } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { UsersTable } from './_components/UsersTable'
 import { useEffect } from 'react'
-import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import { useUser } from '@/services/useUser'
+import { CreateAdminDialog } from './_components/CreateAdminDialog'
 
 const Page = () => {
-  const { users, getUsers, isLoading } = useUser()
+  const { users, isLoading, getUsersByRole, setUsers } = useUser()
 
   useEffect(() => {
-    const fetchUsers = () => {
-      getUsers()
+    const fetchUsers = async () => {
+      const mangersData = await getUsersByRole('2')
+      const usersData = await getUsersByRole('3')
+      if (mangersData.length > 0 || usersData.length > 0) {
+        setUsers([...mangersData, ...usersData])
+      }
     }
     fetchUsers()
   }, [])
 
   return (
     <div className=' flex flex-col relative m-10'>
-      <FloatingButton
-        text='CREAR USUARIO'
-        direction='right'
-        href='/admin/usuarios/form'
-      />
+      <CreateAdminDialog />
 
       {isLoading ? (
         <Loader />
