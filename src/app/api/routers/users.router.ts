@@ -1,5 +1,5 @@
 import { UserInterface } from '@/lib/interfaces/user.interface'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 const baseURL = 'http://localhost:8080/api/v1'
 
@@ -14,7 +14,7 @@ export const getAuthorizedUserRequest = async (email: string, password: string) 
 
 export const createUsersRequest = async (user: UserInterface) => {
   const res = await axios.post(baseURL + '/auth/sign-up', user)
-  return res
+  return res as AxiosResponse
 }
 
 export const updatePasswordUserRequest = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {

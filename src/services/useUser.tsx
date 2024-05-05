@@ -28,24 +28,28 @@ interface UserContextType {
   setUsers: Dispatch<SetStateAction<UserInterface[]>>
   isLoading: boolean
   setIsLoading: (isLoading: boolean) => void
-  createUser: (user: UserInterface) => Promise<AxiosResponse<UserInterface>>
+  createUser: (
+    user: UserInterface
+  ) => Promise<AxiosResponse<any, any> | undefined>
   updatePasswordUser: (
     email: string,
     oldPassword: string,
     newPassword: string,
     confirmPassword: string
-  ) => Promise<AxiosResponse<UserInterface>>
+  ) => Promise<AxiosResponse<any, any> | undefined>
   getUsers: () => Promise<void>
   getUsersByRole: (role: string) => Promise<UserInterface[]>
   getOneUserByEmail: (
     email: string
-  ) => Promise<AxiosResponse<UserInterface> | UserInterface>
-  updateUser: (user: UserInterface) => Promise<AxiosResponse<UserInterface>>
-  deleteUser: (email: string) => Promise<AxiosResponse<UserInterface>>
+  ) => Promise<UserInterface | undefined> | UserInterface
+  updateUser: (
+    user: UserInterface
+  ) => Promise<AxiosResponse<any, any> | undefined>
+  deleteUser: (email: string) => Promise<AxiosResponse<any, any> | undefined>
   unblockUserAccount: (
     email: string,
     token: string
-  ) => Promise<AxiosResponse<UserInterface>>
+  ) => Promise<AxiosResponse<any, any> | undefined>
 }
 
 const UserContext = createContext<UserContextType | null>(null)
@@ -123,7 +127,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         title: 'Te has registrado con exito!',
         description: `Revisa tu correo! Te hemos enviado tu contraseña a ${user.email} para que puedas iniciar sesión por primera vez.`,
       })
-      return res
+      return res as AxiosResponse<any, any>
     } catch (error: any) {
       console.error('Error creating user:', error)
       if (error?.response?.data) {
@@ -164,7 +168,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         title: 'Se actualizó la contraseña con éxito!',
         description: 'Ahora inicia sesión con tu nueva contraseña.',
       })
-      return res
+      return res as AxiosResponse<any, any>
     } catch (error: any) {
       console.error('Error updating password:', error)
       if (error?.response?.data) {

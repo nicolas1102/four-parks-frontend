@@ -145,14 +145,6 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
               text={'CONFIRMAR CONTRASEÑAS'}
               isLoading={isLoading}
             />
-            {/* <DialogFooter className='sm:justify-start'>
-              <DialogClose asChild>
-                <PrimaryButton
-                  text={'CONFIRMAR CONTRASEÑAS'}
-                  isLoading={isLoading}
-                />
-              </DialogClose>
-            </DialogFooter> */}
           </div>
         </form>
       </DialogContent>
