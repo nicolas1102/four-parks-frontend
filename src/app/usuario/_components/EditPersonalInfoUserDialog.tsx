@@ -1,10 +1,8 @@
 'use client'
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -45,12 +43,17 @@ export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
     secondLastname,
   }: TEditPersonalInfoValidator) => {
     const userData = {
+      id: user.id,
       email: user.email,
       firstName,
       secondName,
       firstLastname,
       secondLastname,
+      accountBlocked: user.accountBlocked,
+      accountActive: user.accountActive,
+      loginAttempts: user.loginAttempts,
       roleList: ['USUARIO'],
+      creditCard: user.creditCard,
     } as UserInterface
     const res = (await updateUser(userData)) as AxiosResponse
     if (res.status === 200) {

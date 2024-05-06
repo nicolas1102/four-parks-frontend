@@ -29,8 +29,8 @@ export default function Home() {
         <Loader />
       ) : (
         <div className='max-h-full m-auto flex flex-col gap-y-5 p-10'>
-          <div className='border  p-10 w-[1000px] border-blueFPC-400 bg-blueFPC-200'>
-            <div>
+          <div className='border  p-10 w-[1000px] border-blueFPC-400 bg-blueFPC-200 dark:border-blueFPC-200 dark:bg-blueFPC-400'>
+            <div className=''>
               <h1 className='text-3xl tracking-widest font-medium pb-2'>
                 MI CUENTA
               </h1>

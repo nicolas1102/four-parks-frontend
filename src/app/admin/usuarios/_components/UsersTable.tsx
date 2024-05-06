@@ -33,7 +33,6 @@ export function UsersTable({
   setRole: (role: string) => void
 }) {
   const { table, columns } = UsersTableColumns({ data })
-
   return (
     <div className='w-full gap-2'>
       <div className='flex items-center py-4'>

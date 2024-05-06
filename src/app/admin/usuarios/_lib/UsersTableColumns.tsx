@@ -240,9 +240,9 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                     onClick={() => {
                       if (session) unblockUserAccount(user.email, session?.jwt)
                     }}
-                    className='bg-yellowFPC-200'
+                    className='bg-yellowFPC-200 hover:text-white'
                   >
-                    <span>Desbloquear cuenta</span>
+                    <span className='dark:text-black dark:hover:text-white'>Desbloquear cuenta</span>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />

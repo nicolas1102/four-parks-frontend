@@ -51,11 +51,15 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
     } as CreditCard
 
     const userData = {
+      id: user.id,
       email: user.email,
       firstName: user.firstName,
       secondName: user.secondName,
       firstLastname: user.firstLastname,
       secondLastname: user.secondLastname,
+      accountBlocked: user.accountBlocked,
+      accountActive: user.accountActive,
+      loginAttempts: user.loginAttempts,
       roleList: ['USUARIO'],
       creditCard: creditCardData,
     } as UserInterface

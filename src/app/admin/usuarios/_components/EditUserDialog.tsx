@@ -1,10 +1,7 @@
 'use client'
 import {
-  Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -17,9 +14,7 @@ import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import {
   EditUserFromAdminValidator,
-  EditPersonalInfoValidator,
   TEditUserFromAdminValidator,
-  TEditPersonalInfoValidator,
 } from '@/lib/validators/user-validators'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -31,8 +26,8 @@ import { Check, X } from 'lucide-react'
 
 export function EditUserDialog({ user }: { user: UserInterface }) {
   const router = useRouter()
-  const [accountActive, setAccountActive] = useState(user.accountActive)
-  const [accountBlocked, setAccountBlocked] = useState(user.accountBlocked)
+  const [accountActiveState, setAccountActiveState] = useState(user.accountActive)
+  const [accountBlockedState, setAccountBlockedState] = useState(user.accountBlocked)
   const { updateUser, isLoading } = useUser()
   const {
     register,
@@ -55,13 +50,14 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
     loginAttempts,
   }: TEditUserFromAdminValidator) => {
     const userData = {
+      id: user.id,
       email: user.email,
       firstName,
       secondName,
       firstLastname,
       secondLastname,
-      accountActive,
-      accountBlocked,
+      accountActive: accountActiveState,
+      accountBlocked: accountBlockedState,
       loginAttempts,
       roleList: ['USUARIO'],
       creditCard: user.creditCard,
@@ -189,12 +185,12 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
                     'accountActive',
                     user.accountActive ? user.accountActive : false
                   )
-                  setAccountActive(!accountActive)
+                  setAccountActiveState(!accountActiveState)
                 }}
-                defaultPressed={accountActive}
+                defaultPressed={accountActiveState}
                 className='border space-x-2'
               >
-                {accountActive ? <Check size={19} /> : <X size={19} />}
+                {accountActiveState ? <Check size={19} /> : <X size={19} />}
                 <p>CUENTA ACTIVA</p>
               </Toggle>
             </div>
@@ -204,14 +200,14 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
                 onPressedChange={() => {
                   setValue(
                     'accountBlocked',
-                    accountBlocked ? accountBlocked : false
+                    accountBlockedState ? accountBlockedState : false
                   )
-                  setAccountBlocked(!accountBlocked)
+                  setAccountBlockedState(!accountBlockedState)
                 }}
-                defaultPressed={accountBlocked}
+                defaultPressed={accountBlockedState}
                 className='border space-x-2'
               >
-                {accountBlocked ? <Check size={19} /> : <X size={19} />}
+                {accountBlockedState ? <Check size={19} /> : <X size={19} />}
                 <p className='tracking-widest'>CUENTA BLOQUEADA</p>
               </Toggle>
             </div>
@@ -220,14 +216,6 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
               text={'CONFIRMAR DATOS PERSONALES'}
               isLoading={isLoading}
             />
-            {/* <DialogFooter className='sm:justify-start'>
-          <DialogClose asChild>
-            <PrimaryButton
-              text={'CONFIRMAR DATOS PERSONALES'}
-              isLoading={isLoading}
-            />
-          </DialogClose>
-        </DialogFooter> */}
           </div>
         </form>
       </DialogContent>

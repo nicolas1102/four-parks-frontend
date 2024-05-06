@@ -81,7 +81,7 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
               <Label htmlFor='email'>Email</Label>
               <Input
                 {...register('email')}
-                className={cn('border-primary', {
+                className={cn('border-blueFPC-400', {
                   'focus-visible:ring-red-500': errors.email,
                 })}
                 placeholder='youremail@example.com'
@@ -95,7 +95,7 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
               <Input
                 {...register('oldPassword')}
                 type='password'
-                className={cn('border-primary', {
+                className={cn('border-blueFPC-400', {
                   'focus-visible:ring-red-500': errors.oldPassword,
                 })}
                 placeholder='•••••••'
@@ -107,14 +107,14 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
               )}
             </div>
 
-            <Separator />
+            <Separator lineColor='border-blueFPC-400' />
 
             <div className='grid gap-1 py-2'>
               <Label htmlFor='newPassword'>Nueva Contraseña</Label>
               <Input
                 {...register('newPassword')}
                 type='password'
-                className={cn('border-primary', {
+                className={cn('border-blueFPC-400', {
                   'focus-visible:ring-red-500': errors.newPassword,
                 })}
                 placeholder='•••••••'
@@ -130,7 +130,7 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
               <Input
                 {...register('confirmPassword')}
                 type='password'
-                className={cn('border-primary', {
+                className={cn('border-blueFPC-400', {
                   'focus-visible:ring-red-500': errors.confirmPassword,
                 })}
                 placeholder='•••••••'

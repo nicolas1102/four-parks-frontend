@@ -10,7 +10,6 @@ export interface ParkingInterface {
   cuposVehiculos: number
   cuposBicicletas: number
   cuposMotos: number
-  imagen: string
   lat: number
   lng: number
 }
