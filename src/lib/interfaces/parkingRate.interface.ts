@@ -1,9 +1,9 @@
-import { ParkingLotInterface } from './parking.interface'
+import { ParkingInterface } from './parking.interface'
 import { VehicleTypeInterface } from './vehicleType.interface'
 
 export interface ParkingRateInterface {
   id?: string
-  parking: ParkingLotInterface
+  parking: ParkingInterface
   vehicleType: VehicleTypeInterface
   rate: number
 }

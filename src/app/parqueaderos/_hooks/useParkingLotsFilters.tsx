@@ -2,6 +2,29 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
+import { useParking } from '@/services/useParking'
+
+const newParkingData = [
+  {
+    id: '1',
+    location: {
+      id: '1',
+      address: 'cra 131 asdasd',
+      latitude: 1.002,
+      longitude: 1.01,
+      city: {
+        id: '1',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Parqueamelo 2',
+    availableBikeSlots: 0,
+    availableMotorcicleSlots: 0,
+    availableCarSlots: 0,
+    totalSlots: 3,
+    loyalty: true,
+  },
+]
 
 const parkingLotsData = [
   {
@@ -67,7 +90,8 @@ const parkingLotsData = [
 ]
 
 export function useParkingLotsFilters() {
-  const [parkingLots, setParkingLots] = useState<ParkingInterface[]>([])
+  // const [parkingLots, setParkingLots] = useState<ParkingInterface[]>([])
+  const { parkings, setParkings } = useParking()
   const [filterAddress, setFilterAddress] = useState<string | null>(null)
   const [filterCity, setFilterCity] = useState<string | null>(null)
   const [filterCarPlaces, setFilterCarPlaces] = useState<boolean>(false)
@@ -80,18 +104,18 @@ export function useParkingLotsFilters() {
     // filtro de dirección
     let filteredObjs =
       filterAddress !== null && filterAddress.length > 0
-        ? parkingLots.filter((parkingLot) => {
-            return parkingLot.direccion
+        ? parkings.filter((parkingLot) => {
+            return parkingLot.location.address
               .toLowerCase()
               .includes(filterAddress.toLowerCase())
           })
-        : parkingLots
+        : parkings
 
     // filtro de ciudad
     filteredObjs =
       filterCity !== null && filterCity.length > 0
         ? filteredObjs.filter((parkingLot) => {
-            return parkingLot.ciudad
+            return parkingLot.location.city.name
               .toLowerCase()
               .includes(filterCity.toLowerCase())
           })
@@ -100,42 +124,35 @@ export function useParkingLotsFilters() {
     // filtro de cupos de carros
     filteredObjs = filterCarPlaces
       ? filteredObjs.filter((parkingLot) => {
-          return parkingLot.cuposVehiculos > 0
+          return parkingLot.availableCarSlots > 0
         })
       : filteredObjs
 
     // filtro de cupos de motos
     filteredObjs = filterMotorcyclesPlaces
       ? filteredObjs.filter((parkingLot) => {
-          return parkingLot.cuposMotos > 0
+          return parkingLot.availableMotorcicleSlots > 0
         })
       : filteredObjs
 
     // filtro de cupos de bicicletas
     filteredObjs = filterBikesPlaces
       ? filteredObjs.filter((parkingLot) => {
-          return parkingLot.cuposBicicletas > 0
+          return parkingLot.availableBikeSlots > 0
         })
       : filteredObjs
 
     return filteredObjs
   }, [
     filterAddress,
-    parkingLots,
+    parkings,
     filterCity,
     filterCarPlaces,
     filterMotorcyclesPlaces,
     filterBikesPlaces,
   ])
 
-  useEffect(() => {
-    // TODO: fetch parking lots
-    setParkingLots(parkingLotsData)
-  }, [parkingLots])
-
   return {
-    parkingLots: parkingLots,
-    setParkingLots: setParkingLots,
     filterAddress: filterAddress,
     setFilterAddress: setFilterAddress,
     filterCity: filterCity,

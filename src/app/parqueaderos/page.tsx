@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import { Toggle } from '@/components/ui/toggle'
 import { useParkingLotsFilters } from './_hooks/useParkingLotsFilters'
+import { useParking } from '@/services/useParking'
 
 export default function Home() {
   const {
@@ -23,10 +24,17 @@ export default function Home() {
     setFilterBikesPlaces,
     filteredParkingLots,
   } = useParkingLotsFilters()
-  
+  const { parkings, isLoading, getParkings } = useParking()
+
   const [selectedParkingLot, setSelectedParkingLot] =
     useState<ParkingInterface | null>(null)
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      await getParkings()      
+    }
+    fetchUsers()
+  }, [])
   return (
     <div>
       <div className='py-2 px-6 border-b flex flex-row gap-3'>
@@ -103,12 +111,12 @@ export default function Home() {
           <ScrollArea className='h-[620px]'>
             {filteredParkingLots.length !== 0 ? (
               <div className='grid grid-cols-3 gap-2 pr-3'>
-                {filteredParkingLots.map((item) => (
+                {filteredParkingLots.map((parkingItem) => (
                   <ParkingLotItem
-                    key={item.id}
-                    {...item}
+                    key={parkingItem.id}
+                    parkingData={parkingItem}
                     setSelectedParkingLot={setSelectedParkingLot}
-                    isSelected={item.id === selectedParkingLot?.id}
+                    isSelected={parkingItem.id === selectedParkingLot?.id}
                   />
                 ))}
               </div>

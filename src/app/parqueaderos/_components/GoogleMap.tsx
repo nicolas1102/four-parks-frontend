@@ -63,13 +63,16 @@ const GoogleMapView = ({
           },
         }}
       />
-      {parkingLots.map((parkingLot) => (
+      {parkingLots.map((parkingItem) => (
         <MarkerF
-          key={parkingLot.id}
-          position={{ lat: parkingLot.lat, lng: parkingLot.lng }}
+          key={parkingItem.id}
+          position={{
+            lat: parkingItem.location.latitude,
+            lng: parkingItem.location.longitude,
+          }}
           icon={{
             url:
-              parkingLot.id === selectedParkingLot?.id
+              parkingItem.id === selectedParkingLot?.id
                 ? '/map/selected-parking-map-pin.svg'
                 : '/map/parking-map-pin.svg',
             scaledSize: {
@@ -80,17 +83,20 @@ const GoogleMapView = ({
               },
             },
           }}
-          onClick={() => setSelectedParkingLot(parkingLot)}
+          onClick={() => setSelectedParkingLot(parkingItem)}
         >
-          {selectedParkingLot?.id === parkingLot.id && (
+          {selectedParkingLot?.id === parkingItem.id && (
             <OverlayView
-              position={{ lat: parkingLot.lat, lng: parkingLot.lng }}
+              position={{
+                lat: parkingItem.location.latitude,
+                lng: parkingItem.location.longitude,
+              }}
               mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             >
               <div className='z-10 w-56 bg-background -ml-28 -mt-10 scale-75 hover:scale-[0.80] duration-300'>
                 <ParkingLotItem
-                  key={parkingLot.id}
-                  {...parkingLot}
+                  key={parkingItem.id}
+                  parkingData={parkingItem}
                   setSelectedParkingLot={setSelectedParkingLot}
                 />
               </div>

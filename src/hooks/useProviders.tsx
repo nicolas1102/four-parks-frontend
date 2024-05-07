@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/hooks/useThemeProvider'
 import { UserLocationContext } from '@/context/UserLocationContext'
 import { useEffect, useState } from 'react'
 import { UserProvider } from '@/services/useUser'
+import { ParkingProvider } from '@/services/useParking'
 
 interface Props {
   children: React.ReactNode
@@ -40,7 +41,9 @@ function Providers({ children }: Props) {
         disableTransitionOnChange
       >
         <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
-          <UserProvider>{children}</UserProvider>
+          <UserProvider>
+            <ParkingProvider>{children}</ParkingProvider>
+          </UserProvider>
         </UserLocationContext.Provider>
       </ThemeProvider>
     </SessionProvider>

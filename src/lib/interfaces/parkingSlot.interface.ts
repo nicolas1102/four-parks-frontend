@@ -1,8 +1,8 @@
-import { ParkingLotInterface } from './parking.interface'
+import { ParkingInterface } from './parking.interface'
 
 export interface ParkingSlotInterface {
   id?: string
-  parking: ParkingLotInterface
+  parking: ParkingInterface
   status: string
   allowedType: string
 }

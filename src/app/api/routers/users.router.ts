@@ -1,11 +1,10 @@
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import axios, { AxiosResponse } from 'axios'
-
-const baseURL = 'http://localhost:8080/api/v1'
+import { BASE_URL } from '../axios'
 
 export const getAuthorizedUserRequest = async (email: string, password: string) => {
   try {
-    const res = await axios.post(baseURL + '/auth/log-in', { email, password });
+    const res = await axios.post(BASE_URL + '/auth/log-in', { email, password });
     return res.data;
   } catch (error) {
     return error;
@@ -13,43 +12,38 @@ export const getAuthorizedUserRequest = async (email: string, password: string) 
 };
 
 export const createUsersRequest = async (user: UserInterface) => {
-  const res = await axios.post(baseURL + '/auth/sign-up', user)
+  const res = await axios.post(BASE_URL + '/auth/sign-up', user)
   return res as AxiosResponse
 }
 
 export const updatePasswordUserRequest = async (email: string, oldPassword: string, newPassword: string, confirmPassword: string) => {
-  const res = await axios.post(baseURL + '/auth/new-password', { email, oldPassword, newPassword, confirmPassword })
+  const res = await axios.post(BASE_URL + '/auth/new-password', { email, oldPassword, newPassword, confirmPassword })
   return res
 }
 
 export const getUsersRequest = async () => {
-  const res = await axios.get(baseURL + '/users/allUsers')
+  const res = await axios.get(BASE_URL + '/users/allUsers')
   return res
 }
 
 export const getUsersByRoleRequest = async (role: string) => {
-  const res = await axios.get(baseURL + `/users/userByRole/${role}`)
+  const res = await axios.get(BASE_URL + `/users/userByRole/${role}`)
   return res
 }
 
 export const getOneUserByEmailRequest = async (email: string) => {
-  const res = await axios.get(baseURL + `/users/getOneUser/${email}`)
+  const res = await axios.get(BASE_URL + `/users/getOneUser/${email}`)
   return res;
 };
 
-// export const getOneUserRequest = async (id: string) => {
-//   const res = await axios.get(baseURL + `/usuarios/${id}`)
-//   return res
-// }
-
 export const updateUserRequest = async (user: UserInterface) => {
-  const res = await axios.post(baseURL + '/users/modifyUser', user)
+  const res = await axios.post(BASE_URL + '/users/modifyUser', user)
   return res 
 }
 
 // TODO: Terminar
 export const deleteUserRequest = async (email: string) => {
-  const res = await axios.get(baseURL + `/users/deleteUser/${email}`)
+  const res = await axios.get(BASE_URL + `/users/deleteUser/${email}`)
   return res
 }
 
@@ -60,6 +54,6 @@ export const unblockUserAccountRequest = async (email: string, token: string) =>
       Authorization: `Bearer ${token}`
     }
   };  
-  const res = await axios.post(baseURL + '/auth/unlock', email, config)
+  const res = await axios.post(BASE_URL + '/auth/unlock', email, config)
   return res
 }
