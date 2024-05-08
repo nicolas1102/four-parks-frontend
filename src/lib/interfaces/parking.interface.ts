@@ -23,9 +23,9 @@ export interface ParkingInterface {
   // openingHours: OpeningHoursInterface
   name: string
   totalSlots: number
-  availableBikeSlots: number,
-  availableMotorcicleSlots: number,
-  availableCarSlots: number,
+  availableBikeSlots?: number,
+  availableMotorcicleSlots?: number,
+  availableCarSlots?: number,
   loyalty: boolean
 }
 
