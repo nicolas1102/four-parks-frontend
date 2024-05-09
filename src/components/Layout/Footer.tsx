@@ -39,7 +39,7 @@ const Footer = async () => {
 
         <div className='col-span-3'>
           <h3 className='tracking-widest text-xl font-medium pb-1'>
-            CONTACTANOS
+            CONTÁCTANOS
           </h3>
           <div className='flex flex-row gap-2'>
             <Link href=''>

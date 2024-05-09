@@ -10,8 +10,8 @@ const newParkingData = [
     location: {
       id: '1',
       address: 'cra 131 asdasd',
-      latitude: 1.002,
-      longitude: 1.01,
+      latitude: 4.628139619286705,
+      longitude: -74.06545221960101,
       city: {
         id: '1',
         name: 'Bogotá',
@@ -24,68 +24,195 @@ const newParkingData = [
     totalSlots: 3,
     loyalty: true,
   },
-]
-
-const parkingLotsData = [
   {
-    id: 'parqueadero-1',
-    nombre: 'Carrera 10',
-    direccion: 'Carrera 10 # 15 - 25',
-    ciudad: 'Bogotá',
-    cuposVehiculos: 0,
-    cuposBicicletas: 0,
-    cuposMotos: 0,
-    imagen: '/landing/principal.jpg',
-    lat: 4.628139619286705,
-    lng: -74.06545221960101,
+    id: '2',
+    location: {
+      id: '2',
+      address: 'Calle 85 # 12-34',
+      latitude: 4.628099517336474,
+      longitude: -74.06612813621187,
+      city: {
+        id: '2',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Parking Central',
+    availableBikeSlots: 5,
+    availableMotorcicleSlots: 2,
+    availableCarSlots: 10,
+    totalSlots: 17,
+    loyalty: false,
   },
   {
-    id: 'parqueadero-2',
-    nombre: 'Calle 50',
-    direccion: 'Calle 50 # 40 - 50',
-    ciudad: 'Medellín',
-    cuposVehiculos: 30,
-    cuposBicicletas: 15,
-    cuposMotos: 8,
-    imagen: '/landing/principal.jpg',
-    lat: 4.628099517336474,
-    lng: -74.06612813621187,
+    id: '3',
+    location: {
+      id: '3',
+      address: 'Avenida Caracas con calle 26',
+      latitude: 4.627931089122047,
+      longitude: -74.06506061709275,
+      city: {
+        id: '3',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Zona Rosa Parking',
+    availableBikeSlots: 0,
+    availableMotorcicleSlots: 3,
+    availableCarSlots: 8,
+    totalSlots: 11,
+    loyalty: true,
   },
   {
-    id: 'parqueadero-3',
-    nombre: 'Avenida Cali',
-    direccion: 'Avenida Cali # 20 - 30',
-    ciudad: 'Cali',
-    cuposVehiculos: 40,
-    cuposBicicletas: 20,
-    cuposMotos: 10,
-    imagen: '/landing/principal.jpg',
-    lat: 4.627931089122047,
-    lng: -74.06506061709275,
+    id: '4',
+    location: {
+      id: '4',
+      address: 'Diagonal 70 con carrera 9a',
+      latitude: 4.627995252256931,
+      longitude: -74.06593233495613,
+      city: {
+        id: '4',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Parking Norte',
+    availableBikeSlots: 2,
+    availableMotorcicleSlots: 1,
+    availableCarSlots: 15,
+    totalSlots: 18,
+    loyalty: false,
   },
   {
-    id: 'parqueadero-4',
-    nombre: 'Transversal 7',
-    direccion: 'Transversal 7 # 60 - 70',
-    ciudad: 'Barranquilla',
-    cuposVehiculos: 15,
-    cuposBicicletas: 5,
-    cuposMotos: 3,
-    imagen: '/landing/principal.jpg',
-    lat: 4.627995252256931,
-    lng: -74.06593233495613,
+    id: '5',
+    location: {
+      id: '5',
+      address: 'Calle 26 con carrera 53',
+      latitude: 4.627792068972773,
+      longitude: -74.06676918416223,
+      city: {
+        id: '5',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Estacionamiento Chapinero',
+    availableBikeSlots: 10,
+    availableMotorcicleSlots: 0,
+    availableCarSlots: 5,
+    totalSlots: 15,
+    loyalty: true,
   },
   {
-    id: 'parqueadero-5',
-    nombre: 'Calle 34',
-    direccion: 'Calle 34 # 20 - 30',
-    ciudad: 'Cartagena',
-    cuposVehiculos: 25,
-    cuposBicicletas: 12,
-    cuposMotos: 6,
-    imagen: '/landing/principal.jpg',
-    lat: 4.627792068972773,
-    lng: -74.06676918416223,
+    id: '6',
+    location: {
+      id: '6',
+      address: 'Avenida Boyacá con calle 116',
+      latitude: 4.6271799621213745,
+      longitude: -74.06444254260322,
+      city: {
+        id: '7',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Parking Portal 80',
+    availableBikeSlots: 3,
+    availableMotorcicleSlots: 4,
+    availableCarSlots: 20,
+    totalSlots: 27,
+    loyalty: false,
+  },
+  {
+    id: '7',
+    location: {
+      id: '7',
+      address: 'Calle 63 con carrera 7ma',
+      latitude: 4.62519089991004,
+      longitude: -74.06483950958017,
+      city: {
+        id: '7',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Gran Parking',
+    availableBikeSlots: 0,
+    availableMotorcicleSlots: 0,
+    availableCarSlots: 7,
+    totalSlots: 7,
+    loyalty: false,
+  },
+  {
+    id: '8',
+    location: {
+      id: '8',
+      address: 'Zona T, carrera 14 con calle 82',
+      latitude: 4.6249877158259585,
+      longitude: -74.06978550266348,
+      city: {
+        id: '8',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Zona T Parking',
+    availableBikeSlots: 1,
+    availableMotorcicleSlots: 2,
+    availableCarSlots: 12,
+    totalSlots: 15,
+    loyalty: true,
+  },
+  {
+    id: '9',
+    location: {
+      id: '9',
+      address: 'Calle 100 con carrera 15',
+      latitude: 4.6203679356039045,
+      longitude: -74.06685653066198,
+      city: {
+        id: '9',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Parking El Retiro',
+    availableBikeSlots: 4,
+    availableMotorcicleSlots: 0,
+    availableCarSlots: 25,
+    totalSlots: 29,
+    loyalty: false,
+  },
+  {
+    id: '10',
+    location: {
+      id: '10',
+      address: 'Avenida Jiménez con carrera 3ra',
+      latitude: 4.630443720758486,
+      longitude: -74.06635110751127,
+      city: {
+        id: '10',
+        name: 'Bogotá',
+      },
+    },
+    name: 'Centro Parking',
+    availableBikeSlots: 6,
+    availableMotorcicleSlots: 1,
+    availableCarSlots: 18,
+    totalSlots: 25,
+    loyalty: true,
+  },
+  {
+    id: '11',
+    location: {
+      id: '11',
+      address: 'Carrera 70 con calle 44, El Poblado',
+      latitude: 6.24053678894374, 
+      longitude: -75.5479766332736,
+      city: {
+        id: '11',
+        name: 'Medellín',
+      },
+    },
+    name: 'Parqueadero El Poblado',
+    availableBikeSlots: 5,
+    availableMotorcicleSlots: 3,
+    availableCarSlots: 12,
+    totalSlots: 20,
+    loyalty: true,
   },
 ]
 
@@ -104,12 +231,12 @@ export function useParkingLotsFilters() {
     // filtro de dirección
     let filteredObjs =
       filterAddress !== null && filterAddress.length > 0
-        ? parkings.filter((parkingLot) => {
+        ? newParkingData.filter((parkingLot) => {
             return parkingLot.location.address
               .toLowerCase()
               .includes(filterAddress.toLowerCase())
           })
-        : parkings
+        : newParkingData
 
     // filtro de ciudad
     filteredObjs =
@@ -145,7 +272,7 @@ export function useParkingLotsFilters() {
     return filteredObjs
   }, [
     filterAddress,
-    parkings,
+    // parkings,
     filterCity,
     filterCarPlaces,
     filterMotorcyclesPlaces,

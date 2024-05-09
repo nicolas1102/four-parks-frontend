@@ -53,7 +53,7 @@ const ParkingLotItem = ({
           <div className='flex flex-row gap-1 py-1 flex-wrap'>
             <Badge>Cubierto</Badge>
             {parkingData.loyalty && (
-              <Badge className='bg-yellowFPC-400 text-black border border-primary'>
+              <Badge className='bg-redFPC-400 text-white border border-primary'>
                 Lealtad
               </Badge>
             )}

@@ -16,7 +16,11 @@ const Page = () => {
       if (role === 'ALL') {
         const mangersData = await getUsersByRole('2')
         const usersData = await getUsersByRole('3')
-        if (mangersData.length > 0 || usersData.length > 0) {
+        if (
+          usersData &&
+          mangersData &&
+          (mangersData.length > 0 || usersData.length > 0)
+        ) {
           setUsers([...mangersData, ...usersData])
         }
       } else if (role === 'USUARIO') {

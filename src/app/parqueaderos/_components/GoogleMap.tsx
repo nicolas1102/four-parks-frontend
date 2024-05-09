@@ -47,8 +47,15 @@ const GoogleMapView = ({
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={userLocation}
-      zoom={13}
+      center={
+        selectedParkingLot
+          ? {
+              lat: selectedParkingLot.location.latitude,
+              lng: selectedParkingLot.location.longitude,
+            }
+          : userLocation
+      }
+      zoom={selectedParkingLot ? 17 : 13}
     >
       <MarkerF
         position={userLocation}
@@ -93,7 +100,7 @@ const GoogleMapView = ({
               }}
               mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             >
-              <div className='z-10 w-56 bg-background -ml-28 -mt-10 scale-75 hover:scale-[0.80] duration-300'>
+              <div className='z-10 w-56 bg-background -ml-[106px] -mt-6 scale-75 hover:scale-[0.80] duration-300'>
                 <ParkingLotItem
                   key={parkingItem.id}
                   parkingData={parkingItem}

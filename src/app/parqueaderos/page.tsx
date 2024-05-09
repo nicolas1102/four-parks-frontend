@@ -31,9 +31,9 @@ export default function Home() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      await getParkings()      
+      await getParkings()
     }
-    fetchUsers()
+    // fetchUsers()
   }, [])
   return (
     <div>
@@ -47,17 +47,17 @@ export default function Home() {
           <div>
             <Input
               onChange={(e) => {
-                setFilterAddress(e.target.value)
+                setFilterCity(e.target.value)
               }}
-              placeholder='Filtrar por dirección'
+              placeholder='Filtrar por ciudad'
             />
           </div>
           <div>
             <Input
               onChange={(e) => {
-                setFilterCity(e.target.value)
+                setFilterAddress(e.target.value)
               }}
-              placeholder='Filtrar por ciudad'
+              placeholder='Filtrar por dirección'
             />
           </div>
           <span className='border-l border-primary h-auto'></span>
