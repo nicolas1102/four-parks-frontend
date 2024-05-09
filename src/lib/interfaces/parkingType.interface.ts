@@ -1,4 +1,4 @@
 export interface ParkingTypeInterface {
-  id: string
+  id?: string
   type: string
 }

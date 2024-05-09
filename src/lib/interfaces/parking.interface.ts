@@ -18,14 +18,14 @@ import { ParkingTypeInterface } from './parkingType.interface'
 // TODO: Actualizar esto
 export interface ParkingInterface {
   id?: string
-  location: LocationInterface
-  // parkingType: ParkingTypeInterface
-  // openingHours: OpeningHoursInterface
   name: string
-  totalSlots: number
+  location: LocationInterface
+  parkingType: ParkingTypeInterface
+  openingHours: OpeningHoursInterface
   availableBikeSlots: number,
   availableMotorcicleSlots: number,
   availableCarSlots: number,
+  totalSlots: number
   loyalty: boolean
 }
 

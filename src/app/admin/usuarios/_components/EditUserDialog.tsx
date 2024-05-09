@@ -38,8 +38,6 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
   } = useForm<TEditUserFromAdminValidator>({
     resolver: zodResolver(EditUserFromAdminValidator),
   })
-
-  // TODO: terminar el envio de datos
   const onSubmit = async ({
     firstName,
     secondName,

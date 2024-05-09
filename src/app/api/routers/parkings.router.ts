@@ -12,7 +12,7 @@ export const getParkingsRequest = async () => {
   return res
 }
 
-export const getOneParkingRequest = async (name2: string) => {
+export const getOneParkingRequest = async (name: string) => {
   const res = await axios.get(BASE_URL + `/parking/getParking/?name=${name}`)
   return res;
 };
