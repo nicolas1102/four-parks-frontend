@@ -147,7 +147,9 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
     setIsLoading(true)
     try {
       const res = await deletePakingRequest(name)
-      setParkings((prevParkings) => prevParkings.filter((parking) => parking.name !== name))
+      setParkings((prevParkings) =>
+        prevParkings.filter((parking) => parking.name !== name)
+      )
       toast({
         title: 'Se eliminó el parqueadero con éxito!',
         description: '',

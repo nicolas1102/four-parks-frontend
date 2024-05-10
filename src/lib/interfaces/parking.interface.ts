@@ -2,30 +2,21 @@ import { LocationInterface } from './location.interface'
 import { OpeningHoursInterface } from './openingHours.interface'
 import { ParkingTypeInterface } from './parkingType.interface'
 
-// export interface ParkingInterface {
-//   id: string
-//   nombre: string
-//   direccion: string
-//   ciudad: string
-//   cuposVehiculos: number
-//   cuposBicicletas: number
-//   cuposMotos: number
-//   lat: number
-//   lng: number
-// }
-
-
-// TODO: Actualizar esto
 export interface ParkingInterface {
-  id?: string
+  id?: number
   name: string
   location: LocationInterface
-  parkingType: ParkingTypeInterface
+  admin?: string
+  available_slots: string
+  //availableSlots: number
+  total_slots: string
+  // totalSlots: number
   openingHours: OpeningHoursInterface
-  availableBikeSlots: number,
-  availableMotorcicleSlots: number,
-  availableCarSlots: number,
-  totalSlots: number
-  loyalty: boolean
+  loyalty: string
+  // loyalty: boolean
+  parkingType: ParkingTypeInterface
+  // availableBikeSlots: number
+  // availableMotorcicleSlots: number
+  // availableCarSlots: number
 }
 

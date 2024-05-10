@@ -6,11 +6,13 @@ export type GeolocationType = {
 }
 
 export interface LocationInterface {
-  id?: string
-  city: CityInterface
+  id?: number
   address: string
+  latitude: string
+  // latitude: number
+  longitude: string
+  // longitude: number
+  city: CityInterface
   // geolocation: GeolocationType
-  latitude: number
-  longitude: number
 }
 

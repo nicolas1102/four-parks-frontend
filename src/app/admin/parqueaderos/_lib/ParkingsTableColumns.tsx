@@ -27,6 +27,7 @@ import { Dialog } from '@/components/ui/dialog'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { useParking } from '@/services/useParking'
 import { useRouter } from 'next/navigation'
+import { LocationInterface } from '@/lib/interfaces/location.interface'
 
 const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -61,41 +62,60 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
     },
     {
       accessorKey: 'city',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant='ghost'
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Ciudad
-            <ArrowUpDown className='ml-2 h-4 w-4' />
-          </Button>
-        )
+      header: 'Ciudad',
+      cell: ({ row }) => {
+        const parking = row.original
+        return <div className=''>{parking.location.city.city}</div>
       },
-      cell: ({ row }) => (
-        <div className='text-center'>{row.getValue('city')}</div>
-      ),
     },
     {
       accessorKey: 'address',
-      header: ({ column }) => {
-        return (
-          <Button
-            size={'sm'}
-            variant='ghost'
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Dirección
-            <ArrowUpDown className='ml-2 h-4 w-4' />
-          </Button>
-        )
+      header: 'Dirección',
+      cell: ({ row }) => {
+        const parking = row.original
+        return <div className=''>{parking.location.address}</div>
       },
-      cell: ({ row }) => (
-        <div className='text-center'>{row.getValue('address')}</div>
-      ),
     },
+    // {
+    //   accessorKey: 'location',
+    //   header: ({ column }) => {
+    //     return (
+    //       <Button
+    //         variant='ghost'
+    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    //       >
+    //         Ciudad
+    //         <ArrowUpDown className='ml-2 h-4 w-4' />
+    //       </Button>
+    //     )
+    //   },
+    //   cell: ({ row }) => {
+    //     console.log(row.getValue('location'));
+
+    //     const location = row.getValue('location') as LocationInterface
+    //     return <div className='text-center'>{location.city.city}</div>
+    //   },
+    // },
+    // {
+    //   accessorKey: 'location',
+    //   header: ({ column }) => {
+    //     return (
+    //       <Button
+    //         variant='ghost'
+    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    //       >
+    //         Dirección
+    //         <ArrowUpDown className='ml-2 h-4 w-4' />
+    //       </Button>
+    //     )
+    //   },
+    //   cell: ({ row }) => {
+    //     const location = row.getValue('location') as LocationInterface
+    //     return <div className='text-center'>{location.address}</div>
+    //   },
+    // },
     {
-      accessorKey: 'totalSlots',
+      accessorKey: 'total_slots',
       header: ({ column }) => {
         return (
           <Button
@@ -108,8 +128,16 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
         )
       },
       cell: ({ row }) => (
-        <div className='text-center'>{row.getValue('totalSlots')}</div>
+        <div className='text-center'>{row.getValue('total_slots')}</div>
       ),
+    },
+    {
+      accessorKey: 'admin',
+      header: 'Administrador',
+      cell: ({ row }) => {
+        const parking = row.original
+        return <div className=''>{parking.admin}</div>
+      },
     },
     {
       accessorKey: 'loyalty',
@@ -126,7 +154,8 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       },
       cell: ({ row }) => (
         <div className='text-center'>
-          {row.getValue('loyalty') ? 'Si' : 'No'}
+          {/* {row.getValue('loyalty') ? 'Si' : 'No'} */}
+          {row.getValue('loyalty') === 'true' ? 'Si' : 'No'}
         </div>
       ),
     },
@@ -157,7 +186,8 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
                 <DropdownMenuItem
                   className='cursor-pointer'
                   onClick={() => {
-                    if (parking?.id) navigator.clipboard.writeText(parking.id)
+                    if (parking?.id)
+                      navigator.clipboard.writeText(parking.id + '')
                   }}
                 >
                   Copiar ID de parqueadero
@@ -172,7 +202,6 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
                 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
-
 
                 <ParkingDialog parking={parking} />
 

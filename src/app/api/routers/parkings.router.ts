@@ -13,12 +13,12 @@ export const getParkingsRequest = async () => {
 }
 
 export const getOneParkingRequest = async (name: string) => {
-  const res = await axios.get(BASE_URL + `/parking/getParking/?name=${name}`)
+  const res = await axios.get(BASE_URL + `/parking/getParking/${name}`)
   return res;
 };
 
 export const deletePakingRequest = async (name: string) => {
-  const res = await axios.delete(BASE_URL + `/parking/deleteParking/?name=${name}`)
+  const res = await axios.delete(BASE_URL + `/parking/deleteParking/${name}`)
   return res
 }
 

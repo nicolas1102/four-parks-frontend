@@ -9,7 +9,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
 import {
   Table,
   TableBody,
@@ -18,9 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { UserInterface } from '@/lib/interfaces/user.interface'
 import ParkingsTableColumns from '../_lib/ParkingsTableColumns'
-import { useState } from 'react'
 import { ParkingFiltersDialog } from './ParkingFiltersDialog'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 

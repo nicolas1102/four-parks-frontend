@@ -2,7 +2,7 @@ import { CreditCard } from './creditCard.model'
 import { RoleType } from './role.interface'
 
 export interface UserInterface {
-  id?: string
+  id?: number
   email: string
   password?: string
   ip?: string
