@@ -8,10 +8,11 @@ import { useEffect, useState } from 'react'
 import { EditPersonalInfoUserDialog } from './_components/EditPersonalInfoUserDialog'
 import { EditPasswordUserDialog } from './_components/EditPasswordUserDialog'
 import { EditCreditCardUserDialog } from './_components/EditCreditCardUserDialog'
+import NoResults from '@/components/NoResults'
 
 export default function Home() {
   const { data: session } = useSession()
-  const { getOneUserByEmail } = useUser()
+  const { getOneUserByEmail, isLoading } = useUser()
   const [user, setUser] = useState<UserInterface | null>(null)
 
   useEffect(() => {
@@ -23,10 +24,15 @@ export default function Home() {
       fetchUser(session.email)
     }
   }, [session])
+
   return (
     <>
-      {user === null ? (
+      {isLoading ? (
         <Loader />
+      ) : user === undefined || user === null ? (
+        <div className='m-10'>
+          <NoResults redirection='/' />
+        </div>
       ) : (
         <div className='max-h-full m-auto flex flex-col gap-y-5 p-10'>
           <div className='border  p-10 w-[1000px] border-blueFPC-400 bg-blueFPC-200 dark:border-blueFPC-200 dark:bg-blueFPC-400'>

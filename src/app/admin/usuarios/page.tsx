@@ -6,6 +6,7 @@ import { UsersTable } from './_components/UsersTable'
 import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import { CreateAdminDialog } from './_components/CreateAdminDialog'
+import NoResults from '@/components/NoResults'
 
 const Page = () => {
   const { users, isLoading, getUsersByRole, setUsers } = useUser()
@@ -45,10 +46,7 @@ const Page = () => {
       {isLoading ? (
         <Loader />
       ) : users.length === 0 ? (
-        // TODO: Mejorar esto
-        <h1 className='text-sm tracking-widest text-center'>
-          NO HAY USUARIOS.
-        </h1>
+        <NoResults redirection='/admin' />
       ) : (
         <>
           <div className=' flex flex-col gap-y-2'>

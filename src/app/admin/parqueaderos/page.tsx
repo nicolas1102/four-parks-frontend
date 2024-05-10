@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useParking } from '@/services/useParking'
 import { ParkingDialog } from './_components/ParkingDialog'
 import { Dialog } from '@/components/ui/dialog'
+import NoResults from '@/components/NoResults'
 
 const Page = () => {
   const { parkings, isLoading, getParkings, setParkings } = useParking()
@@ -27,10 +28,7 @@ const Page = () => {
       {isLoading ? (
         <Loader />
       ) : parkings.length === 0 ? (
-        // TODO: Mejorar esto
-        <h1 className='text-sm tracking-widest text-center'>
-          NO HAY PARQUEADEROS.
-        </h1>
+        <NoResults redirection='/admin' />
       ) : (
         <>
           <div className=' flex flex-col gap-y-2'>
