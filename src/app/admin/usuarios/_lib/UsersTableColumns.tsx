@@ -28,6 +28,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { EditUserDialog } from '../_components/EditUserDialog'
 import { Dialog } from '@/components/ui/dialog'
+import { useRouter } from 'next/navigation'
 
 const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -36,6 +37,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
   const [rowSelection, setRowSelection] = useState({})
   const { deleteUser, unblockUserAccount } = useUser()
   const { data: session } = useSession()
+  const router = useRouter()
 
   const columns: ColumnDef<UserInterface>[] = [
     {
@@ -237,12 +239,19 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                 </DropdownMenuItem>
                 {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
                   <DropdownMenuItem
-                    onClick={() => {
-                      if (session) unblockUserAccount(user.email, session?.jwt)
+                    onClick={async () => {
+                      if (session) {
+                        const res = await unblockUserAccount(
+                          user.email,
+                          session.jwt
+                        )
+                      }
                     }}
-                    className='bg-yellowFPC-200 hover:text-white'
+                    className='bg-yellowFPC-200 hover:text-white cursor-pointer'
                   >
-                    <span className='dark:text-black dark:hover:text-white'>Desbloquear cuenta</span>
+                    <span className='dark:text-black dark:hover:text-white'>
+                      Desbloquear cuenta
+                    </span>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />

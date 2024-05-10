@@ -275,6 +275,21 @@ export function UserProvider({ children }: { children: ReactNode }) {
         title: 'Se activo la cuenta del usuario con éxito!',
         description: '',
       })
+
+      if (res?.status === 200) {
+        const updateUser = await getOneUserByEmail(email)        
+        if (updateUser !== undefined) {
+          setUsers((prevUsers) => {
+            const userIndex = prevUsers.findIndex(
+              (userItem) => userItem.email === updateUser.email
+            )
+            const updatedUsers = [...prevUsers]
+            updatedUsers[userIndex] = updateUser
+            return updatedUsers
+          })
+        } 
+      }
+
       return res
     } catch (error: any) {
       console.error('Error activating user account:', error)
