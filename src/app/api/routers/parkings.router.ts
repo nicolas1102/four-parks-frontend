@@ -34,6 +34,6 @@ export const updateParkingAdminRequest = async (admin: string, parking: ParkingI
   const setAdminData = {
 
   }
-  // const res = await axios.put(BASE_URL + '/parking/setAdmin', parking)
-  // return res
+  const res = await axios.put(BASE_URL + '/parking/setAdmin', parking)
+  return res
 }
