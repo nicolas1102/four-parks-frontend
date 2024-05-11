@@ -29,7 +29,7 @@ export const ParkingValidator = z.object({
     .string()
     .min(1, { message: 'Este campo es necesario.' }),
 }).refine((data) => data.closeTime >= data.openTime, {
-  message: "La hora de cierre no puede ser mayor a la de apertura.",
+  message: "La hora de cierre no puede ser igual o mayor a la de apertura.",
   path: ["closeTime"],
 });
 

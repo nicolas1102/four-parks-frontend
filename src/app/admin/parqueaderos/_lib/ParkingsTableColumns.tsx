@@ -65,7 +65,9 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       header: 'Ciudad',
       cell: ({ row }) => {
         const parking = row.original
-        return <div className=''>{parking.location.city.city}</div>
+        return <div className=''>{
+          parking.location.city.city
+          }</div>
       },
     },
     {
@@ -116,6 +118,7 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
     // },
     {
       accessorKey: 'total_slots',
+      // accessorKey: 'totalSlots',
       header: ({ column }) => {
         return (
           <Button

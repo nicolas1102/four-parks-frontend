@@ -31,20 +31,29 @@ export function ParkingFiltersDialog({
 }: {
   table: Table<ParkingInterface>
 }) {
+  // const { cities, getCities, isLoading } = useCity()
+  // useEffect(() => {
+  //   const fetchCities = async () => {
+  //     await getCities()
+  //   }
+  //   fetchCities()
+  // }, [])
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 px-4 py-5 tracking-widest border hover:bg-yellowFPC-200 dark:hover:bg-yellowFPC-400 dark:hover:text-black border-blueFPC-400 cursor-pointer'>
           FILTROS
         </div>
-        {/* <FloatingButton text='CREAR FUNCIONARIO' direction='right' /> */}
       </DialogTrigger>
       <DialogContent className='sm:max-w-md'>
         <DialogHeader>
           <DialogTitle>
             <p className='tracking-widest'>FILTROS</p>
           </DialogTitle>
-          <DialogDescription>Aquí puedes filtrar usuarios.</DialogDescription>
+          <DialogDescription>
+            Aquí puedes filtrar parqueaderos.
+          </DialogDescription>
         </DialogHeader>
         <div className='flex flex-col space-2'>
           <div className='grid gap-1 py-2'>
@@ -59,95 +68,140 @@ export function ParkingFiltersDialog({
             />
           </div>
           <div className='grid gap-1 py-2'>
-            <Label htmlFor='email'>Email</Label>
+            <Label htmlFor='name'>Nombre Parqueadero</Label>
             <Input
-              placeholder='Filtrar por email'
+              placeholder='Filtrar por nombre'
               value={
-                (table.getColumn('email')?.getFilterValue() as string) ?? ''
+                (table.getColumn('name')?.getFilterValue() as string) ?? ''
               }
               onChange={(event) =>
-                table.getColumn('email')?.setFilterValue(event.target.value)
+                table.getColumn('name')?.setFilterValue(event.target.value)
               }
               className=' mr-2 border border-blueFPC-400'
             />
           </div>
-          <div className='grid gap-2 justify-around grid-cols-2'>
+
+          {/* TODO: Arreglar los filtros con subinfo de interface */}
+          {/* <div className='grid gap-2 justify-around grid-cols-2'>
             <div className='grid gap-1 py-2'>
-              <Label htmlFor='firstName'>Primer nombre</Label>
+              <Label htmlFor='city'>Ciudad</Label>
               <Input
-                placeholder='Primer Nombre'
+              placeholder='Filtrar por nombre'
+              value={
+                (table.getColumn('city')?.getFilterValue() as string) ?? ''
+              }
+              onChange={(event) =>
+                table.getColumn('city')?.setFilterValue(event.target.value)
+              }
+              className=' mr-2 border border-blueFPC-400'
+            />
+              
+            </div>
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='address'>Dirección</Label>
+              <Input
+                placeholder='Kandor Street'
                 value={
-                  (table.getColumn('firstName')?.getFilterValue() as string) ??
-                  ''
+                  (table.getColumn('address')?.getFilterValue() as string) ?? ''
                 }
                 onChange={(event) =>
-                  table
-                    .getColumn('firstName')
-                    ?.setFilterValue(event.target.value)
+                  table.getColumn('address')?.setFilterValue(event.target.value)
                 }
                 className='mr-2 border border-blueFPC-400'
               />
             </div>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='secondName'>Segundo nombre</Label>
-              <Input
-                placeholder='Segundo nombre'
-                value={
-                  (table.getColumn('secondName')?.getFilterValue() as string) ??
-                  ''
-                }
-                onChange={(event) =>
-                  table
-                    .getColumn('secondName')
-                    ?.setFilterValue(event.target.value)
-                }
-                className='mr-2 border border-blueFPC-400'
-              />
-            </div>
-          </div>
-          <div className='grid gap-2 justify-around grid-cols-2'>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='firstLastname'>Primer apellido</Label>
-              <Input
-                placeholder='Primer apellido'
-                value={
-                  (table
-                    .getColumn('firstLastname')
-                    ?.getFilterValue() as string) ?? ''
-                }
-                onChange={(event) =>
-                  table
-                    .getColumn('firstLastname')
-                    ?.setFilterValue(event.target.value)
-                }
-                className='mr-2 border border-blueFPC-400'
-              />
-            </div>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='secondLastname'>Segundo apellido</Label>
-              <Input
-                placeholder='Segundo apellido'
-                value={
-                  (table
-                    .getColumn('secondLastname')
-                    ?.getFilterValue() as string) ?? ''
-                }
-                onChange={(event) =>
-                  table
-                    .getColumn('secondLastname')
-                    ?.setFilterValue(event.target.value)
-                }
-                className='mr-2 border border-blueFPC-400'
-              />
-            </div>
-          </div>
+          </div> */}
 
           <Separator
             lineColor='border-blueFPC-400'
             coneColor='text-blueFPC-400'
           />
 
-          <div className='grid gap-2 justify-around grid-cols-3'>
+          <div className='grid gap-2 justify-around grid-cols-2'>
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='total_slots'>Capacidad (Número de Slots)</Label>
+              <Input
+                placeholder='24'
+                value={
+                  (table
+                    .getColumn('total_slots')
+                    ?.getFilterValue() as string) ?? ''
+                }
+                onChange={(event) =>
+                  table
+                    .getColumn('total_slots')
+                    ?.setFilterValue(event.target.value)
+                }
+                className='mr-2 border border-blueFPC-400'
+              />
+            </div>
+
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='loyalty'>Campaña de Lealtad</Label>
+              <Select
+                onValueChange={(value) => {
+                  if (value === 'all') {
+                    table.getColumn('loyalty')?.setFilterValue('')
+                  } else {
+                    console.log(value)
+                    table.getColumn('loyalty')?.setFilterValue(value)
+                    console.log(table.getColumn('loyalty')?.getFilterValue())
+                  }
+                }}
+                value={
+                  table.getColumn('loyalty')?.getFilterValue() !== undefined
+                    ? table.getColumn('loyalty')?.getFilterValue() + ''
+                    : 'all'
+                }
+              >
+                <SelectTrigger className='border border-blueFPC-400'>
+                  <SelectValue placeholder='Cualquiera' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Campaña de lealtad</SelectLabel>
+                    <SelectItem className='italic' value={'all'}>
+                      --- Cualquiera ---
+                    </SelectItem>
+                    <SelectItem value={'true'}>Si</SelectItem>
+                    <SelectItem value={'false'}>No</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              {/* <Select
+                onValueChange={(value) => {
+                  if (value === 'all') {
+                    table.getColumn('loyalty')?.setFilterValue('')
+                  } else {
+                    table
+                      .getColumn('loyalty')
+                      ?.setFilterValue(
+                        !table.getColumn('loyalty')?.getFilterValue()
+                      )
+                  }
+                }}
+                value={
+                  table.getColumn('loyalty')?.getFilterValue() !== undefined
+                    ? table.getColumn('loyalty')?.getFilterValue() + ''
+                    : 'all'
+                }
+              >
+                <SelectTrigger className=' border border-blueFPC-400'>
+                  <SelectValue placeholder='Cualquiera' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Cuenta activa</SelectLabel>
+                    <SelectItem value='all'>Cualquiera</SelectItem>
+                    <SelectItem value={'true'}>Si</SelectItem>
+                    <SelectItem value={'false'}>No</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select> */}
+            </div>
+          </div>
+
+          {/* <div className='grid gap-2 justify-around grid-cols-3'>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='accountActive'>Cuenta activa</Label>
               <Select
@@ -182,79 +236,7 @@ export function ParkingFiltersDialog({
                 </SelectContent>
               </Select>
             </div>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='accountBlocked'>Cuenta bloqueada</Label>
-              <Select
-                onValueChange={(value) => {
-                  if (value === 'all') {
-                    table.getColumn('accountBlocked')?.setFilterValue('')
-                  } else {
-                    table
-                      .getColumn('accountBlocked')
-                      ?.setFilterValue(
-                        !table.getColumn('accountBlocked')?.getFilterValue()
-                      )
-                  }
-                }}
-                value={
-                  table.getColumn('accountBlocked')?.getFilterValue() !==
-                  undefined
-                    ? table.getColumn('accountBlocked')?.getFilterValue() + ''
-                    : 'all'
-                }
-              >
-                <SelectTrigger className='border border-blueFPC-400'>
-                  <SelectValue placeholder='Cualquiera' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Cuenta bloqueada</SelectLabel>
-                    <SelectItem value='all'>Cualquiera</SelectItem>
-                    <SelectItem value={'true'}>Si</SelectItem>
-                    <SelectItem value={'false'}>No</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='loginAttempts'>Intentos de logueo</Label>
-              <Input
-                placeholder='Intentos de logueo'
-                value={
-                  (table
-                    .getColumn('loginAttempts')
-                    ?.getFilterValue() as string) ?? ''
-                }
-                onChange={(event) =>
-                  table
-                    .getColumn('loginAttempts')
-                    ?.setFilterValue(event.target.value)
-                }
-                className='mr-2 border border-blueFPC-400'
-              />
-            </div>
-          </div>
-          <div className='grid gap-1 py-2'>
-            <Label htmlFor='role'>Rol</Label>
-            <Select
-              onValueChange={(value) => {
-                // setRole(value)
-              }}
-              // value={role}
-            >
-              <SelectTrigger className='border border-blueFPC-400'>
-                <SelectValue placeholder='Cualquiera' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Roles</SelectLabel>
-                  <SelectItem value='ALL'>Cualquiera</SelectItem>
-                  <SelectItem value={'USUARIO'}>Usuario</SelectItem>
-                  <SelectItem value={'ADMINISTRADOR'}>Administrador</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+          </div> */}
           <DialogFooter className='sm:justify-start'>
             <DialogClose asChild>
               <PrimaryButton text={'FILTRAR'} />

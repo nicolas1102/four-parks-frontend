@@ -250,7 +250,7 @@ export function UserFiltersDialog({
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Roles</SelectLabel>
-                  <SelectItem value='ALL'>Cualquiera</SelectItem>
+                  <SelectItem value='ALL'>--- Cualquiera ---</SelectItem>
                   <SelectItem value={'USUARIO'}>Usuario</SelectItem>
                   <SelectItem value={'ADMINISTRADOR'}>Administrador</SelectItem>
                 </SelectGroup>

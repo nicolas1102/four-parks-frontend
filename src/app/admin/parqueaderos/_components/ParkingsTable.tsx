@@ -32,7 +32,7 @@ export function ParkingsTable({
     <div className='w-full gap-2'>
       <div className='flex items-center py-4'>
         {/* TODO: Terminar */}
-        {/* <ParkingFiltersDialog table={table} /> */}
+        <ParkingFiltersDialog table={table} />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
