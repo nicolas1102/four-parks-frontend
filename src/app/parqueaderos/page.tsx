@@ -12,12 +12,17 @@ import { Toggle } from '@/components/ui/toggle'
 import { useParkingLotsFilters } from './_hooks/useParkingLotsFilters'
 import { useParking } from '@/services/useParking'
 import { CustomTooltip } from '@/components/CustomTooltip'
+import { CitySelect } from './_components/CitySelect'
+import { ParkingTypeSelect } from './_components/ParkingTypeSelect'
 
 export default function Home() {
   const {
     setFilterName,
     setFilterAddress,
+    filterCity,
     setFilterCity,
+    filterParkingType,
+    setFilterParkingType,
     filterCarPlaces,
     setFilterCarPlaces,
     filterMotorcyclesPlaces,
@@ -41,7 +46,7 @@ export default function Home() {
   }, [])
   return (
     <div>
-      <div className='py-2 px-6 border-b flex flex-row gap-3'>
+      <div className='py-2 px-4 border-b flex flex-row gap-3'>
         <h1 className='text-3xl tracking-widest flex content-center gap-x-2'>
           <ParkingSquare size={40} />
           PARQUEADEROS
@@ -59,17 +64,21 @@ export default function Home() {
           <div>
             <Input
               onChange={(e) => {
-                setFilterCity(e.target.value)
-              }}
-              placeholder='Filtrar por ciudad'
-            />
-          </div>
-          <div>
-            <Input
-              onChange={(e) => {
                 setFilterAddress(e.target.value)
               }}
               placeholder='Filtrar por dirección'
+            />
+          </div>
+          <div>
+            <CitySelect
+              selectValue={filterCity}
+              setSelectValue={setFilterCity}
+            />
+          </div>
+          <div>
+            <ParkingTypeSelect
+              selectValue={filterParkingType}
+              setSelectValue={setFilterParkingType}
             />
           </div>
           <span className='border-l border-primary h-auto'></span>

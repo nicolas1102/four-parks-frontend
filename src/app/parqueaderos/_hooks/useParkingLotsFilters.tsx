@@ -219,9 +219,10 @@ import { useParking } from '@/services/useParking'
 export function useParkingLotsFilters() {
   // const [parkingLots, setParkingLots] = useState<ParkingInterface[]>([])
   const { parkings, setParkings } = useParking()
-  const [filterAddress, setFilterAddress] = useState<string | null>(null)
-  const [filterCity, setFilterCity] = useState<string | null>(null)
-  const [filterName, setFilterName] = useState<string | null>(null)
+  const [filterAddress, setFilterAddress] = useState<string>('')
+  const [filterCity, setFilterCity] = useState<string>('')
+  const [filterParkingType, setFilterParkingType] = useState<string>('')
+  const [filterName, setFilterName] = useState<string>('')
   const [filterCarPlaces, setFilterCarPlaces] = useState<boolean>(false)
   const [filterMotorcyclesPlaces, setFilterMotorcyclesPlaces] =
     useState<boolean>(false)
@@ -232,7 +233,7 @@ export function useParkingLotsFilters() {
   const filteredParkingLots = useMemo(() => {
     // filtro de dirección
     let filteredObjs =
-      filterAddress !== null && filterAddress.length > 0
+      filterAddress.length > 0
         ? parkings.filter((parkingLot) => {
             return parkingLot.location.address
               .toLowerCase()
@@ -242,7 +243,7 @@ export function useParkingLotsFilters() {
 
     // filtro de nombre
     filteredObjs =
-      filterName !== null && filterName.length > 0
+      filterName.length > 0
         ? filteredObjs.filter((parkingLot) => {
             return parkingLot.name
               .toLowerCase()
@@ -252,11 +253,23 @@ export function useParkingLotsFilters() {
 
     // filtro de ciudad
     filteredObjs =
-      filterCity !== null && filterCity.length > 0
+      filterCity.length > 0
         ? filteredObjs.filter((parkingLot) => {
-            return parkingLot.location.city.city
-              .toLowerCase()
-              .includes(filterCity.toLowerCase())
+            return (
+              parkingLot.location.city.city.toLowerCase() ===
+              filterCity.toLowerCase()
+            )
+          })
+        : filteredObjs
+
+    // filtro de tipo de parqueadero
+    filteredObjs =
+      filterParkingType.length > 0
+        ? filteredObjs.filter((parkingLot) => {
+            return (
+              parkingLot.parkingType.type.toLowerCase() ===
+              filterParkingType.toLowerCase()
+            )
           })
         : filteredObjs
 
@@ -292,6 +305,7 @@ export function useParkingLotsFilters() {
   }, [
     filterAddress,
     filterName,
+    filterParkingType,
     // parkings,
     filterCity,
     parkings,
@@ -308,6 +322,8 @@ export function useParkingLotsFilters() {
     setFilterAddress: setFilterAddress,
     filterCity: filterCity,
     setFilterCity: setFilterCity,
+    filterParkingType: filterParkingType,
+    setFilterParkingType: setFilterParkingType,
     filterCarPlaces: filterCarPlaces,
     setFilterCarPlaces: setFilterCarPlaces,
     filterMotorcyclesPlaces: filterMotorcyclesPlaces,

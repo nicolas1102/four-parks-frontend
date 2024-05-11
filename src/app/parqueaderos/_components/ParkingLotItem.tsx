@@ -27,11 +27,36 @@ const ParkingLotItem = ({
       <div className='col-span-8'>
         <h2 className='uppercase tracking-widest font-medium text-lg overflow-hidden text-ellipsis truncate '>
           {parkingData.name}
-        </h2>
+        </h2>{' '}
+        <div className='flex flex-row gap-1 py-1 flex-wrap'>
+          {parkingData.loyalty && (
+            <Badge className='bg-blueFPC-400 text-white border border-primary'>
+              Lealtad
+            </Badge>
+          )}
+          <Badge>
+            <p className='capitalize'>
+              {parkingData.parkingType.type.toLocaleLowerCase()}
+            </p>
+          </Badge>
+        </div>
         <div className=' text-sm'>
           <div className='leading-tight'>
             <p className=''>{parkingData.location.address}</p>
             <p className='font-medium'>{parkingData.location.city.city}</p>
+            <p className='font-medium'>
+              Horario:{' '}
+              <span className='font-normal'>
+                {parkingData.openingHours.open_time +
+                  ' - ' +
+                  parkingData.openingHours.close_time}
+              </span>
+              {/* <span>
+                {parkingData.openingHours.openTime +
+                  ' - ' +
+                  parkingData.openingHours.closeTime}
+              </span> */}
+            </p>
           </div>
           <div className='flex flex-row gap-2'>
             {parkingData.available_slots &&
@@ -59,18 +84,7 @@ const ParkingLotItem = ({
               </p>
             </div> */}
           </div>
-          <div className='flex flex-row gap-1 py-1 flex-wrap'>
-            <Badge>
-              <p className='capitalize'>
-                {parkingData.parkingType.type.toLocaleLowerCase()}
-              </p>
-            </Badge>
-            {parkingData.loyalty && (
-              <Badge className='bg-blueFPC-400 text-white border border-primary'>
-                Lealtad
-              </Badge>
-            )}
-          </div>
+
           <div className='pt-3'>
             <BookingSheet />
           </div>
