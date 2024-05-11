@@ -3,6 +3,7 @@
 import {
   createParkingRequest,
   deletePakingRequest,
+  getOneParkingRequest,
   getParkingsRequest,
   updateParkingRequest,
 } from '@/app/api/routers/parkings.router'
@@ -76,14 +77,46 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const getOneParking = async (name: string) => {
+    try {
+      setIsLoading(true)
+      const res = await getOneParkingRequest(name)
+      // toast({
+      //   title: 'Se obtuvo la información del parqueadero con exito!',
+      //   description: '',
+      // })
+      return res.data as ParkingInterface
+    } catch (error: any) {
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            'Ha ocurrido un error al intentar obtener los datos del parqueadero! Por favor intentalo más tarde.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+      console.error('Error fetching user:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const createParking = async (parking: ParkingInterface) => {
     setIsLoading(true)
     try {
       const res = await createParkingRequest(parking)
-      // setParkings((prevParkings) => {
-      //   const newParking = getParking(parking.name)
-      //   return [...prevParkings, newParking]
-      // })
+      const newParking = await getOneParking(parking.name)
+      if (newParking) {
+        setParkings((prevParkings: ParkingInterface[]) => {
+          return [...prevParkings, newParking]
+        })
+      }
       toast({
         title: 'El parqueadero fue creado con exito!',
         description: '',

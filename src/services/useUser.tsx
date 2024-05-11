@@ -98,8 +98,26 @@ export function UserProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneUserByEmailRequest(email)
+      toast({
+        title: 'Se obtuvo la información del usuario con exito!',
+        description: '',
+      })
       return res.data as UserInterface
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            'Ha ocurrido un error al intentar obtener los datos del usuario! Por favor intentalo más tarde.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
       console.error('Error fetching user:', error)
     } finally {
       setIsLoading(false)
@@ -226,14 +244,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsLoading(false)
     }
-    //   try {
-    //     setIsLoading(true)
-    //     const res = await updateUserRequest(id, user)
-    //     setIsLoading(false)
-    //     return res
-    //   } catch (error) {
-    //     console.error('Error updating user:', error)
-    //   }
   }
 
   const deleteUser = async (email: string) => {
@@ -277,7 +287,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       })
 
       if (res?.status === 200) {
-        const updateUser = await getOneUserByEmail(email)        
+        const updateUser = await getOneUserByEmail(email)
         if (updateUser !== undefined) {
           setUsers((prevUsers) => {
             const userIndex = prevUsers.findIndex(
@@ -287,7 +297,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             updatedUsers[userIndex] = updateUser
             return updatedUsers
           })
-        } 
+        }
       }
 
       return res
