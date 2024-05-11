@@ -19,7 +19,7 @@ import {
   useMemo,
   useState,
 } from 'react'
-import ParkingLotItem from './ParkingLotItem'
+import ParkingItem from './ParkingItem'
 import { useTheme } from 'next-themes'
 
 const GoogleMapView = ({
@@ -105,7 +105,7 @@ const GoogleMapView = ({
               mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             >
               <div className='z-10 w-56 bg-background -ml-[106px] -mt-6 scale-75 hover:scale-[0.80] duration-300'>
-                <ParkingLotItem
+                <ParkingItem
                   key={parkingItem.id}
                   parkingData={parkingItem}
                   setSelectedParkingLot={setSelectedParkingLot}

@@ -3,13 +3,13 @@
 import { Bike, Car, ParkingSquare, Tractor } from 'lucide-react'
 import { useEffect, useState, useMemo } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import ParkingLotItem from './_components/ParkingLotItem'
+import ParkingItem from './_components/ParkingItem'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import GoogleMapView from './_components/GoogleMap'
 import { Input } from '@/components/ui/input'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import { Toggle } from '@/components/ui/toggle'
-import { useParkingLotsFilters } from './_hooks/useParkingLotsFilters'
+import { useParkingsFilters } from './_hooks/useParkingsFilters'
 import { useParking } from '@/services/useParking'
 import { CustomTooltip } from '@/components/CustomTooltip'
 import { CitySelect } from './_components/CitySelect'
@@ -32,7 +32,7 @@ export default function Home() {
     filterHeavyPlaces,
     setFilterHeavyPlaces,
     filteredParkingLots,
-  } = useParkingLotsFilters()
+  } = useParkingsFilters()
   const { parkings, isLoading, getParkings } = useParking()
 
   const [selectedParkingLot, setSelectedParkingLot] =
@@ -153,7 +153,7 @@ export default function Home() {
             {filteredParkingLots.length !== 0 ? (
               <div className='grid grid-cols-3 gap-2 pr-3'>
                 {filteredParkingLots.map((parkingItem) => (
-                  <ParkingLotItem
+                  <ParkingItem
                     key={parkingItem.id}
                     parkingData={parkingItem}
                     setSelectedParkingLot={setSelectedParkingLot}

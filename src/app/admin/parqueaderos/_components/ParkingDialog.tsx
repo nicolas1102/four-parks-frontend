@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import Separator from '@/components/Separator'
 import { Toggle } from '@/components/ui/toggle'
-import { Check, X } from 'lucide-react'
+import { Check, CircleHelp, X } from 'lucide-react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { useParking } from '@/services/useParking'
 import {
@@ -26,6 +26,7 @@ import {
 import { AdminSelect } from './AdminSelect'
 import { CitySelect } from './CitySelect'
 import { ParkingTypeSelect } from './ParkingTypeSelect'
+import { CustomTooltip } from '@/components/CustomTooltip'
 
 export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   const router = useRouter()
@@ -53,10 +54,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     longitude,
     // admin,
     totalSlots,
-    hoursOpenTime,
-    minutesOpenTime,
-    hoursCloseTime,
-    minutesCloseTime,
+    openTime,
+    closeTime,
     loyalty,
     parkingType,
   }: TParkingValidator) => {
@@ -79,12 +78,10 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       available_slots: totalSlots + '',
       // available_slots: 0,
       openingHours: {
-        // open_time: hoursOpenTime + ':' + minutesOpenTime,
         open_time: '01:25',
-        // openTime: hoursOpenTime + ':' + minutesOpenTime,
-        // close_time: hoursCloseTime + ':' + minutesCloseTime,
+        // openTime: openTime,
         close_time: '23:25',
-        // closeTime: hoursCloseTime + ':' + minutesCloseTime,
+        // closeTime: closeTime,
       },
 
       parkingType: {
@@ -104,29 +101,15 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       ? await updateParking(parkingData)
       : await createParking(parkingData)
 
-    if (!parking) clearForm()
-      
     if (res?.status === 200) {
+      if (!parking) clearForm()
       router.refresh()
       router.push('/admin/parqueaderos')
     }
   }
 
   useEffect(() => {
-    const separateOpenningHours = (open_time: string, close_time: string) => {
-      return {
-        openTime: open_time.split(':'),
-        closeTime: close_time.split(':'),
-      }
-    }
-
     if (parking) {
-      // separamos horas
-      const { openTime, closeTime } = separateOpenningHours(
-        parking.openingHours.open_time,
-        parking.openingHours.close_time
-      )
-
       setValue('name', parking.name)
       // setValue('admin', parking.admin)
       setValue('city', parking.location.city.city)
@@ -137,14 +120,10 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       // setValue('longitude', parking.location.longitude)
       setValue('totalSlots', parseInt(parking.total_slots))
       // setValue('totalSlots', parking.totalSlots)
-      setValue('hoursOpenTime', parseInt(openTime[0]))
-      // setValue('hoursOpenTime', openTime[0])
-      setValue('minutesOpenTime', parseInt(openTime[1]))
-      // setValue('minutesOpenTime', openTime[1])
-      setValue('hoursCloseTime', parseInt(closeTime[1]))
-      // setValue('hoursCloseTime', closeTime[1])
-      setValue('minutesCloseTime', parseInt(closeTime[1]))
-      // setValue('minutesCloseTime', closeTime[1])
+      setValue('openTime', parking.openingHours.open_time)
+      // setValue('openTime', parking.openingHours.openTime)
+      setValue('closeTime', parking.openingHours.close_time)
+      // setValue('closeTime', parking.openingHours.closeTime)
       setValue('loyalty', parking.loyalty === 'true' ? true : false)
       // setValue('loyalty', parking.loyalty)
       setValue('parkingType', parking.parkingType.type)
@@ -152,10 +131,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       setValue('latitude', 0)
       setValue('longitude', 0)
       setValue('totalSlots', 0)
-      setValue('hoursOpenTime', 0)
-      setValue('minutesOpenTime', 0)
-      setValue('hoursCloseTime', 0)
-      setValue('minutesCloseTime', 0)
+      setValue('openTime', '00:00')
+      setValue('closeTime', '00:00')
       setValue('loyalty', false)
     }
   }, [])
@@ -167,10 +144,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     setValue('latitude', 0)
     setValue('longitude', 0)
     setValue('totalSlots', 0)
-    setValue('hoursOpenTime', 0)
-    setValue('minutesOpenTime', 0)
-    setValue('hoursCloseTime', 0)
-    setValue('minutesCloseTime', 0)
+    setValue('openTime', '00:00')
+    setValue('closeTime', '00:00')
     setValue('loyalty', false)
     setValue('parkingType', '')
   }
@@ -217,7 +192,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
             />
 
             <div className='grid gap-2 justify-around grid-cols-2'>
-              {/* TODO: SELECT DE CIUDADES */}
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='city'>Ciudad</Label>
                 <CitySelect
@@ -248,7 +222,12 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
 
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='latitude'>Latitud</Label>
+                <div className='flex flex-row gap-2'>
+                  <Label htmlFor='latitude'>Latitud</Label>
+                  <CustomTooltip text='Ingresa a Google Maps, dale clic derecho a un punto en el mapa y copia las coordenadas.'>
+                    <CircleHelp size={16} className='cursor-pointer' />
+                  </CustomTooltip>
+                </div>
                 <Input
                   {...register('latitude', { valueAsNumber: true })}
                   className={cn('border-yellowFPC-400', {
@@ -263,7 +242,12 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                 )}
               </div>
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='longitude'>Longitud</Label>
+                <div className='flex flex-row gap-2'>
+                  <Label htmlFor='latitude'>Longitud</Label>
+                  <CustomTooltip text='Ingresa a Google Maps, dale clic derecho a un punto en el mapa y copia las coordenadas.'>
+                    <CircleHelp size={16} className='cursor-pointer' />
+                  </CustomTooltip>
+                </div>
                 <Input
                   {...register('longitude', { valueAsNumber: true })}
                   className={cn('border-yellowFPC-400', {
@@ -286,65 +270,34 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
 
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='hoursOpenTime'>Hora de Apertura</Label>
+                <Label htmlFor='openTime'>Hora de Apertura</Label>
                 <Input
-                  {...register('hoursOpenTime', { valueAsNumber: true })}
+                  type='time'
+                  {...register('openTime')}
                   className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.hoursOpenTime,
+                    'focus-visible:ring-red-500': errors.openTime,
                   })}
                   placeholder='23'
                 />
-                {errors?.hoursOpenTime && (
+                {errors?.openTime && (
                   <p className='text-sm text-red-500'>
-                    {errors.hoursOpenTime.message}
+                    {errors.openTime.message}
                   </p>
                 )}
               </div>
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='minutesOpenTime'>Minuto de Apertura</Label>
+                <Label htmlFor='closeTime'>Hora de Cierre</Label>
                 <Input
-                  {...register('minutesOpenTime', { valueAsNumber: true })}
+                  type='time'
+                  {...register('closeTime')}
                   className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.minutesOpenTime,
+                    'focus-visible:ring-red-500': errors.closeTime,
                   })}
                   placeholder='23'
                 />
-                {errors?.minutesOpenTime && (
+                {errors?.closeTime && (
                   <p className='text-sm text-red-500'>
-                    {errors.minutesOpenTime.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className='grid gap-2 justify-around grid-cols-2'>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='hoursCloseTime'>Hora de Cierre</Label>
-                <Input
-                  {...register('hoursCloseTime', { valueAsNumber: true })}
-                  className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.hoursCloseTime,
-                  })}
-                  placeholder='23'
-                />
-                {errors?.hoursCloseTime && (
-                  <p className='text-sm text-red-500'>
-                    {errors.hoursCloseTime.message}
-                  </p>
-                )}
-              </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='minutesCloseTime'>Minuto de Cierre</Label>
-                <Input
-                  {...register('minutesCloseTime', { valueAsNumber: true })}
-                  className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.minutesCloseTime,
-                  })}
-                  placeholder='23'
-                />
-                {errors?.minutesCloseTime && (
-                  <p className='text-sm text-red-500'>
-                    {errors.minutesCloseTime.message}
+                    {errors.closeTime.message}
                   </p>
                 )}
               </div>
@@ -392,7 +345,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               <Toggle
                 aria-label='Toggle-accountActive'
                 onPressedChange={() => {
-                  // TODO: Revisar que esté funcionando bien
                   setLoyaltyState(!loyaltyState)
                   setValue('loyalty', loyaltyState)
                 }}

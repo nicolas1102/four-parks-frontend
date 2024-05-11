@@ -216,7 +216,7 @@ import { useParking } from '@/services/useParking'
 //   },
 // ]
 
-export function useParkingLotsFilters() {
+export function useParkingsFilters() {
   // const [parkingLots, setParkingLots] = useState<ParkingInterface[]>([])
   const { parkings, setParkings } = useParking()
   const [filterAddress, setFilterAddress] = useState<string>('')

@@ -5,7 +5,7 @@ import BookingSheet from './BookingSheet'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 
-const ParkingLotItem = ({
+const ParkingItem = ({
   parkingData,
   isSelected,
   setSelectedParkingLot,
@@ -17,7 +17,7 @@ const ParkingLotItem = ({
   return (
     <div
       className={`duration-500 border border-primary p-4 ${
-        isSelected ? 'bg-blueFPC-300 ' : 'hover:bg-muted'
+        isSelected ? 'bg-yellowFPC-200 ' : 'hover:bg-muted'
       }`}
       key={parkingData.id}
       onClick={() => {
@@ -94,4 +94,4 @@ const ParkingLotItem = ({
   )
 }
 
-export default ParkingLotItem
+export default ParkingItem

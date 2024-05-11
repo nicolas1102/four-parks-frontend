@@ -28,10 +28,8 @@ export function CitySelect({
     latitude: number
     longitude: number
     totalSlots: number
-    hoursOpenTime: number
-    minutesOpenTime: number
-    hoursCloseTime: number
-    minutesCloseTime: number
+    openTime: string
+    closeTime: string
   }>
   errors: FieldError | undefined
 }) {

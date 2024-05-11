@@ -19,27 +19,18 @@ export const ParkingValidator = z.object({
     .number()
     .min(1, { message: 'La capacidad (número de slots) no puede ser menor o igual a 0.' })
     .max(1000, { message: 'No puede contener más de 1000 slots' }),
-  hoursOpenTime: z
-    .number()
-    .min(0, { message: 'La hora no puede ser negativa.' })
-    .max(23, { message: 'La hora no puede ser mayor a 24.' }),
-  minutesOpenTime: z
-    .number()
-    .min(0, { message: 'Los minutos no pueden ser negativos.' })
-    .max(59, { message: 'La minutos no pueden ser mayores a 59.' }),
-  hoursCloseTime: z
-    .number()
-    .min(0, { message: 'La hora no puede ser negativa.' })
-    .max(23, { message: 'La hora no puede ser mayor a 24.' }),
-  minutesCloseTime: z
-    .number()
-    .min(0, { message: 'Los minutos no pueden ser negativos.' })
-    .max(59, { message: 'La minutos no pueden ser mayores a 59.' }),
+  openTime: z
+  .string().min(1, { message: 'Este campo es necesario.' }),
+  closeTime: z
+  .string().min(1, { message: 'Este campo es necesario.' }),
   loyalty: z
     .boolean(),
   parkingType: z
     .string()
     .min(1, { message: 'Este campo es necesario.' }),
+}).refine((data) => data.closeTime >= data.openTime, {
+  message: "La hora de cierre no puede ser mayor a la de apertura.",
+  path: ["closeTime"],
 });
 
 // export const EditUserFromAdminValidator = z.object({
