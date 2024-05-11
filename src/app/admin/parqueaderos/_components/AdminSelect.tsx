@@ -22,19 +22,7 @@ export function AdminSelect({
 }: {
   selectValue: string
   setSelectValue: UseFormSetValue<{
-    address: string
-    name: string
     admin: string
-    loyalty: boolean
-    parkingType: string
-    city: string
-    latitude: number
-    longitude: number
-    totalSlots: number
-    hoursOpenTime: number
-    minutesOpenTime: number
-    hoursCloseTime: number
-    minutesCloseTime: number
   }>
   errors: FieldError | undefined
 }) {

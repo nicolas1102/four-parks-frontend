@@ -26,3 +26,14 @@ export const updateParkingRequest = async (parking: ParkingInterface) => {
   const res = await axios.put(BASE_URL + '/parking/modifyParking', parking)
   return res
 }
+export const updateParkingAdminRequest = async (admin: string, parking: ParkingInterface) => {
+  console.log(admin);
+  console.log(parking);
+
+
+  const setAdminData = {
+
+  }
+  // const res = await axios.put(BASE_URL + '/parking/setAdmin', parking)
+  // return res
+}

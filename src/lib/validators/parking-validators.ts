@@ -12,17 +12,14 @@ export const ParkingValidator = z.object({
     .number(),
   longitude: z
     .number(),
-  // admin: z
-  //   .string()
-  //   .min(1, { message: 'Este campo es necesario.' }),
   totalSlots: z
     .number()
     .min(1, { message: 'La capacidad (número de slots) no puede ser menor o igual a 0.' })
     .max(1000, { message: 'No puede contener más de 1000 slots' }),
   openTime: z
-  .string().min(1, { message: 'Este campo es necesario.' }),
+    .string().min(1, { message: 'Este campo es necesario.' }),
   closeTime: z
-  .string().min(1, { message: 'Este campo es necesario.' }),
+    .string().min(1, { message: 'Este campo es necesario.' }),
   loyalty: z
     .boolean(),
   parkingType: z
@@ -32,6 +29,13 @@ export const ParkingValidator = z.object({
   message: "La hora de cierre no puede ser igual o mayor a la de apertura.",
   path: ["closeTime"],
 });
+
+
+export const ParkingAdminValidator = z.object({
+  admin: z
+    .string()
+    .min(1, { message: 'Selecciona un adminstrador.' }),
+})
 
 // export const EditUserFromAdminValidator = z.object({
 //   firstName: z.string().min(1, { message: 'Este campo es necesario.' }),
@@ -95,3 +99,4 @@ export const ParkingValidator = z.object({
 // })
 
 export type TParkingValidator = z.infer<typeof ParkingValidator>
+export type TParkingAdminValidator = z.infer<typeof ParkingAdminValidator>

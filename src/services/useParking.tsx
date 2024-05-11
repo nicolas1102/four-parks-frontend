@@ -5,6 +5,7 @@ import {
   deletePakingRequest,
   getOneParkingRequest,
   getParkingsRequest,
+  updateParkingAdminRequest,
   updateParkingRequest,
 } from '@/app/api/routers/parkings.router'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
@@ -30,6 +31,10 @@ interface ParkingContextType {
   ) => Promise<AxiosResponse<any, any> | undefined>
   getParkings: () => Promise<void>
   updateParking: (
+    parking: ParkingInterface
+  ) => Promise<AxiosResponse<ParkingInterface, any> | undefined>
+  updateParkingAdmin: (
+    adminId: string,
     parking: ParkingInterface
   ) => Promise<AxiosResponse<ParkingInterface, any> | undefined>
   deleteParking: (name: string) => Promise<AxiosResponse<any, any> | undefined>
@@ -181,6 +186,47 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const updateParkingAdmin = async (
+    adminId: string,
+    parking: ParkingInterface
+  ) => {
+    setIsLoading(true)
+    try {
+      const res = await updateParkingAdminRequest(adminId, parking)
+      setParkings((prevParkings) => {
+        const parkingIndex = prevParkings.findIndex(
+          (parkingItem) => parkingItem.name === parking.name
+        )
+        const updatedParkings = [...prevParkings]
+        updatedParkings[parkingIndex] = parking
+        return updatedParkings
+      })
+      toast({
+        title: 'Se actualizó la información del parqueadero con éxito!',
+        description: '',
+      })
+      return res as AxiosResponse<any, any>
+    } catch (error: any) {
+      console.error('Error deleting parking:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            'No se pudo actualizar la información del parqueadero. Por favor intentalo de nuevo.',
+          description: error.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const deleteParking = async (name: string) => {
     setIsLoading(true)
     try {
@@ -223,8 +269,9 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
         setIsLoading,
         createParking,
         getParkings,
-        deleteParking,
+        updateParkingAdmin,
         updateParking,
+        deleteParking,
       }}
     >
       {children}

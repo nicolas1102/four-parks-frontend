@@ -28,6 +28,7 @@ import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { useParking } from '@/services/useParking'
 import { useRouter } from 'next/navigation'
 import { LocationInterface } from '@/lib/interfaces/location.interface'
+import { ParkingAdminDialog } from '../_components/ParkingAdminDialog'
 
 const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -56,18 +57,14 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
           </Button>
         )
       },
-      cell: ({ row }) => (
-        <div>{row.getValue('name')}</div>
-      ),
+      cell: ({ row }) => <div>{row.getValue('name')}</div>,
     },
     {
       accessorKey: 'city',
       header: 'Ciudad',
       cell: ({ row }) => {
         const parking = row.original
-        return <div className=''>{
-          parking.location.city.city
-          }</div>
+        return <div className=''>{parking.location.city.city}</div>
       },
     },
     {
@@ -78,44 +75,6 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
         return <div className=''>{parking.location.address}</div>
       },
     },
-    // {
-    //   accessorKey: 'location',
-    //   header: ({ column }) => {
-    //     return (
-    //       <Button
-    //         variant='ghost'
-    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-    //       >
-    //         Ciudad
-    //         <ArrowUpDown className='ml-2 h-4 w-4' />
-    //       </Button>
-    //     )
-    //   },
-    //   cell: ({ row }) => {
-    //     console.log(row.getValue('location'));
-
-    //     const location = row.getValue('location') as LocationInterface
-    //     return <div className='text-center'>{location.city.city}</div>
-    //   },
-    // },
-    // {
-    //   accessorKey: 'location',
-    //   header: ({ column }) => {
-    //     return (
-    //       <Button
-    //         variant='ghost'
-    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-    //       >
-    //         Dirección
-    //         <ArrowUpDown className='ml-2 h-4 w-4' />
-    //       </Button>
-    //     )
-    //   },
-    //   cell: ({ row }) => {
-    //     const location = row.getValue('location') as LocationInterface
-    //     return <div className='text-center'>{location.address}</div>
-    //   },
-    // },
     {
       accessorKey: 'total_slots',
       // accessorKey: 'totalSlots',
@@ -168,53 +127,55 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       cell: ({ row }) => {
         const parking = row.original
         return (
-          <Dialog>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant='outline' className='h-8 w-8 p-0'>
-                  <p className='sr-only'>Abrir Menu</p>
-                  <MoreHorizontal className='h-4 w-4' />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent sideOffset={5}>
-                <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-                <DropdownMenuItem
-                  className='cursor-pointer'
-                  onClick={() => {
-                    if (parking?.id)
-                      navigator.clipboard.writeText(parking.id + '')
-                  }}
-                >
-                  Copiar ID de parqueadero
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className='cursor-pointer'
-                  onClick={() => {
-                    router.push(`/admin/parqueaderos/${parking.id}`)
-                  }}
-                >
-                  Ver estado de parqueadero
-                </DropdownMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='outline' className='h-8 w-8 p-0'>
+                <p className='sr-only'>Abrir Menu</p>
+                <MoreHorizontal className='h-4 w-4' />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent sideOffset={5}>
+              <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+              <DropdownMenuItem
+                className='cursor-pointer'
+                onClick={() => {
+                  if (parking?.id)
+                    navigator.clipboard.writeText(parking.id + '')
+                }}
+              >
+                Copiar ID de parqueadero
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className='cursor-pointer'
+                onClick={() => {
+                  router.push(`/admin/parqueaderos/${parking.id}`)
+                }}
+              >
+                Ver estado de parqueadero
+              </DropdownMenuItem>
 
-                <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
 
+              <Dialog>
                 <ParkingDialog parking={parking} />
+              </Dialog>
 
-                {/* <ParkingDialog parking={parking} /> */}
+              <Dialog>
+                <ParkingAdminDialog parking={parking} />
+              </Dialog>
 
-                <DropdownMenuItem
-                  onClick={() => {
-                    if (parking?.name) deleteParking(parking?.name)
-                  }}
-                  className='cursor-pointer'
-                >
-                  <span className='text-red-600 font-medium'>
-                    Eliminar Parqueadero
-                  </span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </Dialog>
+              <DropdownMenuItem
+                onClick={() => {
+                  if (parking?.name) deleteParking(parking?.name)
+                }}
+                className='cursor-pointer'
+              >
+                <span className='text-red-600 font-medium'>
+                  Eliminar Parqueadero
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )
       },
     },
