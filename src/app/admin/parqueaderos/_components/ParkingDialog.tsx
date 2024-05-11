@@ -79,9 +79,11 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       available_slots: totalSlots + '',
       // available_slots: 0,
       openingHours: {
-        open_time: hoursOpenTime + ':' + minutesOpenTime,
+        // open_time: hoursOpenTime + ':' + minutesOpenTime,
+        open_time: '01:25',
         // openTime: hoursOpenTime + ':' + minutesOpenTime,
-        close_time: hoursCloseTime + ':' + minutesCloseTime,
+        // close_time: hoursCloseTime + ':' + minutesCloseTime,
+        close_time: '23:25',
         // closeTime: hoursCloseTime + ':' + minutesCloseTime,
       },
 
@@ -97,13 +99,16 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       // availableCarSlots: 0,
     } as ParkingInterface
 
+    // TODO: cerrar ventana al crear nuevo parqueadero
     const res = parking
-      ? await createParking(parkingData)
-      : await updateParking(parkingData)
+      ? await updateParking(parkingData)
+      : await createParking(parkingData)
 
+    if (!parking) clearForm()
+      
     if (res?.status === 200) {
-      router.push('/admin/parqueaderos')
       router.refresh()
+      router.push('/admin/parqueaderos')
     }
   }
 
@@ -151,8 +156,24 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       setValue('minutesOpenTime', 0)
       setValue('hoursCloseTime', 0)
       setValue('minutesCloseTime', 0)
+      setValue('loyalty', false)
     }
   }, [])
+
+  const clearForm = () => {
+    setValue('name', '')
+    setValue('city', '')
+    setValue('address', '')
+    setValue('latitude', 0)
+    setValue('longitude', 0)
+    setValue('totalSlots', 0)
+    setValue('hoursOpenTime', 0)
+    setValue('minutesOpenTime', 0)
+    setValue('hoursCloseTime', 0)
+    setValue('minutesCloseTime', 0)
+    setValue('loyalty', false)
+    setValue('parkingType', '')
+  }
   return (
     <>
       <DialogTrigger asChild>
@@ -204,13 +225,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                   setSelectValue={setValue}
                   errors={errors.city}
                 />
-                {/* <Input
-                  {...register('city')}
-                  className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.city,
-                  })}
-                  placeholder='Asgard'
-                /> */}
                 {errors?.city && (
                   <p className='text-sm text-red-500'>{errors.city.message}</p>
                 )}
@@ -358,25 +372,17 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                 )}
               </div>
 
-              {/* TODO: SELECT DE PARKING TYPE */}
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
-                {/* <Input
-                  {...register('totalSlots', { valueAsNumber: true })}
-                  className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.totalSlots,
-                  })}
-                  placeholder='23'
-                /> */}
+                <Label htmlFor='parkingType'>Tipo de Parqueadero</Label>
                 <ParkingTypeSelect
                   selectValue={parking ? parking.parkingType.type : ''}
                   setSelectValue={setValue}
                   errors={errors.parkingType}
                 />
 
-                {errors?.totalSlots && (
+                {errors?.parkingType && (
                   <p className='text-sm text-red-500'>
-                    {errors.totalSlots.message}
+                    {errors.parkingType.message}
                   </p>
                 )}
               </div>

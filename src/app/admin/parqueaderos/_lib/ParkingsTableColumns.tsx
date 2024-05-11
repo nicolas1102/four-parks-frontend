@@ -57,7 +57,7 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
         )
       },
       cell: ({ row }) => (
-        <div className='lowercase'>{row.getValue('name')}</div>
+        <div>{row.getValue('name')}</div>
       ),
     },
     {
@@ -159,14 +159,6 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
         </div>
       ),
     },
-    // {
-    //   accessorKey: 'role',
-    //   header: 'Rol',
-    //   cell: ({ row }) => {
-    //     const user = row.original
-    //     return <div className=''>{user.roleList[0]}</div>
-    //   },
-    // },
     {
       id: 'actions',
       enableHiding: false,
@@ -214,7 +206,7 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
                   className='cursor-pointer'
                 >
                   <span className='text-red-600 font-medium'>
-                    Eliminar Usuario
+                    Eliminar Parqueadero
                   </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

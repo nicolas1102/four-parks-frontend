@@ -77,11 +77,16 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
   }
 
   const createParking = async (parking: ParkingInterface) => {
+    setIsLoading(true)
     try {
-      setIsLoading(true)
       const res = await createParkingRequest(parking)
+      // setParkings((prevParkings) => {
+      //   const newParking = getParking(parking.name)
+      //   return [...prevParkings, newParking]
+      // })
       toast({
         title: 'El parqueadero fue creado con exito!',
+        description: '',
       })
       return res as AxiosResponse<any, any>
     } catch (error: any) {

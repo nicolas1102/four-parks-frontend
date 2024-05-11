@@ -18,7 +18,7 @@ import { FieldError, UseFormSetValue } from 'react-hook-form'
 export function AdminSelect({
   selectValue,
   setSelectValue,
-  errors
+  errors,
 }: {
   selectValue: string
   setSelectValue: UseFormSetValue<{
@@ -38,6 +38,7 @@ export function AdminSelect({
   }>
   errors: FieldError | undefined
 }) {
+  const [admin, setAdmin] = useState(selectValue)
   const { getUsersByRole, isLoading } = useUser()
   const [admins, setAdmins] = useState<UserInterface[]>()
   useEffect(() => {
@@ -46,13 +47,17 @@ export function AdminSelect({
     }
     fetchAdmins()
   }, [])
+  useEffect(() => {
+    if (admin) {
+      setSelectValue('admin', admin)
+    }
+  }, [admin])
   return (
     <Select
       onValueChange={(value) => {
-        
-        setSelectValue('admin', value)
+        setAdmin(value)
       }}
-      value={selectValue}
+      value={admin ? admin : ''}
       disabled={isLoading || admins?.length === 0 ? true : false}
     >
       <SelectTrigger

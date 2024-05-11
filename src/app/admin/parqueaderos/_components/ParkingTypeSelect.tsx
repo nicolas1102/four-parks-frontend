@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
-import { Dispatch, ReactNode, SetStateAction, useEffect } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { FieldError, UseFormSetValue } from 'react-hook-form'
 
 export function ParkingTypeSelect({
@@ -35,17 +35,18 @@ export function ParkingTypeSelect({
   }>
   errors: FieldError | undefined
 }) {
+  const [parkingType, setParkingType] = useState(selectValue)
   useEffect(() => {
-    selectValue.length !== 0
-      ? setSelectValue('parkingType', selectValue)
-      : setSelectValue('parkingType', '')
-  }, [selectValue, setSelectValue])
+    if (parkingType) {
+      setSelectValue('parkingType', parkingType)
+    }
+  }, [parkingType, selectValue])
   return (
     <Select
       onValueChange={(value) => {
-        setSelectValue('parkingType', value)
+        setParkingType(value)
       }}
-      value={selectValue}
+      value={parkingType ? parkingType : ''}
     >
       <SelectTrigger
         className={cn('w-full border border-yellowFPC-400', {

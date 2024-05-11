@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
-import { Dispatch, ReactNode, SetStateAction, useEffect } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { FieldError, UseFormSetValue } from 'react-hook-form'
 
 export function CitySelect({
@@ -18,7 +18,7 @@ export function CitySelect({
   setSelectValue,
   errors,
 }: {
-  selectValue: string
+  selectValue: string | null
   setSelectValue: UseFormSetValue<{
     address: string
     name: string
@@ -35,6 +35,7 @@ export function CitySelect({
   }>
   errors: FieldError | undefined
 }) {
+  const [city, setCity] = useState(selectValue)
   // const { cities, getCities, isLoading } = useCity()
   // useEffect(() => {
   //   const fetchCities = async () => {
@@ -43,16 +44,16 @@ export function CitySelect({
   //   fetchCities()
   // }, [])
   useEffect(() => {
-    selectValue.length !== 0
-      ? setSelectValue('city', selectValue)
-      : setSelectValue('city', '')
-  }, [])
+    if (city) {
+      setSelectValue('city', city)
+    }
+  }, [city, selectValue])
   return (
     <Select
       onValueChange={(value) => {
-        setSelectValue('city', value)
+        setCity(value)
       }}
-      value={selectValue}
+      value={city ? city : ''}
       // {isLoading || cities.lenght === 0 && disabled }
     >
       <SelectTrigger
