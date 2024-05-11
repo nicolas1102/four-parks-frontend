@@ -205,6 +205,8 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
 
                 <ParkingDialog parking={parking} />
 
+                {/* <ParkingDialog parking={parking} /> */}
+
                 <DropdownMenuItem
                   onClick={() => {
                     if (parking?.name) deleteParking(parking?.name)

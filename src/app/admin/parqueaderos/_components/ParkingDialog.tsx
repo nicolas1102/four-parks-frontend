@@ -23,6 +23,9 @@ import {
   ParkingValidator,
   TParkingValidator,
 } from '@/lib/validators/parking-validators'
+import { AdminSelect } from './AdminSelect'
+import { CitySelect } from './CitySelect'
+import { ParkingTypeSelect } from './ParkingTypeSelect'
 
 export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   const router = useRouter()
@@ -42,8 +45,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   } = useForm<TParkingValidator>({
     resolver: zodResolver(ParkingValidator),
   })
-
-  // TODO: terminar el envio de datos
   const onSubmit = async ({
     name,
     city,
@@ -62,6 +63,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     const parkingData = {
       id: parking && parking.id,
       name,
+      admin: null,
       location: {
         city: {
           city: city,
@@ -121,13 +123,13 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       )
 
       setValue('name', parking.name)
+      // setValue('admin', parking.admin)
       setValue('city', parking.location.city.city)
       setValue('address', parking.location.address)
       setValue('latitude', parseInt(parking.location.latitude))
       // setValue('latitude', parking.location.latitude)
       setValue('longitude', parseInt(parking.location.longitude))
       // setValue('longitude', parking.location.longitude)
-      // setValue('admin', parseInt(parking.admin))
       setValue('totalSlots', parseInt(parking.total_slots))
       // setValue('totalSlots', parking.totalSlots)
       setValue('hoursOpenTime', parseInt(openTime[0]))
@@ -174,33 +176,18 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col space-2'>
-            <div className='grid gap-2 justify-around grid-cols-2'>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='name'>Nombre Parqueadero</Label>
-                <Input
-                  {...register('name')}
-                  className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.name,
-                  })}
-                  placeholder='Parking State'
-                />
-                {errors?.name && (
-                  <p className='text-sm text-red-500'>{errors.name.message}</p>
-                )}
-              </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='name'>Administrador</Label>
-                <Input
-                  {...register('name')}
-                  className={cn('border-yellowFPC-400', {
-                    'focus-visible:ring-red-500': errors.name,
-                  })}
-                  placeholder='Parking State'
-                />
-                {errors?.name && (
-                  <p className='text-sm text-red-500'>{errors.name.message}</p>
-                )}
-              </div>
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='name'>Nombre Parqueadero</Label>
+              <Input
+                {...register('name')}
+                className={cn('border-yellowFPC-400', {
+                  'focus-visible:ring-red-500': errors.name,
+                })}
+                placeholder='Parking State'
+              />
+              {errors?.name && (
+                <p className='text-sm text-red-500'>{errors.name.message}</p>
+              )}
             </div>
 
             <Separator
@@ -212,13 +199,18 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               {/* TODO: SELECT DE CIUDADES */}
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='city'>Ciudad</Label>
-                <Input
+                <CitySelect
+                  selectValue={parking ? parking.location.city.city : ''}
+                  setSelectValue={setValue}
+                  errors={errors.city}
+                />
+                {/* <Input
                   {...register('city')}
                   className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.city,
                   })}
                   placeholder='Asgard'
-                />
+                /> */}
                 {errors?.city && (
                   <p className='text-sm text-red-500'>{errors.city.message}</p>
                 )}
@@ -369,13 +361,19 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               {/* TODO: SELECT DE PARKING TYPE */}
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
-                <Input
+                {/* <Input
                   {...register('totalSlots', { valueAsNumber: true })}
                   className={cn('border-yellowFPC-400', {
                     'focus-visible:ring-red-500': errors.totalSlots,
                   })}
                   placeholder='23'
+                /> */}
+                <ParkingTypeSelect
+                  selectValue={parking ? parking.parkingType.type : ''}
+                  setSelectValue={setValue}
+                  errors={errors.parkingType}
                 />
+
                 {errors?.totalSlots && (
                   <p className='text-sm text-red-500'>
                     {errors.totalSlots.message}

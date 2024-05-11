@@ -25,12 +25,12 @@ const ParkingLotItem = ({
       }}
     >
       <div className='col-span-8'>
-        <h2 className='uppercase tracking-widest font-medium text-lg overflow-hidden text-ellipsis truncate '>
+        <h2 className='uppercase tracking-widest text-xl overflow-hidden text-ellipsis truncate '>
           {parkingData.name}
         </h2>{' '}
         <div className='flex flex-row gap-1 py-1 flex-wrap'>
           {parkingData.loyalty && (
-            <Badge className='bg-blueFPC-400 text-white border border-primary'>
+            <Badge className='bg-yellowFPC-400 text-black hover:text-white border border-primary'>
               Lealtad
             </Badge>
           )}

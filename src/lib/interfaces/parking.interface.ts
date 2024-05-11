@@ -6,7 +6,8 @@ export interface ParkingInterface {
   id?: number
   name: string
   location: LocationInterface
-  admin?: string
+  admin?: string | null
+  // admin: string 
   //availableSlots: number
   total_slots: string
   // totalSlots: number

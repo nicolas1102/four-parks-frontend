@@ -20,6 +20,7 @@ import {
 import ParkingsTableColumns from '../_lib/ParkingsTableColumns'
 import { ParkingFiltersDialog } from './ParkingFiltersDialog'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
+import { useEffect } from 'react'
 
 export function ParkingsTable({
   data,
