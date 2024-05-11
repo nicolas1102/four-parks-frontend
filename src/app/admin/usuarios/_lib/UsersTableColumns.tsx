@@ -210,7 +210,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
       header: 'Rol',
       cell: ({ row }) => {
         const user = row.original
-        return <div className=''>{user.roleList[0]}</div>
+        return <div className=''>{user.roleList[0].toLocaleLowerCase()}</div>
       },
     },
     {
@@ -232,7 +232,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                 <DropdownMenuItem
                   className='cursor-pointer'
                   onClick={() => {
-                    if (user?.id) navigator.clipboard.writeText(user.id)
+                    if (user?.id) navigator.clipboard.writeText(user.id + '')
                   }}
                 >
                   Copiar ID de usuario

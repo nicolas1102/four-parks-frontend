@@ -17,7 +17,7 @@ const ParkingLotItem = ({
   return (
     <div
       className={`duration-500 border border-primary p-4 ${
-        isSelected ? 'bg-blueFPC-400 text-white' : 'hover:bg-muted'
+        isSelected ? 'bg-blueFPC-300 ' : 'hover:bg-muted'
       }`}
       key={parkingData.id}
       onClick={() => {
@@ -31,11 +31,20 @@ const ParkingLotItem = ({
         <div className=' text-sm'>
           <div className='leading-tight'>
             <p className=''>{parkingData.location.address}</p>
-            <p className='font-medium'>{parkingData.location.city.name}</p>
+            <p className='font-medium'>{parkingData.location.city.city}</p>
           </div>
           <div className='flex flex-row gap-2'>
-            Cupos:
-            <div className='flex flex-row gap-x-3'>
+            {parkingData.available_slots &&
+            parseInt(parkingData.available_slots) <= 5 ? (
+              // {parkingData.available_slots && parkingData.available_slots > 5 ? (
+              <p className='text-redFPC-400 font-medium'>
+                Cupos: {parkingData.available_slots}
+              </p>
+            ) : (
+              <p>Cupos: {parkingData.available_slots}</p>
+            )}
+
+            {/* <div className='flex flex-row gap-x-3'>
               <p className='flex flex-row gap-0.5'>
                 <Car size={20} strokeWidth={1.3} />
                 {parkingData.availableCarSlots}
@@ -48,12 +57,16 @@ const ParkingLotItem = ({
                 <Bike size={19} strokeWidth={1.3} />
                 {parkingData.availableBikeSlots}
               </p>
-            </div>
+            </div> */}
           </div>
           <div className='flex flex-row gap-1 py-1 flex-wrap'>
-            <Badge>Cubierto</Badge>
+            <Badge>
+              <p className='capitalize'>
+                {parkingData.parkingType.type.toLocaleLowerCase()}
+              </p>
+            </Badge>
             {parkingData.loyalty && (
-              <Badge className='bg-redFPC-400 text-white border border-primary'>
+              <Badge className='bg-blueFPC-400 text-white border border-primary'>
                 Lealtad
               </Badge>
             )}

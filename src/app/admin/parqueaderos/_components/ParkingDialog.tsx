@@ -27,8 +27,11 @@ import {
 export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   const router = useRouter()
   const [loyaltyState, setLoyaltyState] = useState<boolean>(
-    parking ? parking.loyalty : false
+    parking?.loyalty === 'true' ? true : false
   )
+  // const [loyaltyState, setLoyaltyState] = useState<boolean>(
+  //   parking ? parking.loyalty : false
+  // )
   const { createParking, updateParking, isLoading } = useParking()
   const {
     register,
@@ -47,42 +50,49 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     address,
     latitude,
     longitude,
-    parkingType,
+    // admin,
+    totalSlots,
     hoursOpenTime,
     minutesOpenTime,
     hoursCloseTime,
     minutesCloseTime,
-    totalSlots,
     loyalty,
+    parkingType,
   }: TParkingValidator) => {
     const parkingData = {
       id: parking && parking.id,
       name,
       location: {
         city: {
-          name: city,
+          city: city,
         },
         address,
-        latitude,
-        longitude,
+        latitude: latitude + '',
+        // latitude,
+        longitude: longitude + '',
+        // longitude,
       },
+      total_slots: totalSlots + '',
+      // totalSlots,
+      available_slots: totalSlots + '',
+      // available_slots: 0,
+      openingHours: {
+        open_time: hoursOpenTime + ':' + minutesOpenTime,
+        // openTime: hoursOpenTime + ':' + minutesOpenTime,
+        close_time: hoursCloseTime + ':' + minutesCloseTime,
+        // closeTime: hoursCloseTime + ':' + minutesCloseTime,
+      },
+
       parkingType: {
         type: parkingType,
       },
+      loyalty: loyaltyState.toString(),
+      // loyalty: loyaltyState,
 
       // TODO: Revisar esto
-      openingHours: {
-        openTime: new Date(hoursOpenTime + ':' + minutesOpenTime),
-        closeTime: new Date(hoursCloseTime + ':' + minutesCloseTime),
-      },
-
-      // TODO: Revisar esto
-      availableBikeSlots: 0,
-      availableMotorcicleSlots: 0,
-      availableCarSlots: 0,
-
-      totalSlots,
-      loyalty: loyaltyState,
+      // availableBikeSlots: 0,
+      // availableMotorcicleSlots: 0,
+      // availableCarSlots: 0,
     } as ParkingInterface
 
     const res = parking
@@ -96,22 +106,41 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   }
 
   useEffect(() => {
+    const separateOpenningHours = (open_time: string, close_time: string) => {
+      return {
+        openTime: open_time.split(':'),
+        closeTime: close_time.split(':'),
+      }
+    }
+
     if (parking) {
+      // separamos horas
+      const { openTime, closeTime } = separateOpenningHours(
+        parking.openingHours.open_time,
+        parking.openingHours.close_time
+      )
+
       setValue('name', parking.name)
-      setValue('city', parking.location.city.name)
+      setValue('city', parking.location.city.city)
       setValue('address', parking.location.address)
-      setValue('latitude', parking.location.latitude)
-      setValue('longitude', parking.location.longitude)
+      setValue('latitude', parseInt(parking.location.latitude))
+      // setValue('latitude', parking.location.latitude)
+      setValue('longitude', parseInt(parking.location.longitude))
+      // setValue('longitude', parking.location.longitude)
+      // setValue('admin', parseInt(parking.admin))
+      setValue('totalSlots', parseInt(parking.total_slots))
+      // setValue('totalSlots', parking.totalSlots)
+      setValue('hoursOpenTime', parseInt(openTime[0]))
+      // setValue('hoursOpenTime', openTime[0])
+      setValue('minutesOpenTime', parseInt(openTime[1]))
+      // setValue('minutesOpenTime', openTime[1])
+      setValue('hoursCloseTime', parseInt(closeTime[1]))
+      // setValue('hoursCloseTime', closeTime[1])
+      setValue('minutesCloseTime', parseInt(closeTime[1]))
+      // setValue('minutesCloseTime', closeTime[1])
+      setValue('loyalty', parking.loyalty === 'true' ? true : false)
+      // setValue('loyalty', parking.loyalty)
       setValue('parkingType', parking.parkingType.type)
-
-      // TODO: HOURS
-      // setValue('hoursOpenTime', parking.openingHours.openTime)
-      // setValue('minutesOpenTime', parking.openingHours.openTime)
-      // setValue('hoursCloseTime', parking.openingHours.closeTime)
-      // setValue('minutesCloseTime', parking.openingHours.closeTime)
-
-      setValue('totalSlots', parking.totalSlots)
-      setValue('loyalty', parking.loyalty)
     } else {
       setValue('latitude', 0)
       setValue('longitude', 0)
@@ -135,31 +164,43 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
           </div>
         )}
       </DialogTrigger>
-      <DialogContent className='sm:max-w-md'>
+      <DialogContent className='sm:max-w-xl'>
         <DialogHeader>
           <DialogTitle>
             <p className='tracking-widest'>
               {!parking ? 'CREAR PARQUEADERO' : 'EDITAR PARQUEADERO'}
             </p>
           </DialogTitle>
-          <DialogDescription>
-            Aquí puedes {!parking ? 'agregar' : 'editar'} la información del parqueadero.
-          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col space-2'>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='name'>Nombre Parqueadero</Label>
-              <Input
-                {...register('name')}
-                className={cn('border-yellowFPC-400', {
-                  'focus-visible:ring-red-500': errors.name,
-                })}
-                placeholder='Parking State'
-              />
-              {errors?.name && (
-                <p className='text-sm text-red-500'>{errors.name.message}</p>
-              )}
+            <div className='grid gap-2 justify-around grid-cols-2'>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='name'>Nombre Parqueadero</Label>
+                <Input
+                  {...register('name')}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.name,
+                  })}
+                  placeholder='Parking State'
+                />
+                {errors?.name && (
+                  <p className='text-sm text-red-500'>{errors.name.message}</p>
+                )}
+              </div>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='name'>Administrador</Label>
+                <Input
+                  {...register('name')}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.name,
+                  })}
+                  placeholder='Parking State'
+                />
+                {errors?.name && (
+                  <p className='text-sm text-red-500'>{errors.name.message}</p>
+                )}
+              </div>
             </div>
 
             <Separator
@@ -167,19 +208,36 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               background='bg-background'
             />
 
-            {/* TODO: SELECT DE CIUDADES */}
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='city'>Ciudad</Label>
-              <Input
-                {...register('city')}
-                className={cn('border-yellowFPC-400', {
-                  'focus-visible:ring-red-500': errors.city,
-                })}
-                placeholder='Asgard'
-              />
-              {errors?.city && (
-                <p className='text-sm text-red-500'>{errors.city.message}</p>
-              )}
+            <div className='grid gap-2 justify-around grid-cols-2'>
+              {/* TODO: SELECT DE CIUDADES */}
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='city'>Ciudad</Label>
+                <Input
+                  {...register('city')}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.city,
+                  })}
+                  placeholder='Asgard'
+                />
+                {errors?.city && (
+                  <p className='text-sm text-red-500'>{errors.city.message}</p>
+                )}
+              </div>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='address'>Dirección</Label>
+                <Input
+                  {...register('address')}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.address,
+                  })}
+                  placeholder='Calle Muy Muy Lejano'
+                />
+                {errors?.address && (
+                  <p className='text-sm text-red-500'>
+                    {errors.address.message}
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className='grid gap-2 justify-around grid-cols-2'>
@@ -236,7 +294,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                   </p>
                 )}
               </div>
-              {/* TODO: DOS PUNTOS */}
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='minutesOpenTime'>Minuto de Apertura</Label>
                 <Input
@@ -270,7 +327,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                   </p>
                 )}
               </div>
-              
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='minutesCloseTime'>Minuto de Cierre</Label>
                 <Input
@@ -293,22 +349,39 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               background='bg-background'
             />
 
-            {/* TODO: SELECT DE PARKING TYPE */}
+            <div className='grid gap-2 justify-around grid-cols-2'>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
+                <Input
+                  {...register('totalSlots', { valueAsNumber: true })}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.totalSlots,
+                  })}
+                  placeholder='23'
+                />
+                {errors?.totalSlots && (
+                  <p className='text-sm text-red-500'>
+                    {errors.totalSlots.message}
+                  </p>
+                )}
+              </div>
 
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
-              <Input
-                {...register('totalSlots', { valueAsNumber: true })}
-                className={cn('border-yellowFPC-400', {
-                  'focus-visible:ring-red-500': errors.totalSlots,
-                })}
-                placeholder='23'
-              />
-              {errors?.totalSlots && (
-                <p className='text-sm text-red-500'>
-                  {errors.totalSlots.message}
-                </p>
-              )}
+              {/* TODO: SELECT DE PARKING TYPE */}
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
+                <Input
+                  {...register('totalSlots', { valueAsNumber: true })}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.totalSlots,
+                  })}
+                  placeholder='23'
+                />
+                {errors?.totalSlots && (
+                  <p className='text-sm text-red-500'>
+                    {errors.totalSlots.message}
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className='grid gap-1 py-2'>

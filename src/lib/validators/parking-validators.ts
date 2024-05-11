@@ -12,9 +12,13 @@ export const ParkingValidator = z.object({
     .number(),
   longitude: z
     .number(),
-  parkingType: z
-    .string()
-    .min(1, { message: 'Este campo es necesario.' }),
+  // admin: z
+  //   .string()
+  //   .min(1, { message: 'Este campo es necesario.' }),
+  totalSlots: z
+    .number()
+    .min(1, { message: 'La capacidad (número de slots) no puede ser menor o igual a 0.' })
+    .max(1000, { message: 'No puede contener más de 1000 slots' }),
   hoursOpenTime: z
     .number()
     .min(0, { message: 'La hora no puede ser negativa.' })
@@ -31,12 +35,11 @@ export const ParkingValidator = z.object({
     .number()
     .min(0, { message: 'Los minutos no pueden ser negativos.' })
     .max(59, { message: 'La minutos no pueden ser mayores a 59.' }),
-  totalSlots: z
-    .number()
-    .min(1, { message: 'La capacidad (número de slots) no puede ser menor o igual a 0.' })
-    .max(1000, { message: 'No puede contener más de 1000 slots' }),
   loyalty: z
     .boolean(),
+  parkingType: z
+    .string()
+    .min(1, { message: 'Este campo es necesario.' }),
 });
 
 // export const EditUserFromAdminValidator = z.object({

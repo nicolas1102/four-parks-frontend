@@ -7,10 +7,10 @@ export interface ParkingInterface {
   name: string
   location: LocationInterface
   admin?: string
-  available_slots: string
   //availableSlots: number
   total_slots: string
   // totalSlots: number
+  available_slots?: string
   openingHours: OpeningHoursInterface
   loyalty: string
   // loyalty: boolean

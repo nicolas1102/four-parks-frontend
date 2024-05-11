@@ -50,8 +50,10 @@ const GoogleMapView = ({
       center={
         selectedParkingLot
           ? {
-              lat: selectedParkingLot.location.latitude,
-              lng: selectedParkingLot.location.longitude,
+              lat: parseInt(selectedParkingLot.location.latitude),
+              // lat: selectedParkingLot.location.latitude,
+              lng: parseInt(selectedParkingLot.location.longitude),
+              // lng: selectedParkingLot.location.longitude,
             }
           : userLocation
       }
@@ -74,8 +76,10 @@ const GoogleMapView = ({
         <MarkerF
           key={parkingItem.id}
           position={{
-            lat: parkingItem.location.latitude,
-            lng: parkingItem.location.longitude,
+            lat: parseInt(parkingItem.location.latitude),
+            // lat: parkingItem.location.latitude,
+            lng: parseInt(parkingItem.location.longitude),
+            // lng: parkingItem.location.longitude,
           }}
           icon={{
             url:
@@ -95,8 +99,8 @@ const GoogleMapView = ({
           {selectedParkingLot?.id === parkingItem.id && (
             <OverlayView
               position={{
-                lat: parkingItem.location.latitude,
-                lng: parkingItem.location.longitude,
+                lat: parseInt(parkingItem.location.latitude),
+                lng: parseInt(parkingItem.location.longitude),
               }}
               mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             >

@@ -1,6 +1,6 @@
 'use client'
 
-import { Bike, Car, ParkingSquare } from 'lucide-react'
+import { Bike, Car, ParkingSquare, Tractor } from 'lucide-react'
 import { useEffect, useState, useMemo } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import ParkingLotItem from './_components/ParkingLotItem'
@@ -11,9 +11,11 @@ import { PiMotorcycleFill } from 'react-icons/pi'
 import { Toggle } from '@/components/ui/toggle'
 import { useParkingLotsFilters } from './_hooks/useParkingLotsFilters'
 import { useParking } from '@/services/useParking'
+import { CustomTooltip } from '@/components/CustomTooltip'
 
 export default function Home() {
   const {
+    setFilterName,
     setFilterAddress,
     setFilterCity,
     filterCarPlaces,
@@ -22,6 +24,8 @@ export default function Home() {
     setFilterMotorcyclesPlaces,
     filterBikesPlaces,
     setFilterBikesPlaces,
+    filterHeavyPlaces,
+    setFilterHeavyPlaces,
     filteredParkingLots,
   } = useParkingLotsFilters()
   const { parkings, isLoading, getParkings } = useParking()
@@ -33,7 +37,7 @@ export default function Home() {
     const fetchUsers = async () => {
       await getParkings()
     }
-    // fetchUsers()
+    fetchUsers()
   }, [])
   return (
     <div>
@@ -43,7 +47,15 @@ export default function Home() {
           PARQUEADEROS
         </h1>
         <span className='border-l border-primary h-auto'></span>
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-row gap-2'>
+          <div>
+            <Input
+              onChange={(e) => {
+                setFilterName(e.target.value)
+              }}
+              placeholder='Filtrar por nombre'
+            />
+          </div>
           <div>
             <Input
               onChange={(e) => {
@@ -61,7 +73,7 @@ export default function Home() {
             />
           </div>
           <span className='border-l border-primary h-auto'></span>
-          <div className='flex items-center gap-2'>
+          {/* <div className='flex items-center gap-2'>
             <p>Cupos para: </p>
             <div className='flex items-center space-x-2'>
               <Toggle
@@ -72,7 +84,9 @@ export default function Home() {
                 defaultPressed={filterCarPlaces}
                 className='border'
               >
-                <Car />
+                <CustomTooltip text='Carros'>
+                  <Car />
+                </CustomTooltip>
               </Toggle>
             </div>
             <div className='flex items-center space-x-2'>
@@ -84,7 +98,9 @@ export default function Home() {
                 defaultPressed={filterMotorcyclesPlaces}
                 className='border '
               >
-                <PiMotorcycleFill size={22} />
+                <CustomTooltip text='Motos'>
+                  <PiMotorcycleFill size={22} />
+                </CustomTooltip>
               </Toggle>
             </div>
             <div className='flex items-center space-x-2'>
@@ -96,10 +112,26 @@ export default function Home() {
                 defaultPressed={filterBikesPlaces}
                 className='border '
               >
-                <Bike size={21} />
+                <CustomTooltip text='Bicicletas'>
+                  <Bike size={21} />
+                </CustomTooltip>
               </Toggle>
             </div>
-          </div>
+            <div className='flex items-center space-x-2'>
+              <Toggle
+                aria-label='Toggle-bike-places'
+                onPressedChange={() => {
+                  setFilterHeavyPlaces(!filterHeavyPlaces)
+                }}
+                defaultPressed={filterHeavyPlaces}
+                className='border '
+              >
+                <CustomTooltip text='Carga Pesada'>
+                  <Tractor size={21} />
+                </CustomTooltip>
+              </Toggle>
+            </div>
+          </div> */}
         </div>
       </div>
 
