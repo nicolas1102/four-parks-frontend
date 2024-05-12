@@ -13,8 +13,8 @@ import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import {
-  EditUserFromAdminValidator,
-  TEditUserFromAdminValidator,
+  EditUserFromManagerValidator,
+  TEditUserFromManagerValidator,
 } from '@/lib/validators/user-validators'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -35,8 +35,8 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
     formState: { errors },
     setValue,
     getValues,
-  } = useForm<TEditUserFromAdminValidator>({
-    resolver: zodResolver(EditUserFromAdminValidator),
+  } = useForm<TEditUserFromManagerValidator>({
+    resolver: zodResolver(EditUserFromManagerValidator),
   })
   const onSubmit = async ({
     firstName,
@@ -46,7 +46,7 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
     accountActive,
     accountBlocked,
     loginAttempts,
-  }: TEditUserFromAdminValidator) => {
+  }: TEditUserFromManagerValidator) => {
     const userData = {
       id: user.id,
       email: user.email,

@@ -29,6 +29,7 @@ import { useSession } from 'next-auth/react'
 import { EditUserDialog } from '../_components/EditUserDialog'
 import { Dialog } from '@/components/ui/dialog'
 import { useRouter } from 'next/navigation'
+import { AdminDialog } from '../_components/AdminDialog'
 
 const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -256,7 +257,11 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                 )}
                 <DropdownMenuSeparator />
                 <div className='relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-muted'>
-                  <EditUserDialog user={user} />
+                  {user.roleList[0] === 'USUARIO' ? (
+                    <EditUserDialog user={user} />
+                  ) : (
+                    <AdminDialog admin={user} />
+                  )}
                 </div>
 
                 <DropdownMenuItem

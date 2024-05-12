@@ -16,12 +16,12 @@ import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import {
-  EditUserFromAdminValidator,
+  EditUserFromManagerValidator,
   EditPersonalInfoValidator,
-  TEditUserFromAdminValidator,
+  TEditUserFromManagerValidator,
   TEditPersonalInfoValidator,
-  TCreateAdminFromAdminValidator,
-  CreateAdminFromAdminValidator,
+  TCreateAdminFromManagerValidator,
+  CreateAdminFromManagerValidator,
 } from '@/lib/validators/user-validators'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -32,11 +32,18 @@ import { Toggle } from '@/components/ui/toggle'
 import { Check, X } from 'lucide-react'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import { Button } from '@/components/ui/button'
+import { ParkingInterface } from '@/lib/interfaces/parking.interface'
+import { ParkingSelect } from './ParkingSelect'
 
-export function CreateAdminDialog() {
+export function AdminDialog({ admin }: { admin?: UserInterface }) {
   const router = useRouter()
-  const [accountActive, setAccountActive] = useState(false)
-  const [accountBlocked, setAccountBlocked] = useState(false)
+  const [parking, setParking] = useState<ParkingInterface | null>(null)
+  const [accountActive, setAccountActive] = useState(
+    admin?.accountActive ? true : false
+  )
+  const [accountBlocked, setAccountBlocked] = useState(
+    admin?.accountBlocked ? true : false
+  )
   const { updateUser, isLoading, getUsers } = useUser()
   const {
     register,
@@ -44,11 +51,9 @@ export function CreateAdminDialog() {
     formState: { errors },
     setValue,
     getValues,
-  } = useForm<TCreateAdminFromAdminValidator>({
-    resolver: zodResolver(CreateAdminFromAdminValidator),
+  } = useForm<TCreateAdminFromManagerValidator>({
+    resolver: zodResolver(CreateAdminFromManagerValidator),
   })
-
-  // TODO: terminar el envio de datos
   const onSubmit = async ({
     email,
     firstName,
@@ -58,7 +63,8 @@ export function CreateAdminDialog() {
     accountActive,
     accountBlocked,
     loginAttempts,
-  }: TCreateAdminFromAdminValidator) => {
+    parking,
+  }: TCreateAdminFromManagerValidator) => {
     const adminData = {
       email,
       firstName,
@@ -70,25 +76,58 @@ export function CreateAdminDialog() {
       loginAttempts,
       roleList: ['ADMINISTRADOR'],
     } as UserInterface
-    const res = await updateUser(adminData)
-    if (res?.status === 200) {
-      router.push('/admin/usuarios')
-      router.refresh()
-    }
+    // const res = admin
+    //   ? await updateUser(adminData)
+    //   : await createUser(parkingData)
+
+    console.log(adminData);
+    console.log(parking);
+    
+
+    // const res = await updateUser(adminData)
+    // if (res?.status === 200) {
+    //   router.push('/admin/usuarios')
+    //   router.refresh()
+    // }
   }
+  useEffect(() => {
+    if (admin) {
+      setValue('email', admin.email)
+      setValue('firstName', admin.firstName)
+      if (admin.secondName) setValue('secondName', admin.secondName)
+      setValue('firstLastname', admin.firstLastname)
+      setValue('secondLastname', admin.secondLastname)
+      setValue('accountActive', admin.accountActive!)
+      setValue('accountBlocked', admin.accountBlocked!)
+      setValue('loginAttempts', admin.loginAttempts!)
+    } else {
+      setValue('loginAttempts', 0)
+    }
+  }, [])
+
+  useEffect(() => {
+    setValue('parking', parking?.name + '')
+  }, [parking])
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 px-4 py-2 absolute top-0 z-10 tracking-widest border hover:bg-yellowFPC-200  dark:hover:bg-yellowFPC-400 dark:hover:text-black hover:border-primary right-2 md:right-0 cursor-pointer'>
-          CREAR ADMINISTRADOR
-        </div>
-        {/* <FloatingButton text='CREAR FUNCIONARIO' direction='right' /> */}
+        {!admin ? (
+          <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 px-4 py-2 absolute top-0 z-10 tracking-widest border hover:bg-yellowFPC-200  dark:hover:bg-yellowFPC-400 dark:hover:text-black hover:border-primary right-2 md:right-0 cursor-pointer'>
+            CREAR ADMINISTRADOR
+          </div>
+        ) : (
+          <div className='relative flex cursor-pointer select-none items-center rounded-sm py-1.5 text-sm outline-none transition-colors hover:bg-muted'>
+            <p>Editar administrador</p>
+          </div>
+        )}
       </DialogTrigger>
-      <DialogContent className='sm:max-w-md'>
+      <DialogContent className='sm:max-w-lg'>
         <DialogHeader>
           <DialogTitle>
-            <p className='tracking-widest'>CREAR ADMINISTRADOR</p>
+            <p className='tracking-widest'>
+              {!admin ? 'CREAR ADMINISTRADOR' : 'EDITAR ADMINISTRADOR'}
+            </p>
           </DialogTitle>
           <DialogDescription>
             Aquí puedes crear un nuevo funcionario en nuestro sistema.
@@ -177,6 +216,15 @@ export function CreateAdminDialog() {
                   {errors.loginAttempts.message}
                 </p>
               )}
+            </div>
+
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='loginAttempts'>Parqueadero</Label>
+              <ParkingSelect
+                parking={parking}
+                setParking={setParking}
+                errors={errors.parking}
+              />
             </div>
 
             <div className='grid gap-1 py-2'>

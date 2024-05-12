@@ -30,7 +30,6 @@ export const ParkingValidator = z.object({
   path: ["closeTime"],
 });
 
-
 export const ParkingAdminValidator = z.object({
   admin: z
     .string()

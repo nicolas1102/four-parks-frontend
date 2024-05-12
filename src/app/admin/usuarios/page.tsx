@@ -5,7 +5,7 @@ import Loader from '@/components/Loader'
 import { UsersTable } from './_components/UsersTable'
 import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
-import { CreateAdminDialog } from './_components/CreateAdminDialog'
+import { AdminDialog } from './_components/AdminDialog'
 import NoResults from '@/components/NoResults'
 
 const Page = () => {
@@ -41,7 +41,7 @@ const Page = () => {
 
   return (
     <div className=' flex flex-col relative m-10'>
-      <CreateAdminDialog />
+      <AdminDialog />
 
       {isLoading ? (
         <Loader />

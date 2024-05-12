@@ -158,7 +158,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
           </div>
         ) : (
           <div className='relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-muted'>
-            <span> Editar parqueadero</span>
+            <span>Editar parqueadero</span>
           </div>
         )}
       </DialogTrigger>
