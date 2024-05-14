@@ -17,7 +17,7 @@ const ParkingItem = ({
   return (
     <div
       className={`duration-500 border border-primary p-4 ${
-        isSelected ? 'bg-yellowFPC-200 ' : 'hover:bg-muted'
+        isSelected ? 'bg-yellowFPC-200 text-black' : 'hover:bg-muted'
       }`}
       key={parkingData.id}
       onClick={() => {
@@ -47,9 +47,9 @@ const ParkingItem = ({
             <p className='font-medium'>
               Horario:{' '}
               <span className='font-normal'>
-                {parkingData.openingHours.open_time +
+                {parkingData.openingHours.open_time.substring(0, 5) +
                   ' - ' +
-                  parkingData.openingHours.close_time}
+                  parkingData.openingHours.close_time.substring(0, 5)}
               </span>
               {/* <span>
                 {parkingData.openingHours.openTime +
@@ -86,7 +86,7 @@ const ParkingItem = ({
           </div>
 
           <div className='pt-3'>
-            <BookingSheet />
+            <BookingSheet selectedParking={parkingData} />
           </div>
         </div>
       </div>

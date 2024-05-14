@@ -39,10 +39,10 @@ export default function Home() {
     useState<ParkingInterface | null>(null)
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchParkings = async () => {
       await getParkings()
     }
-    fetchUsers()
+    fetchParkings()
   }, [])
   return (
     <div>
@@ -128,7 +128,7 @@ export default function Home() {
             </div>
             <div className='flex items-center space-x-2'>
               <Toggle
-                aria-label='Toggle-bike-places'
+                aria-label='Toggle-heavy-places'
                 onPressedChange={() => {
                   setFilterHeavyPlaces(!filterHeavyPlaces)
                 }}
