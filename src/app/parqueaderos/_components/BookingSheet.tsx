@@ -20,7 +20,16 @@ import Link from 'next/link'
 // import CartItem from './CartItem'
 import { useEffect, useState } from 'react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
-import { Bike, Bold, Car, Italic, Tractor, Underline, Wand } from 'lucide-react'
+import {
+  Bike,
+  Bold,
+  Car,
+  Cloud,
+  Italic,
+  Tractor,
+  Underline,
+  Wand,
+} from 'lucide-react'
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
@@ -181,7 +190,7 @@ const BookingSheet = ({
                             MOTO
                           </p>
                           -
-                          <p className='font-light text-base italic '>
+                          <p className='font-normal text-base italic '>
                             31 cupos
                           </p>
                         </div>
@@ -201,7 +210,7 @@ const BookingSheet = ({
                             BICICLETA
                           </p>
                           -
-                          <p className='font-light text-base italic '>
+                          <p className='font-normal text-base italic '>
                             55 cupos
                           </p>
                         </div>
@@ -218,18 +227,18 @@ const BookingSheet = ({
                     <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
                       <div className='gap-1'>
                         <div className='flex flex-row gap-2'>
-                          <Wand size={22} strokeWidth={1.5} />
+                          <Cloud size={22} strokeWidth={1.5} />
                           <p className='font-normal text-base font-base tracking-widest'>
-                            ESCOBA MÁGICA
+                            NUBE VOLADORA
                           </p>
                           -
-                          <p className='font-light text-base italic '>
+                          <p className='font-normal text-base italic '>
                             ∞ cupos
                           </p>
                         </div>
                       </div>
                       <p className='text-start text-base'>
-                        ʛ 10 <span className='italic font-light'> / min.</span>
+                        Ƶ10 <span className='italic font-light'> / min.</span>
                       </p>
                     </div>
                   </ToggleGroupItem>
@@ -242,7 +251,7 @@ const BookingSheet = ({
                             VEHíCULO PESADO
                           </p>
                           -
-                          <p className='font-light text-base italic '>
+                          <p className='font-normal text-base italic '>
                             4 cupos
                           </p>
                         </div>
