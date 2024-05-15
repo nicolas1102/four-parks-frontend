@@ -34,7 +34,7 @@ const Page = ({ searchParams }: PageProps) => {
   const [src, setSrc] = useState<string>('')
   useEffect(() => {
     const generate = (orderId: string) => {
-      QRCode.toDataURL('https://github.com/nicolas1102/dxter-shark').then(
+      QRCode.toDataURL('https://github.com/nicolas1102').then(
         setSrc
       )
       // QRCode.toDataURL(`https://fourparks.app.vercel/reservas/${orderId}`)

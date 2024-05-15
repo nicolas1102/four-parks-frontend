@@ -1,8 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Sheet,
   SheetClose,
@@ -14,21 +11,13 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Separator } from '@/components/ui/separator'
-import { buttonVariants } from '@/components/ui/button'
-import Link from 'next/link'
-// TODO: Hacer bookigitem
-// import CartItem from './CartItem'
 import { useEffect, useState } from 'react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import {
   Bike,
-  Bold,
   Car,
   Cloud,
-  Italic,
   Tractor,
-  Underline,
-  Wand,
 } from 'lucide-react'
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -42,74 +31,6 @@ const BookingSheet = ({
   selectedParking: ParkingInterface
 }) => {
   return (
-    // <Sheet>
-    //   <SheetTrigger>
-    //     <PrimaryButton text='RESERVAR PARQUEADERO' />
-    //   </SheetTrigger>
-    //   <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg'>
-    //     <SheetHeader className='space-y-2.5 pr-6'>
-    //       <SheetTitle className='tracking-widest'>RESERVA</SheetTitle>
-    //       <Separator />
-    //       <p className='text-gray-500 text-sm'>
-    //         Para registrar tu reserva necesitamos los siguientes datos.
-    //       </p>
-    //       <Separator />
-    //     </SheetHeader>
-    //     <div className='flex w-full flex-col pr-6'>
-    //       {/* <CartItem
-    //                 selectionProduct={selectionProduct}
-    //                 quantity={quantity}
-    //                 key={
-    //                   selectionProduct?.colorSelectedId +
-    //                   selectionProduct?.product.id +
-    //                   selectionProduct?.sizeSelected
-    //                 }
-    //               /> */}
-    //     </div>
-
-    //     <div className='space-y-4 pr-6'>
-    //       <Separator />
-    //       <div className='space-y-1.5 text-base'>
-    //         <div className='flex'>
-    //           <span className='flex-1'>Shipping</span>
-    //           <span>34</span>
-    //         </div>
-    //         <div className='flex'>
-    //           <span className='flex-1'>Transaction Fee</span>
-    //           <span>43</span>
-    //         </div>
-    //         <div className='flex'>
-    //           <span className='flex-1'>Total</span>
-    //           <span>43</span>
-    //         </div>
-    //       </div>
-    //       <Separator />
-    //       <SheetFooter>
-    //         <SheetTrigger asChild>
-    //           <PrimaryButton text='RESERVAR PARQUEADERO'  />
-    //         </SheetTrigger>
-    //       </SheetFooter>
-    //     </div>
-
-    //     {/* ) : (
-    //       <div className='flex h-full flex-col items-center justify-center space-y-1'>
-    //         <p className='text-base tracking-widest'>YOUR CART IS EMPTY</p>
-    //         <SheetTrigger asChild>
-    //           <Link
-    //             href='/products'
-    //             className={buttonVariants({
-    //               variant: 'link',
-    //               size: 'sm',
-    //               className: 'text-sm text-muted-foreground font-bold',
-    //             })}
-    //           >
-    //             Add items to your cart checkout
-    //           </Link>
-    //         </SheetTrigger>
-    //       </div>
-    //     )} */}
-    //   </SheetContent>
-    // </Sheet>
     <Sheet>
       <SheetTrigger asChild className='w-full'>
         <PrimaryButton text='RESERVAR' />
@@ -221,10 +142,10 @@ const BookingSheet = ({
                     </div>
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value='asustado-potter'
+                    value='nube'
                     aria-label='Toggle underline'
                   >
-                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
+                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1' >
                       <div className='gap-1'>
                         <div className='flex flex-row gap-2'>
                           <Cloud size={22} strokeWidth={1.5} />
