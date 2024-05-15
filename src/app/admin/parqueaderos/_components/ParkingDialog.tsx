@@ -27,12 +27,14 @@ import { AdminSelect } from './AdminSelect'
 import { CitySelect } from './CitySelect'
 import { ParkingTypeSelect } from './ParkingTypeSelect'
 import { CustomTooltip } from '@/components/CustomTooltip'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 
 export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   const router = useRouter()
   const [loyaltyState, setLoyaltyState] = useState<boolean>(
     parking?.loyalty === 'true' ? true : false
   )
+  const [adminId, setAdminId] = useState<string | null>(null)
   // const [loyaltyState, setLoyaltyState] = useState<boolean>(
   //   parking ? parking.loyalty : false
   // )
@@ -52,7 +54,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     address,
     latitude,
     longitude,
-    // admin,
+    admin,
     totalSlots,
     openTime,
     closeTime,
@@ -62,7 +64,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     const parkingData = {
       id: parking && parking.id,
       name,
-      admin: null,
+      adminId: admin,
       location: {
         city: {
           city: city,
@@ -110,8 +112,10 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
 
   useEffect(() => {
     if (parking) {
+      console.log(parking);
+      
       setValue('name', parking.name)
-      // setValue('admin', parking.admin)
+      setAdminId(parking ? parking?.adminId! : null)
       setValue('city', parking.location.city.city)
       setValue('address', parking.location.address)
       setValue('latitude', parseInt(parking.location.latitude))
@@ -137,8 +141,13 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     }
   }, [])
 
+  useEffect(() => {
+    setValue('admin', adminId ? adminId : '')
+  }, [adminId])
+
   const clearForm = () => {
     setValue('name', '')
+    setValue('admin', '')
     setValue('city', '')
     setValue('address', '')
     setValue('latitude', 0)
@@ -172,18 +181,32 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col space-2'>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='name'>Nombre Parqueadero</Label>
-              <Input
-                {...register('name')}
-                className={cn('border-yellowFPC-400', {
-                  'focus-visible:ring-red-500': errors.name,
-                })}
-                placeholder='Parking State'
-              />
-              {errors?.name && (
-                <p className='text-sm text-red-500'>{errors.name.message}</p>
-              )}
+            <div className='grid gap-2 justify-around grid-cols-2'>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='name'>Nombre Parqueadero</Label>
+                <Input
+                  {...register('name')}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.name,
+                  })}
+                  placeholder='Parking State'
+                />
+                {errors?.name && (
+                  <p className='text-sm text-red-500'>{errors.name.message}</p>
+                )}
+              </div>
+
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='admin'>Administrador</Label>
+                <AdminSelect
+                  admin={adminId}
+                  setAdmin={setAdminId}
+                  errors={errors.admin}
+                />
+                {errors?.admin && (
+                  <p className='text-sm text-red-500'>{errors.admin.message}</p>
+                )}
+              </div>
             </div>
 
             <Separator

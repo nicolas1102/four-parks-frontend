@@ -1,12 +1,14 @@
 import { LocationInterface } from './location.interface'
 import { OpeningHoursInterface } from './openingHours.interface'
 import { ParkingTypeInterface } from './parkingType.interface'
+import { UserInterface } from './user.interface'
 
 export interface ParkingInterface {
   id?: number
   name: string
   location: LocationInterface
-  admin?: string | null
+  admin?: UserInterface
+  adminId?: string
   // admin: string 
   //availableSlots: number
   total_slots: string

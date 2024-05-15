@@ -22,6 +22,7 @@ export function CitySelect({
   setSelectValue: UseFormSetValue<{
     address: string
     name: string
+    admin: string
     loyalty: boolean
     parkingType: string
     city: string

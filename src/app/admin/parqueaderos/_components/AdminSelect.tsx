@@ -12,38 +12,37 @@ import {
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { cn } from '@/lib/utils'
 import { useUser } from '@/services/useUser'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { FieldError, UseFormSetValue } from 'react-hook-form'
 
 export function AdminSelect({
-  selectValue,
-  setSelectValue,
+  admin,
+  setAdmin,
   errors,
 }: {
-  selectValue: string
-  setSelectValue: UseFormSetValue<{
-    admin: string
-  }>
+  admin?: string | null
+  setAdmin: Dispatch<SetStateAction<string | null>>
   errors: FieldError | undefined
 }) {
-  const [admin, setAdmin] = useState(selectValue)
-  const { getUsersByRole, isLoading } = useUser()
-  const [admins, setAdmins] = useState<UserInterface[]>()
+  const {
+    users: admins,
+    setUsers: setAdmins,
+    getUsersByRole,
+    isLoading,
+  } = useUser()
   useEffect(() => {
     const fetchAdmins = async () => {
       setAdmins(await getUsersByRole('2'))
     }
     fetchAdmins()
   }, [])
-  useEffect(() => {
-    if (admin) {
-      setSelectValue('admin', admin)
-    }
-  }, [admin])
   return (
     <Select
       onValueChange={(value) => {
-        setAdmin(value)
+        const selectedAdmin = admins.filter((admin) => {
+          return admin.id?.toString() === value
+        })
+        setAdmin(selectedAdmin[0].id + '')
       }}
       value={admin ? admin : ''}
       disabled={isLoading || admins?.length === 0 ? true : false}

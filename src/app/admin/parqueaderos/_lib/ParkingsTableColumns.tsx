@@ -27,8 +27,6 @@ import { Dialog } from '@/components/ui/dialog'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { useParking } from '@/services/useParking'
 import { useRouter } from 'next/navigation'
-import { LocationInterface } from '@/lib/interfaces/location.interface'
-import { ParkingAdminDialog } from '../_components/ParkingAdminDialog'
 
 const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -98,7 +96,11 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       header: 'Administrador',
       cell: ({ row }) => {
         const parking = row.original
-        return <div className=''>{parking.admin}</div>
+        return (
+          <div className=''>
+            {parking.admin?.firstName + ' ' + parking.admin?.firstLastname}
+          </div>
+        )
       },
     },
     {
@@ -160,9 +162,9 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
                 <ParkingDialog parking={parking} />
               </Dialog>
 
-              <Dialog>
+              {/* <Dialog>
                 <ParkingAdminDialog parking={parking} />
-              </Dialog>
+              </Dialog> */}
 
               <DropdownMenuItem
                 onClick={() => {

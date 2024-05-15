@@ -19,9 +19,10 @@ export function ParkingTypeSelect({
   errors,
 }: {
   selectValue: string
-  setSelectValue: UseFormSetValue<{
+  setSelectValue:  UseFormSetValue<{
     address: string
     name: string
+    admin: string
     loyalty: boolean
     parkingType: string
     city: string

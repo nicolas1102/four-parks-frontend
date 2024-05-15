@@ -46,7 +46,9 @@ const Profile = ({
         <DropdownMenuLabel>
           {name}
           {rol !== 'USUARIO' ? (
-            <span className='dark:text-yellowFPC-400 text-blue-700 font-medium'>({rol})</span>
+            <span className='dark:text-yellowFPC-400 text-blue-700 font-medium'>
+              ({rol})
+            </span>
           ) : (
             ''
           )}
@@ -54,7 +56,7 @@ const Profile = ({
         <DropdownMenuSeparator />
         {isLoggedIn ? (
           <>
-            <DropdownMenuItem>
+            <DropdownMenuItem className='cursor-pointer'>
               <User className='mr-2 h-4 w-4' />
               <Link href='/usuario'>Perfil</Link>
             </DropdownMenuItem>
@@ -62,7 +64,7 @@ const Profile = ({
               onClick={() => {
                 signOut()
               }}
-              className='text-red-500 font-bold'
+              className='text-red-500 font-bold cursor-pointer'
             >
               <LogOut className='mr-2 h-4 w-4' />
               Cerrar Sesión
