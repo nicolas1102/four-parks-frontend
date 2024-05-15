@@ -23,7 +23,8 @@ export default withAuth(
       )
     }
 
-    if (request.nextUrl.pathname.startsWith("/parqueaderos")
+    if ((request.nextUrl.pathname.startsWith("/parqueaderos")
+      || request.nextUrl.pathname.startsWith("/reserva"))
       && request.nextauth.token?.rol !== "USUARIO") {
       return NextResponse.rewrite(
         new URL("/auth/unauthorized", request.url)
@@ -41,6 +42,7 @@ export const config = {
   matcher: [
     "/admin/:path*",
     '/parqueaderos/:path*',
+    '/reserva/:path*',
     '/usuario'
   ]
 };

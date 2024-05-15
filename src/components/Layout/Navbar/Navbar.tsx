@@ -4,12 +4,9 @@ import Link from 'next/link'
 import { Icons } from '../../Icons'
 import ModeToggle from './ModeToggle'
 import ProfileNav from './ProfileNav'
-// import { OPTIONS } from '@/app/api/auth/[...nextauth]/route'
 import { useSession } from 'next-auth/react'
-import { Session } from 'next-auth'
 
 const Navbar = () => {
-  // const session = await getServerSession(OPTIONS)
   const { data: session } = useSession()
   return (
     <div className='flex flex-col sticky z-50 top-0 inset-x-0 items-center justify-center w-full border-b-2 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
