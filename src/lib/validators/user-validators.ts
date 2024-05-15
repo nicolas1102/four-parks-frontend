@@ -33,9 +33,6 @@ export const CreateAdminFromManagerValidator = z.object({
     .number()
     .min(0, { message: 'El número de intentos de logueo debe ser mayor o igual a 0.' })
     .max(4, { message: 'El número de intentos de logueo debe no puede ser mayor a 4.' }),
-  parking: z
-    .string()
-    .min(1, { message: 'Este campo es necesario.' }),
 });
 
 export const EditPersonalInfoValidator = z.object({

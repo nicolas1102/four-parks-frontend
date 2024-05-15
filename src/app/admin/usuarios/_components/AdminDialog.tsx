@@ -16,10 +16,6 @@ import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect, useState } from 'react'
 import { useUser } from '@/services/useUser'
 import {
-  EditUserFromManagerValidator,
-  EditPersonalInfoValidator,
-  TEditUserFromManagerValidator,
-  TEditPersonalInfoValidator,
   TCreateAdminFromManagerValidator,
   CreateAdminFromManagerValidator,
 } from '@/lib/validators/user-validators'
@@ -30,14 +26,9 @@ import { useRouter } from 'next/navigation'
 import Separator from '@/components/Separator'
 import { Toggle } from '@/components/ui/toggle'
 import { Check, X } from 'lucide-react'
-import FloatingButton from '@/components/CustomButtons/FloatingButton'
-import { Button } from '@/components/ui/button'
-import { ParkingInterface } from '@/lib/interfaces/parking.interface'
-import { ParkingSelect } from './ParkingSelect'
 
 export function AdminDialog({ admin }: { admin?: UserInterface }) {
   const router = useRouter()
-  const [parking, setParking] = useState<ParkingInterface | null>(null)
   const [accountActive, setAccountActive] = useState(
     admin?.accountActive ? true : false
   )
@@ -63,7 +54,6 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
     accountActive,
     accountBlocked,
     loginAttempts,
-    parking,
   }: TCreateAdminFromManagerValidator) => {
     const adminData = {
       email,
@@ -78,11 +68,9 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
     } as UserInterface
     // const res = admin
     //   ? await updateUser(adminData)
-    //   : await createUser(parkingData)
+    //   : await createAdmin(adminData)
 
-    console.log(adminData);
-    console.log(parking);
-    
+    console.log(adminData)
 
     // const res = await updateUser(adminData)
     // if (res?.status === 200) {
@@ -105,10 +93,6 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
     }
   }, [])
 
-  useEffect(() => {
-    setValue('parking', parking?.name + '')
-  }, [parking])
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -130,7 +114,9 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
             </p>
           </DialogTitle>
           <DialogDescription>
-            Aquí puedes crear un nuevo funcionario en nuestro sistema.
+            {!admin
+              ? 'Aquí puedes crear un nuevo administrador en nuestro sistema.'
+              : 'Aquí puedes editar los datos del administrador.'}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -200,7 +186,10 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
               </div>
             </div>
 
-            <Separator lineColor='border-yellowFPC-400' />
+            <Separator
+              lineColor='border-yellowFPC-400'
+              background='bg-background'
+            />
 
             <div className='grid gap-1 py-2'>
               <Label htmlFor='loginAttempts'>Intentos de Logueo</Label>
@@ -216,15 +205,6 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
                   {errors.loginAttempts.message}
                 </p>
               )}
-            </div>
-
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='loginAttempts'>Parqueadero</Label>
-              <ParkingSelect
-                parking={parking}
-                setParking={setParking}
-                errors={errors.parking}
-              />
             </div>
 
             <div className='grid gap-1 py-2'>
@@ -260,7 +240,7 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
             </div>
 
             <PrimaryButton
-              text={'CONFIRMAR DATOS PERSONALES'}
+              text={'CONFIRMAR DATOS DE ADMIN'}
               isLoading={isLoading}
             />
           </div>
