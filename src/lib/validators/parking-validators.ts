@@ -28,6 +28,18 @@ export const ParkingValidator = z.object({
   parkingType: z
     .string()
     .min(1, { message: 'Este campo es necesario.' }),
+  carRate: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
+  motorcycleRate: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
+  bikeRate: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
+  heavyCarRate: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
 }).refine((data) => data.closeTime >= data.openTime, {
   message: "La hora de cierre no puede ser igual o mayor a la de apertura.",
   path: ["closeTime"],

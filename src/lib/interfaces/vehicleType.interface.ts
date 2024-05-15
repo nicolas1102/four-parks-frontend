@@ -1,5 +1,5 @@
 export interface VehicleTypeInterface {
-  id: string
+  id?: string
   type: string
 }
 

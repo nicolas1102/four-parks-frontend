@@ -60,6 +60,10 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     closeTime,
     loyalty,
     parkingType,
+    carRate,
+    motorcycleRate,
+    bikeRate,
+    heavyCarRate,
   }: TParkingValidator) => {
     const parkingData = {
       id: parking && parking.id,
@@ -98,6 +102,12 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       // availableCarSlots: 0,
     } as ParkingInterface
 
+    // const carRateData = {
+    //   rate: carRate,
+    //   parking: ,
+    //   vehicleTyple: ,
+    // } as ParkingRateInterface
+
     // TODO: cerrar ventana al crear nuevo parqueadero
     const res = parking
       ? await updateParking(parkingData)
@@ -112,8 +122,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
 
   useEffect(() => {
     if (parking) {
-      console.log(parking);
-      
       setValue('name', parking.name)
       setAdminId(parking ? parking?.adminId! : null)
       setValue('city', parking.location.city.city)
@@ -131,12 +139,21 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       setValue('loyalty', parking.loyalty === 'true' ? true : false)
       // setValue('loyalty', parking.loyalty)
       setValue('parkingType', parking.parkingType.type)
+
+      // setValue('carRate', parking.heavyCarRate)
+      // setValue('motorcycleRate', parking.motorcycleRate)
+      // setValue('bikeRate', parking.bikeRate)
+      // setValue('heavyCarRate', parking.heavyCarRate)
     } else {
       setValue('latitude', 0)
       setValue('longitude', 0)
       setValue('totalSlots', 0)
       setValue('openTime', '00:00')
       setValue('closeTime', '00:00')
+      setValue('carRate', 0)
+      setValue('motorcycleRate', 0)
+      setValue('bikeRate', 0)
+      setValue('heavyCarRate', 0)
       setValue('loyalty', false)
     }
   }, [])
@@ -157,6 +174,10 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     setValue('closeTime', '00:00')
     setValue('loyalty', false)
     setValue('parkingType', '')
+    setValue('carRate', 0)
+    setValue('bikeRate', 0)
+    setValue('heavyCarRate', 0)
+    setValue('motorcycleRate', 0)
   }
   return (
     <>
@@ -208,11 +229,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                 )}
               </div>
             </div>
-
-            <Separator
-              lineColor='border-yellowFPC-400'
-              background='bg-background'
-            />
 
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
@@ -286,11 +302,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               </div>
             </div>
 
-            <Separator
-              lineColor='border-yellowFPC-400'
-              background='bg-background'
-            />
-
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='openTime'>Hora de Apertura</Label>
@@ -326,11 +337,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               </div>
             </div>
 
-            <Separator
-              lineColor='border-yellowFPC-400'
-              background='bg-background'
-            />
-
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
@@ -359,6 +365,69 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                 {errors?.parkingType && (
                   <p className='text-sm text-red-500'>
                     {errors.parkingType.message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className='grid gap-2 justify-around grid-cols-4'>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='carRate'>Precio Carros</Label>
+                <Input
+                  {...register('carRate', { valueAsNumber: true })}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.carRate,
+                  })}
+                  placeholder='200'
+                />
+                {errors?.carRate && (
+                  <p className='text-sm text-red-500'>
+                    {errors.carRate.message}
+                  </p>
+                )}
+              </div>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='motorcycleRate'>Precio Motos</Label>
+                <Input
+                  {...register('motorcycleRate', { valueAsNumber: true })}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.motorcycleRate,
+                  })}
+                  placeholder='200'
+                />
+                {errors?.motorcycleRate && (
+                  <p className='text-sm text-red-500'>
+                    {errors.motorcycleRate.message}
+                  </p>
+                )}
+              </div>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='bikeRate'>Precio Ciclas</Label>
+                <Input
+                  {...register('bikeRate', { valueAsNumber: true })}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.bikeRate,
+                  })}
+                  placeholder='200'
+                />
+                {errors?.bikeRate && (
+                  <p className='text-sm text-red-500'>
+                    {errors.bikeRate.message}
+                  </p>
+                )}
+              </div>
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='heavyCarRate'>Precio V. Pesados</Label>
+                <Input
+                  {...register('heavyCarRate', { valueAsNumber: true })}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.heavyCarRate,
+                  })}
+                  placeholder='200'
+                />
+                {errors?.heavyCarRate && (
+                  <p className='text-sm text-red-500'>
+                    {errors.heavyCarRate.message}
                   </p>
                 )}
               </div>
