@@ -226,7 +226,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       })
       return res as AxiosResponse<any, any>
     } catch (error: any) {
-      console.error('Error deleting user:', error)
+      console.error('Error updating user:', error)
       if (error?.response?.data) {
         toast({
           variant: 'destructive',
