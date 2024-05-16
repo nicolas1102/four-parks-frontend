@@ -119,17 +119,16 @@ export function ParkingFiltersDialog({
 
           <div className='grid gap-2 justify-around grid-cols-2'>
             <div className='grid gap-1 py-2'>
-              <Label htmlFor='total_slots'>Capacidad (Número de Slots)</Label>
+              <Label htmlFor='totalSlots'>Capacidad (Número de Slots)</Label>
               <Input
                 placeholder='24'
                 value={
-                  (table
-                    .getColumn('total_slots')
-                    ?.getFilterValue() as string) ?? ''
+                  (table.getColumn('totalSlots')?.getFilterValue() as string) ??
+                  ''
                 }
                 onChange={(event) =>
                   table
-                    .getColumn('total_slots')
+                    .getColumn('totalSlots')
                     ?.setFilterValue(event.target.value)
                 }
                 className='mr-2 border border-blueFPC-400'
@@ -143,9 +142,9 @@ export function ParkingFiltersDialog({
                   if (value === 'all') {
                     table.getColumn('loyalty')?.setFilterValue('')
                   } else {
-                    console.log(value)
-                    table.getColumn('loyalty')?.setFilterValue(value)
-                    console.log(table.getColumn('loyalty')?.getFilterValue())
+                    table
+                      .getColumn('loyalty')
+                      ?.setFilterValue(value === 'true' ? true : false)
                   }
                 }}
                 value={
