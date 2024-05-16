@@ -30,8 +30,6 @@ const authOptions = NextAuth({
           if (userFound?.response?.data) {
             throw new Error(userFound?.response?.data)
           }
-          console.log(userFound)
-
           if (userFound?.jwt) {
             const userWithRole = {
               ...userFound,

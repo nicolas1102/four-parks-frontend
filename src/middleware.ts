@@ -3,7 +3,6 @@ import { NextResponse } from "next/server"
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
-
     if (request.nextUrl.pathname.startsWith("/usuario")
       && request.nextauth.token?.rol !== "ADMINISTRADOR"
       && request.nextauth.token?.rol !== "GERENTE"

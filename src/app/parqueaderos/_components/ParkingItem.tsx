@@ -1,9 +1,10 @@
 import { Badge } from '@/components/ui/badge'
-import { Bike, Car } from 'lucide-react'
+import { Bike, Car, Tractor } from 'lucide-react'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import BookingSheet from './BookingSheet'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
+import { cn } from '@/lib/utils'
 
 const ParkingItem = ({
   parkingData,
@@ -47,42 +48,68 @@ const ParkingItem = ({
             <p className='font-medium'>
               Horario:{' '}
               <span className='font-normal'>
-                {parkingData.openingHours.open_time.substring(0, 5) +
+                {parkingData.openingHours.openTime.substring(0, 5) +
                   ' - ' +
-                  parkingData.openingHours.close_time.substring(0, 5)}
+                  parkingData.openingHours.closeTime.substring(0, 5)}
               </span>
-              {/* <span>
-                {parkingData.openingHours.openTime +
-                  ' - ' +
-                  parkingData.openingHours.closeTime}
-              </span> */}
             </p>
           </div>
-          <div className='flex flex-row gap-2'>
-            {parkingData.available_slots &&
-            parseInt(parkingData.available_slots) <= 5 ? (
-              // {parkingData.available_slots && parkingData.available_slots > 5 ? (
+          {/* {parkingData.availableSlots && parkingData.availableSlots <= 5 ? (
               <p className='text-redFPC-400 font-medium'>
-                Cupos: {parkingData.available_slots}
+                Cupos: {parkingData.availableSlots}
               </p>
             ) : (
-              <p>Cupos: {parkingData.available_slots}</p>
-            )}
+              <p>Cupos: {parkingData.availableSlots}</p>
+            )} */}
 
-            {/* <div className='flex flex-row gap-x-3'>
-              <p className='flex flex-row gap-0.5'>
-                <Car size={20} strokeWidth={1.3} />
-                {parkingData.availableCarSlots}
-              </p>
-              <p className='flex flex-row gap-0.5'>
-                <PiMotorcycleFill size={21} strokeWidth={1.3} />
-                {parkingData.availableMotorcicleSlots}
-              </p>
-              <p className='flex flex-row gap-0.5'>
-                <Bike size={19} strokeWidth={1.3} />
-                {parkingData.availableBikeSlots}
-              </p>
-            </div> */}
+          <div className='flex flex-row gap-x-3 items-center'>
+            <p>Cupos: </p>
+            <p
+              className={cn(
+                'flex flex-col justify-center text-center gap-0.5',
+                {
+                  'text-redFPC-400 font-medium': parkingData.carSlots <= 5,
+                }
+              )}
+            >
+              <Car size={20} strokeWidth={1.3} />
+              {parkingData.carSlots}
+            </p>
+            <p
+              className={cn(
+                'flex flex-col justify-center text-center gap-0.5',
+                {
+                  'text-redFPC-400 font-medium':
+                    parkingData.motorcycleSlots <= 5,
+                }
+              )}
+            >
+              <PiMotorcycleFill size={21} strokeWidth={1.3} />
+              {parkingData.motorcycleSlots}
+            </p>
+            <p
+              className={cn(
+                'flex flex-col justify-center text-center gap-0.5',
+                {
+                  'text-redFPC-400 font-medium': parkingData.bicycleSlots <= 5,
+                }
+              )}
+            >
+              <Bike size={19} strokeWidth={1.3} />
+              {parkingData.bicycleSlots}
+            </p>
+            <p
+              className={cn(
+                'flex flex-col justify-center text-center gap-0.5',
+                {
+                  'text-redFPC-400 font-medium':
+                    parkingData.heavyVehicleSlots <= 6,
+                }
+              )}
+            >
+              <Tractor size={19} strokeWidth={1.3} />
+              {parkingData.heavyVehicleSlots}
+            </p>
           </div>
 
           <div className='pt-3'>
