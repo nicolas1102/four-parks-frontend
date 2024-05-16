@@ -30,6 +30,8 @@ const authOptions = NextAuth({
           if (userFound?.response?.data) {
             throw new Error(userFound?.response?.data)
           }
+          console.log(userFound)
+
           if (userFound?.jwt) {
             const userWithRole = {
               ...userFound,
@@ -48,6 +50,7 @@ const authOptions = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        token.id = user.id as number
         token.jwt = user.jwt
         token.rol = user.rol
         token.ip = user.ip
@@ -62,6 +65,7 @@ const authOptions = NextAuth({
     // para configurar los datos que se peueden usar en client
     session({ token, session }) {
       if (token) {
+        session.id = token.id
         session.rol = token.rol
         session.ip = token.ip
         session.jwt = token.jwt
@@ -70,7 +74,7 @@ const authOptions = NextAuth({
         session.firstName = token.firstName
         session.firstLastname = token.firstLastname
         session.secondLastname = token.secondLastname
-      }      
+      }
       return session
     },
   },

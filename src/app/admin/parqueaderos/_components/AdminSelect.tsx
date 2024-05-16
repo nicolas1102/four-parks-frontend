@@ -9,11 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { UserInterface } from '@/lib/interfaces/user.interface'
 import { cn } from '@/lib/utils'
 import { useUser } from '@/services/useUser'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { FieldError, UseFormSetValue } from 'react-hook-form'
+import { Dispatch, SetStateAction, useEffect } from 'react'
+import { FieldError } from 'react-hook-form'
 
 export function AdminSelect({
   admin,

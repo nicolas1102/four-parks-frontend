@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react'
 import AdminFunctionItem from './_components/AdminFunctionItem'
 import { LineChart, ParkingSquare, User } from 'lucide-react'
+import Loader from '@/components/Loader'
 
 const GERENTE_FUNCTIONS = [
   {
@@ -36,7 +37,9 @@ const FUNCIONARIO_FUNCTIONS = [
 
 const Page = () => {
   const { data: session } = useSession()
-  return (
+  return !session ? (
+    <Loader />
+  ) : (
     <div className='max-h-full flex flex-col gap-y-10 m-10'>
       <div className='flex flex-col'>
         <div className='pb-7'>

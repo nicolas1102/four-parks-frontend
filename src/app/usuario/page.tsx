@@ -97,13 +97,6 @@ export default function Home() {
                       {user?.secondLastname}
                     </p>
                   </li>
-                  {/* <li>
-                    <p className='uppercase'>
-                      <span className='font-medium tracking-widest'>Rol:</span>{' '}
-                      // TODO: Arreglar esta respuesta
-                      // {user?.roleList[0]}
-                    </p>
-                  </li> */}
                 </ul>
               </div>
 

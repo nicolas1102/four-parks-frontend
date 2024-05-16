@@ -57,40 +57,43 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       },
       cell: ({ row }) => <div>{row.getValue('name')}</div>,
     },
-    {
-      accessorKey: 'city',
-      header: 'Ciudad',
-      cell: ({ row }) => {
-        const parking = row.original
-        return <div className=''>{parking.location.city.city}</div>
-      },
-    },
-    {
-      accessorKey: 'address',
-      header: 'Dirección',
-      cell: ({ row }) => {
-        const parking = row.original
-        return <div className=''>{parking.location.address}</div>
-      },
-    },
-    {
-      accessorKey: 'total_slots',
-      // accessorKey: 'totalSlots',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant='ghost'
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Capacidad (Espacios)
-            <ArrowUpDown className='ml-2 h-4 w-4' />
-          </Button>
-        )
-      },
-      cell: ({ row }) => (
-        <div className='text-center'>{row.getValue('total_slots')}</div>
-      ),
-    },
+    // {
+    //   accessorKey: 'city',
+    //   header: 'Ciudad',
+    //   cell: ({ row }) => {
+    //     const parking = row.original
+    //     return <div className=''>{parking.location.
+          
+          
+    //       }</div>
+    //   },
+    // },
+    // {
+    //   accessorKey: 'address',
+    //   header: 'Dirección',
+    //   cell: ({ row }) => {
+    //     const parking = row.original
+    //     return <div className=''>{parking.location.address}</div>
+    //   },
+    // },
+    // {
+    //   accessorKey: 'total_slots',
+    //   // accessorKey: 'totalSlots',
+    //   header: ({ column }) => {
+    //     return (
+    //       <Button
+    //         variant='ghost'
+    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    //       >
+    //         Capacidad (Espacios)
+    //         <ArrowUpDown className='ml-2 h-4 w-4' />
+    //       </Button>
+    //     )
+    //   },
+    //   cell: ({ row }) => (
+    //     <div className='text-center'>{row.getValue('total_slots')}</div>
+    //   ),
+    // },
     {
       accessorKey: 'admin',
       header: 'Administrador',

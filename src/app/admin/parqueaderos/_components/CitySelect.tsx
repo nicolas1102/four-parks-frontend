@@ -9,68 +9,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { CityInterface } from '@/lib/interfaces/city.interface'
 import { cn } from '@/lib/utils'
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
-import { FieldError, UseFormSetValue } from 'react-hook-form'
+import { useCity } from '@/services/useCity'
+import { Dispatch, SetStateAction, useEffect } from 'react'
+import { FieldError } from 'react-hook-form'
 
 export function CitySelect({
-  selectValue,
-  setSelectValue,
+  city,
+  setCity,
   errors,
 }: {
-  selectValue: string | null
-  setSelectValue: UseFormSetValue<{
-    address: string
-    name: string
-    admin: string
-    loyalty: boolean
-    parkingType: string
-    city: string
-    latitude: number
-    longitude: number
-    totalSlots: number
-    openTime: string
-    closeTime: string
-  }>
+  city: CityInterface | null
+  setCity: Dispatch<SetStateAction<CityInterface | null>>
   errors: FieldError | undefined
 }) {
-  const [city, setCity] = useState(selectValue)
-  // const { cities, getCities, isLoading } = useCity()
-  // useEffect(() => {
-  //   const fetchCities = async () => {
-  //     await getCities()
-  //   }
-  //   fetchCities()
-  // }, [])
+  const { cities, getCities, isLoading } = useCity()
   useEffect(() => {
-    if (city) {
-      setSelectValue('city', city)
+    const fetchCities = async () => {
+      await getCities()
     }
-  }, [city, selectValue])
+    fetchCities()
+  }, [])
+
   return (
     <Select
       onValueChange={(value) => {
-        setCity(value)
+        const selectedCity = cities.filter((city) => {
+          return city.city.toLowerCase() === value.toLowerCase()
+        })
+        setCity(selectedCity[0])
       }}
-      value={city ? city : ''}
-      // {isLoading || cities.lenght === 0 && disabled }
+      value={city ? city.city : ''}
+      disabled={isLoading || cities?.length === 0 ? true : false}
     >
       <SelectTrigger
         className={cn('w-full border border-yellowFPC-400', {
           'focus-visible:ring-red-500': errors,
         })}
       >
-        <SelectValue placeholder='Ciudad' />
+        <SelectValue placeholder={isLoading ? 'Cargando Datos...' : 'Ciudad'} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Ciudad</SelectLabel>
-          <SelectItem value={'Bogota D.C.'}>Bogota D.C.</SelectItem>
-          <SelectItem value={'Medellín'}>Medellín</SelectItem>
-          {/* cities.map((city) => (
-            <SelectItem key={city.id} value={city.city}>{city.city}</SelectItem>
-
-          )) */}
+          {cities &&
+            cities.map((cityItem) => (
+              <SelectItem key={cityItem.id} value={cityItem.id + ''}>
+                {cityItem.city}
+              </SelectItem>
+            ))}
         </SelectGroup>
       </SelectContent>
     </Select>

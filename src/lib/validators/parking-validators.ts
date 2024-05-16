@@ -15,10 +15,6 @@ export const ParkingValidator = z.object({
     .number(),
   longitude: z
     .number(),
-  totalSlots: z
-    .number()
-    .min(1, { message: 'La capacidad (número de slots) no puede ser menor o igual a 0.' })
-    .max(1000, { message: 'No puede contener más de 1000 slots' }),
   openTime: z
     .string().min(1, { message: 'Este campo es necesario.' }),
   closeTime: z
@@ -28,6 +24,18 @@ export const ParkingValidator = z.object({
   parkingType: z
     .string()
     .min(1, { message: 'Este campo es necesario.' }),
+  car_slots: z
+    .number()
+    .min(0, { message: 'La capacidad no puede ser menor a 0.' }),
+  bicycle_slots: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
+  motorcycle_slots: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
+  heavy_vehicle_slots: z
+    .number()
+    .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),
   carRate: z
     .number()
     .min(0, { message: 'Un precio no puede ser menor a 0 pesos.' }),

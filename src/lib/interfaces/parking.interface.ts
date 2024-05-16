@@ -6,20 +6,18 @@ import { UserInterface } from './user.interface'
 export interface ParkingInterface {
   id?: number
   name: string
-  location: LocationInterface
-  admin?: UserInterface
   adminId?: string
-  // admin: string 
-  //availableSlots: number
-  total_slots: string
-  // totalSlots: number
-  available_slots?: string
+  location: LocationInterface
+  // arreglar esto
+  loyalty: boolean | string
+  car_slots: number
+  bicycle_slots: number
+  motorcycle_slots: number
+  heavy_vehicle_slots: number
   openingHours: OpeningHoursInterface
-  loyalty: string
-  // loyalty: boolean
   parkingType: ParkingTypeInterface
-  // availableBikeSlots: number
-  // availableMotorcicleSlots: number
-  // availableCarSlots: number
+  // admin?: UserInterface
+  total_slots: string
+  available_slots?: string
 }
 

@@ -20,17 +20,24 @@ export function ParkingTypeSelect({
 }: {
   selectValue: string
   setSelectValue:  UseFormSetValue<{
-    address: string
     name: string
     admin: string
-    loyalty: boolean
-    parkingType: string
     city: string
+    address: string
     latitude: number
     longitude: number
-    totalSlots: number
     openTime: string
     closeTime: string
+    loyalty: boolean
+    parkingType: string
+    car_slots: number
+    bicycle_slots: number
+    motorcycle_slots: number
+    heavy_vehicle_slots: number
+    carRate: number
+    motorcycleRate: number
+    bikeRate: number
+    heavyCarRate: number
   }>
   errors: FieldError | undefined
 }) {

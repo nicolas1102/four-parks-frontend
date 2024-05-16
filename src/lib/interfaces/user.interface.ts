@@ -1,4 +1,4 @@
-import { CreditCard } from './creditCard.model'
+import { CreditCard } from './creditCard.interface'
 import { RoleType } from './role.interface'
 
 export interface UserInterface {
@@ -10,9 +10,9 @@ export interface UserInterface {
   secondName?: string
   firstLastname: string
   secondLastname: string
-  loginAttempts?: number
   accountActive?: boolean
   accountBlocked?: boolean
+  loginAttempts?: number
   roleList: RoleType[],
   creditCard?: CreditCard
 }

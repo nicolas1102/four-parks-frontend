@@ -3,5 +3,4 @@ export interface CreditCard {
   cardNumber: string
   expirationDate: string
   cvv: string
-  userId?: string
 }

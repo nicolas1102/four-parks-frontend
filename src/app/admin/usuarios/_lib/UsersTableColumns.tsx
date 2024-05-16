@@ -238,6 +238,16 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                 >
                   Copiar ID de usuario
                 </DropdownMenuItem>
+                {user.roleList[0] === 'USUARIO' && (
+                  <DropdownMenuItem
+                    className='cursor-pointer'
+                    onClick={() => {
+                      router.push(`/admin/usuarios/usuario/${user.id}`)
+                    }}
+                  >
+                    Ver operaciones en el sistema
+                  </DropdownMenuItem>
+                )}
                 {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
                   <DropdownMenuItem
                     onClick={async () => {

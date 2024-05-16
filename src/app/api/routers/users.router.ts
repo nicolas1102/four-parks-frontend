@@ -53,6 +53,6 @@ export const deleteUserRequest = async (email: string) => {
 }
 
 export const updateUserRequest = async (user: UserInterface) => {
-  const res = await axios.post(BASE_URL + '/users/user/update', user)
+  const res = await axios.put(BASE_URL + '/users/user/update', user)
   return res
 }

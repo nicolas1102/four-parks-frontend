@@ -3,8 +3,8 @@ import { VehicleTypeInterface } from './vehicleType.interface'
 
 export interface ParkingRateInterface {
   id?: string
-  rate: number
-  parking: ParkingInterface
-  vehicleType: VehicleTypeInterface
+  rate: string
+  parkingId: number
+  vehicleTypeId: VehicleTypeInterface
 }
 

@@ -6,6 +6,8 @@ import { UserLocationContext } from '@/context/UserLocationContext'
 import { useEffect, useState } from 'react'
 import { UserProvider } from '@/services/useUser'
 import { ParkingProvider } from '@/services/useParking'
+import { CityProvider } from '@/services/useCity'
+import { ParkingRateProvider } from '@/services/useParkingRate'
 
 interface Props {
   children: React.ReactNode
@@ -42,7 +44,11 @@ function Providers({ children }: Props) {
       >
         <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
           <UserProvider>
-            <ParkingProvider>{children}</ParkingProvider>
+            <ParkingProvider>
+              <ParkingRateProvider>
+                <CityProvider>{children}</CityProvider>
+              </ParkingRateProvider>
+            </ParkingProvider>
           </UserProvider>
         </UserLocationContext.Provider>
       </ThemeProvider>
