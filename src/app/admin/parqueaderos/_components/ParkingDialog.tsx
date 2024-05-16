@@ -31,23 +31,36 @@ import { UserInterface } from '@/lib/interfaces/user.interface'
 import { ParkingRateInterface } from '@/lib/interfaces/parkingRate.interface'
 import { CityInterface } from '@/lib/interfaces/city.interface'
 import { useParkingRate } from '@/services/useParkingRate'
+import { ParkingTypeInterface } from '@/lib/interfaces/parkingType.interface'
 
-export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
+export function ParkingDialog({
+  parking,
+  carRate,
+  motorcycleRate,
+  bikeRate,
+  heavyCarRate,
+}: {
+  parking?: ParkingInterface
+  carRate?: ParkingRateInterface
+  motorcycleRate?: ParkingRateInterface
+  bikeRate?: ParkingRateInterface
+  heavyCarRate?: ParkingRateInterface
+}) {
   const router = useRouter()
   const [loyaltyState, setLoyaltyState] = useState<boolean>(
-    parking?.loyalty === 'true' ? true : false
+    parking?.loyalty ? parking?.loyalty : false
   )
-  const [adminId, setAdminId] = useState<string | null>(null)
-  const [city, setCity] = useState<CityInterface | null>(null)
-  // const [loyaltyState, setLoyaltyState] = useState<boolean>(
-  //   parking ? parking.loyalty : false
-  // )
+  const [adminState, setAdminState] = useState<UserInterface | null>(null)
+  const [cityState, setCityState] = useState<CityInterface | null>(null)
+  const [parkingType, setParkingType] = useState<ParkingTypeInterface | null>(
+    null
+  )
   const { createParking, updateParking, isLoading } = useParking()
   const {
     createParkingRate,
     updateParkingRate,
     getParkingRatesByParkingId,
-    parkingRateRates,
+    parkingRates,
   } = useParkingRate()
   const {
     register,
@@ -69,76 +82,71 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     closeTime,
     loyalty,
     parkingType,
-    car_slots,
-    bicycle_slots,
-    motorcycle_slots,
-    heavy_vehicle_slots,
+    carSlots,
+    bicycleSlots,
+    motorcycleSlots,
+    heavyVehicleSlots,
     carRate,
     motorcycleRate,
     bikeRate,
     heavyCarRate,
   }: TParkingValidator) => {
-    console.log(closeTime)
-
     const parkingData = {
       id: parking && parking.id,
       name,
-      adminId: admin,
+      totalSlots: parking && parking.totalSlots,
+      availableSlots: parking && parking.availableSlots,
+      carSlots,
+      bicycleSlots,
+      motorcycleSlots,
+      heavyVehicleSlots,
+      loyalty,
       location: {
-        city,
+        city: {
+          city: city,
+        },
         address,
-        latitude: latitude + '',
-        longitude: longitude + '',
+        latitude: latitude,
+        longitude: longitude,
       },
-      car_slots,
-      bicycle_slots,
-      motorcycle_slots,
-      heavy_vehicle_slots,
       openingHours: {
-        open_time: openTime,
-        close_time: closeTime,
+        openTime,
+        closeTime,
       },
       parkingType: {
         type: parkingType,
       },
-      loyalty: loyaltyState.toString(),
+      adminId: adminState?.id,
     } as ParkingInterface
 
     // TODO: cerrar ventana al crear nuevo parqueadero
     const res = parking
       ? await updateParking(parkingData)
       : await createParking(parkingData)
-
-    console.log(res)
-
     const carRateData = {
-      rate: carRate + '',
-      // arreglar el id de parking
-      parkingId: 1,
+      rate: carRate,
+      parkingId: res?.data.id,
       vehicleTypeId: {
         type: 'CARRO',
       },
     } as ParkingRateInterface
     const motorcycleRateData = {
-      rate: motorcycleRate + '',
-      // arreglar el id de parking
-      parkingId: 1,
+      rate: motorcycleRate,
+      parkingId: res?.data.id,
       vehicleTypeId: {
         type: 'MOTO',
       },
     } as ParkingRateInterface
     const bikeRateData = {
-      rate: motorcycleRate + '',
-      // arreglar el id de parking
-      parkingId: 1,
+      rate: bikeRate,
+      parkingId: res?.data.id,
       vehicleTypeId: {
         type: 'BICICLETA',
       },
     } as ParkingRateInterface
     const heavyCarRateData = {
-      rate: motorcycleRate + '',
-      // arreglar el id de parking
-      parkingId: 1,
+      rate: heavyCarRate,
+      parkingId: res?.data.id,
       vehicleTypeId: {
         type: 'VEHICULO_PESADO',
       },
@@ -173,36 +181,39 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   useEffect(() => {
     if (parking) {
       setValue('name', parking.name)
-      setAdminId(parking ? parking?.adminId! : null)
-      setValue('city', parking.location.city)
+      setAdminState(parking.admin!)
+      setCityState(parking.location.city)
       setValue('address', parking.location.address)
-      setValue('latitude', parseInt(parking.location.latitude))
-      setValue('longitude', parseInt(parking.location.longitude))
-      setValue('openTime', parking.openingHours.open_time)
-      setValue('closeTime', parking.openingHours.close_time)
-      setValue('loyalty', parking.loyalty === 'true' ? true : false)
-      setValue('parkingType', parking.parkingType.type)
-      // setValue('car_slots', parking.parkingType.type)
-
-      // setValue('carRate', parking.heavyCarRate)
-      // setValue('motorcycleRate', parking.motorcycleRate)
-      // setValue('bikeRate', parking.bikeRate)
-      // setValue('heavyCarRate', parking.heavyCarRate)
+      setValue('latitude', parking.location.latitude)
+      setValue('longitude', parking.location.longitude)
+      setValue('openTime', parking.openingHours.openTime)
+      setValue('closeTime', parking.openingHours.closeTime)
+      setLoyaltyState(parking.loyalty)
+      setParkingType(parking.parkingType)
+      setValue('carSlots', parking.carSlots)
+      setValue('bicycleSlots', parking.bicycleSlots)
+      setValue('motorcycleSlots', parking.motorcycleSlots)
+      setValue('heavyVehicleSlots', parking.heavyVehicleSlots)
     } else {
       setValue('latitude', 0)
       setValue('longitude', 0)
       setValue('openTime', '00:00')
       setValue('closeTime', '00:00')
-      setValue('car_slots', 0)
-      setValue('bicycle_slots', 0)
-      setValue('motorcycle_slots', 0)
-      setValue('heavy_vehicle_slots', 0)
+      setValue('carSlots', 0)
+      setValue('bicycleSlots', 0)
+      setValue('motorcycleSlots', 0)
+      setValue('heavyVehicleSlots', 0)
       setValue('carRate', 0)
-      setValue('motorcycleRate', 0)
-      setValue('bikeRate', 0)
-      setValue('heavyCarRate', 0)
-      setValue('loyalty', false)
     }
+
+    carRate ? setValue('carRate', carRate.rate) : setValue('carRate', 0)
+    motorcycleRate
+      ? setValue('motorcycleRate', motorcycleRate.rate)
+      : setValue('bikeRate', 0)
+    bikeRate ? setValue('bikeRate', bikeRate.rate) : setValue('heavyCarRate', 0)
+    heavyCarRate
+      ? setValue('heavyCarRate', heavyCarRate.rate)
+      : setValue('motorcycleRate', 0)
   }, [])
 
   const clearForm = () => {
@@ -214,26 +225,36 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
     setValue('longitude', 0)
     setValue('openTime', '00:00')
     setValue('closeTime', '00:00')
-    setValue('loyalty', false)
-    setValue('parkingType', '')
-    setValue('car_slots', 0)
-    setValue('bicycle_slots', 0)
-    setValue('motorcycle_slots', 0)
-    setValue('heavy_vehicle_slots', 0)
+    setValue('carSlots', 0)
+    setValue('bicycleSlots', 0)
+    setValue('motorcycleSlots', 0)
+    setValue('heavyVehicleSlots', 0)
     setValue('carRate', 0)
     setValue('bikeRate', 0)
     setValue('heavyCarRate', 0)
     setValue('motorcycleRate', 0)
   }
   useEffect(() => {
-    setValue('admin', adminId ? adminId : '')
-  }, [adminId])
+    if (adminState) {
+      setValue('admin', adminState.id! + '')
+    }
+  }, [adminState])
 
   useEffect(() => {
-    if (city) {
-      setValue('city', city.city)
+    if (cityState) {
+      setValue('city', cityState.city)
     }
-  }, [city])
+  }, [cityState])
+
+  useEffect(() => {
+    if (parkingType) {
+      setValue('parkingType', parkingType.type)
+    }
+  }, [parkingType])
+
+  useEffect(() => {
+    setValue('loyalty', loyaltyState)
+  }, [loyaltyState])
   return (
     <>
       <DialogTrigger asChild>
@@ -275,8 +296,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='parkingType'>Tipo de Parqueadero</Label>
                 <ParkingTypeSelect
-                  selectValue={parking ? parking.parkingType.type : ''}
-                  setSelectValue={setValue}
+                  parkingType={parkingType}
+                  setParkingType={setParkingType}
                   errors={errors.parkingType}
                 />
                 {errors?.parkingType && (
@@ -291,8 +312,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='city'>Ciudad</Label>
                 <CitySelect
-                  city={city}
-                  setCity={setCity}
+                  city={cityState}
+                  setCity={setCityState}
                   errors={errors.city}
                 />
                 {errors?.city && (
@@ -318,7 +339,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
 
             <div className='grid gap-2 justify-around grid-cols-4'>
               <div className='grid gap-1 py-2'>
-                <div className='flex flex-row gap-2'>
+                <div className='flex flex-row gap-1'>
                   <Label htmlFor='latitude'>Latitud</Label>
                   <CustomTooltip text='Ingresa a Google Maps, dale clic derecho a un punto en el mapa y copia las coordenadas.'>
                     <CircleHelp size={16} className='cursor-pointer' />
@@ -338,7 +359,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                 )}
               </div>
               <div className='grid gap-1 py-2'>
-                <div className='flex flex-row gap-2'>
+                <div className='flex flex-row gap-1'>
                   <Label htmlFor='latitude'>Longitud</Label>
                   <CustomTooltip text='Ingresa a Google Maps, dale clic derecho a un punto en el mapa y copia las coordenadas.'>
                     <CircleHelp size={16} className='cursor-pointer' />
@@ -391,77 +412,9 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               </div>
             </div>
 
-            <div className='grid gap-2 justify-around grid-cols-2'>
+            {parking ? (
               <div className='grid gap-1 py-2'>
-                <Label htmlFor='totalSlots'>
-                  Capacidad <span className='italic'>(Número de Slots)</span>
-                </Label>
-                <div className='grid gap-2 justify-around grid-cols-4'>
-                  <div className='grid gap-1 py-1'>
-                    <Label htmlFor='totalSlots'>
-                      <p className='italic font-normal'>Carro</p>
-                    </Label>
-                    <Input
-                      {...register('car_slots', { valueAsNumber: true })}
-                      className={cn('border-yellowFPC-400', {
-                        'focus-visible:ring-red-500': errors.car_slots,
-                      })}
-                      placeholder='23'
-                    />
-                  </div>
-                  <div className='grid gap-1 py-1'>
-                    <Label htmlFor='totalSlots'>
-                      <p className='italic font-normal'>Moto</p>
-                    </Label>
-                    <Input
-                      {...register('bicycle_slots', { valueAsNumber: true })}
-                      className={cn('border-yellowFPC-400', {
-                        'focus-visible:ring-red-500': errors.bicycle_slots,
-                      })}
-                      placeholder='23'
-                    />
-                  </div>
-                  <div className='grid gap-1 py-1'>
-                    <Label htmlFor='totalSlots'>
-                      <p className='italic font-normal'>Cicla</p>
-                    </Label>
-                    <Input
-                      {...register('motorcycle_slots', { valueAsNumber: true })}
-                      className={cn('border-yellowFPC-400', {
-                        'focus-visible:ring-red-500': errors.motorcycle_slots,
-                      })}
-                      placeholder='23'
-                    />
-                  </div>
-
-                  <div className='grid gap-1 py-1'>
-                    <Label htmlFor='totalSlots'>
-                      <p className='italic font-normal'>Pesado</p>
-                    </Label>
-                    <Input
-                      {...register('heavy_vehicle_slots', {
-                        valueAsNumber: true,
-                      })}
-                      className={cn('border-yellowFPC-400', {
-                        'focus-visible:ring-red-500':
-                          errors.heavy_vehicle_slots,
-                      })}
-                      placeholder='23'
-                    />
-                  </div>
-                </div>
-                {(errors?.car_slots ||
-                  errors?.bicycle_slots ||
-                  errors?.motorcycle_slots ||
-                  errors?.heavy_vehicle_slots) && (
-                  <p className='text-sm text-red-500'>
-                    {'Por favor revisa estos datos'}
-                  </p>
-                )}
-              </div>
-
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='totalSlots'>
+                <Label htmlFor='rates'>
                   Precio por tipo de parqueadero{' '}
                   <span className='italic'>(COP)</span>
                 </Label>
@@ -524,14 +477,150 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
                   </p>
                 )}
               </div>
-            </div>
+            ) : (
+              <div className='grid gap-2 justify-around grid-cols-2'>
+                <div className='grid gap-1 py-2'>
+                  <Label htmlFor='totalSlots'>
+                    Capacidad <span className='italic'>(Número de Slots)</span>
+                  </Label>
+                  <div className='grid gap-2 justify-around grid-cols-4'>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='carSlots'>
+                        <p className='italic font-normal'>Carro</p>
+                      </Label>
+                      <Input
+                        {...register('carSlots', { valueAsNumber: true })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.carSlots,
+                        })}
+                        placeholder='23'
+                      />
+                    </div>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='bicycleSlots'>
+                        <p className='italic font-normal'>Moto</p>
+                      </Label>
+                      <Input
+                        {...register('bicycleSlots', { valueAsNumber: true })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.bicycleSlots,
+                        })}
+                        placeholder='23'
+                      />
+                    </div>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='motorcycleSlots'>
+                        <p className='italic font-normal'>Cicla</p>
+                      </Label>
+                      <Input
+                        {...register('motorcycleSlots', {
+                          valueAsNumber: true,
+                        })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.motorcycleSlots,
+                        })}
+                        placeholder='23'
+                      />
+                    </div>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='heavyVehicleSlots'>
+                        <p className='italic font-normal'>Pesado</p>
+                      </Label>
+                      <Input
+                        {...register('heavyVehicleSlots', {
+                          valueAsNumber: true,
+                        })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500':
+                            errors.heavyVehicleSlots,
+                        })}
+                        placeholder='23'
+                      />
+                    </div>
+                  </div>
+                  {(errors?.carSlots ||
+                    errors?.bicycleSlots ||
+                    errors?.motorcycleSlots ||
+                    errors?.heavyVehicleSlots) && (
+                    <p className='text-sm text-red-500'>
+                      {'Por favor revisa estos datos'}
+                    </p>
+                  )}
+                </div>
+
+                <div className='grid gap-1 py-2'>
+                  <Label htmlFor='rates'>
+                    Precio por tipo de parqueadero{' '}
+                    <span className='italic'>(COP)</span>
+                  </Label>
+                  <div className='grid gap-2 justify-around grid-cols-4'>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='totalSlots'>
+                        <p className='italic font-normal'>Carro</p>
+                      </Label>
+                      <Input
+                        {...register('carRate', { valueAsNumber: true })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.carRate,
+                        })}
+                        placeholder='200'
+                      />
+                    </div>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='totalSlots'>
+                        <p className='italic font-normal'>Moto</p>
+                      </Label>
+                      <Input
+                        {...register('motorcycleRate', { valueAsNumber: true })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.motorcycleRate,
+                        })}
+                        placeholder='200'
+                      />
+                    </div>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='totalSlots'>
+                        <p className='italic font-normal'>Cicla</p>
+                      </Label>
+                      <Input
+                        {...register('bikeRate', { valueAsNumber: true })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.bikeRate,
+                        })}
+                        placeholder='200'
+                      />
+                    </div>
+                    <div className='grid gap-1 py-1'>
+                      <Label htmlFor='totalSlots'>
+                        <p className='italic font-normal'>Pesado</p>
+                      </Label>
+                      <Input
+                        {...register('heavyCarRate', { valueAsNumber: true })}
+                        className={cn('border-yellowFPC-400', {
+                          'focus-visible:ring-red-500': errors.heavyCarRate,
+                        })}
+                        placeholder='200'
+                      />
+                    </div>
+                  </div>
+                  {(errors?.carRate ||
+                    errors?.motorcycleRate ||
+                    errors?.bikeRate ||
+                    errors?.heavyCarRate) && (
+                    <p className='text-sm text-red-500'>
+                      {'Por favor revisa estos datos'}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className='grid gap-1 py-2'>
             <Label htmlFor='admin'>Administrador</Label>
             <AdminSelect
-              admin={adminId}
-              setAdmin={setAdminId}
+              admin={adminState}
+              setAdmin={setAdminState}
               errors={errors.admin}
             />
             {errors?.admin && (

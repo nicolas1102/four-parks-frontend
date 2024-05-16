@@ -20,7 +20,7 @@ import { useRouter } from 'next/navigation'
 import { AxiosResponse } from 'axios'
 
 interface ParkingRateContextType {
-  parkingRateRates: ParkingRateInterface[]
+  parkingRates: ParkingRateInterface[]
   setParkingRates: Dispatch<SetStateAction<ParkingRateInterface[]>>
   isLoading: boolean
   setIsLoading: (isLoading: boolean) => void
@@ -28,7 +28,9 @@ interface ParkingRateContextType {
   getOneParkingRate: (
     id: number
   ) => Promise<ParkingRateInterface | undefined> | ParkingRateInterface
-  createParkingRate: (parking: ParkingRateInterface) => Promise<AxiosResponse<any, any> | undefined>
+  createParkingRate: (
+    parking: ParkingRateInterface
+  ) => Promise<AxiosResponse<any, any> | undefined>
   updateParkingRate: (
     parkingRate: ParkingRateInterface
   ) => Promise<AxiosResponse<ParkingRateInterface, any> | undefined>
@@ -45,12 +47,9 @@ export const useParkingRate = () => {
 }
 
 export function ParkingRateProvider({ children }: { children: ReactNode }) {
-  const [parkingRateRates, setParkingRates] = useState<ParkingRateInterface[]>(
-    []
-  )
+  const [parkingRates, setParkingRates] = useState<ParkingRateInterface[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
-  const router = useRouter()
 
   const getParkingRatesByParkingId = async (parkingId: number) => {
     try {
@@ -172,7 +171,7 @@ export function ParkingRateProvider({ children }: { children: ReactNode }) {
   return (
     <ParkingRateContext.Provider
       value={{
-        parkingRateRates,
+        parkingRates,
         setParkingRates,
         isLoading,
         setIsLoading,

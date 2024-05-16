@@ -57,43 +57,41 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       },
       cell: ({ row }) => <div>{row.getValue('name')}</div>,
     },
-    // {
-    //   accessorKey: 'city',
-    //   header: 'Ciudad',
-    //   cell: ({ row }) => {
-    //     const parking = row.original
-    //     return <div className=''>{parking.location.
-          
-          
-    //       }</div>
-    //   },
-    // },
-    // {
-    //   accessorKey: 'address',
-    //   header: 'Dirección',
-    //   cell: ({ row }) => {
-    //     const parking = row.original
-    //     return <div className=''>{parking.location.address}</div>
-    //   },
-    // },
-    // {
-    //   accessorKey: 'total_slots',
-    //   // accessorKey: 'totalSlots',
-    //   header: ({ column }) => {
-    //     return (
-    //       <Button
-    //         variant='ghost'
-    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-    //       >
-    //         Capacidad (Espacios)
-    //         <ArrowUpDown className='ml-2 h-4 w-4' />
-    //       </Button>
-    //     )
-    //   },
-    //   cell: ({ row }) => (
-    //     <div className='text-center'>{row.getValue('total_slots')}</div>
-    //   ),
-    // },
+    {
+      accessorKey: 'city',
+      header: 'Ciudad',
+      cell: ({ row }) => {
+        const parking = row.original
+        return <div className=''>{parking.location.city.city}</div>
+      },
+    },
+    {
+      accessorKey: 'address',
+      header: 'Dirección',
+      cell: ({ row }) => {
+        const parking = row.original
+        return <div className=''>{parking.location.address}</div>
+      },
+    },
+    {
+      accessorKey: 'totalSlots',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant='ghost'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Capacidad (Espacios)
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        )
+      },
+      cell: ({ row }) => (
+        <div className='text-center'>
+          {row.getValue('totalSlots') + ' slots'}
+        </div>
+      ),
+    },
     {
       accessorKey: 'admin',
       header: 'Administrador',
@@ -121,15 +119,14 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
       },
       cell: ({ row }) => (
         <div className='text-center'>
-          {/* {row.getValue('loyalty') ? 'Si' : 'No'} */}
-          {row.getValue('loyalty') === 'true' ? 'Si' : 'No'}
+          {row.getValue('loyalty') ? 'Si' : 'No'}
         </div>
       ),
     },
     {
       id: 'actions',
       enableHiding: false,
-      cell: ({ row }) => {
+      cell: async ({ row }) => {
         const parking = row.original
         return (
           <DropdownMenu>
@@ -164,10 +161,6 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
               <Dialog>
                 <ParkingDialog parking={parking} />
               </Dialog>
-
-              {/* <Dialog>
-                <ParkingAdminDialog parking={parking} />
-              </Dialog> */}
 
               <DropdownMenuItem
                 onClick={() => {

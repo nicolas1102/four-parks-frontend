@@ -9,50 +9,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { ParkingTypeInterface } from '@/lib/interfaces/parkingType.interface'
 import { cn } from '@/lib/utils'
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { FieldError, UseFormSetValue } from 'react-hook-form'
 
 export function ParkingTypeSelect({
-  selectValue,
-  setSelectValue,
+  parkingType,
+  setParkingType,
   errors,
 }: {
-  selectValue: string
-  setSelectValue:  UseFormSetValue<{
-    name: string
-    admin: string
-    city: string
-    address: string
-    latitude: number
-    longitude: number
-    openTime: string
-    closeTime: string
-    loyalty: boolean
-    parkingType: string
-    car_slots: number
-    bicycle_slots: number
-    motorcycle_slots: number
-    heavy_vehicle_slots: number
-    carRate: number
-    motorcycleRate: number
-    bikeRate: number
-    heavyCarRate: number
-  }>
+  parkingType: ParkingTypeInterface | null
+  setParkingType: Dispatch<SetStateAction<ParkingTypeInterface | null>>
   errors: FieldError | undefined
 }) {
-  const [parkingType, setParkingType] = useState(selectValue)
-  useEffect(() => {
-    if (parkingType) {
-      setSelectValue('parkingType', parkingType)
-    }
-  }, [parkingType, selectValue])
   return (
     <Select
       onValueChange={(value) => {
-        setParkingType(value)
+        setParkingType({ type: value })
       }}
-      value={parkingType ? parkingType : ''}
+      value={parkingType ? parkingType.type : ''}
     >
       <SelectTrigger
         className={cn('w-full border border-yellowFPC-400', {

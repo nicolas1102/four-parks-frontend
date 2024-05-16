@@ -28,7 +28,7 @@ export function ParkingsTable({ data }: { data: ParkingInterface[] }) {
   return (
     <div className='w-full gap-2'>
       <div className='flex items-center py-4'>
-        <ParkingFiltersDialog table={table} />
+        {/* <ParkingFiltersDialog table={table} /> */}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

@@ -17,7 +17,6 @@ import {
   useState,
 } from 'react'
 import { useToast } from '@/components/ui/use-toast'
-import { useRouter } from 'next/navigation'
 import { AxiosResponse } from 'axios'
 
 interface ParkingContextType {
@@ -49,7 +48,6 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
   const [parkings, setParkings] = useState<ParkingInterface[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
-  const router = useRouter()
 
   const getParkings = async () => {
     setIsLoading(true)
@@ -113,9 +111,10 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
       const res = await createParkingRequest(parking)
       const newParking = await getOneParking(parking.name)
       if (newParking) {
-        setParkings((prevParkings: ParkingInterface[]) => {
-          return [...prevParkings, newParking]
-        })
+        setParkings((prevParkings: ParkingInterface[]) => [
+          ...prevParkings,
+          newParking,
+        ])
       }
       toast({
         title: 'El parqueadero fue creado con exito!',

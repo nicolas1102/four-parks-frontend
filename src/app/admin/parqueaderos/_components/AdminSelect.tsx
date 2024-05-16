@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { UserInterface } from '@/lib/interfaces/user.interface'
 import { cn } from '@/lib/utils'
 import { useUser } from '@/services/useUser'
 import { Dispatch, SetStateAction, useEffect } from 'react'
@@ -19,8 +20,8 @@ export function AdminSelect({
   setAdmin,
   errors,
 }: {
-  admin?: string | null
-  setAdmin: Dispatch<SetStateAction<string | null>>
+  admin?: UserInterface | null
+  setAdmin: Dispatch<SetStateAction<UserInterface | null>>
   errors: FieldError | undefined
 }) {
   const {
@@ -41,9 +42,9 @@ export function AdminSelect({
         const selectedAdmin = admins.filter((admin) => {
           return admin.id?.toString() === value
         })
-        setAdmin(selectedAdmin[0].id + '')
+        setAdmin(selectedAdmin[0])
       }}
-      value={admin ? admin : ''}
+      value={admin ? admin.id + '' : ''}
       disabled={isLoading || admins?.length === 0 ? true : false}
     >
       <SelectTrigger

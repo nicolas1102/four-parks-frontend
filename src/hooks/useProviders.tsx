@@ -44,11 +44,11 @@ function Providers({ children }: Props) {
       >
         <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
           <UserProvider>
-            <ParkingProvider>
-              <ParkingRateProvider>
+            <ParkingRateProvider>
+              <ParkingProvider>
                 <CityProvider>{children}</CityProvider>
-              </ParkingRateProvider>
-            </ParkingProvider>
+              </ParkingProvider>
+            </ParkingRateProvider>
           </UserProvider>
         </UserLocationContext.Provider>
       </ThemeProvider>
