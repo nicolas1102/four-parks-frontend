@@ -22,7 +22,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn, MONTH_OPTIONS, YEAR_OPTIONS } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
-import { CreditCard } from '@/lib/interfaces/creditCard.model'
+import { CreditCard } from '@/lib/interfaces/creditCard.interface'
 import { AxiosResponse } from 'axios'
 
 export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
