@@ -38,15 +38,15 @@ const questions = [
 
 export function FAQ() {
   return (
-    <div className='pb-20 px-10'>
-      <h2 className='text-3xl tracking-widest dark:font-normal font-medium text-center'>
+    <div className='pb-10 px-6 sm:pb-20 sm:px-10'>
+      <h2 className='text-2xl sm:text-3xl tracking-widest dark:font-normal font-medium text-center'>
         PREGUNTAS FRECUENTES (FAQ)
       </h2>
-      <div className='px-60 flex justify-center'>
-        <Accordion type='single' collapsible className='my-6 w-full'>
+      <div className='sm:px-60 flex justify-center'>
+        <Accordion type='single' collapsible className='sm:my-6 my-2 w-full'>
           {questions.map((item, index) => (
             <AccordionItem value={index + 1 + ''} key={index} className='border-b border-redFPC-400'>
-              <AccordionTrigger className='font-normal text-lg tracking-widest'>
+              <AccordionTrigger className='font-normal text-base sm:text-lg tracking-widest'>
                 {item.question}
               </AccordionTrigger>
               <AccordionContent>

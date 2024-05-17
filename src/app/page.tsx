@@ -13,7 +13,7 @@ export default function Home() {
       <Features />
       <ConvinceYou />
       <ExperiencesCards />
-      {/* <FAQ /> */}
+      <FAQ />
     </div>
   )
 }
