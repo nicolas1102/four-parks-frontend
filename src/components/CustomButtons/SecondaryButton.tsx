@@ -17,7 +17,9 @@ const SecondaryButton = ({
       onClick={onClick}
       variant='secondary'
       disabled={isLoading}
-      className={`tracking-widest dark:font-semibold hover:bg-yellowFPC-400 bg-yellow-200 dark:border-primary hover:border-primary dark:text-black dark:bg-yellowFPC-200 border border-primary w-[${width ? width : ''}px] `}
+      className={`tracking-widest dark:font-semibold hover:bg-yellowFPC-400 bg-yellow-200 dark:border-primary hover:border-primary dark:text-black dark:bg-yellowFPC-200 border border-primary sm:w-[${
+        width ? width : ''
+      }px] w-full`}
     >
       {text}
     </Button>
