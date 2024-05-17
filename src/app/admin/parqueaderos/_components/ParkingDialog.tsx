@@ -33,19 +33,7 @@ import { CityInterface } from '@/lib/interfaces/city.interface'
 import { useParkingRate } from '@/services/useParkingRate'
 import { ParkingTypeInterface } from '@/lib/interfaces/parkingType.interface'
 
-export function ParkingDialog({
-  parking,
-  carRate,
-  motorcycleRate,
-  bikeRate,
-  heavyCarRate,
-}: {
-  parking?: ParkingInterface
-  carRate?: ParkingRateInterface
-  motorcycleRate?: ParkingRateInterface
-  bikeRate?: ParkingRateInterface
-  heavyCarRate?: ParkingRateInterface
-}) {
+export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   const router = useRouter()
   const [loyaltyState, setLoyaltyState] = useState<boolean>(
     parking?.loyalty ? parking?.loyalty : false
@@ -123,54 +111,95 @@ export function ParkingDialog({
     const res = parking
       ? await updateParking(parkingData)
       : await createParking(parkingData)
-    const carRateData = {
-      rate: carRate,
-      parkingId: res?.data.id,
-      vehicleTypeId: {
-        type: 'CARRO',
-      },
-    } as ParkingRateInterface
-    const motorcycleRateData = {
-      rate: motorcycleRate,
-      parkingId: res?.data.id,
-      vehicleTypeId: {
-        type: 'MOTO',
-      },
-    } as ParkingRateInterface
-    const bikeRateData = {
-      rate: bikeRate,
-      parkingId: res?.data.id,
-      vehicleTypeId: {
-        type: 'BICICLETA',
-      },
-    } as ParkingRateInterface
-    const heavyCarRateData = {
-      rate: heavyCarRate,
-      parkingId: res?.data.id,
-      vehicleTypeId: {
-        type: 'VEHICULO_PESADO',
-      },
-    } as ParkingRateInterface
 
-    const resCarRate = parking
-      ? await updateParkingRate(carRateData)
-      : await createParkingRate(carRateData)
-    const resMotorcycleRate = parking
-      ? await updateParkingRate(motorcycleRateData)
-      : await createParkingRate(motorcycleRateData)
-    const resBikeRate = parking
-      ? await updateParkingRate(bikeRateData)
-      : await createParkingRate(bikeRateData)
-    const resHeavyCarRate = parking
-      ? await updateParkingRate(heavyCarRateData)
-      : await createParkingRate(heavyCarRateData)
+    if (parking?.parkingRate) {
+      parking.parkingRate.map(async (parkingType) => {
+        if (parkingType.vehicleTypeId.type === 'CARRO') {
+          const carRateData = {
+            id: parkingType.id,
+            rate: carRate,
+            parkingId: res?.data.id,
+            vehicleTypeId: {
+              type: 'CARRO',
+            },
+          } as ParkingRateInterface
+          await updateParkingRate(carRateData)
+        } else if (parkingType.vehicleTypeId.type === 'MOTO') {
+          const motorcycleRateData = {
+            id: parkingType.id,
+            rate: motorcycleRate,
+            parkingId: res?.data.id,
+            vehicleTypeId: {
+              type: 'MOTO',
+            },
+          } as ParkingRateInterface
+          await updateParkingRate(motorcycleRateData)
+        } else if (parkingType.vehicleTypeId.type === 'BICICLETA') {
+          const bikeRateData = {
+            id: parkingType.id,
+            rate: bikeRate,
+            parkingId: res?.data.id,
+            vehicleTypeId: {
+              type: 'BICICLETA',
+            },
+          } as ParkingRateInterface
+          await updateParkingRate(bikeRateData)
+        } else if (parkingType.vehicleTypeId.type === 'VEHICULO_PESADO') {
+          const heavyCarRateData = {
+            id: parkingType.id,
+            rate: heavyCarRate,
+            parkingId: res?.data.id,
+            vehicleTypeId: {
+              type: 'VEHICULO_PESADO',
+            },
+          } as ParkingRateInterface
+          await updateParkingRate(heavyCarRateData)
+        }
+      })
+    } 
+    else {
+      const carRateData = {
+        rate: carRate,
+        parkingId: res?.data.id,
+        vehicleTypeId: {
+          type: 'CARRO',
+        },
+      } as ParkingRateInterface
+      const motorcycleRateData = {
+        rate: motorcycleRate,
+        parkingId: res?.data.id,
+        vehicleTypeId: {
+          type: 'MOTO',
+        },
+      } as ParkingRateInterface
+      const bikeRateData = {
+        rate: bikeRate,
+        parkingId: res?.data.id,
+        vehicleTypeId: {
+          type: 'BICICLETA',
+        },
+      } as ParkingRateInterface
+      const heavyCarRateData = {
+        rate: heavyCarRate,
+        parkingId: res?.data.id,
+        vehicleTypeId: {
+          type: 'VEHICULO_PESADO',
+        },
+      } as ParkingRateInterface
+
+      const resCarRate = await createParkingRate(carRateData)
+      const resBikeRate = await createParkingRate(bikeRateData)
+      const resMotorcycleRate = await createParkingRate(motorcycleRateData)
+      const resHeavyCarRate = await createParkingRate(heavyCarRateData)
+    }
 
     if (
-      res?.status === 200 &&
-      resCarRate?.status === 200 &&
-      resMotorcycleRate?.status === 200 &&
-      resBikeRate?.status === 200 &&
-      resHeavyCarRate?.status === 200
+      res?.status === 200
+      // &&
+      // resCarRate?.status === 200 &&
+      // resMotorcycleRate?.status === 200 &&
+      // resBikeRate?.status === 200 &&
+      // resHeavyCarRate?.status === 200
     ) {
       if (!parking) clearForm()
       router.refresh()
@@ -194,6 +223,19 @@ export function ParkingDialog({
       setValue('bicycleSlots', parking.bicycleSlots)
       setValue('motorcycleSlots', parking.motorcycleSlots)
       setValue('heavyVehicleSlots', parking.heavyVehicleSlots)
+      if (parking.parkingRate) {
+        parking.parkingRate.map((parkingRate) => {
+          if (parkingRate.vehicleTypeId.type === 'CARRO') {
+            setValue('carRate', parkingRate.rate)
+          } else if (parkingRate.vehicleTypeId.type === 'MOTO') {
+            setValue('motorcycleRate', parkingRate.rate)
+          } else if (parkingRate.vehicleTypeId.type === 'BICICLETA') {
+            setValue('bikeRate', parkingRate.rate)
+          } else if (parkingRate.vehicleTypeId.type === 'VEHICULO_PESADO') {
+            setValue('heavyCarRate', parkingRate.rate)
+          }
+        })
+      }
     } else {
       setValue('latitude', 0)
       setValue('longitude', 0)
@@ -204,16 +246,10 @@ export function ParkingDialog({
       setValue('motorcycleSlots', 0)
       setValue('heavyVehicleSlots', 0)
       setValue('carRate', 0)
+      setValue('bikeRate', 0)
+      setValue('heavyCarRate', 0)
+      setValue('motorcycleRate', 0)
     }
-
-    carRate ? setValue('carRate', carRate.rate) : setValue('carRate', 0)
-    motorcycleRate
-      ? setValue('motorcycleRate', motorcycleRate.rate)
-      : setValue('bikeRate', 0)
-    bikeRate ? setValue('bikeRate', bikeRate.rate) : setValue('heavyCarRate', 0)
-    heavyCarRate
-      ? setValue('heavyCarRate', heavyCarRate.rate)
-      : setValue('motorcycleRate', 0)
   }, [])
 
   const clearForm = () => {

@@ -19,10 +19,5 @@ export interface ParkingInterface {
   parkingType: ParkingTypeInterface
   admin?: UserInterface
   adminId?: number
-  rates?: {
-    carRate: ParkingRateInterface
-    motorcycleRate: ParkingRateInterface
-    bikeRate: ParkingRateInterface
-    heavyCarRate: ParkingRateInterface
-  }
+  parkingRate?: ParkingRateInterface[]
 }

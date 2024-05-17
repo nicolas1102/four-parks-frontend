@@ -13,12 +13,7 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { useEffect, useState } from 'react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
-import {
-  Bike,
-  Car,
-  Cloud,
-  Tractor,
-} from 'lucide-react'
+import { Bike, Car, Cloud, Tractor } from 'lucide-react'
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
@@ -57,10 +52,15 @@ const BookingSheet = ({
               <p className='font-medium  tracking-wider overflow-hidden text-ellipsis truncate '>
                 DIRECCIÓN:{' '}
                 <span className='font-normal'>
-                  {selectedParking.location.address} -{' '}
-                  <span className='italic'>
-                    {selectedParking.location.city.city}
-                  </span>
+                  {selectedParking.location.address}
+                </span>
+              </p>
+            </div>
+            <div>
+              <p className='font-medium tracking-wider overflow-hidden text-ellipsis truncate '>
+                CIUDAD:{' '}
+                <span className='font-normal'>
+                  {selectedParking.location.city.city}
                 </span>
               </p>
             </div>
@@ -141,11 +141,8 @@ const BookingSheet = ({
                       </p>
                     </div>
                   </ToggleGroupItem>
-                  <ToggleGroupItem
-                    value='nube'
-                    aria-label='Toggle underline'
-                  >
-                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1' >
+                  <ToggleGroupItem value='nube' aria-label='Toggle underline'>
+                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
                       <div className='gap-1'>
                         <div className='flex flex-row gap-2'>
                           <Cloud size={22} strokeWidth={1.5} />
