@@ -1,13 +1,7 @@
 'use client'
 
-import {
-  User,
-  UserPlus,
-  LogIn,
-  LogOut,
-  SeparatorHorizontal,
-} from 'lucide-react'
-import Link from 'next/link'
+import * as React from 'react'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,9 +10,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
+import {
+  Menu,
+  ParkingSquare,
+  LogOut,
+  LogIn,
+  UserPlus,
+  User,
+} from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 
-const Profile = ({
+const BurgerMenu = ({
   isLoggedIn,
   name,
   rol,
@@ -27,19 +31,23 @@ const Profile = ({
   name: string
   rol: string
 }) => {
+  const { data: session } = useSession()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Link
-          className='bg-background hover:bg-accent h-12 w-auto flex items-center justify-around p-1.5 pr-2 border border-primary hover:bg-yellowFPC-200 hover dark:hover:bg-yellowFPC-400 dark:hover:text-background  '
-          href='/auth/sign-up'
+        <Button
+          variant='outline'
+          size='icon'
+          className='h-12 w-12 hover:bg-yellowFPC-200  dark:hover:bg-yellowFPC-400 border-primary dark:hover:text-background'
         >
-          <p className='tracking-widest text-sm font-medium leading-none m-1'>
-            PERFIL
+          <p
+            className={
+              'h-12 w-auto flex items-center justify-around p-2.5  dark:hover:text-background'
+            }
+          >
+            <Menu />
           </p>
-          <div className='border-l-2 h-full w-0 border-primary mx-2'></div>
-          <User />
-        </Link>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
         <DropdownMenuLabel>
@@ -81,9 +89,29 @@ const Profile = ({
             </DropdownMenuItem>
           </>
         )}
+        {session?.rol && <DropdownMenuSeparator />}
+
+        {session?.rol === 'USUARIO' && (
+          <DropdownMenuItem>
+            <ParkingSquare className='mr-2 h-4 w-4' />
+            <Link href='/auth/log-in'>Parqueaderos</Link>
+          </DropdownMenuItem>
+        )}
+        {session?.rol === 'ADMINISTRADOR' && (
+          <DropdownMenuItem>
+            <ParkingSquare className='mr-2 h-4 w-4' />
+            <Link href='/admin'>Menu Admin</Link>
+          </DropdownMenuItem>
+        )}
+        {session?.rol === 'GERENTE' && (
+          <DropdownMenuItem>
+            <ParkingSquare className='mr-2 h-4 w-4' />
+            <Link href='/admin'>Menu Gerente</Link>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
 
-export default Profile
+export default BurgerMenu
