@@ -131,42 +131,6 @@ const ParkingItem = ({
                 )
               }
             })}
-
-            {/* <p
-              className={cn(
-                'flex flex-col justify-center text-center gap-0.5',
-                {
-                  'text-redFPC-400 font-medium':
-                    parkingData.motorcycleSlots <= 5,
-                }
-              )}
-            >
-              <PiMotorcycleFill size={21} strokeWidth={1.3} />
-              {parkingData.motorcycleSlots}
-            </p>
-            <p
-              className={cn(
-                'flex flex-col justify-center text-center gap-0.5',
-                {
-                  'text-redFPC-400 font-medium': parkingData.bicycleSlots <= 5,
-                }
-              )}
-            >
-              <Bike size={19} strokeWidth={1.3} />
-              {parkingData.bicycleSlots}
-            </p>
-            <p
-              className={cn(
-                'flex flex-col justify-center text-center gap-0.5',
-                {
-                  'text-redFPC-400 font-medium':
-                    parkingData.heavyVehicleSlots <= 6,
-                }
-              )}
-            >
-              <Tractor size={19} strokeWidth={1.3} />
-              {parkingData.heavyVehicleSlots}
-            </p> */}
           </div>
 
           <div className='pt-3'>
