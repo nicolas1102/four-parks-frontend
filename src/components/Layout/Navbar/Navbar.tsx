@@ -20,11 +20,11 @@ const Navbar = () => {
       <div className='flex flex-row justify-between w-full p-1 content-center gap-2'>
         <div className='flex flex-row px-4 py-1'>
           <Link href='/' className='flex flex-row justify-center'>
-            <p className='sm:text-4xl text-3xl font-medium tracking-wider text-center text-primary pr-2'>
+            <p className='text-4xl font-medium tracking-wider text-center text-primary pr-2'>
               FOUR
             </p>
-            <Icons.logo className='w-7 h-10 sm:w-10 sm:h-10  text-yellow-400 hover:-rotate-45 transition-all' />
-            <p className='sm:text-4xl text-3xl font-medium tracking-wider text-center text-primary '>
+            <Icons.logo className='w-10 h-10  text-yellow-400 hover:-rotate-45 transition-all' />
+            <p className='text-4xl font-medium tracking-wider text-center text-primary '>
               ARKS
             </p>
           </Link>

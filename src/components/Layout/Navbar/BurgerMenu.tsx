@@ -89,7 +89,7 @@ const BurgerMenu = ({
             <Link href='/admin'>Menu Gerente</Link>
           </DropdownMenuItem>
         )}
-        <DropdownMenuSub>
+        <DropdownMenuSub >
           <DropdownMenuSubTrigger>
             <SunMoon className='mr-2 h-4 w-4' />
             <span>Tema</span>
