@@ -67,7 +67,7 @@ const Navbar = () => {
           <span className='border-l border-primary'></span>
           <ModeToggle />
         </div>
-        <div className=''>
+        <div className='sm:hidden'>
           <BurgerMenu
             isLoggedIn={Boolean(session)}
             name={
