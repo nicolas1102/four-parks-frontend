@@ -21,7 +21,7 @@ import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useEffect } from 'react'
-import { CreditCard } from '@/lib/interfaces/creditCard.model'
+import { CreditCard } from '@/lib/interfaces/creditCard.interface'
 
 const Page = () => {
   const searchParams = useSearchParams()
