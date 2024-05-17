@@ -61,17 +61,19 @@ const benefits = [
 
 const Features = () => {
   return (
-    <div className='py-20 px-32'>
-      <h2 className='text-3xl tracking-widest dark:font-normal font-medium'>
+    <div className='sm:py-20 py-10 sm:px-32 px-6'>
+      <h2 className='sm:text-3xl text-2xl tracking-widest dark:font-normal font-medium'>
         MÁS QUE UN SIMPLE ESTACIONAMIENTO
       </h2>
-      <ul className='flex flex-row justify-evenly pt-6 flex-wrap'>
+      <ul className='flex flex-col sm:flex-row justify-between pt-6 flex-wrap gap-y-4'>
         {benefits.map((item, index) => (
           <li
             key={index}
-            className='border border-primary w-48 m-2 bg-redFPC-400 '
+            className='border border-primary w-48 sm:m-2 bg-redFPC-400 m-auto'
           >
-            <p className='text-primary text-center bg-white p-2'>{item.image}</p>
+            <p className='text-primary text-center bg-white p-2'>
+              {item.image}
+            </p>
             <div className='p-2'>
               <h3 className='font-medium text-xl tracking-wider text-white text-center'>
                 {item.title}

@@ -35,7 +35,7 @@ const steps = [
 
 const Steps = () => {
   return (
-    <div className=' bg-blueFPC-400 py-10 sm:py-20 px-8 sm:px-32 w-full sm:grid sm:grid-cols-12'>
+    <div className=' bg-blueFPC-400 py-10 sm:py-20 px-6 sm:px-32 w-full sm:grid sm:grid-cols-12'>
       <div className='hidden sm:block col-span-5 relative overflow-hidden h-[630px]'>
         <Image
           src='/landing/steps.jpg'
