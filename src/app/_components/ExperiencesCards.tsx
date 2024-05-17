@@ -45,13 +45,13 @@ const experiences = [
 
 export function ExperiencesCards() {
   return (
-    <div className='py-20 px-10'>
-      <h2 className='text-3xl tracking-widest dark:font-normal font-medium pb-7 text-center'>
+    <div className='sm:py-20 sm:px-10 py-10 px-2'>
+      <h2 className='sm:text-3xl text-2xl tracking-widest dark:font-normal font-medium pb-7 text-center'>
         EXPERIENCIAS DE NUESTROS CLIENTES
       </h2>
       <div className='px-12 flex justify-center'>
         <Carousel
-          className='w-[1150px] '
+          className='sm:w-[1150px] w-64 '
           opts={{
             align: 'center',
             loop: true,
@@ -64,10 +64,10 @@ export function ExperiencesCards() {
         >
           <CarouselContent className=''>
             {experiences.map((item, index) => (
-              <CarouselItem key={index} className='basis-1/2'>
+              <CarouselItem key={index} className='sm:basis-1/3'>
                 <div className='p-1'>
                   <Card className='bg-blueFPC-400 border border-primary'>
-                    <CardContent className='flex aspect-square content-start justify-center p-6 h-96 flex-col w-full text-white'>
+                    <CardContent className='flex aspect-square content-start justify-center py-10 p-6 h-[500px] flex-col w-full text-white'>
                       <div className='flex justify-center flex-col items-center'>
                         <div className='rounded-full relative overflow-hidden h-40 w-40 border-2 border-white'>
                           <Image
@@ -80,15 +80,21 @@ export function ExperiencesCards() {
                             height={160}
                           />
                         </div>
-                        <p className='uppercase tracking-widest pt-3 text-xl font-medium'>
+                        <p className='uppercase tracking-widest pt-3 text-lg sm:text-xl font-medium'>
                           {item.name}
                         </p>
                       </div>
                       <div className=''>
                         <p className='mt-3 text-center'>
-                          <span className='text-xl font-bold'>&quot;</span>
-                          <span className='text-xl '>{item.experience}</span>
-                          <span className='text-xl font-bold'>&quot;</span>
+                          <span className='text-lg sm:text-xl font-bold'>
+                            &quot;
+                          </span>
+                          <span className='text-lg sm:text-xl '>
+                            {item.experience}
+                          </span>
+                          <span className='text-lg sm:text-xl font-bold'>
+                            &quot;
+                          </span>
                         </p>
                       </div>
                     </CardContent>
