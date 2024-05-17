@@ -35,8 +35,8 @@ const steps = [
 
 const Steps = () => {
   return (
-    <div className=' bg-blueFPC-400 py-20 px-32 w-full grid grid-cols-12'>
-      <div className='col-span-5 relative overflow-hidden h-[630px]'>
+    <div className=' bg-blueFPC-400 py-10 sm:py-20 px-8 sm:px-32 w-full sm:grid sm:grid-cols-12'>
+      <div className='hidden sm:block col-span-5 relative overflow-hidden h-[630px]'>
         <Image
           src='/landing/steps.jpg'
           className='w-full h-full object-cover object-center'
@@ -47,7 +47,7 @@ const Steps = () => {
         />
       </div>
 
-      <div className='col-span-7 pl-10'>
+      <div className='sm:col-span-7 sm:pl-10'>
         <h2 className='text-3xl text-black tracking-widest font-medium'>
           PARQUEA MEJOR, ASÍ DE FÁCIL
         </h2>
@@ -55,7 +55,7 @@ const Steps = () => {
           En solo unos pocos pasos estarás reservando tus parqueaderos en todo
           Colombia.
         </p>
-        <ul className='flex flex-col gap-4 py-4 pl-6'>
+        <ul className='flex flex-col gap-4 py-4'>
           {steps.map((item, index) => (
             <li
               key={index}

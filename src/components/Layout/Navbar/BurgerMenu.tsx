@@ -50,6 +50,25 @@ const BurgerMenu = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
+        {session?.rol === 'USUARIO' && (
+          <DropdownMenuItem>
+            <ParkingSquare className='mr-2 h-4 w-4' />
+            <Link href='/auth/log-in'>Parqueaderos</Link>
+          </DropdownMenuItem>
+        )}
+        {session?.rol === 'ADMINISTRADOR' && (
+          <DropdownMenuItem>
+            <ParkingSquare className='mr-2 h-4 w-4' />
+            <Link href='/admin'>Menu Admin</Link>
+          </DropdownMenuItem>
+        )}
+        {session?.rol === 'GERENTE' && (
+          <DropdownMenuItem>
+            <ParkingSquare className='mr-2 h-4 w-4' />
+            <Link href='/admin'>Menu Gerente</Link>
+          </DropdownMenuItem>
+        )}
+        {session?.rol && <DropdownMenuSeparator />}
         <DropdownMenuLabel>
           {name}
           {rol !== 'USUARIO' ? (
@@ -88,26 +107,6 @@ const BurgerMenu = ({
               <Link href='/auth/sign-up'>Registrarse</Link>
             </DropdownMenuItem>
           </>
-        )}
-        {session?.rol && <DropdownMenuSeparator />}
-
-        {session?.rol === 'USUARIO' && (
-          <DropdownMenuItem>
-            <ParkingSquare className='mr-2 h-4 w-4' />
-            <Link href='/auth/log-in'>Parqueaderos</Link>
-          </DropdownMenuItem>
-        )}
-        {session?.rol === 'ADMINISTRADOR' && (
-          <DropdownMenuItem>
-            <ParkingSquare className='mr-2 h-4 w-4' />
-            <Link href='/admin'>Menu Admin</Link>
-          </DropdownMenuItem>
-        )}
-        {session?.rol === 'GERENTE' && (
-          <DropdownMenuItem>
-            <ParkingSquare className='mr-2 h-4 w-4' />
-            <Link href='/admin'>Menu Gerente</Link>
-          </DropdownMenuItem>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

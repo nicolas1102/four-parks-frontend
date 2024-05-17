@@ -16,7 +16,7 @@ const PrimaryButton = ({
     <Button
       onClick={onClick}
       className={`tracking-widest dark:font-semibold border border-primary ${
-        width ? `w-[${width}px]` : 'w-full'
+        width ? `sm:w-[${width}px] w-full ` : 'w-full'
       }`}
       disabled={isLoading}
     >

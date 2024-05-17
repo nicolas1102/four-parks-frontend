@@ -14,11 +14,11 @@ const Hero = () => {
   }
 
   return (
-    <div className='h-[650px] w-full grid grid-cols-12 relative overflow-hidden'>
-      <div className='col-span-7 my-12 ml-32 mr-10'>
-        <h1 className='text-6xl font-light tracking-wider'>
+    <div className='sm:h-[650px] pb-8 w-full sm:grid sm:grid-cols-12 relative overflow-hidden'>
+      <div className='sm:col-span-7 sm:my-12 my-8 sm:ml-32 m-6 sm:mr-10'>
+        <h1 className='sm:text-6xl text-4xl font-light tracking-wider'>
           <span className=' font-bold'>¡</span>LA FORMA MÁS{' '}
-          <span className='font-bold'>FÁCIL</span>{' '}DE{' '}
+          <span className='font-bold'>FÁCIL</span> DE{' '}
           <span className='font-bold'>ASEGURAR</span> TU{' '}
           <span className='font-bold'>PARQUEADERO</span> EN TODA{' '}
           <span className='font-bold hover:animate-pulse'>
@@ -28,12 +28,11 @@ const Hero = () => {
           </span>
         </h1>
 
-        <div className='pt-12'>
-          <p className='text-xl font-medium tracking-widest'>
-            {/* Olvídate del estrés de buscar estacionamiento.  */}
+        <div className='sm:pt-12 pt-6'>
+          <p className='sm:text-xl text-lg sm:font-medium tracking-widest'>
             Ingresa, encuentra y reserva en segundos.
           </p>
-          <div className='pt-5 w-[450px]'>
+          <div className='pt-5 sm:w-[450px] w-full'>
             <Input
               type='email'
               placeholder='Tu email'
@@ -49,7 +48,10 @@ const Hero = () => {
               />
             </Link>
 
-            <Separator text={'¿Ya tienes una cuenta?'} background='bg-background' />
+            <Separator
+              text={'¿Ya tienes una cuenta?'}
+              background='bg-background'
+            />
 
             <Link href={'/auth/log-in'}>
               <PrimaryButton
@@ -61,7 +63,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className='col-span-5 relative overflow-hidden'>
+      <div className='sm:col-span-5 relative overflow-hidden  sm:block hidden'>
         <Image
           src='/landing/hero.jpg'
           className='w-full h-full object-cover object-center '

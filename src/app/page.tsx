@@ -10,10 +10,10 @@ export default function Home() {
     <div className='max-h-full m-auto flex flex-col'>
       <Hero />
       <Steps />
-      <Features />
+      {/* <Features />
       <ConvinceYou />
       <ExperiencesCards />
-      <FAQ />
+      <FAQ /> */}
     </div>
   )
 }
