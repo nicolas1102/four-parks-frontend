@@ -71,16 +71,19 @@ const Page = () => {
   }, [email, setValue])
 
   return (
-    <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
-      <FloatingButton text='INGRESAR' href='/auth/log-in' direction='left' />
-
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-blueFPC-400 p-5 bg-background-contrast'>
+    <div className='relative flex flex-col items-center justify-center lg:px-0 m-6 sm:m-10'>
+      <div className='hidden sm:block'>
+        <FloatingButton text='INGRESAR' href='/auth/log-in' direction='left' />
+      </div>
+      <div className='mx-auto flex w-full flex-col justify-center sm:space-y-6 space-y-3 sm:w-[450px] border border-blueFPC-400 p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
-          <div className='relative h-32 w-32 text-muted-foreground'>
+          <div className='relative h-20 w-20 sm:h-32 sm:w-32 text-muted-foreground'>
             <Icons.logo className='text-blueFPC-400' />
           </div>
-          <h1 className='text-2xl tracking-widest p-3'>REGISTARSE</h1>
-          <p className='text-sm tracking-wider'>
+          <h1 className='sm:text-2xl text-xl tracking-widest sm:p-3'>
+            REGISTARSE
+          </h1>
+          <p className='sm:text-sm text-xs tracking-wider'>
             Por favor llena todos los campos.{' '}
           </p>
         </div>
@@ -237,7 +240,7 @@ const Page = () => {
                 </div>
               </div>
               <PrimaryButton text={'REGISTRARSE'} isLoading={isLoading} />{' '}
-              <p className='text-muted-foreground text-center pt-1'>
+              <p className='text-muted-foreground text-center pt-1 text-sm sm:text-base'>
                 Al continuar, estarás aceptando nuestros{' '}
                 <span className='underline'>Términos de Servicio</span> y{' '}
                 <span className='underline'>Política de Privacidad.</span>
@@ -252,7 +255,7 @@ const Page = () => {
               <Link
                 className={buttonVariants({
                   variant: 'link',
-                  className: 'gap-1.5',
+                  className: 'gap-1 sm:gap-1.5 text-sm sm:text-base',
                 })}
                 href='/auth/log-in'
               >

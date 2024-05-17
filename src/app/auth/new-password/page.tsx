@@ -34,16 +34,18 @@ export default function Page() {
   }
 
   return (
-    <div className=' relative flex flex-col items-center gap-2 m-10'>
-      <FloatingButton text='PANTALLA DE INICIO' href='/' direction='left' />
+    <div className=' relative flex flex-col items-center gap-2 m-6 sm:m-10'>
+      <div className='hidden sm:block'>
+        <FloatingButton text='PANTALLA DE INICIO' href='/' direction='left' />
+      </div>
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-yellowFPC-400 p-5 bg-background-contrast'>
+      <div className='mx-auto flex w-full flex-col justify-center sm:space-y-6 space-y-3 sm:w-[450px] border border-yellowFPC-400 p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
-          <div className='relative mb-4 h-32 w-32 text-muted-foreground'>
+          <div className='relative h-20 w-20 sm:h-32 sm:w-32 text-muted-foreground'>
             <Icons.logo className='text-yellowFPC-400' />
           </div>
-          <h1 className='text-2xl tracking-widest p-3'>¡BIENVENIDO!</h1>
-          <p className='text-sm tracking-wider'>
+          <h1 className='sm:text-2xl text-xl tracking-widest sm:p-3'>¡BIENVENIDO!</h1>
+          <p className='sm:text-sm text-xs tracking-wider'>
             <span className='font-medium'>
               Te damos una gran bienvenida a la familia Four Parks.
             </span>{' '}
