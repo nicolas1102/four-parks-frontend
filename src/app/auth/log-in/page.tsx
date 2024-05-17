@@ -33,6 +33,7 @@ const Page = () => {
   const origin = searchParams.get('callbackUrl')
   const { toast } = useToast()
   const [stateCaptcha, setStateCaptcha] = useState<string | null>(null)
+  const { theme } = useTheme()
 
   const {
     register,
@@ -47,10 +48,10 @@ const Page = () => {
       if (!stateCaptcha) {
         toast({
           variant: 'destructive',
-           title: 'Recuerda llenar el captcha.',
-         })
-         return
-       }
+          title: 'Recuerda llenar el captcha.',
+        })
+        return
+      }
 
       setIsLoading(true)
       // usamos metodo de next-auth para inicio de sesioon
@@ -99,16 +100,20 @@ const Page = () => {
   }
 
   return (
-    <div className='relative flex flex-col items-center justify-center lg:px-0 m-10'>
-      <FloatingButton text='REGISTRARSE' href='./sign-up' direction='right' />
+    <div className='relative flex flex-col items-center justify-center m-6 sm:m-10'>
+      <div className='hidden sm:block'>
+        <FloatingButton text='REGISTRARSE' href='./sign-up' direction='right' />
+      </div>
 
-      <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px] border border-yellowFPC-400 p-5 bg-background-contrast'>
+      <div className='mx-auto flex w-full flex-col justify-center sm:space-y-6 space-y-3 sm:w-[450px] border border-yellowFPC-400 p-5 bg-background-contrast'>
         <div className='flex flex-col items-center text-center'>
-          <div className='relative h-32 w-32 text-muted-foreground'>
+          <div className='relative h-20 w-20 sm:h-32 sm:w-32 text-muted-foreground'>
             <Icons.logo className='text-yellowFPC-400' />
           </div>
-          <h1 className='text-2xl tracking-widest p-3'>INGRESA A TU CUENTA</h1>
-          <p className='text-sm tracking-wider'>
+          <h1 className='sm:text-2xl text-xl tracking-widest sm:p-3'>
+            INGRESA A TU CUENTA
+          </h1>
+          <p className='sm:text-sm text-xs tracking-wider'>
             Por favor ingresa tu e-mail y tu contraseña.
           </p>
         </div>
@@ -145,10 +150,11 @@ const Page = () => {
                   </p>
                 )}
               </div>
-              <div className='flex justify-center flex-col w-[407px] h-[78px]'>
+              <div className='flex justify-center sm:w-[407px] h-[78px]'>
                 <ReCAPTCHA
-                  className='flex justify-center mx-auto'
+                  className=''
                   size='normal'
+                  theme={theme === 'light' ? 'light' : 'dark'}
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                   onChange={setStateCaptcha}
                 />
@@ -156,7 +162,7 @@ const Page = () => {
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
 
-              <p className='text-muted-foreground text-center pt-1'>
+              <p className='text-muted-foreground text-center pt-1 text-sm sm:text-base'>
                 Al continuar, estarás aceptando nuestros{' '}
                 <span className='underline'>Términos de Servicio</span> y{' '}
                 <span className='underline'>Política de Privacidad.</span>
@@ -169,7 +175,7 @@ const Page = () => {
               <Link
                 className={buttonVariants({
                   variant: 'link',
-                  className: 'gap-1.5',
+                  className: 'gap-1 sm:gap-1.5 text-sm sm:text-base',
                 })}
                 href='/auth/sign-up'
               >
