@@ -1,6 +1,7 @@
 import { LocationInterface } from './location.interface'
 import { OpeningHoursInterface } from './openingHours.interface'
 import { ParkingRateInterface } from './parkingRate.interface'
+import { ParkingSlotDetailInterface } from './parkingSlotDetail.interface'
 import { ParkingTypeInterface } from './parkingType.interface'
 import { UserInterface } from './user.interface'
 
@@ -20,4 +21,5 @@ export interface ParkingInterface {
   admin?: UserInterface
   adminId?: number
   parkingRate?: ParkingRateInterface[]
+  parkingSlotDetails?: ParkingSlotDetailInterface[]
 }

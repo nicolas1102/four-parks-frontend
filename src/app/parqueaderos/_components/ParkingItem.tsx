@@ -64,18 +64,75 @@ const ParkingItem = ({
 
           <div className='flex flex-row gap-x-3 items-center'>
             <p>Cupos: </p>
-            <p
-              className={cn(
-                'flex flex-col justify-center text-center gap-0.5',
-                {
-                  'text-redFPC-400 font-medium': parkingData.carSlots <= 5,
-                }
-              )}
-            >
-              <Car size={20} strokeWidth={1.3} />
-              {parkingData.carSlots}
-            </p>
-            <p
+            {parkingData.parkingSlotDetails?.map((parkingSlotDetailItem) => {
+              if (parkingSlotDetailItem.slotType === 'CARRO') {
+                return (
+                  <p
+                    key={parkingSlotDetailItem.slotType}
+                    className={cn(
+                      'flex flex-col justify-center text-center gap-0.5',
+                      {
+                        'text-redFPC-400 font-medium':
+                          parkingSlotDetailItem.emptySlots <= 5,
+                      }
+                    )}
+                  >
+                    <Car size={20} strokeWidth={1.3} />
+                    {parkingSlotDetailItem.emptySlots}
+                  </p>
+                )
+              } else if (parkingSlotDetailItem.slotType === 'MOTO') {
+                return (
+                  <p
+                    key={parkingSlotDetailItem.slotType}
+                    className={cn(
+                      'flex flex-col justify-center text-center gap-0.5',
+                      {
+                        'text-redFPC-400 font-medium':
+                          parkingSlotDetailItem.emptySlots <= 5,
+                      }
+                    )}
+                  >
+                    <PiMotorcycleFill size={20} strokeWidth={1.3} />
+                    {parkingSlotDetailItem.emptySlots}
+                  </p>
+                )
+              } else if (parkingSlotDetailItem.slotType === 'BICICLETA') {
+                return (
+                  <p
+                    key={parkingSlotDetailItem.slotType}
+                    className={cn(
+                      'flex flex-col justify-center text-center gap-0.5',
+                      {
+                        'text-redFPC-400 font-medium':
+                          parkingSlotDetailItem.emptySlots <= 5,
+                      }
+                    )}
+                  >
+                    <Bike size={20} strokeWidth={1.3} />
+                    {parkingSlotDetailItem.emptySlots}
+                  </p>
+                )
+              } else if (parkingSlotDetailItem.slotType === 'VEHICULO_PESADO') {
+                return (
+                  <p
+                    key={parkingSlotDetailItem.slotType}
+                    className={cn(
+                      'flex flex-col justify-center text-center gap-0.5',
+                      {
+                        'text-redFPC-400 font-medium':
+                          parkingSlotDetailItem.emptySlots <= 5,
+                      }
+                    )}
+                  >
+                    <Tractor size={20} strokeWidth={1.3} />
+                    {parkingSlotDetailItem.emptySlots}
+                  </p>
+                )
+              }
+            })}
+
+            {/* <p
               className={cn(
                 'flex flex-col justify-center text-center gap-0.5',
                 {
@@ -109,7 +166,7 @@ const ParkingItem = ({
             >
               <Tractor size={19} strokeWidth={1.3} />
               {parkingData.heavyVehicleSlots}
-            </p>
+            </p> */}
           </div>
 
           <div className='pt-3'>
