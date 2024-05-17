@@ -23,7 +23,7 @@ const Navbar = () => {
             <p className='sm:text-4xl text-3xl font-medium tracking-wider text-center text-primary pr-2'>
               FOUR
             </p>
-            <Icons.logo className='w-8 h-10 sm:w-10 sm:h-10  text-yellow-400 hover:-rotate-45 transition-all' />
+            <Icons.logo className='w-7 h-10 sm:w-10 sm:h-10  text-yellow-400 hover:-rotate-45 transition-all' />
             <p className='sm:text-4xl text-3xl font-medium tracking-wider text-center text-primary '>
               ARKS
             </p>
