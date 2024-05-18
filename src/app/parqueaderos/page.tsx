@@ -1,6 +1,6 @@
 'use client'
 
-import { ParkingSquare } from 'lucide-react'
+import { Bike, Car, ParkingSquare, Tractor } from 'lucide-react'
 import { useEffect, useState, useMemo } from 'react'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import ParkingItem from './_components/ParkingItem'
@@ -24,6 +24,9 @@ import {
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import Separator from '@/components/Separator'
+import { Toggle } from '@/components/ui/toggle'
+import { CustomTooltip } from '@/components/CustomTooltip'
+import { PiMotorcycleFill } from 'react-icons/pi'
 
 export default function Home() {
   const {
@@ -56,14 +59,14 @@ export default function Home() {
   }, [])
   return (
     <div>
-      <div className='py-2 px-4 border-b flex flex-row gap-3'>
-        <h1 className='text-3xl tracking-widest flex content-center gap-x-2'>
-          <ParkingSquare size={40} />
+      <div className='py-2 px-2 border-b flex flex-row gap-3'>
+        <h1 className='text-2xl tracking-widest sm:tracking-wide flex content-center gap-x-1 items-center'>
+          <ParkingSquare size={35} />
           PARQUEADEROS
         </h1>
         <span className='border-l border-primary h-auto hidden sm:block'></span>
         <div className='sm:flex sm:flex-row gap-2 hidden'>
-          <div>
+          <div className='w-32'>
             <Input
               onChange={(e) => {
                 setFilterName(e.target.value)
@@ -71,7 +74,7 @@ export default function Home() {
               placeholder='Filtrar por nombre'
             />
           </div>
-          <div>
+          <div className='w-32'>
             <Input
               onChange={(e) => {
                 setFilterAddress(e.target.value)
@@ -92,8 +95,8 @@ export default function Home() {
             />
           </div>
           <span className='border-l border-primary h-auto'></span>
-          {/* <div className='flex items-center gap-2'>
-            <p>Cupos para: </p>
+          <div className='flex items-center gap-2'>
+            <p>Tipo Vehículo: </p>
             <div className='flex items-center space-x-2'>
               <Toggle
                 aria-label='Toggle-car-places'
@@ -150,14 +153,15 @@ export default function Home() {
                 </CustomTooltip>
               </Toggle>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
 
       <div className='sm:grid sm:grid-cols-12 '>
         <div className='sm:col-span-7 px-4 py-5 hidden sm:block'>
           <p className='mb-4'>
-            Selecciona el parqueadero que te mejor se acerque a lo que necesitas.
+            Selecciona el parqueadero que te mejor se acerque a lo que
+            necesitas.
           </p>
           <ScrollArea className='h-[620px]'>
             {filteredParkingLots.length !== 0 ? (
@@ -192,9 +196,7 @@ export default function Home() {
                     }
                     disabled={isLoading}
                   >
-                    <p className='font-semibold'>
-                    BUSCAR PARQUEADEROS
-                    </p>
+                    <p className='font-semibold'>BUSCAR PARQUEADEROS</p>
                   </Button>
                 </div>
               </DrawerTrigger>
@@ -287,7 +289,7 @@ export default function Home() {
                     )}
                     {/* <ScrollBar orientation='horizontal' /> */}
                   </ScrollArea>
-                </div>               
+                </div>
               </DrawerContent>
             </Drawer>
           </div>

@@ -59,6 +59,8 @@ const ParkingItem = ({
             <p className='sm:text-sm text-xs'>Cupos: </p>
             {parkingData.parkingSlotDetails?.map((parkingSlotDetailItem) => {
               if (parkingSlotDetailItem.slotType === 'CARRO') {
+                console.log(parkingSlotDetailItem.slotType)
+
                 return (
                   <p
                     key={parkingSlotDetailItem.slotType}
@@ -86,7 +88,10 @@ const ParkingItem = ({
                       }
                     )}
                   >
-                    <PiMotorcycleFill className='sm:w-5 sm:h-5 w-4 h-4' strokeWidth={1.3} />
+                    <PiMotorcycleFill
+                      className='sm:w-5 sm:h-5 w-4 h-4'
+                      strokeWidth={1.3}
+                    />
                     {parkingSlotDetailItem.emptySlots}
                   </p>
                 )
@@ -118,7 +123,10 @@ const ParkingItem = ({
                       }
                     )}
                   >
-                    <Tractor className='sm:w-5 sm:h-5 w-4 h-4' strokeWidth={1.3} />
+                    <Tractor
+                      className='sm:w-5 sm:h-5 w-4 h-4'
+                      strokeWidth={1.3}
+                    />
                     {parkingSlotDetailItem.emptySlots}
                   </p>
                 )

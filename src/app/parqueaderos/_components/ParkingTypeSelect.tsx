@@ -30,7 +30,7 @@ export function ParkingTypeSelect({
       }}
       value={selectValue}
     >
-      <SelectTrigger className='sm:w-48 '>
+      <SelectTrigger className='sm:w-32 '>
         <SelectValue placeholder='Tipo' />
       </SelectTrigger>
       <SelectContent>

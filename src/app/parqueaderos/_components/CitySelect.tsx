@@ -32,7 +32,7 @@ export function CitySelect({
       value={selectValue}
       // {isLoading || cities.lenght === 0 && disabled }
     >
-      <SelectTrigger className='sm:w-48 '>
+      <SelectTrigger className='sm:w-32 '>
         <SelectValue placeholder='Ciudad' />
       </SelectTrigger>
       <SelectContent>

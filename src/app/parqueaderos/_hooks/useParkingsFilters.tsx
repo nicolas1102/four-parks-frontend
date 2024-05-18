@@ -60,46 +60,69 @@ export function useParkingsFilters() {
           })
         : filteredObjs
 
-    // // filtro de cupos de carros
-    // filteredObjs = filterCarPlaces
-    //   ? filteredObjs.filter((parkingLot) => {
-    //       return parkingLot.availableCarSlots > 0
-    //     })
-    //   : filteredObjs
+    // filtro de cupos de carros
+    filteredObjs = filterCarPlaces
+      ? filteredObjs.filter((parkingLot) => {
+          return (
+            parkingLot.parkingSlotDetails &&
+            parkingLot.parkingSlotDetails.map((parkingSlotDetailItem) => {
+              parkingSlotDetailItem.slotType === 'CARRO' &&
+                parkingSlotDetailItem.emptySlots > 0
+            })
+          )
+        })
+      : filteredObjs
 
     // // filtro de cupos de motos
-    // filteredObjs = filterMotorcyclesPlaces
-    //   ? filteredObjs.filter((parkingLot) => {
-    //       return parkingLot.availableMotorcicleSlots > 0
-    //     })
-    //   : filteredObjs
+    filteredObjs = filterMotorcyclesPlaces
+      ? filteredObjs.filter((parkingLot) => {
+          return (
+            parkingLot.parkingSlotDetails &&
+            parkingLot.parkingSlotDetails.map((parkingSlotDetailItem) => {
+              parkingSlotDetailItem.slotType === 'MOTO' &&
+                parkingSlotDetailItem.emptySlots > 0
+            })
+          )
+        })
+      : filteredObjs
 
     // // filtro de cupos de bicicletas
-    // filteredObjs = filterBikesPlaces
-    //   ? filteredObjs.filter((parkingLot) => {
-    //       return parkingLot.availableBikeSlots > 0
-    //     })
-    //   : filteredObjs
+    filteredObjs = filterBikesPlaces
+      ? filteredObjs.filter((parkingLot) => {
+          return (
+            parkingLot.parkingSlotDetails &&
+            parkingLot.parkingSlotDetails.map((parkingSlotDetailItem) => {
+              parkingSlotDetailItem.slotType === 'BICICLETA' &&
+                parkingSlotDetailItem.emptySlots > 0
+            })
+          )
+        })
+      : filteredObjs
 
     // // filtro de cupos de vehiculos pesados
-    // filteredObjs = filterHeavyPlaces
-    //   ? filteredObjs.filter((parkingLot) => {
-    //       return parkingLot.availableHeavySlots > 0
-    //     })
-    //   : filteredObjs
+    filteredObjs = filterHeavyPlaces
+      ? filteredObjs.filter((parkingLot) => {
+          return (
+            parkingLot.parkingSlotDetails &&
+            parkingLot.parkingSlotDetails.map((parkingSlotDetailItem) => {
+              parkingSlotDetailItem.slotType === 'VEHICULO_PESADO' &&
+                parkingSlotDetailItem.emptySlots > 0
+            })
+          )
+        })
+      : filteredObjs
 
     return filteredObjs
   }, [
     filterAddress,
-    filterName,
-    filterParkingType,
-    // parkings,
-    filterCity,
     parkings,
-    // filterCarPlaces,
-    // filterMotorcyclesPlaces,
-    // filterBikesPlaces,
-    // filterHeavyPlaces,
+    filterName,
+    filterCity,
+    filterParkingType,
+    filterCarPlaces,
+    filterMotorcyclesPlaces,
+    filterBikesPlaces,
+    filterHeavyPlaces,
   ])
 
   return {
