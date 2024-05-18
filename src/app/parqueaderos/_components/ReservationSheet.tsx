@@ -25,6 +25,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { DateTime } from 'luxon'
+import { cn } from '@/lib/utils'
 
 interface ParkingVehicleType {
   id?: number
@@ -63,7 +64,7 @@ const ReservationSheet = ({
 
       // const res = await createReservation(reservationData)
       // if (res?.status === 200) {
-      //   router.push(`/reserva/${res?.data.id}`)
+      //   router.push(`/reserva/thank-you?reservationId=${res?.data.id}`)
       // }
     }
   }
@@ -140,22 +141,34 @@ const ReservationSheet = ({
                         onClick={() => {
                           setParkingSlot(parkingVehicleType.id)
                         }}
+                        disabled={!parkingVehicleType.emptySlots}
                       >
-                        <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
+                        <div className='flex flex-col justify-start w-full py-3 px-4 gap-1'>
                           <div className='gap-1'>
                             <div className='flex flex-row gap-1 sm:gap-2'>
                               {parkingVehicleType.icon}
-                              <p className='font-normal text-sm sm:text-base tracking-wider'>
+                              <p className='font-medium text-sm sm:text-base tracking-wider'>
                                 {parkingVehicleType.label}
                               </p>
                               -
-                              <p className='font-normal text-sm sm:text-base  italic'>
-                                {parkingVehicleType.emptySlots} cupo(s)
+                              <p
+                                className={cn(
+                                  'font-medium text-sm sm:text-base italic',
+                                  {
+                                    'text-redFPC-400 font-medium':
+                                    parkingVehicleType?.emptySlots && parkingVehicleType?.emptySlots <= 5,
+                                  }
+                                )}
+                              >
+                                {parkingVehicleType.emptySlots
+                                  ? parkingVehicleType.emptySlots
+                                  : 0}{' '}
+                                cupo(s)
                               </p>
                             </div>
                           </div>
                           <p className='text-start text-sm sm:text-base '>
-                            {parkingVehicleType.rate}{' '}
+                            ${parkingVehicleType.rate}{' '}
                             <span className='italic font-light'> / min.</span>
                           </p>
                         </div>
@@ -176,11 +189,11 @@ const ReservationSheet = ({
                             className='sm:w-6 sm:h-6 w-5 h-5'
                             strokeWidth={1.5}
                           />
-                          <p className='font-normal text-sm sm:text-base font-base tracking-wider'>
+                          <p className='font-medium text-sm sm:text-base font-base tracking-wider'>
                             NUBE VOLADORA
                           </p>
                           -
-                          <p className='font-normal text-sm sm:text-base italic '>
+                          <p className='font-medium text-sm sm:text-base italic '>
                             ∞ cupos
                           </p>
                         </div>
@@ -199,33 +212,6 @@ const ReservationSheet = ({
           <Separator />
           <div className='text-xs sm:text-base'>
             <h2 className='tracking-widest font-medium'>RESUMEN</h2>
-
-            {/* <div className='flex'>
-              <span className='flex-1'>Hora de ingreso: </span>
-              <span className='pr-1'>
-                {new Date().toLocaleString('es-CO', {
-                  hour: 'numeric',
-                  minute: 'numeric',
-                })}
-              </span>
-              {' - '}
-              <span className='pl-1'>
-                {new Date().toLocaleString('es-CO', {
-                  hour: 'numeric',
-                  minute: 'numeric',
-                })}
-              </span>
-            </div>
-            <div className='flex'>
-              <span className='flex-1'>Fecha: </span>
-              <span>
-                {new Date().toLocaleDateString('es-CO', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </span>
-            </div> */}
             <div className='flex font-medium overflow-hidden text-ellipsis truncate'>
               <span className='flex-1'>Parqueadero</span>
               <span className='font-normal'>{selectedParking.name}</span>
@@ -246,16 +232,6 @@ const ReservationSheet = ({
               <span className='flex-1'>Tipo Parqueadero</span>
               <span className='font-normal'>
                 {selectedParking.parkingType.type.toLocaleLowerCase()}
-              </span>
-            </div>
-            <div className='flex'>
-              <span className='flex-1'>Tipo vehículo</span>
-              <span>Carro</span>
-            </div>
-            <div className='flex'>
-              <span className='flex-1'>Tarifa</span>
-              <span>
-                $200 <span className='italic text-sm'>/ min</span>
               </span>
             </div>
           </div>

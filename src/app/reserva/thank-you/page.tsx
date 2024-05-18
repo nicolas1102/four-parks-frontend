@@ -15,13 +15,13 @@ interface PageProps {
 }
 
 const Page = ({ searchParams }: PageProps) => {
-  const orderId = searchParams.orderId
+  const orderId = searchParams.reservationId
   const { data: session } = useSession()
   // const {getOrder, isLoading} = useOrders()
 
   // useEffect(() => {
-  //   const fetchOrder = (orderId: string) => {
-  //     const order = getOrder(orderId)
+  //   const fetchOrder = (reservationId: string) => {
+  //     const order = getOrder(reservationId)
 
   // Verificamos que el usuario de la orden es el mismo que está ingresando
   // if (orderUserId !== session?.id) {
@@ -29,7 +29,7 @@ const Page = ({ searchParams }: PageProps) => {
   // }
 
   //   }
-  //   fetchOrder(orderId)
+  //   fetchOrder(reservationId)
   // }, [])
   const [src, setSrc] = useState<string>('')
   useEffect(() => {
@@ -37,9 +37,9 @@ const Page = ({ searchParams }: PageProps) => {
       QRCode.toDataURL('https://github.com/nicolas1102').then(
         setSrc
       )
-      // QRCode.toDataURL(`https://fourparks.app.vercel/reservas/${orderId}`)
+      // QRCode.toDataURL(`https://fourparks.app.vercel/reservas/${reservationId}`)
     }
-    // orderId && generate(orderId[0])
+    // reservationId && generate(reservationId[0])
     generate('goku')
   }, [])
   return !session ? (
