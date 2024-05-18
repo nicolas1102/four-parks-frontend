@@ -54,13 +54,6 @@ const ParkingItem = ({
               </span>
             </p>
           </div>
-          {/* {parkingData.availableSlots && parkingData.availableSlots <= 5 ? (
-              <p className='text-redFPC-400 font-medium'>
-                Cupos: {parkingData.availableSlots}
-              </p>
-            ) : (
-              <p>Cupos: {parkingData.availableSlots}</p>
-            )} */}
 
           <div className='flex flex-row gap-x-3 items-center'>
             <p>Cupos: </p>

@@ -21,6 +21,7 @@ import {
 } from 'react'
 import ParkingItem from './ParkingItem'
 import { useTheme } from 'next-themes'
+import Loader from '@/components/Loader'
 
 const GoogleMapView = ({
   parkingLots,
@@ -50,9 +51,7 @@ const GoogleMapView = ({
       center={
         selectedParkingLot
           ? {
-              // lat: parseInt(selectedParkingLot.location.latitude),
               lat: selectedParkingLot.location.latitude,
-              // lng: parseInt(selectedParkingLot.location.longitude),
               lng: selectedParkingLot.location.longitude,
             }
           : userLocation
@@ -76,9 +75,7 @@ const GoogleMapView = ({
         <MarkerF
           key={parkingItem.id}
           position={{
-            // lat: parseInt(parkingItem.location.latitude),
             lat: parkingItem.location.latitude,
-            // lng: parseInt(parkingItem.location.longitude),
             lng: parkingItem.location.longitude,
           }}
           icon={{
@@ -117,7 +114,9 @@ const GoogleMapView = ({
       ))}
     </GoogleMap>
   ) : (
-    <></>
+    <>
+      <Loader />
+    </>
   )
 }
 

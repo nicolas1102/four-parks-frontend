@@ -34,29 +34,27 @@ export default function Home() {
           <NoResults redirection='/' />
         </div>
       ) : (
-        <div className='max-h-full m-auto flex flex-col gap-y-5 p-10'>
-          <div className='border  p-10 w-[1000px] border-blueFPC-400 bg-blueFPC-200 dark:border-blueFPC-200 dark:bg-blueFPC-400'>
-            <div className=''>
-              <h1 className='text-3xl tracking-widest font-medium pb-2'>
-                MI CUENTA
-              </h1>
-              <p className='text-base tracking-widest uppercase'>
-                Bienvenido de nuevo
-                {session?.firstName && (
-                  <span className='font-bold uppercase'>
-                    , {user?.firstName}
-                  </span>
-                )}
-                .
-              </p>
-            </div>
+        <div className='max-h-full m-auto flex flex-col gap-y-5 p-6 sm:p-10'>
+          <div className='border sm:p-10 p-5 border-blueFPC-400 bg-blueFPC-200 dark:border-blueFPC-200 dark:bg-blueFPC-400'>
+            <h1 className='text-2xl sm:text-3xl tracking-widest font-medium pb-2'>
+              MI CUENTA
+            </h1>
+            <p className='text-sm sm:text-base tracking-widest uppercase'>
+              Bienvenido de nuevo
+              {session?.firstName && (
+                <span className='font-bold uppercase'>, {user?.firstName}</span>
+              )}
+              .
+            </p>
           </div>
 
-          <div className='flex flex-row gap-5 flex-wrap max-w-[1000px]'>
-            <div className='p-10 w-[490px] border border-blueFPC-400'>
+          <div className='gap-5 flex-wrap sm:grid sm:grid-cols-2 flex flex-col'>
+            <div className='p-6 sm:p-10 border border-blueFPC-400 '>
               <div className='col-span-1 row-span-1'>
-                <h2 className='tracking-widest text-xl pb-2'>CUENTA</h2>
-                <ul>
+                <h2 className='tracking-widest text-lg sm:text-xl pb-2'>
+                  CUENTA
+                </h2>
+                <ul className='text-sm'>
                   <li>
                     <p className='uppercase'>
                       <span className='font-medium tracking-widest '>
@@ -109,12 +107,12 @@ export default function Home() {
 
             {session?.rol === 'USUARIO' && (
               <>
-                <div className='border border-blueFPC-400 p-10 w-[490px]'>
+                <div className='border border-blueFPC-400 p-6 sm:p-10'>
                   <div className='col-span-1 row-span-1'>
-                    <h2 className='tracking-widest text-xl pb-2'>
+                    <h2 className='tracking-widest text-lg sm:text-xl pb-2'>
                       TARJETA DE CRÉDITO
                     </h2>
-                    <ul>
+                    <ul className='text-sm'>
                       <li>
                         <p className='uppercase'>
                           <span className='font-medium tracking-widest'>
@@ -146,10 +144,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className='border border-blueFPC-400 p-10 w-[490px]'>
+                <div className='border border-blueFPC-400 p-6 sm:p-10'>
                   <div className='col-span-1 row-span-1'>
-                    <h2 className='tracking-widest text-xl pb-2'>CONTRASEÑA</h2>
-                    <ul>
+                    <h2 className='tracking-widest text-lg sm:text-xl pb-2'>
+                      CONTRASEÑA
+                    </h2>
+                    <ul className='text-sm'>
                       <li>
                         <p className='uppercase'>
                           <span className='font-medium tracking-widest'>

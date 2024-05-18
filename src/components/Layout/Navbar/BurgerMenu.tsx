@@ -74,7 +74,7 @@ const BurgerMenu = ({
         {session?.rol === 'USUARIO' && (
           <DropdownMenuItem>
             <ParkingSquare className='mr-2 h-4 w-4' />
-            <Link href='/auth/log-in'>Parqueaderos</Link>
+            <Link href='/parqueaderos'>Parqueaderos</Link>
           </DropdownMenuItem>
         )}
         {session?.rol === 'ADMINISTRADOR' && (

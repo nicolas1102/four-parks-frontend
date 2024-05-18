@@ -7,7 +7,7 @@ import { buttonVariants } from './ui/button'
 
 const NoResults = ({ redirection }: { redirection?: string }) => {
   return (
-    <div className='relative flex flex-col items-center gap-y-2'>
+    <div className='relative flex flex-col items-center gap-y-2 py-16'>
       <FloatingButton
         text='IR A LUGAR SEGURO'
         href={redirection ? redirection : '/'}

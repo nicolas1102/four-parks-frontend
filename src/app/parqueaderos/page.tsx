@@ -1,19 +1,28 @@
 'use client'
 
-import { Bike, Car, ParkingSquare, Tractor } from 'lucide-react'
+import { ParkingSquare } from 'lucide-react'
 import { useEffect, useState, useMemo } from 'react'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import ParkingItem from './_components/ParkingItem'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import GoogleMapView from './_components/GoogleMap'
 import { Input } from '@/components/ui/input'
-import { PiMotorcycleFill } from 'react-icons/pi'
-import { Toggle } from '@/components/ui/toggle'
 import { useParkingsFilters } from './_hooks/useParkingsFilters'
 import { useParking } from '@/services/useParking'
-import { CustomTooltip } from '@/components/CustomTooltip'
 import { CitySelect } from './_components/CitySelect'
 import { ParkingTypeSelect } from './_components/ParkingTypeSelect'
+import FloatingButton from '@/components/CustomButtons/FloatingButton'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
   const {
@@ -51,8 +60,8 @@ export default function Home() {
           <ParkingSquare size={40} />
           PARQUEADEROS
         </h1>
-        <span className='border-l border-primary h-auto'></span>
-        <div className='flex flex-row gap-2'>
+        <span className='border-l border-primary h-auto hidden sm:block'></span>
+        <div className='sm:flex sm:flex-row gap-2 hidden'>
           <div>
             <Input
               onChange={(e) => {
@@ -144,8 +153,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='grid grid-cols-12'>
-        <div className='col-span-7 px-4 py-5'>
+      <div className='sm:grid sm:grid-cols-12 '>
+        <div className='sm:col-span-7 px-4 py-5 hidden sm:block'>
           <p className='mb-4 px-3'>
             Selecciona el parqueadero que te mejor se a lo que necesitas.
           </p>
@@ -171,7 +180,79 @@ export default function Home() {
           </ScrollArea>
         </div>
 
-        <div className='col-span-5'>
+        <div className='sm:col-span-5'>
+          <div className='relative'>
+            <Drawer>
+              <DrawerTrigger>
+                opem
+                {/* <FloatingButton text='VER PARQUEADEROS' direction='left' /> */}
+              </DrawerTrigger>
+              <DrawerContent className='px-6'>
+                <DrawerHeader>
+                  <DrawerTitle>
+                    <p className='tracking-widest'>PARQUEADEROS</p>
+                  </DrawerTitle>
+                  <DrawerDescription>
+                    <p className=''>
+                      Selecciona el parqueadero que te mejor se a lo que
+                      necesitas.
+                    </p>
+                  </DrawerDescription>
+                </DrawerHeader>
+                <div>
+                  <ScrollArea>
+                    {filteredParkingLots.length !== 0 ? (
+                      <div className='flex flex-row gap-2 pr-3'>
+                        {filteredParkingLots.map((parkingItem) => (
+                          <ParkingItem
+                            key={parkingItem.id}
+                            parkingData={parkingItem}
+                            setSelectedParkingLot={setSelectedParkingLot}
+                            isSelected={
+                              parkingItem.id === selectedParkingLot?.id
+                            }
+                          />
+                        ))}
+                        {filteredParkingLots.map((parkingItem) => (
+                          <ParkingItem
+                            key={parkingItem.id}
+                            parkingData={parkingItem}
+                            setSelectedParkingLot={setSelectedParkingLot}
+                            isSelected={
+                              parkingItem.id === selectedParkingLot?.id
+                            }
+                          />
+                        ))}
+                        {filteredParkingLots.map((parkingItem) => (
+                          <ParkingItem
+                            key={parkingItem.id}
+                            parkingData={parkingItem}
+                            setSelectedParkingLot={setSelectedParkingLot}
+                            isSelected={
+                              parkingItem.id === selectedParkingLot?.id
+                            }
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className='flex flex-col items-center w-full h-full py-14'>
+                        <p className='text-xl tracking-widest'>
+                          NO HAY RESULTADOS DE PARQUEADEROS.
+                        </p>
+                      </div>
+                    )}
+                    <ScrollBar orientation='horizontal' />
+                  </ScrollArea>
+                </div>
+                <DrawerFooter>
+                  <Button>Submit</Button>
+                  <DrawerClose>
+                    <Button variant='outline'>Cancel</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </div>
           <GoogleMapView
             parkingLots={filteredParkingLots}
             selectedParkingLot={selectedParkingLot}
