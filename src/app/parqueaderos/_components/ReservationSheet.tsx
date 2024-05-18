@@ -20,7 +20,7 @@ import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-const BookingSheet = ({
+const ReservationSheet = ({
   selectedParking,
 }: {
   selectedParking: ParkingInterface
@@ -81,7 +81,7 @@ const BookingSheet = ({
                 TIPO VEHÍCULO
               </p>
 
-              <ScrollArea className='h-[260px]'>
+              <ScrollArea className='h-[215px] sm:h-[260px]'>
                 <div className='flex flex-col space-y-2 w-full'>
                   <ToggleGroupItem value='car' aria-label='Toggle bold'>
                     <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
@@ -255,4 +255,4 @@ const BookingSheet = ({
   )
 }
 
-export default BookingSheet
+export default ReservationSheet

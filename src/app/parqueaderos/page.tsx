@@ -159,9 +159,9 @@ export default function Home() {
 
       <div className='sm:grid sm:grid-cols-12 '>
         <div className='sm:col-span-7 px-4 py-5 hidden sm:block'>
-          <p className='mb-4'>
-            Selecciona el parqueadero que te mejor se acerque a lo que
-            necesitas.
+          <p className='mb-4 text-center'>
+            Encuentra tu parqueadero ideal. En la barra superior podrás filtrar
+            los parqueaderos de FourParksColombia.
           </p>
           <ScrollArea className='h-[620px]'>
             {filteredParkingLots.length !== 0 ? (
@@ -206,16 +206,25 @@ export default function Home() {
                     <p className='tracking-widest'>PARQUEADEROS</p>
                   </DrawerTitle>
                   <DrawerDescription>
-                    <p className=''>
-                      Selecciona el parqueadero que te mejor se acerque a lo que
-                      necesitas.
-                    </p>
+                    <p className=''>Encuentra tu parqueadero ideal.</p>
                   </DrawerDescription>
                 </DrawerHeader>
                 <h2 className='tracking-widest'>
-                  <p className='tracking-widest'>Filtros</p>
+                  <p className='tracking-widest text-center'>FILTROS</p>
                 </h2>
                 <div className='grid gap-2 justify-around grid-cols-2 py-3'>
+                  <div>
+                    <CitySelect
+                      selectValue={filterCity}
+                      setSelectValue={setFilterCity}
+                    />
+                  </div>
+                  <div>
+                    <ParkingTypeSelect
+                      selectValue={filterParkingType}
+                      setSelectValue={setFilterParkingType}
+                    />
+                  </div>
                   <div>
                     <Input
                       onChange={(e) => {
@@ -230,18 +239,6 @@ export default function Home() {
                         setFilterAddress(e.target.value)
                       }}
                       placeholder='Dirección de parqueadero'
-                    />
-                  </div>
-                  <div>
-                    <CitySelect
-                      selectValue={filterCity}
-                      setSelectValue={setFilterCity}
-                    />
-                  </div>
-                  <div>
-                    <ParkingTypeSelect
-                      selectValue={filterParkingType}
-                      setSelectValue={setFilterParkingType}
                     />
                   </div>
                 </div>

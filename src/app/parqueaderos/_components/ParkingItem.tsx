@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Bike, Car, Tractor } from 'lucide-react'
 import { PiMotorcycleFill } from 'react-icons/pi'
-import BookingSheet from './BookingSheet'
+import ReservationSheet from './ReservationSheet'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { cn } from '@/lib/utils'
@@ -133,7 +133,7 @@ const ParkingItem = ({
           </div>
 
           <div className='pt-3'>
-            <BookingSheet selectedParking={parkingData} />
+            <ReservationSheet selectedParking={parkingData} />
           </div>
         </div>
       </div>
