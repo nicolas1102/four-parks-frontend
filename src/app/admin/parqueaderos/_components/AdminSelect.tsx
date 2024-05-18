@@ -52,7 +52,15 @@ export function AdminSelect({
           'focus-visible:ring-red-500': errors,
         })}
       >
-        <SelectValue placeholder='Administradores' />
+        <SelectValue
+          placeholder={
+            isLoading
+              ? 'Cargando Administradores'
+              : !isLoading && admins.length === 0
+              ? 'Sin resultados'
+              : 'Administradores'
+          }
+        />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

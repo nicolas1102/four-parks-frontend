@@ -5,8 +5,10 @@ import { Input } from '@/components/ui/input'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 const Hero = () => {
+  const { data: session } = useSession()
   const [email, setEmail] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,33 +35,62 @@ const Hero = () => {
             Ingresa, encuentra y reserva en segundos.
           </p>
           <div className='pt-5 sm:w-[450px] w-full'>
-            <Input
-              type='email'
-              placeholder='Tu email'
-              value={email}
-              onChange={handleChange}
-              className='mb-2 border-primary'
-            />
-            <Link href={`/auth/sign-up?email=${email}`}>
-              <PrimaryButton
-                text='COMIENZA A PARQUEAR MEJOR'
-                isLoading={false}
-                width={450}
-              />
-            </Link>
+            {session?.rol ? (
+              session.rol === 'USUARIO' && (
+                <>
+                  <Link href={`/parqueaderos`}>
+                    <PrimaryButton
+                      text='VER PARQUEADEROS'
+                      isLoading={false}
+                      width={450}
+                    />
+                  </Link>
 
-            <Separator
-              text={'¿Ya tienes una cuenta?'}
-              background='bg-background'
-            />
+                  <Separator
+                    text={'También puedes editar tu cuenta'}
+                    background='bg-background'
+                  />
 
-            <Link href={'/auth/log-in'}>
-              <PrimaryButton
-                text='INGRESA A TU CUENTA'
-                isLoading={false}
-                width={450}
-              />
-            </Link>
+                  <Link href={'/usuario'}>
+                    <PrimaryButton
+                      text='IR A EDITAR TU CUENTA'
+                      isLoading={false}
+                      width={450}
+                    />
+                  </Link>
+                </>
+              )
+            ) : (
+              <>
+                <Input
+                  type='email'
+                  placeholder='Tu email'
+                  value={email}
+                  onChange={handleChange}
+                  className='mb-2 border-primary'
+                />
+                <Link href={`/auth/sign-up?email=${email}`}>
+                  <PrimaryButton
+                    text='COMIENZA A PARQUEAR MEJOR'
+                    isLoading={false}
+                    width={450}
+                  />
+                </Link>
+
+                <Separator
+                  text={'¿Ya tienes una cuenta?'}
+                  background='bg-background'
+                />
+
+                <Link href={'/auth/log-in'}>
+                  <PrimaryButton
+                    text='INGRESA A TU CUENTA'
+                    isLoading={false}
+                    width={450}
+                  />
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

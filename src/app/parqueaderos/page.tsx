@@ -221,7 +221,7 @@ export default function Home() {
                       onChange={(e) => {
                         setFilterName(e.target.value)
                       }}
-                      placeholder='Filtrar por nombre'
+                      placeholder='Nombre de parqueadero'
                     />
                   </div>
                   <div>
@@ -229,7 +229,7 @@ export default function Home() {
                       onChange={(e) => {
                         setFilterAddress(e.target.value)
                       }}
-                      placeholder='Filtrar por dirección'
+                      placeholder='Dirección de parqueadero'
                     />
                   </div>
                   <div>

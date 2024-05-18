@@ -59,8 +59,6 @@ const ParkingItem = ({
             <p className='sm:text-sm text-xs'>Cupos: </p>
             {parkingData.parkingSlotDetails?.map((parkingSlotDetailItem) => {
               if (parkingSlotDetailItem.slotType === 'CARRO') {
-                console.log(parkingSlotDetailItem.slotType)
-
                 return (
                   <p
                     key={parkingSlotDetailItem.slotType}

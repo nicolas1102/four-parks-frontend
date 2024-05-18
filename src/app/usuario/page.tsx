@@ -34,7 +34,7 @@ export default function Home() {
           <NoResults redirection='/' />
         </div>
       ) : (
-        <div className='max-h-full m-auto flex flex-col gap-y-5 p-6 sm:p-10'>
+        <div className='max-h-full flex flex-col gap-y-5 p-6 sm:p-10'>
           <div className='border sm:p-10 p-5 border-blueFPC-400 bg-blueFPC-200 dark:border-blueFPC-200 dark:bg-blueFPC-400'>
             <h1 className='text-2xl sm:text-3xl tracking-widest font-medium pb-2'>
               MI CUENTA

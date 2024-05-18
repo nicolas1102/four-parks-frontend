@@ -82,7 +82,7 @@ const Page = () => {
           const url = new URL(origin)
           const path = url.pathname
           return router.push(`${path}`)
-        }
+        }       
 
         router.push('/')
         router.refresh()

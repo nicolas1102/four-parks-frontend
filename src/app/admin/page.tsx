@@ -7,16 +7,16 @@ import Loader from '@/components/Loader'
 
 const GERENTE_FUNCTIONS = [
   {
-    title: 'GESTIONAR PARQUEADEROS',
-    text: 'Gestiona todos los parqueaderos del sistema de Four Parks. Tambien podrás generar reportes de cada uno de los puntos.',
-    link: '/admin/parqueaderos',
-    icon: <ParkingSquare strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
-  },
-  {
     title: 'GESTIONAR USUARIOS',
-    text: 'Visualiza, edita y elimina los usuarios del sistema de Four Parks. Tambien podrás visualizar las operaciones de cada uno.',
+    text: 'Visualiza, edita y elimina los usuarios del sistema de Four Parks. También podrás visualizar las operaciones de cada uno.',
     link: '/admin/usuarios',
     icon: <User strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
+  },
+  {
+    title: 'GESTIONAR PARQUEADEROS',
+    text: 'Gestiona todos los parqueaderos del sistema de Four Parks. También podrás generar reportes de cada uno de los puntos.',
+    link: '/admin/parqueaderos',
+    icon: <ParkingSquare strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
   },
 ]
 
@@ -29,7 +29,7 @@ const FUNCIONARIO_FUNCTIONS = [
   },
   {
     title: 'VER ESTADISTICAS DE PUNTO',
-    text: 'Ver las estadisticas del punto de parqueadero.',
+    text: 'Ver las estadísticas del punto de parqueadero.',
     link: '/admin/usuarios',
     icon: <LineChart strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
   },
@@ -40,17 +40,17 @@ const Page = () => {
   return !session ? (
     <Loader />
   ) : (
-    <div className='max-h-full flex flex-col gap-y-10 m-10'>
+    <div className='max-h-full flex flex-col gap-y-10 m-6 sm:m-10'>
       <div className='flex flex-col'>
         <div className='pb-7'>
-          <h1 className='text-4xl tracking-widest pb-1'>
+          <h1 className='text-3xl sm:text-4xl tracking-widest pb-1'>
             MENU {session?.rol === 'GERENTE' ? 'GERENTE' : 'ADMINISTRADOR'}
           </h1>
-          <p className='text-base uppercase'>
+          <p className='text-sm sm:text-base uppercase'>
             Este es el menu de {session?.rol}.
           </p>
         </div>
-        <div className='flex flex-row flex-wrap gap-5'>
+        <div className='flex flex-row justify-center flex-wrap gap-5'>
           {session?.rol === 'ADMINISTRADOR' &&
             FUNCIONARIO_FUNCTIONS.map((item, index) => (
               <AdminFunctionItem

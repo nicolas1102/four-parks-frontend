@@ -1,9 +1,11 @@
+
 import Steps from './_components/Steps'
 import Hero from './_components/Hero'
 import Features from './_components/Features'
 import ConvinceYou from './_components/ConvinceYou'
 import { ExperiencesCards } from './_components/ExperiencesCards'
 import { FAQ } from './_components/FAQ'
+
 
 export default function Home() {
   return (
