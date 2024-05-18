@@ -91,7 +91,7 @@ const BookingSheet = ({
                             className='sm:w-6 sm:h-6 w-5 h-5'
                             strokeWidth={1.5}
                           />
-                          <p className='font-normal text-sm sm:text-base tracking-widest'>
+                          <p className='font-normal text-sm sm:text-base tracking-wider'>
                             CARRO
                           </p>
                           -
@@ -116,7 +116,7 @@ const BookingSheet = ({
                             className='sm:w-6 sm:h-6 w-5 h-5'
                             strokeWidth={1.5}
                           />
-                          <p className='font-normal font-base text-sm sm:text-base  tracking-widest'>
+                          <p className='font-normal font-base text-sm sm:text-base  tracking-wider'>
                             MOTO
                           </p>
                           -
@@ -139,7 +139,7 @@ const BookingSheet = ({
                             className='sm:w-6 sm:h-6 w-5 h-5'
                             strokeWidth={1.5}
                           />
-                          <p className='font-normal text-sm sm:text-base tracking-widest'>
+                          <p className='font-normal text-sm sm:text-base tracking-wider'>
                             BICICLETA
                           </p>
                           -
@@ -161,7 +161,7 @@ const BookingSheet = ({
                             className='sm:w-6 sm:h-6 w-5 h-5'
                             strokeWidth={1.5}
                           />
-                          <p className='font-normal text-sm sm:text-base font-base tracking-widest'>
+                          <p className='font-normal text-sm sm:text-base font-base tracking-wider'>
                             NUBE VOLADORA
                           </p>
                           -
@@ -183,7 +183,7 @@ const BookingSheet = ({
                             className='sm:w-6 sm:h-6 w-5 h-5'
                             strokeWidth={1.5}
                           />
-                          <p className='font-normal text-sm sm:text-base font-base tracking-widest'>
+                          <p className='font-normal text-sm sm:text-base font-base tracking-wider'>
                             V. PESADO
                           </p>
                           -
