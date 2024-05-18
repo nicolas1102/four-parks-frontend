@@ -30,7 +30,7 @@ import { cn } from '@/lib/utils'
 interface ParkingVehicleType {
   id?: number
   type: 'CARRO' | 'MOTO' | 'BICICLETA' | 'VEHICULO_PESADO'
-  label?: 'CARRO' | 'MOTO' | 'BICICLETA' | 'V. PESADO'
+  label?: 'CARRO' | 'MOTO' | 'BICICLETA' | 'VEHíCULO_PESADO PESADO'
   emptySlots?: number
   rate?: number
   icon: JSX.Element
@@ -51,7 +51,12 @@ const ReservationSheet = ({
     if (parkingSlot === undefined) {
       toast({
         variant: 'destructive',
-        title: 'Selecciona un tipo de vehículo.',
+        title: 'Selecciona un tipo de vehículo válido.',
+      })
+    } else if (parkingSlot === -1) {
+      toast({
+        variant: 'destructive',
+        title: 'Ya quisiera usted tener una nube voladora.',
       })
     } else if (session && parkingSlot) {
       const reservationData = {
@@ -179,10 +184,10 @@ const ReservationSheet = ({
                     value='nube'
                     aria-label='Toggle underline'
                     onClick={() => {
-                      setParkingSlot(undefined)
+                      setParkingSlot(-1)
                     }}
                   >
-                    <div className='flex flex-col justify-start w-full sm:py-2 sm:px-3 py-1 px-2 gap-1'>
+                    <div className='flex flex-col justify-start w-full py-3 px-4 gap-1'>
                       <div className='gap-1'>
                         <div className='flex flex-row gap-1 sm:gap-2'>
                           <Cloud
