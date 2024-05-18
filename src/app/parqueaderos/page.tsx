@@ -188,7 +188,7 @@ export default function Home() {
                 <div>
                   <Button
                     className={
-                      'tracking-widest dark:font-semibold border border-primary absolute top-[650px] z-10 left-3'
+                      'tracking-widest dark:font-semibold border border-primary absolute top-[60px] z-10 left-3'
                     }
                     disabled={isLoading}
                   >
