@@ -41,8 +41,9 @@ const Page = () => {
 
   return (
     <div className=' flex flex-col relative m-10'>
-      <AdminDialog />
-
+      <div className='sm:mt-0 mt-12'>
+        <AdminDialog />
+      </div>
       {isLoading ? (
         <Loader />
       ) : users.length === 0 ? (

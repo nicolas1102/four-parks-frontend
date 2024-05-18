@@ -22,7 +22,9 @@ const Page = () => {
   return (
     <div className=' flex flex-col relative m-10'>
       <Dialog>
-        <ParkingDialog />
+        <div className='sm:mt-0 mt-12'>
+          <ParkingDialog />
+        </div>
       </Dialog>
 
       {isLoading ? (
