@@ -112,7 +112,7 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Programa de Lealtad
+            Lealtad
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         )

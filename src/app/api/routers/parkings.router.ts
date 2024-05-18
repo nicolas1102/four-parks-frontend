@@ -17,7 +17,7 @@ export const getParkingsRequest = async () => {
   return res
 }
 
-export const deletePakingRequest = async (name: string) => {
+export const deleteParkingRequest = async (name: string) => {
   const res = await axios.delete(BASE_URL + `/parkings/parking/delete/name/${name}`)
   return res
 }

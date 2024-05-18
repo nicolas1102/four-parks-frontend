@@ -2,7 +2,7 @@
 
 import {
   createParkingRequest,
-  deletePakingRequest,
+  deleteParkingRequest,
   getOneParkingRequest,
   getParkingsRequest,
   updateParkingRequest,
@@ -28,6 +28,7 @@ interface ParkingContextType {
     parking: ParkingInterface
   ) => Promise<AxiosResponse<any, any> | undefined>
   getParkings: () => Promise<void>
+  getOneParking: (name: string) => Promise<ParkingInterface | undefined>
   updateParking: (
     parking: ParkingInterface
   ) => Promise<AxiosResponse<ParkingInterface, any> | undefined>
@@ -183,7 +184,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
   const deleteParking = async (name: string) => {
     setIsLoading(true)
     try {
-      const res = await deletePakingRequest(name)
+      const res = await deleteParkingRequest(name)
       setParkings((prevParkings) =>
         prevParkings.filter((parking) => parking.name !== name)
       )
@@ -220,6 +221,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
         setParkings,
         isLoading,
         setIsLoading,
+        getOneParking,
         createParking,
         getParkings,
         updateParking,
