@@ -161,7 +161,8 @@ export default function Home() {
         <div className='sm:col-span-7 px-4 py-5 hidden sm:block'>
           <p className='mb-4 text-center'>
             Encuentra tu parqueadero ideal. En la barra superior podrás filtrar
-            los parqueaderos de FourParksColombia.
+            los parqueaderos de{' '}
+            <span className='font-semibold'>FourParksColombia</span>.
           </p>
           <ScrollArea className='h-[620px]'>
             {filteredParkingLots.length !== 0 ? (
