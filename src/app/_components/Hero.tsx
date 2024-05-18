@@ -18,7 +18,7 @@ const Hero = () => {
   return (
     <div className='sm:h-[650px] sm:pb-0 pb-8 w-full sm:grid sm:grid-cols-12 relative overflow-hidden'>
       <div className='sm:col-span-7 sm:my-12 my-8 sm:ml-32 m-6 sm:mr-10'>
-        <h1 className='sm:text-6xl text-4xl font-light tracking-wider'>
+        <h1 className='sm:text-6xl text-5xl font-light tracking-wider'>
           <span className=' font-bold'>¡</span>LA FORMA MÁS{' '}
           <span className='font-bold'>FÁCIL</span> DE{' '}
           <span className='font-bold'>ASEGURAR</span> TU{' '}
