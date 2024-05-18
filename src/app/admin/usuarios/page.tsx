@@ -40,7 +40,7 @@ const Page = () => {
   }, [role])
 
   return (
-    <div className=' flex flex-col relative m-10'>
+    <div className=' flex flex-col relative m-6 sm:m-10'>
       <div className='sm:mt-0 mt-12'>
         <AdminDialog />
       </div>

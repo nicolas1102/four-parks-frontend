@@ -60,7 +60,7 @@ export default function Page({
   }, [parking, session])
 
   return (
-    <div className=' flex flex-col relative m-10'>
+    <div className=' flex flex-col relative m-6 sm:m-10'>
       {isLoading || isLoadingParking ? (
         <Loader />
       ) : reservations.length === 0 || !parkingId ? (
