@@ -156,8 +156,8 @@ export default function Home() {
 
       <div className='sm:grid sm:grid-cols-12 '>
         <div className='sm:col-span-7 px-4 py-5 hidden sm:block'>
-          <p className='mb-4 px-3'>
-            Selecciona el parqueadero que te mejor se a lo que necesitas.
+          <p className='mb-4'>
+            Selecciona el parqueadero que te mejor se acerque a lo que necesitas.
           </p>
           <ScrollArea className='h-[620px]'>
             {filteredParkingLots.length !== 0 ? (
@@ -188,11 +188,13 @@ export default function Home() {
                 <div>
                   <Button
                     className={
-                      'tracking-widest dark:font-semibold border border-primary absolute top-[60px] z-10 left-3'
+                      'tracking-widest dark:font-semibold border border-primary absolute top-[10px] z-10 left-3'
                     }
                     disabled={isLoading}
                   >
-                    VER PARQUEADEROS
+                    <p className='font-semibold'>
+                    BUSCAR PARQUEADEROS
+                    </p>
                   </Button>
                 </div>
               </DrawerTrigger>
@@ -203,15 +205,48 @@ export default function Home() {
                   </DrawerTitle>
                   <DrawerDescription>
                     <p className=''>
-                      Selecciona el parqueadero que te mejor se a lo que
+                      Selecciona el parqueadero que te mejor se acerque a lo que
                       necesitas.
                     </p>
                   </DrawerDescription>
                 </DrawerHeader>
-                <div>
-                  <ScrollArea>
+                <h2 className='tracking-widest'>
+                  <p className='tracking-widest'>Filtros</p>
+                </h2>
+                <div className='grid gap-2 justify-around grid-cols-2 py-3'>
+                  <div>
+                    <Input
+                      onChange={(e) => {
+                        setFilterName(e.target.value)
+                      }}
+                      placeholder='Filtrar por nombre'
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      onChange={(e) => {
+                        setFilterAddress(e.target.value)
+                      }}
+                      placeholder='Filtrar por dirección'
+                    />
+                  </div>
+                  <div>
+                    <CitySelect
+                      selectValue={filterCity}
+                      setSelectValue={setFilterCity}
+                    />
+                  </div>
+                  <div>
+                    <ParkingTypeSelect
+                      selectValue={filterParkingType}
+                      setSelectValue={setFilterParkingType}
+                    />
+                  </div>
+                </div>
+                <div className='py-2'>
+                  <ScrollArea className='h-[320px]'>
                     {filteredParkingLots.length !== 0 ? (
-                      <div className='flex flex-row gap-2 pr-3'>
+                      <div className='grid gap-2 justify-around grid-cols-2 '>
                         {filteredParkingLots.map((parkingItem) => (
                           <ParkingItem
                             key={parkingItem.id}
@@ -250,44 +285,9 @@ export default function Home() {
                         </p>
                       </div>
                     )}
-                    <ScrollBar orientation='horizontal' />
+                    {/* <ScrollBar orientation='horizontal' /> */}
                   </ScrollArea>
-                </div>
-                <Separator background='bg-background' />
-
-                <h2 className='tracking-widest'>
-                  <p className='tracking-widest'>Filtros</p>
-                </h2>
-                <div className='grid gap-2 justify-around grid-cols-2 py-3'>
-                  <div>
-                    <Input
-                      onChange={(e) => {
-                        setFilterName(e.target.value)
-                      }}
-                      placeholder='Filtrar por nombre'
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      onChange={(e) => {
-                        setFilterAddress(e.target.value)
-                      }}
-                      placeholder='Filtrar por dirección'
-                    />
-                  </div>
-                  <div>
-                    <CitySelect
-                      selectValue={filterCity}
-                      setSelectValue={setFilterCity}
-                    />
-                  </div>
-                  <div>
-                    <ParkingTypeSelect
-                      selectValue={filterParkingType}
-                      setSelectValue={setFilterParkingType}
-                    />
-                  </div>
-                </div>
+                </div>               
               </DrawerContent>
             </Drawer>
           </div>

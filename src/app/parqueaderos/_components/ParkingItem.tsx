@@ -17,8 +17,8 @@ const ParkingItem = ({
 }) => {
   return (
     <div
-      className={`duration-500 border border-primary p-4 ${
-        isSelected ? 'bg-yellowFPC-200 text-black' : 'hover:bg-muted'
+      className={`duration-500 border border-primary pt-1 pb-2 px-2 sm:p-4 ${
+        isSelected ? 'bg-blueFPC-300 text-black' : 'hover:bg-muted'
       }`}
       key={parkingData.id}
       onClick={() => {
@@ -26,7 +26,7 @@ const ParkingItem = ({
       }}
     >
       <div className='col-span-8'>
-        <h2 className='uppercase tracking-widest text-xl overflow-hidden text-ellipsis truncate '>
+        <h2 className='uppercase tracking-widest text-sm sm:text-lg overflow-hidden text-ellipsis truncate '>
           {parkingData.name}
         </h2>{' '}
         <div className='flex flex-row gap-1 py-1 flex-wrap'>
@@ -41,7 +41,7 @@ const ParkingItem = ({
             </p>
           </Badge>
         </div>
-        <div className=' text-sm'>
+        <div className='sm:text-sm text-xs'>
           <div className='leading-tight'>
             <p className=''>{parkingData.location.address}</p>
             <p className='font-medium'>{parkingData.location.city.city}</p>
@@ -55,22 +55,22 @@ const ParkingItem = ({
             </p>
           </div>
 
-          <div className='flex flex-row gap-x-3 items-center'>
-            <p>Cupos: </p>
+          <div className='flex flex-row gap-x-2 sm:gap-x-3 items-center'>
+            <p className='sm:text-sm text-xs'>Cupos: </p>
             {parkingData.parkingSlotDetails?.map((parkingSlotDetailItem) => {
               if (parkingSlotDetailItem.slotType === 'CARRO') {
                 return (
                   <p
                     key={parkingSlotDetailItem.slotType}
                     className={cn(
-                      'flex flex-col justify-center text-center gap-0.5',
+                      'flex flex-col justify-center text-center gap-[1px]',
                       {
                         'text-redFPC-400 font-medium':
                           parkingSlotDetailItem.emptySlots <= 5,
                       }
                     )}
                   >
-                    <Car size={20} strokeWidth={1.3} />
+                    <Car className='sm:w-5 sm:h-5 w-4 h-4' strokeWidth={1.3} />
                     {parkingSlotDetailItem.emptySlots}
                   </p>
                 )
@@ -86,7 +86,7 @@ const ParkingItem = ({
                       }
                     )}
                   >
-                    <PiMotorcycleFill size={20} strokeWidth={1.3} />
+                    <PiMotorcycleFill className='sm:w-5 sm:h-5 w-4 h-4' strokeWidth={1.3} />
                     {parkingSlotDetailItem.emptySlots}
                   </p>
                 )
@@ -102,7 +102,7 @@ const ParkingItem = ({
                       }
                     )}
                   >
-                    <Bike size={20} strokeWidth={1.3} />
+                    <Bike className='sm:w-5 sm:h-5 w-4 h-4' strokeWidth={1.3} />
                     {parkingSlotDetailItem.emptySlots}
                   </p>
                 )
@@ -118,7 +118,7 @@ const ParkingItem = ({
                       }
                     )}
                   >
-                    <Tractor size={20} strokeWidth={1.3} />
+                    <Tractor className='sm:w-5 sm:h-5 w-4 h-4' strokeWidth={1.3} />
                     {parkingSlotDetailItem.emptySlots}
                   </p>
                 )

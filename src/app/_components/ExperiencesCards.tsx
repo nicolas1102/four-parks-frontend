@@ -51,7 +51,7 @@ export function ExperiencesCards() {
       </h2>
       <div className='px-12 flex justify-center'>
         <Carousel
-          className='sm:w-[1150px] w-64 '
+          className='sm:w-[1000px] w-64 '
           opts={{
             align: 'center',
             loop: true,

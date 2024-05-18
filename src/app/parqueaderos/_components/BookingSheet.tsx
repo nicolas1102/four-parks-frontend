@@ -28,37 +28,38 @@ const BookingSheet = ({
   return (
     <Sheet>
       <SheetTrigger asChild className='w-full'>
-        <PrimaryButton text='RESERVAR' />
+        <PrimaryButton size={'sm'} text='RESERVAR' />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle className='tracking-widest text-xl'>RESERVAR</SheetTitle>
+          <SheetTitle className='tracking-widest text-base sm:text-lg'>
+            RESERVAR
+          </SheetTitle>
           <Separator />
-          <p className='text-gray-500 text-sm text-justify'>
-            ¡No dejes que te quiten el cupo! Completa los siguientes datos para
-            asegurar tu parqueadero.
+          <p className='text-gray-500 text-xs sm:text-sm text-justify'>
+            ¡No dejes que te quiten el cupo! Asegura tu cupo.
           </p>
           <Separator />
         </SheetHeader>
         <div className='flex w-full flex-col py-2 gap-2'>
-          <div>
+          <div className='text-xs sm:text-base'>
             <div>
-              <p className='font-medium tracking-wider overflow-hidden text-ellipsis truncate '>
-                NOMBRE:{' '}
+              <p className='font-medium overflow-hidden text-ellipsis truncate '>
+                Nombre:{' '}
                 <span className='font-normal'>{selectedParking.name}</span>
               </p>
             </div>
             <div>
-              <p className='font-medium  tracking-wider overflow-hidden text-ellipsis truncate '>
-                DIRECCIÓN:{' '}
+              <p className='font-medium overflow-hidden text-ellipsis truncate '>
+                Dirección:{' '}
                 <span className='font-normal'>
                   {selectedParking.location.address}
                 </span>
               </p>
             </div>
             <div>
-              <p className='font-medium tracking-wider overflow-hidden text-ellipsis truncate '>
-                CIUDAD:{' '}
+              <p className='font-medium overflow-hidden text-ellipsis truncate '>
+                Ciudad:{' '}
                 <span className='font-normal'>
                   {selectedParking.location.city.city}
                 </span>
@@ -66,7 +67,7 @@ const BookingSheet = ({
             </div>
             <div>
               <p className='font-medium  tracking-wider overflow-hidden text-ellipsis truncate '>
-                TIPO PARQUEDERO:{' '}
+                Tipo Parqueadero:{' '}
                 <span className='font-normal'>
                   {selectedParking.parkingType.type.toLocaleLowerCase()}
                 </span>
@@ -76,25 +77,30 @@ const BookingSheet = ({
           <Separator />
           <ToggleGroup variant='outline' type='single' size={'xl'}>
             <div className='flex flex-col space-y-1 w-full'>
-              <p className='tracking-widest font-medium '>TIPO VEHÍCULO</p>
+              <p className='tracking-widest font-medium text-sm sm:text-base'>
+                TIPO VEHÍCULO
+              </p>
 
               <ScrollArea className='h-[260px]'>
                 <div className='flex flex-col space-y-2 w-full'>
                   <ToggleGroupItem value='car' aria-label='Toggle bold'>
                     <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
                       <div className='gap-1'>
-                        <div className='flex flex-row gap-2'>
-                          <Car size={24} strokeWidth={1.5} />
-                          <p className='font-normal text-base tracking-widest'>
+                        <div className='flex flex-row gap-1 sm:gap-2'>
+                          <Car
+                            className='sm:w-6 sm:h-6 w-5 h-5'
+                            strokeWidth={1.5}
+                          />
+                          <p className='font-normal text-sm sm:text-base tracking-widest'>
                             CARRO
                           </p>
                           -
-                          <p className='font-normal text-base italic'>
+                          <p className='font-normal text-sm sm:text-base  italic'>
                             23 cupos
                           </p>
                         </div>
                       </div>
-                      <p className='text-start text-base'>
+                      <p className='text-start text-sm sm:text-base '>
                         $200 <span className='italic font-light'> / min.</span>
                       </p>
                     </div>
@@ -103,78 +109,90 @@ const BookingSheet = ({
                     value='motorcycle'
                     aria-label='Toggle italic'
                   >
-                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
+                    <div className='flex flex-col justify-start w-full sm:py-2 sm:px-3 py-1 px-2 gap-1'>
                       <div className='gap-1'>
-                        <div className='flex flex-row gap-2'>
-                          <PiMotorcycleFill size={24} strokeWidth={1.5} />
-                          <p className='font-normal font-base text-base tracking-widest'>
+                        <div className='flex flex-row gap-1 sm:gap-2'>
+                          <PiMotorcycleFill
+                            className='sm:w-6 sm:h-6 w-5 h-5'
+                            strokeWidth={1.5}
+                          />
+                          <p className='font-normal font-base text-sm sm:text-base  tracking-widest'>
                             MOTO
                           </p>
                           -
-                          <p className='font-normal text-base italic '>
+                          <p className='font-normal text-sm sm:text-base  italic '>
                             31 cupos
                           </p>
                         </div>
                       </div>
-                      <p className='text-start text-base'>
+                      <p className='text-start text-sm sm:text-base '>
                         $150 <span className='italic font-light'> / min.</span>
                       </p>
                     </div>
                   </ToggleGroupItem>
 
                   <ToggleGroupItem value='byke' aria-label='Toggle underline'>
-                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
+                    <div className='flex flex-col justify-start w-full sm:py-2 sm:px-3 py-1 px-2 gap-1'>
                       <div className='gap-1'>
-                        <div className='flex flex-row gap-2'>
-                          <Bike size={22} strokeWidth={1.5} />
-                          <p className='font-normal text-base tracking-widest'>
+                        <div className='flex flex-row gap-1 sm:gap-2'>
+                          <Bike
+                            className='sm:w-6 sm:h-6 w-5 h-5'
+                            strokeWidth={1.5}
+                          />
+                          <p className='font-normal text-sm sm:text-base tracking-widest'>
                             BICICLETA
                           </p>
                           -
-                          <p className='font-normal text-base italic '>
+                          <p className='font-normal text-sm sm:text-base italic '>
                             55 cupos
                           </p>
                         </div>
                       </div>
-                      <p className='text-start text-base'>
+                      <p className='text-start text-sm sm:text-base'>
                         $10 <span className='italic font-light'> / min.</span>
                       </p>
                     </div>
                   </ToggleGroupItem>
                   <ToggleGroupItem value='nube' aria-label='Toggle underline'>
-                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
+                    <div className='flex flex-col justify-start w-full sm:py-2 sm:px-3 py-1 px-2 gap-1'>
                       <div className='gap-1'>
-                        <div className='flex flex-row gap-2'>
-                          <Cloud size={22} strokeWidth={1.5} />
-                          <p className='font-normal text-base font-base tracking-widest'>
+                        <div className='flex flex-row gap-1 sm:gap-2'>
+                          <Cloud
+                            className='sm:w-6 sm:h-6 w-5 h-5'
+                            strokeWidth={1.5}
+                          />
+                          <p className='font-normal text-sm sm:text-base font-base tracking-widest'>
                             NUBE VOLADORA
                           </p>
                           -
-                          <p className='font-normal text-base italic '>
+                          <p className='font-normal text-sm sm:text-base italic '>
                             ∞ cupos
                           </p>
                         </div>
                       </div>
-                      <p className='text-start text-base'>
+                      <p className='text-start text-sm sm:text-base'>
                         Ƶ10 <span className='italic font-light'> / min.</span>
                       </p>
                     </div>
                   </ToggleGroupItem>
                   <ToggleGroupItem value='heavy' aria-label='Toggle underline'>
-                    <div className='flex flex-col justify-start w-full py-2 px-3 gap-1'>
+                    <div className='flex flex-col justify-start w-full sm:py-2 sm:px-3 py-1 px-2 gap-1'>
                       <div className='gap-1'>
-                        <div className='flex flex-row gap-2'>
-                          <Tractor size={22} strokeWidth={1.5} />
-                          <p className='font-normal text-base font-base tracking-widest'>
-                            VEHíCULO PESADO
+                        <div className='flex flex-row gap-1 sm:gap-2'>
+                          <Tractor
+                            className='sm:w-6 sm:h-6 w-5 h-5'
+                            strokeWidth={1.5}
+                          />
+                          <p className='font-normal text-sm sm:text-base font-base tracking-widest'>
+                            V. PESADO
                           </p>
                           -
-                          <p className='font-normal text-base italic '>
+                          <p className='font-normal text-sm sm:text-base italic '>
                             4 cupos
                           </p>
                         </div>
                       </div>
-                      <p className='text-start text-base'>
+                      <p className='text-start text-sm sm:text-base'>
                         $400 <span className='italic font-light'> / min.</span>
                       </p>
                     </div>
@@ -186,8 +204,8 @@ const BookingSheet = ({
         </div>
         <div className='space-y-4 '>
           <Separator />
-          <div className=' text-base'>
-            <h2 className='tracking-widest text-lg'>RESUMEN</h2>
+          <div className='text-xs sm:text-base'>
+            <h2 className='tracking-widest font-medium'>RESUMEN</h2>
             <div className='flex'>
               <span className='flex-1'>Hora de ingreso: </span>
               <span className='pr-1'>
