@@ -30,13 +30,15 @@ export function ParkingTypeSelect({
       }}
       value={selectValue}
     >
-      <SelectTrigger className='w-48'>
-        <SelectValue placeholder='Tipo de Parqueadero' />
+      <SelectTrigger className='sm:w-48 '>
+        <SelectValue placeholder='Tipo' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Ciudad</SelectLabel>
-          <SelectItem value={'all'} className='text-center italic'>--- Cualquiera --</SelectItem>
+          <SelectLabel>Tipos de Parqueadero</SelectLabel>
+          <SelectItem value={'all'} className='italic'>
+            --- Cualquiera --
+          </SelectItem>
           <SelectItem value={'DESCUBIERTO'}>Descubierto</SelectItem>
           <SelectItem value={'CUBIERTO'}>Cubierto</SelectItem>
           <SelectItem value={'SEMI-CUBIERTO'}>Semi-cubierto</SelectItem>

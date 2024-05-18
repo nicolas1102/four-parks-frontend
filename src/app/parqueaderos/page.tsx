@@ -23,6 +23,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
+import Separator from '@/components/Separator'
 
 export default function Home() {
   const {
@@ -181,11 +182,19 @@ export default function Home() {
         </div>
 
         <div className='sm:col-span-5'>
-          <div className='relative'>
+          <div className='relative sm:hidden h-0'>
             <Drawer>
               <DrawerTrigger>
-                opem
-                {/* <FloatingButton text='VER PARQUEADEROS' direction='left' /> */}
+                <div>
+                  <Button
+                    className={
+                      'tracking-widest dark:font-semibold border border-primary absolute top-[650px] z-10 left-3'
+                    }
+                    disabled={isLoading}
+                  >
+                    VER PARQUEADEROS
+                  </Button>
+                </div>
               </DrawerTrigger>
               <DrawerContent className='px-6'>
                 <DrawerHeader>
@@ -244,12 +253,41 @@ export default function Home() {
                     <ScrollBar orientation='horizontal' />
                   </ScrollArea>
                 </div>
-                <DrawerFooter>
-                  <Button>Submit</Button>
-                  <DrawerClose>
-                    <Button variant='outline'>Cancel</Button>
-                  </DrawerClose>
-                </DrawerFooter>
+                <Separator background='bg-background' />
+
+                <h2 className='tracking-widest'>
+                  <p className='tracking-widest'>Filtros</p>
+                </h2>
+                <div className='grid gap-2 justify-around grid-cols-2 py-3'>
+                  <div>
+                    <Input
+                      onChange={(e) => {
+                        setFilterName(e.target.value)
+                      }}
+                      placeholder='Filtrar por nombre'
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      onChange={(e) => {
+                        setFilterAddress(e.target.value)
+                      }}
+                      placeholder='Filtrar por dirección'
+                    />
+                  </div>
+                  <div>
+                    <CitySelect
+                      selectValue={filterCity}
+                      setSelectValue={setFilterCity}
+                    />
+                  </div>
+                  <div>
+                    <ParkingTypeSelect
+                      selectValue={filterParkingType}
+                      setSelectValue={setFilterParkingType}
+                    />
+                  </div>
+                </div>
               </DrawerContent>
             </Drawer>
           </div>
