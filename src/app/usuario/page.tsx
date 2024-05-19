@@ -55,146 +55,7 @@ export default function Home() {
           <NoResults redirection='/' />
         </div>
       ) : (
-        // <div className='max-h-full flex flex-col gap-y-5 p-6 sm:p-10'>
-        //   <div className='border sm:p-10 p-5 border-blueFPC-400 bg-blueFPC-200 dark:border-blueFPC-200 dark:bg-blueFPC-400'>
-        //     <h1 className='text-2xl sm:text-3xl tracking-widest font-medium pb-2'>
-        //       MI CUENTA
-        //     </h1>
-        //     <p className='text-sm sm:text-base tracking-widest uppercase'>
-        //       Bienvenido de nuevo
-        //       {session?.firstName && (
-        //         <span className='font-bold uppercase'>, {user?.firstName}</span>
-        //       )}
-        //       .
-        //     </p>
-        //   </div>
-
-        //   <div className='gap-5 flex-wrap sm:grid sm:grid-cols-2 flex flex-col'>
-        //     <div className='p-6 sm:p-10 border border-blueFPC-400 '>
-        //       <div className='col-span-1 row-span-1'>
-        //         <h2 className='tracking-widest text-lg sm:text-xl pb-2'>
-        //           CUENTA
-        //         </h2>
-        //         <ul className='text-sm'>
-        //           <li>
-        //             <p className='uppercase'>
-        //               <span className='font-medium tracking-widest '>
-        //                 E-mail:
-        //               </span>{' '}
-        //               {user?.email}
-        //             </p>
-        //           </li>
-        //           <li>
-        //             <p className='uppercase'>
-        //               <span className='font-medium tracking-widest'>
-        //                 Primer Nombre:
-        //               </span>{' '}
-        //               {user?.firstName}
-        //             </p>
-        //           </li>
-        //           <li>
-        //             <p className='uppercase'>
-        //               <span className='font-medium tracking-widest'>
-        //                 Segundo Nombre:
-        //               </span>{' '}
-        //               {user?.secondName}
-        //             </p>
-        //           </li>
-        //           <li>
-        //             <p className='uppercase'>
-        //               <span className='font-medium tracking-widest'>
-        //                 Primer Apellido:
-        //               </span>{' '}
-        //               {user?.firstLastname}
-        //             </p>
-        //           </li>
-        //           <li>
-        //             <p className='uppercase'>
-        //               <span className='font-medium tracking-widest'>
-        //                 Segundo Apellido:
-        //               </span>{' '}
-        //               {user?.secondLastname}
-        //             </p>
-        //           </li>
-        //         </ul>
-        //       </div>
-
-        //       {session?.rol === 'USUARIO' && (
-        //         <div className='col-span-1 pt-8 flex flex-row justify-end'>
-        //           <EditPersonalInfoUserDialog user={user} />
-        //         </div>
-        //       )}
-        //     </div>
-
-        //     {session?.rol === 'USUARIO' && (
-        //       <>
-        //         <div className='border border-blueFPC-400 p-6 sm:p-10'>
-        //           <div className='col-span-1 row-span-1'>
-        //             <h2 className='tracking-widest text-lg sm:text-xl pb-2'>
-        //               TARJETA DE CRÉDITO
-        //             </h2>
-        //             <ul className='text-sm'>
-        //               <li>
-        //                 <p className='uppercase'>
-        //                   <span className='font-medium tracking-widest'>
-        //                     Número de tarjeta:
-        //                   </span>{' '}
-        //                   ••••••••••••••
-        //                 </p>
-        //               </li>
-        //               <li>
-        //                 <p className='uppercase'>
-        //                   <span className='font-medium tracking-widest'>
-        //                     Fecha de expritación:
-        //                   </span>{' '}
-        //                   ••••••••••••••
-        //                 </p>
-        //               </li>
-        //               <li>
-        //                 <p className='uppercase'>
-        //                   <span className='font-medium tracking-widest'>
-        //                     CVV:
-        //                   </span>{' '}
-        //                   ••••••••••••••
-        //                 </p>
-        //               </li>
-        //             </ul>
-        //           </div>
-        //           <div className='col-span-1 pt-8 flex flex-row justify-end'>
-        //             <EditCreditCardUserDialog user={user} />
-        //           </div>
-        //         </div>
-
-        //         <div className='border border-blueFPC-400 p-6 sm:p-10'>
-        //           <div className='col-span-1 row-span-1'>
-        //             <h2 className='tracking-widest text-lg sm:text-xl pb-2'>
-        //               CONTRASEÑA
-        //             </h2>
-        //             <ul className='text-sm'>
-        //               <li>
-        //                 <p className='uppercase'>
-        //                   <span className='font-medium tracking-widest'>
-        //                     Contraseña:
-        //                   </span>{' '}
-        //                   ••••••••••••••
-        //                 </p>
-        //               </li>
-        //             </ul>
-        //           </div>
-        //           <div className='col-span-1 pt-8 flex flex-row justify-end'>
-        //             <EditPasswordUserDialog user={user} />
-        //           </div>
-        //         </div>
-        //       </>
-        //     )}
-        //   </div>
-
-        //   {session?.rol === 'USUARIO' && (
-        //     <div className='border-t border-redFPC-400 my-4'></div>
-        //   )}
-        // </div>
-
-        <div className='sm:col-span-6 sm:mx-44 sm:my-6 m-6'>
+        <div className='sm:mx-44 sm:my-6 m-6 space-y-8'>
           <Card className='overflow-hidden'>
             <CardHeader className='flex flex-col justify-center bg-muted/50'>
               <CardTitle className='group flex flex-col '>
@@ -308,23 +169,35 @@ export default function Home() {
                   )}
                 </div>
               </div>
-              <Separator className='my-4' />
-              <div className='grid gap-1'>
-                <div className='font-semibold tracking-widest'>RESERVAS</div>
-                
-              </div>
-              
             </CardContent>
+
             <CardFooter className='flex flex-row items-center border-t bg-muted/50 px-6 py-3'>
               <div className='text-sm text-muted-foreground flex justify-end'>
-                <Link
-                  href='/'
-                  className='font-medium hover:text-gray-400'
-                >
+                <Link href='/' className='font-medium hover:text-gray-400'>
                   ← Ir al inicio
                 </Link>
               </div>
             </CardFooter>
+          </Card>
+          <Card className='overflow-hidden'>
+            <CardHeader className='flex flex-col justify-center bg-muted/50'>
+              <CardTitle className='group flex flex-col '>
+                <h1 className='mt-2 tracking-widest sm:text-2xl text-xl '>
+                  RESERVAS
+                </h1>
+              </CardTitle>
+              <CardDescription className='text-sm '>
+                Aquí puedes ver un resumen de todas tus reservas en{' '}
+                <span className='font-medium text-primary'>
+                  FourParksColombia.
+                </span>
+              </CardDescription>
+            </CardHeader>
+            <CardContent className='py-6 text-sm'>
+              <div className='grid gap-1'>
+                <div className='font-semibold tracking-widest'>RESERVAS</div>
+              </div>
+            </CardContent>
           </Card>
         </div>
       )}
