@@ -132,7 +132,7 @@ const Page = ({ searchParams }: PageProps) => {
                   <div className='border-4 border-yellowFPC-400 '>
                     <Image
                       src={src}
-                      className='object-cover object-center grayscale w-72 h-72 sm:w-44 sm:h-44 '
+                      className='object-cover object-center grayscale w-64 h-64 sm:w-44 sm:h-44 '
                       alt='thank you for your order'
                       priority
                       width='160'
