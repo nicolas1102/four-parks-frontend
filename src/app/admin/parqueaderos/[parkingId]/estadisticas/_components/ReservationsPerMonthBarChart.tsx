@@ -54,9 +54,9 @@ export function ReservationsPerMonthBarChart() {
     <Card className='' x-chunk='dashboard-01-chunk-4'>
       <CardHeader className='flex flex-row items-center'>
         <div className='grid gap-2'>
-          <CardTitle>Transactions</CardTitle>
+          <CardTitle>Reservas</CardTitle>
           <CardDescription>
-            Recent transactions from your store.
+            Cantidad de reservas por mes reciente.
           </CardDescription>
         </div>
       </CardHeader>
@@ -68,8 +68,8 @@ export function ReservationsPerMonthBarChart() {
             data={reservationsPerMonth}
             margin={{
               // top: 5,
-              // right: 30,
-              left: -35,
+              // right: 5,
+              left: -32,
               // bottom: 5,
             }}
           >
@@ -83,7 +83,7 @@ export function ReservationsPerMonthBarChart() {
               dataKey='reservas'
               // fill='#82ca9d'
               className='fill-yellowFPC-400'
-              activeBar={<Rectangle fill='gold' stroke='purple' />}
+              activeBar={<Rectangle fill='gold' stroke='blue' />}
             />
           </BarChart>
         </ResponsiveContainer>
