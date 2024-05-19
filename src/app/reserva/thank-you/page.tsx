@@ -91,12 +91,10 @@ const Page = ({ searchParams }: PageProps) => {
                 <span className='text-primary font-medium'>
                   {session?.firstName + ' ' + session?.firstLastname + ', '}
                 </span>
-                ya hemos enviado el resumen de tux reserva a tu correo{' '}
+                hemos enviado a tu correo {' '}
                 <span className='text-primary font-medium'>
                   ({session?.email})
-                </span>
-                . Presentando el siguiente QR podrás empezar a hacer uso de tu
-                parqueadero.
+                </span> los datos de tu reserva. Presentando el siguiente QR podrás empezar a hacer uso de tu parqueadero.
               </CardDescription>
             </CardHeader>
             <CardContent className='py-6 sm:px-44 text-sm'>
@@ -172,9 +170,9 @@ const Page = ({ searchParams }: PageProps) => {
               </div>
             </CardContent>
             <CardFooter className='flex flex-row items-center border-t bg-muted/50 px-6 py-3'>
-              <div className='text-xs text-muted-foreground flex justify-end'>
+              <div className='text-sm text-muted-foreground flex justify-end'>
                 <Link
-                  href='/parqueaderos'
+                  href='/'
                   className='font-medium hover:text-gray-400'
                 >
                   ← Ir al inicio
