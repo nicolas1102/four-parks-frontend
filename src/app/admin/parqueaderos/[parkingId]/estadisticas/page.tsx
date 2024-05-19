@@ -146,18 +146,21 @@ export default function Page({
   }, [])
 
   useEffect(() => {
-    if (
-      session?.rol === 'ADMINISTRADOR' &&
-      session?.id !== parking?.admin?.id
-    ) {
-      toast({
-        variant: 'destructive',
-        title: 'Dewey, sal de ahí, esa no es tu familia.',
-        description:
-          'No puedes administrar un parqueadero al que no estás asignado.',
-      })
-      router.push('/admin')
-    }
+    // console.log(parking?.admin?.id);
+    // console.log(session?.id);
+    
+    // if (
+    //   session?.rol === 'ADMINISTRADOR' &&
+    //   session?.id !== parking?.admin?.id
+    // ) {
+    //   toast({
+    //     variant: 'destructive',
+    //     title: 'Dewey, sal de ahí, esa no es tu familia.',
+    //     description:
+    //       'No puedes administrar un parqueadero al que no estás asignado.',
+    //   })
+    //   router.push('/admin')
+    // }
   }, [parking, session])
 
   return (
@@ -332,7 +335,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
@@ -343,7 +346,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
@@ -354,7 +357,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
@@ -365,7 +368,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
@@ -376,7 +379,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
@@ -387,7 +390,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
@@ -398,7 +401,7 @@ export default function Page({
                   <div className='flex items-center gap-4'>
                     <div className='grid gap-1'>
                       <p className='text-sm font-medium leading-none'>
-                        Camilo Jimenéz
+                        Camilo Jiménez
                       </p>
                       <p className='text-sm text-muted-foreground'>
                         camilo@email.com
