@@ -90,18 +90,20 @@ const Page = ({ searchParams }: PageProps) => {
                   </span>{' '}
                   tu reserva se finalizó con éxito a las{' '}
                   <span className='text-primary font-medium'>
-                    {DateTime.fromISO(reservation?.reservationEndTime)
-                      .setLocale('co')
-                      .toLocaleString({
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      })}
+                    {reservation?.reservationEndTime &&
+                      DateTime.fromISO(reservation?.reservationEndTime)
+                        .setLocale('co')
+                        .toLocaleString({
+                          hour: 'numeric',
+                          minute: 'numeric',
+                        })}
                   </span>{' '}
                   el{' '}
                   <span className='text-primary font-medium'>
-                    {DateTime.fromISO(reservation?.reservationEndTime)
-                      .setLocale('co')
-                      .toLocaleString()}
+                    {reservation?.reservationEndTime &&
+                      DateTime.fromISO(reservation?.reservationEndTime)
+                        .setLocale('co')
+                        .toLocaleString()}
                   </span>{' '}
                   y ya realizamos el respectivo cobro a tu tarjeta de crédito.{' '}
                   <span className='text-primary font-medium'>
