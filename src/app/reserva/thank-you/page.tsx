@@ -26,18 +26,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from '@/components/ui/pagination'
 import { Separator } from '@/components/ui/separator'
 
 interface PageProps {
@@ -194,90 +182,6 @@ const Page = ({ searchParams }: PageProps) => {
               </div>
             </CardFooter>
           </Card>
-
-          {/* <div className='mx-auto max-w-2xl sm:px-6 py-15'>
-            <p className='text-sm font-medium tracking-widest text-center'>
-              RESERVA CONFIRMADA
-            </p>
-            <h1 className='mt-2 font-light tracking-wider sm:text-4xl text-2xl text-center'>
-              GRACIAS POR ESCOGERNOS
-            </h1>
-            <p className='mt-2 text-sm sm:text-base text-muted-foreground text-center'>
-              <span className='text-primary font-medium'>
-                {session?.firstName + ' ' + session?.firstLastname + ', '}
-              </span>
-              ya hemos enviado el resumen de tux reserva a tu correo{' '}
-              <span className='text-primary font-medium'>
-                ({session?.email})
-              </span>
-              . Presentando el siguiente QR podrás empezar a hacer uso de tu
-              parqueadero.
-            </p>
-
-            <div className='mt-2 text-sm font-medium pt-3 '>
-              <div className='divide-gray-200 border-t border-gray-200 text-sm font-medium text-muted-foreground sm:px-28'>
-                <div className=' mt-3 text-primary'>
-                  Reserva N°. <span className='mt-2'>1</span>
-                </div>
-
-                <div className='space-y-1 pt-4 text-sm font-medium text-muted-foreground '>
-                  <div className='flex justify-between'>
-                    <h3 className='tracking-widest text-primary'>
-                      PARQUEADERO
-                    </h3>
-                    <p className='text-primary'>
-                      Pelo quemao
-                    </p>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <p>Dirección</p>
-                    <p>cra 50 s - Medellín</p>
-                  </div>
-                  <div className='flex justify-between'>
-                    <p>Tipo parqueadero</p>
-                    <p>descubierto</p>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <p>Hora de ingreso</p>
-                    <p>2:47 p. m. - 2:47 p. m.</p>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <p>Fecha</p>
-                    <p>15 de mayo de 2024</p>
-                  </div>
-
-                  <div className='flex justify-between'>
-                    <p>Tipo vehículo</p>
-                    <p>Carro</p>
-                  </div>
-                </div>
-
-                <div className='w-full flex justify-center py-8'>
-                  <div className='border-4 border-yellowFPC-400 '>
-                    <Image
-                      src={src}
-                      className='object-cover object-center grayscale w-80 h-80 sm:w-44 sm:h-44 '
-                      alt='thank you for your order'
-                      priority
-                      width='160'
-                      height='160'
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='mt-5 border-t border-gray-200 py-6 text-right'>
-                <Link
-                  href='/parqueaderos'
-                  className='text-sm font-medium tracking-widest  hover:text-gray-400'
-                >
-                  Ir al inicio &rarr;
-                </Link>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
