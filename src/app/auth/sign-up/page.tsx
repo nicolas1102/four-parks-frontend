@@ -81,7 +81,7 @@ const Page = () => {
             <Icons.logo className='text-blueFPC-400' />
           </div>
           <h1 className='sm:text-2xl text-xl tracking-widest sm:p-3'>
-            REGISTARSE
+            REGISTRARSE
           </h1>
           <p className='sm:text-sm text-xs tracking-wider'>
             Por favor llena todos los campos.{' '}
