@@ -75,7 +75,7 @@ const Page = ({ searchParams }: PageProps) => {
     }
     const generate = (reservationId: string) => {
       // QRCode.toDataURL('https://github.com/nicolas1102').then(setSrc)
-      QRCode.toDataURL(`https://fourparks.vercel.app/admin/reservas/edit/${reservationId}`).then(setSrc)
+      QRCode.toDataURL(`https://fourparks.vercel.app/admin/reservas/edit?reservationId=${reservationId}`).then(setSrc)
     }
     reservationId &&
       typeof reservationId === 'string' &&
