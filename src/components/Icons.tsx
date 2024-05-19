@@ -7,7 +7,7 @@ export const Icons = {
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='2.5'
       strokeLinecap='round'
       strokeLinejoin='round'
       className='lucide lucide-square-parking '
@@ -17,8 +17,8 @@ export const Icons = {
       enableBackground='new 0 0 32 32'
       xmlSpace='preserve'
     >
-      <rect width='18' height='18' x='3' y='3' rx='2' />
-      <path d='M9 17V7h4a3 3 0 0 1 0 6H9' />
+      <rect width='20' height='20' x='2' y='2' rx='2'  />
+      <path d='M9 17V7h4a3 3 0 0 1 0 6H9'  />
     </svg>
   ),
   lost: (props: LucideProps) => (

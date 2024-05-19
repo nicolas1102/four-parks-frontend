@@ -1,6 +1,12 @@
 'use client'
 
-import { User, UserPlus, LogIn, LogOut } from 'lucide-react'
+import {
+  User,
+  UserPlus,
+  LogIn,
+  LogOut,
+  SeparatorHorizontal,
+} from 'lucide-react'
 import Link from 'next/link'
 import {
   DropdownMenu,
@@ -10,32 +16,54 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-// import { useAuth } from '@/hooks/user-auth'
+import { signOut } from 'next-auth/react'
 
-const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
-  // const { signOut } = useAuth()
+const Profile = ({
+  isLoggedIn,
+  name,
+  rol,
+}: {
+  isLoggedIn: boolean
+  name: string
+  rol: string
+}) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Link
-          className='bg-background hover:bg-accent h-11 w-12 flex items-center justify-around p-1.5 border border-primary hover:bg-yellow-200 hover dark:hover:bg-yellow-300 dark:hover:text-background  '
-          href='/sign-up'
+          className='bg-background hover:bg-accent h-12 w-auto flex items-center justify-around p-1.5 pr-2 border border-primary hover:bg-yellowFPC-200 hover dark:hover:bg-yellowFPC-400 dark:hover:text-background  '
+          href='/auth/sign-up'
         >
+          <p className='tracking-widest text-sm font-medium leading-none m-1'>
+            PERFIL
+          </p>
+          <div className='border-l-2 h-full w-0 border-primary mx-2'></div>
           <User />
         </Link>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuLabel>Perfil</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {name}
+          {rol !== 'USUARIO' ? (
+            <span className='dark:text-yellowFPC-400 text-blue-700 font-medium'>
+              ({rol})
+            </span>
+          ) : (
+            ''
+          )}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {isLoggedIn ? (
           <>
-            <DropdownMenuItem>
+            <DropdownMenuItem className='cursor-pointer'>
               <User className='mr-2 h-4 w-4' />
-              <Link href='/profile'>Perfil</Link>
+              <Link href='/usuario'>Perfil</Link>
             </DropdownMenuItem>
             <DropdownMenuItem
-              // onClick={signOut}
-              className='text-red-500 font-bold'
+              onClick={() => {
+                signOut()
+              }}
+              className='text-red-500 font-bold cursor-pointer'
             >
               <LogOut className='mr-2 h-4 w-4' />
               Cerrar Sesión
@@ -45,26 +73,16 @@ const Profile = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <>
             <DropdownMenuItem>
               <LogIn className='mr-2 h-4 w-4' />
-              <Link href='/sign-in'>Ingresar</Link>
+              <Link href='/auth/log-in'>Ingresar</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <UserPlus className='mr-2 h-4 w-4' />
-              <Link href='/sign-up'>Registrarse</Link>
+              <Link href='/auth/sign-up'>Registrarse</Link>
             </DropdownMenuItem>
           </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
-    // {isLoggedIn ? (
-    //   <Link
-    //     className='bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 flex items-center justify-around p-1.5'
-    //     href='/profile'
-    //   >
-    //     <User />
-    //   </Link>
-    // ) : (
-
-    // )}
   )
 }
 
