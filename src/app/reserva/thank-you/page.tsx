@@ -525,7 +525,7 @@ const Page = ({ searchParams }: PageProps) => {
                   <CardHeader className='flex flex-col justify-center bg-muted/50'>
                     <CardTitle className='group flex flex-col '>
                       <h1 className='font-light tracking-widest sm:text-2xl text-xl text-center'>
-                        RESERVA INICIADA
+                        RESERVA CONFIRMADA
                       </h1>
                     </CardTitle>
                     <CardDescription className='text-center text-sm'>
