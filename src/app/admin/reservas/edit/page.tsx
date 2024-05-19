@@ -39,6 +39,9 @@ import { useReservation } from '@/services/useReservation'
 import { ReservationInterface } from '@/lib/interfaces/reservation.interface'
 import NoResults from '@/components/NoResults'
 import { DateTime } from 'luxon'
+import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
+import { StartReservationDialog } from './_components/StartReservationDialog'
+import { EndReservationDialog } from './_components/EndReservationDialog'
 
 interface PageProps {
   searchParams: {
@@ -53,7 +56,6 @@ const Page = ({ searchParams }: PageProps) => {
   const [reservation, setReservation] = useState<
     ReservationInterface | null | undefined
   >(null)
-  const [src, setSrc] = useState<string>('')
 
   useEffect(() => {
     const fetchOrder = async (reservationId: number) => {
@@ -80,45 +82,13 @@ const Page = ({ searchParams }: PageProps) => {
             <Card className='overflow-hidden'>
               <CardHeader className='flex flex-col justify-center bg-muted/50'>
                 <CardTitle className='group flex flex-col '>
-                  <h1 className='font-light tracking-widest sm:text-2xl text-xl text-center'>
-                    RESERVA FINALIZADA
-                  </h1>
-                </CardTitle>
-                <CardDescription className='text-center text-sm'>
-                  <span className='text-primary font-medium'>
-                    {session?.firstName + ' ' + session?.firstLastname + ', '}
-                  </span>{' '}
-                  tu reserva se finalizó con éxito a las{' '}
-                  <span className='text-primary font-medium'>
-                    {reservation?.reservationEndTime &&
-                      DateTime.fromISO(reservation?.reservationEndTime)
-                        .setLocale('co')
-                        .toLocaleString({
-                          hour: 'numeric',
-                          minute: 'numeric',
-                        })}
-                  </span>{' '}
-                  el{' '}
-                  <span className='text-primary font-medium'>
-                    {reservation?.reservationEndTime &&
-                      DateTime.fromISO(reservation?.reservationEndTime)
-                        .setLocale('co')
-                        .toLocaleString()}
-                  </span>{' '}
-                  y ya realizamos el respectivo cobro a tu tarjeta de crédito.{' '}
-                  <span className='text-primary font-medium'>
-                    Esperamos que vuelvas pronto.
-                  </span>
-                  <p className='pt-3 text-sm font-medium text-primary tracking-widest text-center'>
-                    ¡GRACIAS POR ESCOGERNOS!{' '}
+                  <p className='tracking-widest sm:text-2xl text-xl text-center'>
+                    RESERVA N° <span className='mt-2'>{reservation?.id}</span>
                   </p>
-                </CardDescription>
+                </CardTitle>
               </CardHeader>
               <CardContent className='py-6 text-sm'>
                 <div className='grid gap-3'>
-                  <div className='font-semibold'>
-                    Reserva N°. <span className='mt-2'>{reservation?.id}</span>
-                  </div>
                   <div className='grid gap-1'>
                     <div className='font-semibold'>Información de Cliente</div>
                     <dl className='grid gap-3'>
@@ -193,14 +163,14 @@ const Page = ({ searchParams }: PageProps) => {
                         </dt>
                         <dd>{reservation?.parkingSlot?.vehicleTypeId.type}</dd>
                       </div>
-                      <div className='flex items-center justify-between'>
-                        <dt className='flex items-center gap-1 text-muted-foreground'>
-                          <Clock className='h-4 w-4' />
-                          Hora Reserva
-                        </dt>
-                        <dd>
-                          {reservation?.reservationTime &&
-                            DateTime.fromISO(reservation?.reservationTime)
+                      {reservation?.reservationTime && (
+                        <div className='flex items-center justify-between'>
+                          <dt className='flex items-center gap-1 text-muted-foreground'>
+                            <Clock className='h-4 w-4' />
+                            Hora Reserva
+                          </dt>
+                          <dd>
+                            {DateTime.fromISO(reservation?.reservationTime)
                               .setLocale('co')
                               .toLocaleString({
                                 hour: 'numeric',
@@ -210,16 +180,17 @@ const Page = ({ searchParams }: PageProps) => {
                               DateTime.fromISO(reservation?.reservationTime)
                                 .setLocale('co')
                                 .toLocaleString()}
-                        </dd>
-                      </div>
-                      <div className='flex items-center justify-between'>
-                        <dt className='flex items-center gap-1 text-muted-foreground'>
-                          <Clock className='h-4 w-4' />
-                          Hora Inicio Reserva
-                        </dt>
-                        <dd>
-                          {reservation?.reservationStartTime &&
-                            DateTime.fromISO(reservation?.reservationStartTime)
+                          </dd>
+                        </div>
+                      )}
+                      {reservation?.reservationStartTime && (
+                        <div className='flex items-center justify-between'>
+                          <dt className='flex items-center gap-1 text-muted-foreground'>
+                            <Clock className='h-4 w-4' />
+                            Hora Inicio Reserva
+                          </dt>
+                          <dd>
+                            {DateTime.fromISO(reservation?.reservationStartTime)
                               .setLocale('co')
                               .toLocaleString({
                                 hour: 'numeric',
@@ -231,16 +202,17 @@ const Page = ({ searchParams }: PageProps) => {
                               )
                                 .setLocale('co')
                                 .toLocaleString()}
-                        </dd>
-                      </div>
-                      <div className='flex items-center justify-between'>
-                        <dt className='flex items-center gap-1 text-muted-foreground'>
-                          <Clock className='h-4 w-4' />
-                          Hora Fin Reserva
-                        </dt>
-                        <dd>
-                          {reservation?.reservationEndTime &&
-                            DateTime.fromISO(reservation?.reservationEndTime)
+                          </dd>
+                        </div>
+                      )}
+                      {reservation?.reservationEndTime && (
+                        <div className='flex items-center justify-between'>
+                          <dt className='flex items-center gap-1 text-muted-foreground'>
+                            <Clock className='h-4 w-4' />
+                            Hora Fin Reserva
+                          </dt>
+                          <dd>
+                            {DateTime.fromISO(reservation?.reservationEndTime)
                               .setLocale('co')
                               .toLocaleString({
                                 hour: 'numeric',
@@ -250,8 +222,9 @@ const Page = ({ searchParams }: PageProps) => {
                               DateTime.fromISO(reservation?.reservationEndTime)
                                 .setLocale('co')
                                 .toLocaleString()}
-                        </dd>
-                      </div>
+                          </dd>
+                        </div>
+                      )}
                     </dl>
                   </div>
                   <Separator className='my-2' />
@@ -263,25 +236,48 @@ const Page = ({ searchParams }: PageProps) => {
                           <CreditCard className='h-4 w-4' />
                           Tarjeta de Crédito
                         </dt>
-                        <dd>**** **** **** 4532</dd>
+                        <dd>•••• •••• •••• 4532</dd>
                       </div>
                     </dl>
-                    <dl className='grid gap-3'>
-                      <div className='flex items-center justify-between text-lg'>
-                        <dt className='flex items-center gap-1'>
-                          <CircleDollarSign className='h-5 w-5' />
-                          Total
-                        </dt>
-                        <dd>${reservation?.totalPrice}</dd>
-                      </div>
-                    </dl>
+                    {reservation?.totalPrice && (
+                      <dl className='grid gap-3'>
+                        <div className='flex items-center justify-between text-lg'>
+                          <dt className='flex items-center gap-1'>
+                            <CircleDollarSign className='h-5 w-5' />
+                            Total
+                          </dt>
+                          <dd>${reservation?.totalPrice}</dd>
+                        </div>
+                      </dl>
+                    )}
                   </div>
+                  {session?.rol === 'ADMINISTRADOR' &&
+                    reservation &&
+                    reservation?.parkingSlot?.parkingId?.admin?.id === session?.id && (
+                      <>
+                        <Separator className='my-2' />
+                        <div>
+                          {reservation?.reservationStartTime &&
+                          reservation?.reservationEndTime ? (
+                            <p className='text-center tracking-widest text-lg'>
+                              RESERVA FINALIZADA
+                            </p>
+                          ) : reservation?.reservationStartTime ? (
+                            <StartReservationDialog reservation={reservation} />
+                          ) : (
+                            reservation && (
+                              <EndReservationDialog reservation={reservation} />
+                            )
+                          )}
+                        </div>
+                      </>
+                    )}
                 </div>
               </CardContent>
               <CardFooter className='flex flex-row items-center border-t bg-muted/50 px-6 py-3'>
                 <div className='text-sm text-muted-foreground flex justify-end'>
                   <Link href='/' className='font-medium hover:text-gray-400'>
-                    ← Ir al inicio
+                    ← Ir a menu Admin
                   </Link>
                 </div>
               </CardFooter>

@@ -68,14 +68,16 @@ const Page = ({ searchParams }: PageProps) => {
   useEffect(() => {
     // Verificamos que el usuario de la orden es el mismo que está ingresando
     if (
+      session?.rol !== 'GERENTE' &&
       reservation?.id !== undefined &&
       reservation?.user?.id !== session?.id
     ) {
       // return redirect(`/auth/unauthorized`)
     }
     const generate = (reservationId: string) => {
-      // QRCode.toDataURL('https://github.com/nicolas1102').then(setSrc)
-      QRCode.toDataURL(`https://fourparks.vercel.app/admin/reservas/edit?reservationId=${reservationId}`).then(setSrc)
+      QRCode.toDataURL(
+        `https://fourparks.vercel.app/admin/reservas/edit?reservationId=${reservationId}`
+      ).then(setSrc)
     }
     reservationId &&
       typeof reservationId === 'string' &&
@@ -529,7 +531,7 @@ const Page = ({ searchParams }: PageProps) => {
                       </h1>
                     </CardTitle>
                     <CardDescription className='text-center text-sm'>
-                    <span className='text-primary font-medium'>
+                      <span className='text-primary font-medium'>
                         {session?.firstName +
                           ' ' +
                           session?.firstLastname +
