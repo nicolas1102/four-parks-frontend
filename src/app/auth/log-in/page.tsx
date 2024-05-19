@@ -179,7 +179,7 @@ const Page = () => {
                 })}
                 href='/auth/sign-up'
               >
-                ¿No tienes una cuenta? Registrate!
+                ¿No tienes una cuenta? Regístrate!
                 <ArrowRight className='h-4 w-4' />
               </Link>
             </div>
