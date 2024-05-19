@@ -91,7 +91,7 @@ const Hero = () => {
                 </Link>
               </>
             )}
-            {session?.rol !== 'USUARIO' && (
+            {session?.rol && session?.rol !== 'USUARIO' && (
               <Link href={'/admin'}>
                 <PrimaryButton
                   text='ADMINISTRAR SISTEMA'

@@ -17,7 +17,7 @@ const NoResults = ({ redirection }: { redirection?: string }) => {
         <Icons.lost className='text-red-400' />
       </div>
       <h3 className='tracking-widest text-2xl'>SIN RESULTADOS.</h3>
-      <p className='text-muted-foreground'>
+      <p className='text-muted-foreground text-center'>
         No se encontraron resultados de lo que estás buscando. Intenta más
         tarde.
       </p>

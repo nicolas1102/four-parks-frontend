@@ -66,8 +66,10 @@ const ReservationSheet = ({
       } as ReservationInterface
 
       console.log(reservationData)
-
+      
       // const res = await createReservation(reservationData)
+      // console.log(res?.data.id)
+      
       // if (res?.status === 200) {
       //   router.push(`/reserva/thank-you?reservationId=${res?.data.id}`)
       // }
@@ -161,7 +163,8 @@ const ReservationSheet = ({
                                   'font-medium text-sm sm:text-base italic',
                                   {
                                     'text-redFPC-400 font-medium':
-                                    parkingVehicleType?.emptySlots && parkingVehicleType?.emptySlots <= 5,
+                                      parkingVehicleType?.emptySlots &&
+                                      parkingVehicleType?.emptySlots <= 5,
                                   }
                                 )}
                               >

@@ -2,10 +2,7 @@ import { ParkingInterface } from './parking.interface'
 
 export interface ParkingSlotInterface {
   id?: string
-  parkingId?: {
-    id?: number
-    name: string
-  }
+  parkingId?: ParkingInterface
   parking?: ParkingInterface
   slotStatusId: {
     id?: number

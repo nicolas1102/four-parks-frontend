@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 
 const Loader = () => {
   return (
-    <div className='flex flex-col items-center gap-2 pt-5 sm:m-10  m-6'>
+    <div className='flex flex-col items-center gap-2 py-10 sm:m-10  m-6'>
       <div className='animate-pulse relative mb-4 h-32 w-32 text-muted-foreground'>
         <Icons.logo />
       </div>

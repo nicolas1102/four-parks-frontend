@@ -31,6 +31,7 @@ interface ReservationContextType {
     reservation: ReservationInterface
   ) => Promise<AxiosResponse<any, any> | undefined>
   getReservations: () => Promise<void>
+  getOneReservation: (id: number) => Promise<ReservationInterface | undefined>
   getReservationsByParking: (parkingId: number) => Promise<void>
   startReservation: (
     reservation: ReservationInterface
@@ -296,6 +297,7 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
         setIsLoading,
         createReservation,
         getReservations,
+        getOneReservation,
         getReservationsByParking,
         startReservation,
         endReservation,
