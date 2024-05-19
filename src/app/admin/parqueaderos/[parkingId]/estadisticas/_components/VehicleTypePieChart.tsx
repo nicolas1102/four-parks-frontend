@@ -36,8 +36,8 @@ export function VehicleTypePieChart() {
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent className='h-[400px] flex justify-center'>
-        <ResponsiveContainer width='100%' height='100%'>
+      <CardContent className='h-[400px] flex justify-center sm:scale-105 '>
+        <ResponsiveContainer width='100%' height='100%' className='sm:-mt-4'>
           <PieChart width={400} height={400}>
             <Legend />
             <Pie
@@ -46,7 +46,7 @@ export function VehicleTypePieChart() {
               data={data01}
               cx='50%'
               cy='50%'
-              outerRadius={100}
+              outerRadius={110}
               fill='#8884d8'
               label
             >
