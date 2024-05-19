@@ -150,7 +150,7 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
               <DropdownMenuItem
                 className='cursor-pointer'
                 onClick={() => {
-                  router.push(`/admin/parqueaderos/${parking.id}`)
+                  router.push(`/admin/parqueaderos/${parking.id}/reservas`)
                 }}
               >
                 Ver estado de parqueadero

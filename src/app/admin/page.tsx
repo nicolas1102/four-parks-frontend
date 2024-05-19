@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import AdminFunctionItem from './_components/AdminFunctionItem'
 import { LineChart, ParkingSquare, User } from 'lucide-react'
 import Loader from '@/components/Loader'
+import { useEffect } from 'react'
 
 const GERENTE_FUNCTIONS = [
   {
@@ -30,13 +31,19 @@ const FUNCIONARIO_FUNCTIONS = [
   {
     title: 'VER ESTADISTICAS DE PUNTO',
     text: 'Ver las estadísticas del punto de parqueadero.',
-    link: '/admin/usuarios',
+    link: '/admin/parqueaderos/estadisticas',
     icon: <LineChart strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
   },
 ]
 
 const Page = () => {
   const { data: session } = useSession()
+  useEffect(() => {
+    const fetchParkingData = () => {
+
+    }
+    session?.rol === 'ADMINISTRADOR' && fetchParkingData()
+  }, [session])
   return !session ? (
     <Loader />
   ) : (
