@@ -40,7 +40,7 @@ const Page = () => {
   const { data: session } = useSession()
   useEffect(() => {
     const fetchParkingData = () => {
-
+      
     }
     session?.rol === 'ADMINISTRADOR' && fetchParkingData()
   }, [session])

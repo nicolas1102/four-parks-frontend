@@ -156,8 +156,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
           await updateParkingRate(heavyCarRateData)
         }
       })
-    } 
-    else {
+    } else {
       const carRateData = {
         rate: carRate,
         parkingId: res?.data.id,
@@ -277,6 +276,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   }, [adminState])
 
   useEffect(() => {
+    // console.log(cityState)
+
     if (cityState) {
       setValue('city', cityState.city)
     }

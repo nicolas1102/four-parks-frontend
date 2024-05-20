@@ -25,24 +25,28 @@ export function CitySelect({
   errors: FieldError | undefined
 }) {
   const { cities, getCities, isLoading } = useCity()
-  // useEffect(() => {
-  //   const fetchCities = async () => {
-  //     await getCities()
-  //   }
-  //   fetchCities()
-  // }, [])
+  useEffect(() => {
+    const fetchCities = async () => {
+      await getCities()
+    }
+    fetchCities()
+  }, [])
+  // console.log(city?.city)
+
+  useEffect(() => {
+    // console.log(city)
+  }, [city])
 
   return (
     <Select
       onValueChange={(value) => {
-        // const selectedCity = cities.filter((city) => {
-        //   return city.city.toLowerCase() === value.toLowerCase()
-        // })
-        // setCity(selectedCity[0])
-        setCity({ city: value })
+        const selectedCity = cities.filter((city) => {
+          return city.city.toLowerCase() === value.toLowerCase()
+        })
+        setCity(selectedCity[0])
       }}
       value={city ? city.city : ''}
-      // disabled={isLoading || cities?.length === 0 ? true : false}
+      disabled={isLoading || cities?.length === 0 ? true : false}
     >
       <SelectTrigger
         className={cn('w-full border border-yellowFPC-400', {
@@ -54,14 +58,12 @@ export function CitySelect({
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Ciudad</SelectLabel>
-          {/* {cities &&
+          {cities &&
             cities.map((cityItem) => (
-              <SelectItem key={cityItem.id} value={cityItem.id + ''}>
+              <SelectItem key={cityItem.id} value={cityItem.city + ''}>
                 {cityItem.city}
               </SelectItem>
-            ))} */}
-
-          <SelectItem value={'Bogotá D.C.'}>Bogotá D.C.</SelectItem>
+            ))}
         </SelectGroup>
       </SelectContent>
     </Select>
