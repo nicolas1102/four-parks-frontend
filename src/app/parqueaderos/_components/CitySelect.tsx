@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useCity } from '@/services/useCity'
 import { Dispatch, ReactNode, SetStateAction, useEffect } from 'react'
 
 export function CitySelect({
@@ -18,8 +19,13 @@ export function CitySelect({
   selectValue: string
   setSelectValue: Dispatch<SetStateAction<string>>
 }) {
-  // const { cities, getCities, isLoading } = useCity()
-  useEffect(() => {}, [])
+  const { cities, getCities, isLoading } = useCity()
+  useEffect(() => {
+    const fetchCities = async () => {
+      await getCities()
+    }
+    fetchCities()
+  }, [])
   return (
     <Select
       onValueChange={(value) => {
@@ -30,7 +36,7 @@ export function CitySelect({
         }
       }}
       value={selectValue}
-      // {isLoading || cities.lenght === 0 && disabled }
+      disabled={isLoading || cities?.length === 0 ? true : false}
     >
       <SelectTrigger className='sm:w-32 '>
         <SelectValue placeholder='Ciudad' />
@@ -41,12 +47,12 @@ export function CitySelect({
           <SelectItem value={'all'} className='italic'>
             --- Cualquiera --
           </SelectItem>
-          <SelectItem value={'Bogota D.C.'}>Bogotá D.C.</SelectItem>
-          <SelectItem value={'Medellín'}>Medellín</SelectItem>
-          {/* cities.map((city) => (
-            <SelectItem key={city.id} value={city.city}>{city.city}</SelectItem>
-
-          )) */}
+          {cities &&
+            cities.map((cityItem) => (
+              <SelectItem key={cityItem.id} value={cityItem.city + ''}>
+                {cityItem.city}
+              </SelectItem>
+            ))}
         </SelectGroup>
       </SelectContent>
     </Select>

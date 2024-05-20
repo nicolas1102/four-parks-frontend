@@ -31,11 +31,6 @@ export function CitySelect({
     }
     fetchCities()
   }, [])
-  // console.log(city?.city)
-
-  useEffect(() => {
-    // console.log(city)
-  }, [city])
 
   return (
     <Select
