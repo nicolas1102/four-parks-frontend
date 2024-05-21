@@ -42,7 +42,7 @@ export function ParkingTypeSelect({
           <SelectLabel>Tipo de Parqueadero</SelectLabel>
           <SelectItem value={'DESCUBIERTO'}>Descubierto</SelectItem>
           <SelectItem value={'CUBIERTO'}>Cubierto</SelectItem>
-          <SelectItem value={'SEMI-CUBIERTO'}>Semi-cubierto</SelectItem>
+          <SelectItem value={'SEMICUBIERTO'}>SEMICUBIERTO</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
