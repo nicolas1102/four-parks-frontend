@@ -25,21 +25,6 @@ const GERENTE_FUNCTIONS = [
   },
 ]
 
-const ADMIN_FUNCTIONS = [
-  {
-    title: 'VER ESTADO PUNTO',
-    text: 'Gestiona las reservas actuales del punto.',
-    link: '/admin/parqueaderos/',
-    icon: <ParkingSquare strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
-  },
-  {
-    title: 'VER ESTADISTICAS DE PUNTO',
-    text: 'Ver las estadísticas del punto de parqueadero.',
-    link: '/admin/parqueaderos/estadisticas',
-    icon: <LineChart strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
-  },
-]
-
 const Page = () => {
   const { data: session } = useSession()
   const { parkings, getParkings, isLoading } = useParking()
