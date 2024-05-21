@@ -146,9 +146,6 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
     setIsLoading(true)
     try {
       const res = await createReservationRequest(reservation)
-      console.log(res.data)
-
-      // router.push('/auth/log-in')
       toast({
         title: '¡Gracias por tu reserva¡',
         description:

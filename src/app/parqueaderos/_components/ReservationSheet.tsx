@@ -26,6 +26,7 @@ import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { DateTime } from 'luxon'
 import { cn } from '@/lib/utils'
+import { useParkingSlot } from '@/services/useParkingSlot'
 
 interface ParkingVehicleType {
   id?: number
@@ -41,40 +42,64 @@ const ReservationSheet = ({
 }: {
   selectedParking: ParkingInterface
 }) => {
-  const { createReservation } = useReservation()
+  const { createReservation, isLoading } = useReservation()
+  const {
+    getParkingSlotsFromParkingByParkingId,
+    parkingSlots,
+    isLoading: isLoadingParkingSlots,
+  } = useParkingSlot()
   const { data: session } = useSession()
   const router = useRouter()
-  const [parkingSlot, setParkingSlot] = useState<number>()
+  const [vehicleType, setVehicleType] = useState<number>()
   const { toast } = useToast()
 
   const onSubmit = async () => {
-    if (parkingSlot === undefined) {
+    if (vehicleType === undefined) {
       toast({
         variant: 'destructive',
         title: 'Selecciona un tipo de vehículo válido.',
       })
-    } else if (parkingSlot === -1) {
+    } else if (vehicleType === -1) {
       toast({
         variant: 'destructive',
         title: 'Ya quisiera usted tener una nube voladora.',
       })
-    } else if (session && parkingSlot) {
+    } else if (session && vehicleType) {
+      await getParkingSlotsFromParkingByParkingId(selectedParking.id!)
+
+      const availableSlots = parkingSlots.filter((parkingSlotItem) => {
+        if (
+          parkingSlotItem.vehicleTypeId?.id === vehicleType &&
+          parkingSlotItem.slotStatusId?.status === 'EMPTY' &&
+          parkingSlotItem.parkingId?.id === selectedParking.id
+        ) {
+          return parkingSlotItem
+        }
+      })
+
       const reservationData = {
-        reservationTime: DateTime.now().toString(),
+        reservationTime: DateTime.now().toString().substring(0, 19),
         userId: session?.id,
-        parkingSlotId: parkingSlot,
+        parkingSlotId: vehicleType,
       } as ReservationInterface
 
-      console.log(reservationData)
-      
-      // const res = await createReservation(reservationData)
-      // console.log(res?.data.id)
-      
-      // if (res?.status === 200) {
-      //   router.push(`/reserva/thank-you?reservationId=${res?.data.id}`)
-      // }
+      const res = await createReservation(reservationData)
+
+      if (res?.status === 200) {
+        router.push(`/reserva/thank-you?reservationId=${res?.data.id}`)
+      }
     }
   }
+
+  // useEffect(() => {
+  //   if (!isLoading && parkingSlots.length !== 0) {
+  //     const availableSlots = parkingSlots.map((parkingSlotItem) => {
+  //       parkingSlotItem.vehicleTypeId.id === vehicleType &&
+  //         parkingSlotItem.slotStatusId.status === 'EMPTY' &&
+  //         parkingSlotItem.parkingId?.id === selectedParking.id
+  //     })
+  //   }
+  // }, [parkingSlots])
 
   const refactorParkingVehicleTypeData = () => {
     let data = selectedParking?.parkingRate?.map((parkingRateItem) => {
@@ -101,6 +126,7 @@ const ReservationSheet = ({
           ),
       } as ParkingVehicleType
     })
+    // agregamos ultima propiedad
     data &&
       data.map((parkingVehicleTypeItem) => {
         selectedParking.parkingSlotDetails?.map((parkingSlotDetailItem) => {
@@ -146,7 +172,7 @@ const ReservationSheet = ({
                         aria-label='Toggle bold'
                         key={parkingVehicleType.id}
                         onClick={() => {
-                          setParkingSlot(parkingVehicleType.id)
+                          setVehicleType(parkingVehicleType.id)
                         }}
                         disabled={!parkingVehicleType.emptySlots}
                       >
@@ -187,7 +213,7 @@ const ReservationSheet = ({
                     value='nube'
                     aria-label='Toggle underline'
                     onClick={() => {
-                      setParkingSlot(-1)
+                      setVehicleType(-1)
                     }}
                   >
                     <div className='flex flex-col justify-start w-full py-3 px-4 gap-1'>
@@ -250,6 +276,7 @@ const ReservationSheet = ({
               onClick={() => {
                 onSubmit()
               }}
+              isLoading={isLoadingParkingSlots}
             />
           </SheetFooter>
         </div>

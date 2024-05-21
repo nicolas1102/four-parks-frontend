@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BASE_URL } from '../axios'
 
 export const createReservationRequest = async (reservation: ReservationInterface) => {
+
   const res = await axios.post(BASE_URL + '/reservations/reservation/new', reservation)
   return res
 }

@@ -27,6 +27,7 @@ import Separator from '@/components/Separator'
 import { Toggle } from '@/components/ui/toggle'
 import { CustomTooltip } from '@/components/CustomTooltip'
 import { PiMotorcycleFill } from 'react-icons/pi'
+import Loader from '@/components/Loader'
 
 export default function Home() {
   const {
@@ -164,26 +165,30 @@ export default function Home() {
             los parqueaderos de{' '}
             <span className='font-semibold'>FourParksColombia</span>.
           </p>
-          <ScrollArea className='h-[620px]'>
-            {filteredParkingLots.length !== 0 ? (
-              <div className='grid grid-cols-3 gap-2 pr-3'>
-                {filteredParkingLots.map((parkingItem) => (
-                  <ParkingItem
-                    key={parkingItem.id}
-                    parkingData={parkingItem}
-                    setSelectedParkingLot={setSelectedParkingLot}
-                    isSelected={parkingItem.id === selectedParkingLot?.id}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className='flex flex-col items-center w-full h-full py-14'>
-                <p className='text-xl tracking-widest'>
-                  NO HAY RESULTADOS DE PARQUEADEROS.
-                </p>
-              </div>
-            )}
-          </ScrollArea>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <ScrollArea className='h-[620px]'>
+              {filteredParkingLots.length !== 0 ? (
+                <div className='grid grid-cols-3 gap-2 pr-3'>
+                  {filteredParkingLots.map((parkingItem) => (
+                    <ParkingItem
+                      key={parkingItem.id}
+                      parkingData={parkingItem}
+                      setSelectedParkingLot={setSelectedParkingLot}
+                      isSelected={parkingItem.id === selectedParkingLot?.id}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className='flex flex-col items-center w-full h-full py-14'>
+                  <p className='text-xl tracking-widest'>
+                    NO HAY RESULTADOS DE PARQUEADEROS.
+                  </p>
+                </div>
+              )}
+            </ScrollArea>
+          )}
         </div>
 
         <div className='sm:col-span-5'>

@@ -38,7 +38,7 @@ const authOptions = NextAuth({
             return userWithRole // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
           }
           // If response is not ok or does not contain a user token
-          throw new Error('No se encontro el token.')
+          throw new Error('No se encontró el token.')
         } catch (e: any) {
           return Promise.reject(new Error(e?.message))
         }
