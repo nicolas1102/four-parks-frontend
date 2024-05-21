@@ -58,27 +58,27 @@ const Page = ({ searchParams }: PageProps) => {
   >(null)
 
   useEffect(() => {
-    const fetchOrder = async (reservationId: number) => {
+    const fetchReservation = async (reservationId: number) => {
       setReservation(await getOneReservation(reservationId))
     }
 
     reservationId &&
       typeof reservationId === 'string' &&
-      fetchOrder(parseInt(reservationId))
+      fetchReservation(parseInt(reservationId))
   }, [])
 
   return (
     <div className='flex justify-center w-full'>
       {!session || isLoading ? (
         <Loader />
-      ) : !reservationId ? (
+      ) : !reservationId || !reservation ? (
         <div className='sm:m-8 m-6'>
           <NoResults />
         </div>
       ) : (
         session &&
         reservationId && (
-          <div className='sm:w-[550px] sm:my-10 m-6'>
+          <div className='sm:w-[550px] sm:my-10 m-6 w-full'>
             <Card className='overflow-hidden'>
               <CardHeader className='flex flex-col justify-center bg-muted/50'>
                 <CardTitle className='group flex flex-col '>
@@ -253,7 +253,8 @@ const Page = ({ searchParams }: PageProps) => {
                   </div>
                   {session?.rol === 'ADMINISTRADOR' &&
                     reservation &&
-                    reservation?.parkingSlot?.parkingId?.admin?.id === session?.id && (
+                    reservation?.parkingSlot?.parkingId?.admin?.id ===
+                      session?.id && (
                       <>
                         <Separator className='my-2' />
                         <div>
