@@ -251,6 +251,7 @@ const Page = ({ searchParams }: PageProps) => {
                       </dl>
                     )}
                   </div>
+                  {/* verificacion de administrador de punto de la reserva */}
                   {session?.rol === 'ADMINISTRADOR' &&
                     reservation &&
                     reservation?.parkingSlot?.parkingId?.admin?.id ===

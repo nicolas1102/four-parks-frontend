@@ -30,12 +30,12 @@ import { Check, X } from 'lucide-react'
 export function AdminDialog({ admin }: { admin?: UserInterface }) {
   const router = useRouter()
   const [accountActive, setAccountActive] = useState(
-    admin?.accountActive ? true : false
+    admin && admin?.accountActive ? true : false
   )
   const [accountBlocked, setAccountBlocked] = useState(
-    admin?.accountBlocked ? true : false
+    admin && admin?.accountBlocked ? true : false
   )
-  const { updateUser, isLoading, getUsers } = useUser()
+  const { updateUser, isLoading, getUsers, createAdmin } = useUser()
   const {
     register,
     handleSubmit,
@@ -55,6 +55,7 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
     accountBlocked,
     loginAttempts,
   }: TCreateAdminFromManagerValidator) => {
+    console.log('gku')
     const adminData = {
       email,
       firstName,
@@ -66,11 +67,9 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
       loginAttempts,
       roleList: ['ADMINISTRADOR'],
     } as UserInterface
-    // const res = admin
-    //   ? await updateUser(adminData)
-    //   : await createAdmin(adminData)
-
-    console.log(adminData)
+    const res = admin
+      ? await updateUser(adminData)
+      : await createAdmin(adminData)
 
     // const res = await updateUser(adminData)
     // if (res?.status === 200) {
@@ -85,13 +84,20 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
       if (admin.secondName) setValue('secondName', admin.secondName)
       setValue('firstLastname', admin.firstLastname)
       setValue('secondLastname', admin.secondLastname)
+      setValue('loginAttempts', admin.loginAttempts!)
       setValue('accountActive', admin.accountActive!)
       setValue('accountBlocked', admin.accountBlocked!)
-      setValue('loginAttempts', admin.loginAttempts!)
     } else {
       setValue('loginAttempts', 0)
     }
   }, [])
+
+  useEffect(() => {
+    setValue('accountActive', accountActive)
+  }, [accountActive])
+  useEffect(() => {
+    setValue('accountBlocked', accountBlocked)
+  }, [accountBlocked])
 
   return (
     <Dialog>
@@ -121,6 +127,19 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col space-2'>
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='email'>Email</Label>
+              <Input
+                {...register('email')}
+                className={cn('border-yellowFPC-400', {
+                  'focus-visible:ring-red-500': errors.email,
+                })}
+                placeholder='example@gmail.com'
+              />
+              {errors?.email && (
+                <p className='text-sm text-red-500'>{errors.email.message}</p>
+              )}
+            </div>
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='firstName'>Primer Nombre</Label>
@@ -225,10 +244,7 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
               <Toggle
                 aria-label='Toggle-accountBlocked'
                 onPressedChange={() => {
-                  setValue(
-                    'accountBlocked',
-                    accountBlocked ? accountBlocked : false
-                  )
+                  setValue('accountBlocked', !getValues('accountBlocked'))
                   setAccountBlocked(!accountBlocked)
                 }}
                 defaultPressed={accountBlocked}

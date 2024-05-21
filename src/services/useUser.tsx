@@ -31,6 +31,9 @@ interface UserContextType {
   createUser: (
     user: UserInterface
   ) => Promise<AxiosResponse<any, any> | undefined>
+  createAdmin: (
+    user: UserInterface
+  ) => Promise<AxiosResponse<any, any> | undefined>
   updatePasswordUser: (
     email: string,
     oldPassword: string,
@@ -153,6 +156,36 @@ export function UserProvider({ children }: { children: ReactNode }) {
           variant: 'destructive',
           title:
             'Ha ocurrido un error al intentar registrar usuario! Por favor intentalo de nuevo.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const createAdmin = async (user: UserInterface) => {
+    try {
+      setIsLoading(true)
+      const res = await createUsersRequest(user)
+      setUsers((prevUsers: UserInterface[]) => [...prevUsers, res.data])
+      toast({
+        title: '¡Administrador creado con éxito!',
+      })
+      return res as AxiosResponse<any, any>
+    } catch (error: any) {
+      console.error('Error creating admin:', error)
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            '¡Ha ocurrido un error al intentar crear administrador! Por favor intentalo de nuevo.',
           description: error?.response.data,
         })
       } else {
@@ -330,6 +363,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         isLoading,
         setIsLoading,
         createUser,
+        createAdmin,
         updatePasswordUser,
         getUsers,
         getUsersByRole,
