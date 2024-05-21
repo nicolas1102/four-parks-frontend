@@ -19,9 +19,13 @@ export default function Page({
   params: { parkingId: number }
 }) {
   const { data: session } = useSession()
-  const { reservations, isLoading, getReservationsByParking, getReservations } =
+  const { reservations, isLoading, getReservations, getReservationsByParking } =
     useReservation()
-  const { getOneParking, isLoading: isLoadingParking } = useParking()
+  const {
+    getOneParking,
+    isLoading: isLoadingParking,
+    getOneParkingById,
+  } = useParking()
   const [parking, setParking] = useState<ParkingInterface | null | undefined>(
     null
   )
@@ -30,22 +34,22 @@ export default function Page({
 
   useEffect(() => {
     const fetchReservationsByPaking = async () => {
-      // await getReservationsByParking(parkingId)
-      await getReservations()
+      await getReservationsByParking(parkingId)
     }
     fetchReservationsByPaking()
   }, [])
 
   useEffect(() => {
-    const fetchParking = async (parkingName: string) => {
-      setParking(await getOneParking(parkingName))
+    const fetchParking = async (parkingId: number) => {
+      setParking(await getOneParkingById(parkingId))
     }
-    reservations.length !== 0 &&
-      fetchParking(reservations[0].parkingSlot?.parkingId?.name!)
+    parkingId && fetchParking(parkingId)
   }, [reservations])
 
   useEffect(() => {
     if (
+      session &&
+      parking &&
       session?.rol === 'ADMINISTRADOR' &&
       session?.id !== parking?.admin?.id
     ) {
@@ -55,7 +59,8 @@ export default function Page({
         description:
           'No puedes administrar un parqueadero al que no estás asignado.',
       })
-      router.push('/admin')
+
+      // router.push('/admin')
     }
   }, [parking, session])
 

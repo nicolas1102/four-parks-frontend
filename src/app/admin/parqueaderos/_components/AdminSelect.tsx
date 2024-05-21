@@ -55,7 +55,7 @@ export function AdminSelect({
         <SelectValue
           placeholder={
             isLoading
-              ? 'Cargando Administradores'
+              ? 'Cargando Administradores...'
               : !isLoading && admins.length === 0
               ? 'Sin resultados'
               : 'Administradores'

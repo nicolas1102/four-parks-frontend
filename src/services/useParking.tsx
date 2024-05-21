@@ -3,6 +3,7 @@
 import {
   createParkingRequest,
   deleteParkingRequest,
+  getOneParkingByIdRequest,
   getOneParkingRequest,
   getParkingsRequest,
   updateParkingRequest,
@@ -29,6 +30,7 @@ interface ParkingContextType {
   ) => Promise<AxiosResponse<any, any> | undefined>
   getParkings: () => Promise<void>
   getOneParking: (name: string) => Promise<ParkingInterface | undefined>
+  getOneParkingById: (id: number) => Promise<ParkingInterface | undefined>
   updateParking: (
     parking: ParkingInterface
   ) => Promise<AxiosResponse<ParkingInterface, any> | undefined>
@@ -53,7 +55,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
   const getParkings = async () => {
     setIsLoading(true)
     try {
-      const res = await getParkingsRequest()
+      const res = await getParkingsRequest()      
       setParkings(res.data)
     } catch (error: any) {
       if (error?.response?.data) {
@@ -80,6 +82,36 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneParkingRequest(name)
+      // toast({
+      //   title: 'Se obtuvo la información del parqueadero con exito!',
+      //   description: '',
+      // })
+      return res.data as ParkingInterface
+    } catch (error: any) {
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            'Ha ocurrido un error al intentar obtener los datos del parqueadero! Por favor intentalo más tarde.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+      console.error('Error fetching user:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const getOneParkingById = async (id: number) => {
+    try {
+      setIsLoading(true)
+      const res = await getOneParkingByIdRequest(id)
       // toast({
       //   title: 'Se obtuvo la información del parqueadero con exito!',
       //   description: '',
@@ -222,6 +254,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
         isLoading,
         setIsLoading,
         getOneParking,
+        getOneParkingById,
         createParking,
         getParkings,
         updateParking,

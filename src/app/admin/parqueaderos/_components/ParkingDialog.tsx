@@ -201,8 +201,8 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
       // resHeavyCarRate?.status === 200
     ) {
       if (!parking) clearForm()
-      router.refresh()
-      router.push('/admin/parqueaderos')
+        // TODO: Arreglar esto, sacamos al usuario de la pagina de usuario porque al actuzlizar, no tenemos los damos de los precios y no se mostrarían esos datos al editar un parqueadero. entonces es para que no se note.
+      router.push('/admin')
     }
   }
 
@@ -276,8 +276,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   }, [adminState])
 
   useEffect(() => {
-    // console.log(cityState)
-
     if (cityState) {
       setValue('city', cityState.city)
     }

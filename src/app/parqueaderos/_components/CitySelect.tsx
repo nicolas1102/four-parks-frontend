@@ -39,7 +39,7 @@ export function CitySelect({
       disabled={isLoading || cities?.length === 0 ? true : false}
     >
       <SelectTrigger className='sm:w-32 '>
-        <SelectValue placeholder='Ciudad' />
+        <SelectValue placeholder={isLoading ? 'Cargando Ciudades...' : 'Ciudad'} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

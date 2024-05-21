@@ -12,6 +12,11 @@ export const getOneParkingRequest = async (name: string) => {
   return res;
 };
 
+export const getOneParkingByIdRequest = async (id: number) => {
+  const res = await axios.get(BASE_URL + `/parkings/parking/id/${id}`)
+  return res;
+};
+
 export const getParkingsRequest = async () => {
   const res = await axios.get(BASE_URL + '/parkings/all')
   return res
