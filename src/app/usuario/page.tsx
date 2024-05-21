@@ -30,11 +30,31 @@ import {
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
+import { useReservation } from '@/services/useReservation'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { ReservationTableItem } from './_components/ReservationTableItem'
+import { ReservationInterface } from '@/lib/interfaces/reservation.interface'
 
 export default function Home() {
   const { data: session } = useSession()
+  const {
+    getActiveReservationByUserId,
+    getFinishedReservationsByUserId,
+    reservations,
+    isLoading: isUseReservationLoading,
+  } = useReservation()
   const { getOneUserByEmail, isLoading } = useUser()
   const [user, setUser] = useState<UserInterface | null>(null)
+  const [activedReservation, setActivedReservation] = useState<
+    ReservationInterface | null | undefined
+  >()
 
   useEffect(() => {
     const fetchUser = async (email: string) => {
@@ -45,6 +65,19 @@ export default function Home() {
       fetchUser(session.email)
     }
   }, [session])
+
+  useEffect(() => {
+    const fetchActiveReservation = async (userId: number) => {
+      setActivedReservation(await getActiveReservationByUserId(userId))
+    }
+    const fetchFinishedReservations = async (userId: number) => {
+      await getFinishedReservationsByUserId(userId)
+    }
+    user?.id && session?.rol === 'USUARIO' && fetchActiveReservation(user?.id)
+    user?.id &&
+      session?.rol === 'USUARIO' &&
+      fetchFinishedReservations(user?.id)
+  }, [user])
 
   return (
     <>
@@ -179,26 +212,60 @@ export default function Home() {
               </div>
             </CardFooter>
           </Card>
-          <Card className='overflow-hidden'>
-            <CardHeader className='flex flex-col justify-center bg-muted/50'>
-              <CardTitle className='group flex flex-col '>
-                <h1 className='mt-2 tracking-widest sm:text-2xl text-xl '>
-                  RESERVAS
-                </h1>
-              </CardTitle>
-              <CardDescription className='text-sm '>
-                Aquí puedes ver un resumen de todas tus reservas en{' '}
-                <span className='font-medium text-primary'>
-                  FourParksColombia.
-                </span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='py-6 text-sm'>
-              <div className='grid gap-1'>
-                <div className='font-semibold tracking-widest'>RESERVAS</div>
-              </div>
-            </CardContent>
-          </Card>
+
+          {/* Reservas de usuario */}
+          {session?.rol !== 'USUARIO' ? (
+            <></>
+          ) : isUseReservationLoading ? (
+            <Loader />
+          ) : (
+            <Card className='overflow-hidden'>
+              <CardHeader className='flex flex-col justify-center bg-muted/50'>
+                <CardTitle className='group flex flex-col '>
+                  <h1 className='mt-2 tracking-widest sm:text-2xl text-xl '>
+                    RESERVAS
+                  </h1>
+                </CardTitle>
+                <CardDescription className='text-sm '>
+                  Aquí puedes ver un resumen de todas tus reservas en{' '}
+                  <span className='font-medium text-primary'>
+                    FourParksColombia.
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className='py-6 text-sm'>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Parqueadero</TableHead>
+                      <TableHead className='text-center'>
+                        Tipo Vehículo
+                      </TableHead>
+                      <TableHead className='text-center'>
+                        Día de Reserva
+                      </TableHead>
+                      <TableHead className='text-center'>Estado</TableHead>
+                      <TableHead className='text-center'>Precio</TableHead>
+                      <TableHead className='text-center'>Ver</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {activedReservation && (
+                        <ReservationTableItem
+                          reservation={activedReservation}
+                        />
+                      )}
+                    {reservations.map((reservationItem) => (
+                      <ReservationTableItem
+                        key={reservationItem.id}
+                        reservation={reservationItem}
+                      />
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          )}
         </div>
       )}
     </>

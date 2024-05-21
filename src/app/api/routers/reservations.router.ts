@@ -23,8 +23,18 @@ export const getOneReservationRequest = async (id: number) => {
   return res;
 };
 
+export const getActiveReservationByUserIdRequest = async (userId: number) => {
+  const res = await axios.get(BASE_URL + `/reservations/active/user/id/${userId}`)
+  return res;
+};
+
 export const getReservationsRequest = async () => {
   const res = await axios.get(BASE_URL + '/reservations/all')
+  return res
+}
+
+export const getFinishedReservationsByUserIdRequest = async (userId: number) => {
+  const res = await axios.get(BASE_URL + `/reservations/finish/user/id/${userId}`)
   return res
 }
 
