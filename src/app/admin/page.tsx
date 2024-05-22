@@ -119,7 +119,7 @@ const Page = () => {
                 }
               />
               <AdminFunctionItem
-                title={'VER ESTADISTICAS DE PUNTO'}
+                title={'VER ESTADíSTICAS DE PUNTO'}
                 text={'Ver las estadísticas del punto de parqueadero.'}
                 link={'/admin/parqueaderos/' + parking?.id + '/estadisticas'}
                 icon={

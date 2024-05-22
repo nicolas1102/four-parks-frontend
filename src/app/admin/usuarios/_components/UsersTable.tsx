@@ -132,7 +132,7 @@ export function UsersTable({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant='outline'
@@ -140,7 +140,7 @@ export function UsersTable({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Siguiete
           </Button>
         </div>
       </div>

@@ -11,7 +11,7 @@ const questions = [
   {
     question: '¿CÓMO FUNCIONA EL SISTEMA FOUR-PARKS COLOMBIA?',
     answer:
-      'FOUR-PARKS COLOMBIA es una aplicación móvil que te permite encontrar, reservar y pagar tu estacionamiento en toda Colombia. Simplemente descarga la aplicación, crea una cuenta y agrega un método de pago. Luego, puedes buscar un parqueadero cercano, seleccionar un lugar y reservar tu estacionamiento. Cuando llegues al parqueadero, la aplicación abrirá la puerta y podrás ingresar y salir sin necesidad de tiquetes o efectivo.',
+      'FOUR-PARKS COLOMBIA es una aplicación móvil que te permite encontrar, reservar y pagar tu estacionamiento en toda Colombia. Simplemente, descarga la aplicación, crea una cuenta y agrega un método de pago. Luego, puedes buscar un parqueadero cercano, seleccionar un lugar y reservar tu estacionamiento. Cuando llegues al parqueadero, la aplicación abrirá la puerta y podrás ingresar y salir sin necesidad de tiquetes o efectivo.',
   },
   {
     question: '¿EN QUÉ CIUDADES ESTÁ DISPONIBLE FOUR-PARKS COLOMBIA?',

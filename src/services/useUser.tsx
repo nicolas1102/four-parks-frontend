@@ -102,7 +102,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       setIsLoading(true)
       const res = await getOneUserByEmailRequest(email)
       toast({
-        title: 'Se obtuvo la información del usuario con exito!',
+        title: '¡Se obtuvo la información del usuario con éxito!',
         description: '',
       })
       return res.data as UserInterface
@@ -145,7 +145,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       const res = await createUsersRequest(user)
       router.push('/auth/log-in')
       toast({
-        title: 'Te has registrado con exito!',
+        title: 'Te has registrado con éxito!',
         description: `Revisa tu correo! Te hemos enviado tu contraseña a ${user.email} para que puedas iniciar sesión por primera vez.`,
       })
       return res as AxiosResponse<any, any>

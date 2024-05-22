@@ -41,7 +41,7 @@ export function ParkingTypeSelect({
           </SelectItem>
           <SelectItem value={'DESCUBIERTO'}>Descubierto</SelectItem>
           <SelectItem value={'CUBIERTO'}>Cubierto</SelectItem>
-          <SelectItem value={'SEMICUBIERTO'}>SEMICUBIERTO</SelectItem>
+          <SelectItem value={'SEMICUBIERTO'}>Semicubierto</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

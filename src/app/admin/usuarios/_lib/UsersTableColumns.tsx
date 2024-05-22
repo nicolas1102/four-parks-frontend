@@ -106,7 +106,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Primer Apeliido
+            Primer Apellido
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         )
@@ -224,7 +224,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant='outline' className='h-8 w-8 p-0'>
-                  <p className='sr-only'>Abrir Menu</p>
+                  <p className='sr-only'>Abrir Menú</p>
                   <MoreHorizontal className='h-4 w-4' />
                 </Button>
               </DropdownMenuTrigger>

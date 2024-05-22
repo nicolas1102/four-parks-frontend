@@ -279,7 +279,7 @@ const Page = ({ searchParams }: PageProps) => {
               <CardFooter className='flex flex-row items-center border-t bg-muted/50 px-6 py-3'>
                 <div className='text-sm text-muted-foreground flex justify-end'>
                   <Link href='/' className='font-medium hover:text-gray-400'>
-                    ← Ir a menu Admin
+                    ← Ir a menú Admin
                   </Link>
                 </div>
               </CardFooter>

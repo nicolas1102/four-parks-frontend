@@ -20,7 +20,7 @@ const experiences = [
   {
     name: 'Pancracio',
     experience:
-      'El sistema de navegación me guió directamente al parqueadero, sin necesidad de dar vueltas. ¡Muy útil!',
+      'El sistema de navegación me guio directamente al parqueadero, sin necesidad de dar vueltas. ¡Muy útil!',
     image: '/landing/experiences/3.jpg',
   },
   {

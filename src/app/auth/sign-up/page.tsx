@@ -260,7 +260,7 @@ const Page = () => {
                 href='/auth/log-in'
               >
                 <ArrowLeft className='h-4 w-4' />
-                ¿Ya tienes una cuenta? Ingresa!
+                ¿Ya tienes una cuenta? ¡Ingresa!
               </Link>
             </div>
           </form>

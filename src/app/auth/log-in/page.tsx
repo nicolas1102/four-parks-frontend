@@ -72,7 +72,7 @@ const Page = () => {
         })
       } else {
         toast({
-          title: 'Has iniciado sesión con exito!',
+          title: 'Has iniciado sesión con éxito!',
           description:
             'Ahora puedes hacer uso de las funciones de nuestro sistema!',
         })
@@ -179,7 +179,7 @@ const Page = () => {
                 })}
                 href='/auth/sign-up'
               >
-                ¿No tienes una cuenta? Regístrate!
+                ¿No tienes una cuenta? ¡Regístrate!
                 <ArrowRight className='h-4 w-4' />
               </Link>
             </div>

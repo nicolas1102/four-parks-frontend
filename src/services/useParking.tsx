@@ -83,7 +83,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
       setIsLoading(true)
       const res = await getOneParkingRequest(name)
       // toast({
-      //   title: 'Se obtuvo la información del parqueadero con exito!',
+      //   title: '¡Se obtuvo la información del parqueadero con éxito!',
       //   description: '',
       // })
       return res.data as ParkingInterface
@@ -113,7 +113,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
       setIsLoading(true)
       const res = await getOneParkingByIdRequest(id)
       // toast({
-      //   title: 'Se obtuvo la información del parqueadero con exito!',
+      //   title: '¡Se obtuvo la información del parqueadero con éxito!',
       //   description: '',
       // })
       return res.data as ParkingInterface
@@ -150,7 +150,7 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
         ])
       }
       toast({
-        title: 'El parqueadero fue creado con exito!',
+        title: 'El parqueadero fue creado con éxito!',
         description: '',
       })
       return res as AxiosResponse<any, any>

@@ -124,7 +124,7 @@ export function ParkingsTable({ data }: { data: ParkingInterface[] }) {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant='outline'
@@ -132,7 +132,7 @@ export function ParkingsTable({ data }: { data: ParkingInterface[] }) {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Siguiente
           </Button>
         </div>
       </div>

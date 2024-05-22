@@ -516,7 +516,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
               <div className='grid gap-2 justify-around grid-cols-2'>
                 <div className='grid gap-1 py-2'>
                   <Label htmlFor='totalSlots'>
-                    Capacidad <span className='italic'>(Número de Slots)</span>
+                    Capacidad <span className='italic'>(Número de Espacios)</span>
                   </Label>
                   <div className='grid gap-2 justify-around grid-cols-4'>
                     <div className='grid gap-1 py-1'>

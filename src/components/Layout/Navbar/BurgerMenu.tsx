@@ -80,13 +80,13 @@ const BurgerMenu = ({
         {session?.rol === 'ADMINISTRADOR' && (
           <DropdownMenuItem>
             <ParkingSquare className='mr-2 h-4 w-4' />
-            <Link href='/admin'>Menu Admin</Link>
+            <Link href='/admin'>Menú Admin</Link>
           </DropdownMenuItem>
         )}
         {session?.rol === 'GERENTE' && (
           <DropdownMenuItem>
             <ParkingSquare className='mr-2 h-4 w-4' />
-            <Link href='/admin'>Menu Gerente</Link>
+            <Link href='/admin'>Menú Gerente</Link>
           </DropdownMenuItem>
         )}
         <DropdownMenuSub >

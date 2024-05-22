@@ -57,7 +57,7 @@ export function ParkingRateProvider({ children }: { children: ReactNode }) {
       const res = await getParkingRatesByParkingIdRequest(parkingId)
       toast({
         title:
-          'Se obtuvo la información de los precios de parqueadero con exito!',
+          '¡Se obtuvo la información de los precios de parqueadero con éxito!',
         description: '',
       })
       setParkingRates(res.data)

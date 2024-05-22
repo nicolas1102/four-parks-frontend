@@ -63,7 +63,7 @@ const ReservationsTableColumns = ({
           <div className=''>
             {reservation.parkingSlot?.slotStatusId.status === 'EMPTY'
               ? 'Lleno'
-              : 'Vacio'}
+              : 'Vacío'}
           </div>
         )
       },
@@ -138,7 +138,7 @@ const ReservationsTableColumns = ({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='outline' className='h-8 w-8 p-0'>
-                <p className='sr-only'>Abrir Menu</p>
+                <p className='sr-only'>Abrir Menú</p>
                 <MoreHorizontal className='h-4 w-4' />
               </Button>
             </DropdownMenuTrigger>

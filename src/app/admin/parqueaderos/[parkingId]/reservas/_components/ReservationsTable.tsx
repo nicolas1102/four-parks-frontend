@@ -100,7 +100,7 @@ export function ReservationsTable({ data }: { data: ReservationInterface[] }) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No hay slots ocupados.
+                  No hay espacios disponibles.
                 </TableCell>
               </TableRow>
             )}
@@ -119,7 +119,7 @@ export function ReservationsTable({ data }: { data: ReservationInterface[] }) {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant='outline'
@@ -127,7 +127,7 @@ export function ReservationsTable({ data }: { data: ReservationInterface[] }) {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Siguiente
           </Button>
         </div>
       </div>
