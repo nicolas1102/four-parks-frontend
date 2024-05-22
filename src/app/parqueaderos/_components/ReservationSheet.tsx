@@ -80,7 +80,7 @@ const ReservationSheet = ({
       const reservationData = {
         reservationTime: DateTime.now().toString().substring(0, 19),
         userId: session?.id,
-        parkingSlotId: vehicleType,
+        parkingSlotId: availableSlots[0].id,
       } as ReservationInterface
 
       const res = await createReservation(reservationData)
