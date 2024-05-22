@@ -23,10 +23,7 @@ const PrimaryButton = ({
       disabled={isLoading}
       size={size}
     >
-      <p className='sm:text-base text-sm'>
-      {text}
-
-      </p>
+      <p className='sm:text-base text-sm'>{text}</p>
     </Button>
   )
 }

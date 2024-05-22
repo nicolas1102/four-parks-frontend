@@ -1,10 +1,14 @@
-import { Document, Page, Text, Image, Canvas } from '@react-pdf/renderer'
+import { Document, Page, Text, Image, View } from '@react-pdf/renderer'
 import { ReservationsPerMonthBarChart } from './ReservationsPerMonthBarChart'
 
 export function PDFStatistics() {
   return (
-    <div>
-      <ReservationsPerMonthBarChart />
-    </div>
+    <Document>
+      <Page>
+        <View>
+          <ReservationsPerMonthBarChart />
+        </View>
+      </Page>
+    </Document>
   )
 }
