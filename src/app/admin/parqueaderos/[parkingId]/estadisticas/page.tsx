@@ -1,6 +1,6 @@
 'use client'
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useRef } from 'react'
 import {
   BarChart,
   Bar,
@@ -49,14 +49,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
@@ -70,6 +62,11 @@ import {
 import { ReservationsPerMonthBarChart } from './_components/ReservationsPerMonthBarChart'
 import { Separator } from '@/components/ui/separator'
 import { VehicleTypePieChart } from './_components/VehicleTypePieChart'
+import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
+import { PDFStatistics } from './_components/PdfStatistics'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const data = [
   {
@@ -148,7 +145,6 @@ export default function Page({
   useEffect(() => {
     // console.log(parking?.admin?.id);
     // console.log(session?.id);
-    
     // if (
     //   session?.rol === 'ADMINISTRADOR' &&
     //   session?.id !== parking?.admin?.id
@@ -163,6 +159,33 @@ export default function Page({
     // }
   }, [parking, session])
 
+  const pdfRef = useRef<HTMLDivElement>(null)
+  const downloadPDF = () => {
+    const input = pdfRef.current
+    if (input) {
+      html2canvas(input).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png')
+        const pdf = new jsPDF('p', 'mm', 'a4', true)
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = pdf.internal.pageSize.getHeight()
+        const imgWidth = canvas.width
+        const imgHeight = canvas.height
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
+        const imgX = (pdfWidth - imgWidth * ratio) / 2
+        const imgY = 30
+        pdf.addImage(
+          imgData,
+          'PNG',
+          imgX,
+          imgY,
+          imgWidth * ratio,
+          imgHeight * ratio
+        )
+        pdf.save('invoice.pdf')
+      })
+    }
+  }
+
   return (
     <div>
       {/* {isLoading || isLoadingParking ? (
@@ -176,15 +199,23 @@ export default function Page({
           <h2 className='tracking-widest font-normal sm:font-normal text-lg sm:text-xl pr-4'>
             (PARQUEADERO)
           </h2>
-          <div className='gap-3 hidden sm:flex'>
-            <span className='border-l h-6'></span>
-            <p className='text-center text-muted-foreground'>Cra</p>
-            <span className='border-l h-6'></span>
-            <p className='yext-center text-muted-foreground'>Bogotá</p>
+          <div className='flex flex-row justify-between w-full items-center'>
+            <div className='gap-3 hidden sm:flex'>
+              <span className='border-l h-6'></span>
+              <p className='text-center text-muted-foreground'>Cra</p>
+              <span className='border-l h-6'></span>
+              <p className='yext-center text-muted-foreground'>Bogotá</p>
+            </div>
+            <div>
+              {/* <PDFDownloadLink document={<PDFStatistics />} fileName='siu.pdf'>
+                <PDFStatistics />
+              </PDFDownloadLink> */}
+              <PrimaryButton text='IMPRIMIR' onClick={downloadPDF} />
+            </div>
           </div>
         </div>
         <div className=' flex flex-col relative m-6 sm:m-8'>
-          <div className='flex min-h-screen  flex-col gap-8'>
+          <div className='flex min-h-screen  flex-col gap-8' ref={pdfRef}>
             <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
               <Card x-chunk='dashboard-01-chunk-0'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>

@@ -8,12 +8,12 @@ const Footer = async () => {
     <div className='inset-x-0 items-center justify-center w-full bottom-0 sm:px-8 px-6 flex flex-col text-neutral-800 dark:text-slate-50'>
       <div className='sm:grid sm:grid-cols-12 w-full sm:pb-14 pb-10 border-t-2 border-yellowFPC-400 py-8 flex flex-col gap-y-8'>
         <div className='col-span-3'>
-          <p className='sm:text-2xl text-xl tracking-tighter font-bold leading-none'>
+          <p className='sm:text-2xl text-xl tracking-tighter font-bold leading-none sm:leading-none'>
             FourParks<span className='text-yellowFPC-400'>Colo</span>
             <span className='text-blueFPC-400'>mb</span>
             <span className='text-redFPC-400'>ia</span>
           </p>
-          <p className=' sm:text-2xl text-xl tracking-tighter  leading-none'>
+          <p className=' sm:text-2xl text-xl tracking-tighter leading-none sm:leading-none'>
             by Grupo C
           </p>
         </div>
