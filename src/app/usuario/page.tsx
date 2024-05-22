@@ -41,8 +41,9 @@ import {
 } from '@/components/ui/table'
 import { ReservationTableItem } from './_components/ReservationTableItem'
 import { ReservationInterface } from '@/lib/interfaces/reservation.interface'
+import { Session } from 'inspector'
 
-export default function Home() {
+export default function Page() {
   const { data: session } = useSession()
   const {
     getActiveReservationByUserId,
@@ -55,16 +56,20 @@ export default function Home() {
   const [activedReservation, setActivedReservation] = useState<
     ReservationInterface | null | undefined
   >()
+  const [temp, setTemp] = useState<string>()
+  useEffect(() => {
+    if (session) setTemp(session.email)
+  }, [session])
 
   useEffect(() => {
     const fetchUser = async (email: string) => {
       const userData = await getOneUserByEmail(email)
       if (userData !== null) setUser(userData as UserInterface)
     }
-    if (session) {
-      fetchUser(session.email)
+    if (temp) {
+      fetchUser(temp)
     }
-  }, [session])
+  }, [temp])
 
   useEffect(() => {
     const fetchActiveReservation = async (userId: number) => {
@@ -99,7 +104,7 @@ export default function Home() {
               <CardDescription className='text-sm'>
                 Bienvenido de nuevo,{' '}
                 <span className='text-primary font-medium'>
-                  {session?.firstName + ' ' + session?.firstLastname + '.'}
+                  {session?.firstName + ' ' + session?.firstLastname.trim()}.
                 </span>
               </CardDescription>
             </CardHeader>
@@ -234,35 +239,42 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent className='py-6 text-sm'>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Parqueadero</TableHead>
-                      <TableHead className='text-center'>
-                        Tipo Vehículo
-                      </TableHead>
-                      <TableHead className='text-center'>
-                        Día de Reserva
-                      </TableHead>
-                      <TableHead className='text-center'>Estado</TableHead>
-                      <TableHead className='text-center'>Precio</TableHead>
-                      <TableHead className='text-center'>Ver</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {activedReservation && (
+                {!activedReservation && reservations.length == 0 ? (
+                  <p className='text-center w-full tracking-widest'>
+                    NO TIENES RESERVAS TODAVÍA EN{' '}
+                    <span className='font-medium'>FOUR PARKS, ¡ANIMATE!</span>.
+                  </p>
+                ) : (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Parqueadero</TableHead>
+                        <TableHead className='text-center'>
+                          Tipo Vehículo
+                        </TableHead>
+                        <TableHead className='text-center'>
+                          Día de Reserva
+                        </TableHead>
+                        <TableHead className='text-center'>Estado</TableHead>
+                        <TableHead className='text-center'>Precio</TableHead>
+                        <TableHead className='text-center'>Ver</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {activedReservation && (
                         <ReservationTableItem
                           reservation={activedReservation}
                         />
                       )}
-                    {reservations.map((reservationItem) => (
-                      <ReservationTableItem
-                        key={reservationItem.id}
-                        reservation={reservationItem}
-                      />
-                    ))}
-                  </TableBody>
-                </Table>
+                      {reservations.map((reservationItem) => (
+                        <ReservationTableItem
+                          key={reservationItem.id}
+                          reservation={reservationItem}
+                        />
+                      ))}
+                    </TableBody>
+                  </Table>
+                )}
               </CardContent>
             </Card>
           )}
