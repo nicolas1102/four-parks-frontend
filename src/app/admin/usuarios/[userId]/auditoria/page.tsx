@@ -72,7 +72,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
         <Loader />
       ) : (
         <>
-          <div className='flex flex-row justify-between'>
+          <div className='flex sm:flex-row sm:justify-between justify-center flex-col'>
             <div className=' flex flex-col gap-y-2'>
               <h1 className='text-3xl font-normal tracking-wider text-primary sm:text-4xl inline-flex'>
                 <UserIcons className='h-9 w-9 mt-1 mr-2' />
