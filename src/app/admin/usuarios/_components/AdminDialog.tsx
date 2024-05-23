@@ -127,19 +127,22 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col space-2'>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='email'>Email</Label>
-              <Input
-                {...register('email')}
-                className={cn('border-yellowFPC-400', {
-                  'focus-visible:ring-red-500': errors.email,
-                })}
-                placeholder='example@gmail.com'
-              />
-              {errors?.email && (
-                <p className='text-sm text-red-500'>{errors.email.message}</p>
-              )}
-            </div>
+            {!admin && (
+              <div className='grid gap-1 py-2'>
+                <Label htmlFor='email'>Email</Label>
+                <Input
+                  {...register('email')}
+                  className={cn('border-yellowFPC-400', {
+                    'focus-visible:ring-red-500': errors.email,
+                  })}
+                  placeholder='example@gmail.com'
+                />
+                {errors?.email && (
+                  <p className='text-sm text-red-500'>{errors.email.message}</p>
+                )}
+              </div>
+            )}
+
             <div className='grid gap-2 justify-around grid-cols-2'>
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='firstName'>Primer Nombre</Label>
