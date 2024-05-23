@@ -240,7 +240,7 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
           (reservationItem) => reservationItem.id === reservation.id
         )
         const updatedReservations = [...prevReservations]
-        updatedReservations[parkingIndex] = reservation
+        updatedReservations[parkingIndex] = res.data
         return updatedReservations
       })
       toast({

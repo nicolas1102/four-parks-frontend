@@ -62,8 +62,8 @@ const ReservationsTableColumns = ({
         return (
           <div className=''>
             {reservation.parkingSlot?.slotStatusId.status === 'EMPTY'
-              ? 'Lleno'
-              : 'Vacío'}
+              ? 'Vacio'
+              : 'Ocupado'}
           </div>
         )
       },

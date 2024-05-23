@@ -55,7 +55,6 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
     accountBlocked,
     loginAttempts,
   }: TCreateAdminFromManagerValidator) => {
-    console.log('gku')
     const adminData = {
       email,
       firstName,

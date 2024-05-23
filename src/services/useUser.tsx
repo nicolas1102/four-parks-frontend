@@ -250,7 +250,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
           (userItem) => userItem.email === user.email
         )
         const updatedUsers = [...prevUsers]
-        updatedUsers[userIndex] = user
+        updatedUsers[userIndex] = res.data
         return updatedUsers
       })
       toast({
