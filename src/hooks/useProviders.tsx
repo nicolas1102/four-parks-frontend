@@ -10,6 +10,7 @@ import { CityProvider } from '@/services/useCity'
 import { ParkingRateProvider } from '@/services/useParkingRate'
 import { ReservationProvider } from '@/services/useReservation'
 import { ParkingSlotProvider } from '@/services/useParkingSlot'
+import { AuditProvider } from '@/services/useAudit'
 
 interface Props {
   children: React.ReactNode
@@ -50,7 +51,9 @@ function Providers({ children }: Props) {
               <ParkingProvider>
                 <CityProvider>
                   <ReservationProvider>
-                    <ParkingSlotProvider>{children}</ParkingSlotProvider>
+                    <ParkingSlotProvider>
+                      <AuditProvider>{children}</AuditProvider>
+                    </ParkingSlotProvider>
                   </ReservationProvider>
                 </CityProvider>
               </ParkingProvider>

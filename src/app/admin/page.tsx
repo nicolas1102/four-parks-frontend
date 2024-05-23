@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import AdminFunctionItem from './_components/AdminFunctionItem'
-import { LineChart, ParkingSquare, User } from 'lucide-react'
+import { LineChart, NotebookText, ParkingSquare, User } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { useEffect, useState } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
@@ -22,6 +22,18 @@ const GERENTE_FUNCTIONS = [
     text: 'Gestiona todos los parqueaderos del sistema de Four Parks. También podrás generar reportes de cada uno de los puntos.',
     link: '/admin/parqueaderos',
     icon: <ParkingSquare strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
+  },
+  {
+    title: 'VER ESTADÍSTICAS DE FOUR PARKS',
+    text: 'Echa un vistazo a las estadísticas generales de los parqueaderos de FourParks y genera reportes sobre los mismos.',
+    link: '/admin/parqueaderos/-1/estadisticas',
+    icon: <LineChart strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
+  },
+  {
+    title: 'AUDITAR USUARIOS',
+    text: 'Audita todas las operaciones de todos los usuarios en rangos de fechas.',
+    link: '/admin/usuarios/-1/auditoria',
+    icon: <NotebookText strokeWidth={0.9} className='h-32 w-32 mx-auto' />,
   },
 ]
 
