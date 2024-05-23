@@ -72,7 +72,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
         <Loader />
       ) : (
         <>
-          <div className='flex sm:flex-row sm:justify-between justify-center flex-col'>
+          <div className='flex sm:flex-row sm:justify-between justify-center flex-col  gap-y-3'>
             <div className=' flex flex-col gap-y-2'>
               <h1 className='text-3xl font-normal tracking-wider text-primary sm:text-4xl inline-flex'>
                 <UserIcons className='h-9 w-9 mt-1 mr-2' />
@@ -92,7 +92,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
                 <p className='tracking-widest'>EMAIL:</p>
               </div>
             </div>
-            <div className='flex gap-2'>
+            <div className='flex gap-2 sm:flex-row flex-col'>
               <DateRangePicker
                 dateRange={dateRange}
                 setDateRange={setDateRange}
