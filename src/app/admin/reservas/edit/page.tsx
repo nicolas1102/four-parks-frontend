@@ -265,10 +265,12 @@ const Page = ({ searchParams }: PageProps) => {
                               RESERVA FINALIZADA
                             </p>
                           ) : reservation?.reservationStartTime ? (
-                            <StartReservationDialog reservation={reservation} />
+                            <EndReservationDialog reservation={reservation} />
                           ) : (
                             reservation && (
-                              <EndReservationDialog reservation={reservation} />
+                              <StartReservationDialog
+                                reservation={reservation}
+                              />
                             )
                           )}
                         </div>

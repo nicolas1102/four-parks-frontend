@@ -95,7 +95,7 @@ export default function Home() {
               setSelectValue={setFilterParkingType}
             />
           </div>
-          <span className='border-l border-primary h-auto'></span>
+          {/* <span className='border-l border-primary h-auto'></span>
           <div className='flex items-center gap-2'>
             <p>Tipo Vehículo: </p>
             <div className='flex items-center space-x-2'>
@@ -154,7 +154,7 @@ export default function Home() {
                 </CustomTooltip>
               </Toggle>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -262,26 +262,6 @@ export default function Home() {
                             }
                           />
                         ))}
-                        {filteredParkingLots.map((parkingItem) => (
-                          <ParkingItem
-                            key={parkingItem.id}
-                            parkingData={parkingItem}
-                            setSelectedParkingLot={setSelectedParkingLot}
-                            isSelected={
-                              parkingItem.id === selectedParkingLot?.id
-                            }
-                          />
-                        ))}
-                        {filteredParkingLots.map((parkingItem) => (
-                          <ParkingItem
-                            key={parkingItem.id}
-                            parkingData={parkingItem}
-                            setSelectedParkingLot={setSelectedParkingLot}
-                            isSelected={
-                              parkingItem.id === selectedParkingLot?.id
-                            }
-                          />
-                        ))}
                       </div>
                     ) : (
                       <div className='flex flex-col items-center w-full h-full py-14'>
@@ -290,7 +270,6 @@ export default function Home() {
                         </p>
                       </div>
                     )}
-                    {/* <ScrollBar orientation='horizontal' /> */}
                   </ScrollArea>
                 </div>
               </DrawerContent>

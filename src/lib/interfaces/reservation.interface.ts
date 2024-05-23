@@ -13,6 +13,7 @@ export interface ReservationInterface {
   parkingSlotId?: number
   parkingSlot?: ParkingSlotInterface
   totalPrice?: number
+  discount?: boolean
   // invoice: InvoiceInterface
   // totalPrice: number
 }

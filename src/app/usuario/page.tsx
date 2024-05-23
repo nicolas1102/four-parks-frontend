@@ -56,9 +56,10 @@ export default function Page() {
   const [activedReservation, setActivedReservation] = useState<
     ReservationInterface | null | undefined
   >()
-  const [temp, setTemp] = useState<string>()
+  const [adminEmail, setAdminEmail] = useState<string>()
+
   useEffect(() => {
-    if (session) setTemp(session.email)
+    if (session) setAdminEmail(session.email)
   }, [session])
 
   useEffect(() => {
@@ -66,10 +67,10 @@ export default function Page() {
       const userData = await getOneUserByEmail(email)
       if (userData !== null) setUser(userData as UserInterface)
     }
-    if (temp) {
-      fetchUser(temp)
+    if (adminEmail) {
+      fetchUser(adminEmail)
     }
-  }, [temp])
+  }, [adminEmail])
 
   useEffect(() => {
     const fetchActiveReservation = async (userId: number) => {

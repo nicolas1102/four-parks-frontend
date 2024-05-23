@@ -288,7 +288,7 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
       })
       return res as AxiosResponse<any, any>
     } catch (error: any) {
-      console.error('Error starting reservation:', error)
+      console.error('Error finishing reservation:', error)
       if (error?.response?.data) {
         toast({
           variant: 'destructive',
