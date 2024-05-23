@@ -103,7 +103,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
           {isFistTime ? (
             <div className='w-full h-32 flex items-center'>
               <p className='tracking-widest text-center w-full'>
-                SELECCIONA UN RANDO DE FECHAS.
+                SELECCIONA UN RANGO DE FECHAS.
               </p>
             </div>
           ) : (
