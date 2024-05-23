@@ -30,9 +30,9 @@ export default withAuth(
       )
     }
 
-    if (request.nextUrl.pathname.startsWith("/admin/usuarios") ||
-      request.nextUrl.pathname.startsWith("/admin/parqueaderos") &&
-      request.nextauth.token?.rol !== "ADMINISTRADOR"
+    if ((request.nextUrl.pathname.startsWith("/admin/usuarios") ||
+      request.nextUrl.pathname.startsWith("/admin/parqueaderos")) &&
+      request.nextauth.token?.rol === "ADMINISTRADOR"
     ) {
       return NextResponse.rewrite(
         new URL("/auth/unauthorized", request.url)

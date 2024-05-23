@@ -37,6 +37,11 @@ export const getUsersRequest = async () => {
   return res
 }
 
+export const getFreeAdminsRequest = async () => {
+  const res = await axios.get(BASE_URL + '/users/freeAdmins')
+  return res
+}
+
 export const getUsersByRoleRequest = async (role: string) => {
   const res = await axios.get(BASE_URL + `/users/role/${role}`)
   return res

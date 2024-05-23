@@ -9,6 +9,7 @@ import Loader from '@/components/Loader'
 var QRCode = require('qrcode')
 
 import {
+  BadgePercent,
   Car,
   ChevronLeft,
   ChevronRight,
@@ -39,6 +40,7 @@ import { useReservation } from '@/services/useReservation'
 import { ReservationInterface } from '@/lib/interfaces/reservation.interface'
 import NoResults from '@/components/NoResults'
 import { DateTime } from 'luxon'
+import { Badge } from '@/components/ui/badge'
 
 interface PageProps {
   searchParams: {
@@ -303,6 +305,17 @@ const Page = ({ searchParams }: PageProps) => {
                             <dd>**** **** **** 4532</dd>
                           </div>
                         </dl>
+                        {reservation?.discount && (
+                          <div className='flex items-center justify-between'>
+                            <dt className='flex items-center gap-1 text-muted-foreground'>
+                              <BadgePercent className='h-4 w-4' />
+                              Descuento por Lealtad
+                            </dt>
+                            <dd>
+                              <Badge>-10% de Descuento</Badge>
+                            </dd>
+                          </div>
+                        )}
                         <dl className='grid gap-3'>
                           <div className='flex items-center justify-between text-lg'>
                             <dt className='flex items-center gap-1'>

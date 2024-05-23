@@ -3,6 +3,7 @@
 import {
   createUsersRequest,
   deleteUserRequest,
+  getFreeAdminsRequest,
   getOneUserByEmailRequest,
   getUsersByRoleRequest,
   getUsersRequest,
@@ -41,6 +42,7 @@ interface UserContextType {
     confirmPassword: string
   ) => Promise<AxiosResponse<any, any> | undefined>
   getUsers: () => Promise<void>
+  getFreeAdmins: () => Promise<void>
   getUsersByRole: (role: string) => Promise<UserInterface[]>
   getOneUserByEmail: (
     email: string
@@ -75,6 +77,32 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setIsLoading(true)
     try {
       const res = await getUsersRequest()
+      setUsers(res.data)
+    } catch (error: any) {
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            'Ha ocurrido un error al intentar obtener los usuarios! Por favor intentalo más tarde.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+      console.error('Error fetching users:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const getFreeAdmins = async () => {
+    setIsLoading(true)
+    try {
+      const res = await getFreeAdminsRequest()
       setUsers(res.data)
     } catch (error: any) {
       if (error?.response?.data) {
@@ -133,7 +161,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       const res = await getUsersByRoleRequest(role)
       return res.data
     } catch (error) {
-      console.error('Error fetching user:', error)
+      console.error('Error fetching userS:', error)
     } finally {
       setIsLoading(false)
     }
@@ -366,6 +394,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         createAdmin,
         updatePasswordUser,
         getUsers,
+        getFreeAdmins,
         getUsersByRole,
         getOneUserByEmail,
         deleteUser,

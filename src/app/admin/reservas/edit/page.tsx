@@ -42,6 +42,7 @@ import { DateTime } from 'luxon'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { StartReservationDialog } from './_components/StartReservationDialog'
 import { EndReservationDialog } from './_components/EndReservationDialog'
+import { Badge } from '@/components/ui/badge'
 
 interface PageProps {
   searchParams: {
@@ -239,6 +240,17 @@ const Page = ({ searchParams }: PageProps) => {
                         <dd>•••• •••• •••• 4532</dd>
                       </div>
                     </dl>
+                    {reservation?.discount && (
+                      <div className='flex items-center justify-between'>
+                        <dt className='flex items-center gap-1 text-muted-foreground'>
+                          <Clock className='h-4 w-4' />
+                          Descuento por Lealtad
+                        </dt>
+                        <dd>
+                          <Badge>Descuento</Badge>
+                        </dd>
+                      </div>
+                    )}
                     {reservation?.totalPrice && (
                       <dl className='grid gap-3'>
                         <div className='flex items-center justify-between text-lg'>
