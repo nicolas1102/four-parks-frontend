@@ -1,47 +1,14 @@
 'use client'
 
-import React, { PureComponent, useRef } from 'react'
-import {
-  BarChart,
-  Bar,
-  Rectangle,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts'
-import {
-  LineChart,
-  NotebookPen,
-  ParkingSquare,
-  Printer,
-  User as UserIcons,
-} from 'lucide-react'
-import Loader from '@/components/Loader'
+import React, { useRef } from 'react'
+import { LineChart, Printer } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useParking } from '@/services/useParking'
-import { Dialog } from '@/components/ui/dialog'
-import NoResults from '@/components/NoResults'
-import { useReservation } from '@/services/useReservation'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
-import Link from 'next/link'
-import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  Menu,
-  Package2,
-  Search,
-  Users,
-} from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { Activity, CreditCard, DollarSign, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -50,8 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
   Table,
   TableBody,
@@ -61,12 +26,10 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { ReservationsPerMonthBarChart } from './_components/ReservationsPerMonthBarChart'
-import { Separator } from '@/components/ui/separator'
 import { VehicleTypePieChart } from './_components/VehicleTypePieChart'
-import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
-import { PDFDownloadLink } from '@react-pdf/renderer'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+import { ComparisonCard } from './_components/ComparisonCard'
 
 export default function Page({
   params: { parkingId },
@@ -80,6 +43,25 @@ export default function Page({
   )
   const router = useRouter()
   const { toast } = useToast()
+  const [totalRevenue, setTotalRevenue] = useState<{
+    presentData: string
+    pastData: string
+  } | null>(null)
+  const [numberOfClientsData, setNumberOfClientsData] = useState<{
+    presentData: string
+    pastData: string
+  } | null>(null)
+  const [vehicleTypePieChartData, setVehicleTypePieChartData] = useState<
+    | {
+        tipo: string
+        valor: number
+      }[]
+    | null
+  >(null)
+  const [isTotalRevenueLoading, setIsTotalRevenueLoading] = useState(false)
+  const [isNumberOfClientsLoading, setIsNumberOfClientsLoading] =
+    useState(false)
+  const [isVehicleTypeLoading, setIsVehicleTypeLoading] = useState(false)
 
   useEffect(() => {
     const fetchStatisticsByPaking = async () => {
@@ -114,6 +96,59 @@ export default function Page({
     // }
   }, [parking, session])
 
+  useEffect(() => {
+    setIsTotalRevenueLoading(true)
+    const fetchTotalRevenue = () => {
+      new Promise(() => {
+        setTimeout(() => {
+          setIsTotalRevenueLoading(false)
+          const datita = {
+            presentData: '$45,231.89',
+            pastData: '+20.1%',
+          }
+          setTotalRevenue(datita)
+        }, 4000)
+      })
+    }
+    fetchTotalRevenue()
+  }, [])
+
+  useEffect(() => {
+    setIsNumberOfClientsLoading(true)
+    const fetchNumberOfClients = () => {
+      new Promise(() => {
+        setTimeout(() => {
+          setIsNumberOfClientsLoading(false)
+          const datita = {
+            presentData: '+2350',
+            pastData: '+180.1%',
+          }
+          setNumberOfClientsData(datita)
+        }, 2000)
+      })
+    }
+    fetchNumberOfClients()
+  }, [])
+
+  useEffect(() => {
+    setIsVehicleTypeLoading(true)
+    const fetchNumberOfClients = () => {
+      new Promise(() => {
+        setTimeout(() => {
+          setIsVehicleTypeLoading(false)
+          const datita = [
+            { tipo: 'Carro', valor: 156 },
+            { tipo: 'Moto', valor: 232 },
+            { tipo: 'Bicicleta', valor: 140 },
+            { tipo: 'V. Pesado', valor: 54 },
+          ]
+          setVehicleTypePieChartData(datita)
+        }, 5000)
+      })
+    }
+    fetchNumberOfClients()
+  }, [])
+
   const pdfRef = useRef<HTMLDivElement>(null)
 
   const downloadPDF = (parkingName: string) => {
@@ -121,7 +156,7 @@ export default function Page({
     if (input) {
       html2canvas(input).then((canvas) => {
         const imgData = canvas.toDataURL('image/png')
-        const pdf = new jsPDF('l', 'mm', 'a4', true)
+        const pdf = new jsPDF('p', 'mm', 'a4', true)
         const pdfWidth = pdf.internal.pageSize.getWidth()
         const pdfHeight = pdf.internal.pageSize.getHeight()
         const imgWidth = canvas.width
@@ -130,15 +165,15 @@ export default function Page({
         const imgX = (pdfWidth - imgWidth * ratio) / 2
         const imgY = 30
 
-        // Add a small text at the top
-        const fontSize = 12 // Adjust font size as needed
-        const text = 'Título del PDF' // Replace with your desired text
-        const textX = pdfWidth - pdf.getTextWidth(text) / 2 // Center text horizontally with some padding
-        const textY = 15 // Adjust vertical position for the text
+        // // Add a small text at the top
+        // const fontSize = 12 // Adjust font size as needed
+        // const text = 'Título del PDF' // Replace with your desired text
+        // const textX = pdfWidth - pdf.getTextWidth(text) / 2 // Center text horizontally with some padding
+        // const textY = 15 // Adjust vertical position for the text
 
-        pdf.setFont('Arial', 'bold', fontSize)
-        pdf.setTextColor('black')
-        pdf.text(text + '', textX, textY) // Add the text
+        // pdf.setFont('Arial', 'bold', fontSize)
+        // pdf.setTextColor('black')
+        // pdf.text(text + '', textX, textY) // Add the text
 
         pdf.addImage(
           imgData,
@@ -161,7 +196,7 @@ export default function Page({
         <NoResults redirection='/admin' />
       ) : ( */}
       <>
-        <div className='w-full h-16 py-4 px-6 sm:px-8 border-b flex items-center sticky z-40 sm:top-[66px] top-[65px] backdrop-blur supports-[backdrop-filter]:bg-background/60 '>
+        <div className='w-full h-16 py-4 px-6 sm:px-8 border-b flex items-center sticky z-40 sm:top-[65px] top-[65px] backdrop-blur supports-[backdrop-filter]:bg-background/60 '>
           <LineChart className='h-7 w-7 sm:h-8 sm:w-8 mt-1 mr-2' />
           <h2 className='tracking-widest font-normal sm:font-normal text-lg sm:text-xl pr-4'>
             (PARQUEADERO)
@@ -179,6 +214,11 @@ export default function Page({
                   // parking?.name && downloadPDF(parking?.name)
                   downloadPDF('goku')
                 }}
+                disabled={
+                  isTotalRevenueLoading ||
+                  isLoadingParking ||
+                  isNumberOfClientsLoading
+                }
               >
                 <div className='flex flex-row items-center gap-2'>
                   <Printer strokeWidth={1.1} />
@@ -191,62 +231,30 @@ export default function Page({
         <div className=' flex flex-col relative m-6 sm:m-8'>
           <div className='flex min-h-screen  flex-col gap-8' ref={pdfRef}>
             <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
-              <Card x-chunk='dashboard-01-chunk-0'>
-                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                  <CardTitle className='text-sm font-medium'>
-                    Ingresos Totales
-                  </CardTitle>
-                  <DollarSign className='h-4 w-4 text-muted-foreground' />
-                </CardHeader>
-                <CardContent>
-                  <div className='text-2xl font-bold'>$45,231.89</div>
-                  <p className='text-xs text-muted-foreground'>
-                    +20.1% desde el mes pasado
-                  </p>
-                </CardContent>
-              </Card>
-              <Card x-chunk='dashboard-01-chunk-1'>
-                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                  <CardTitle className='text-sm font-medium'>
-                    Cantidad de Clientes
-                  </CardTitle>
-                  <Users className='h-4 w-4 text-muted-foreground' />
-                </CardHeader>
-                <CardContent>
-                  <div className='text-2xl font-bold'>+2350</div>
-                  <p className='text-xs text-muted-foreground'>
-                    +180.1% desde el mes pasado
-                  </p>
-                </CardContent>
-              </Card>
-              <Card x-chunk='dashboard-01-chunk-2'>
-                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                  <CardTitle className='text-sm font-medium'>
-                    Cantidad de Reservas
-                  </CardTitle>
-                  <CreditCard className='h-4 w-4 text-muted-foreground' />
-                </CardHeader>
-                <CardContent>
-                  <div className='text-2xl font-bold'>+12,234</div>
-                  <p className='text-xs text-muted-foreground'>
-                    +19% desde el mes pasado
-                  </p>
-                </CardContent>
-              </Card>
-              <Card x-chunk='dashboard-01-chunk-3'>
-                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                  <CardTitle className='text-sm font-medium'>
-                    Algo más
-                  </CardTitle>
-                  <Activity className='h-4 w-4 text-muted-foreground' />
-                </CardHeader>
-                <CardContent>
-                  <div className='text-2xl font-bold'>+573</div>
-                  <p className='text-xs text-muted-foreground'>
-                    +201 desde el mes pasado
-                  </p>
-                </CardContent>
-              </Card>
+              <ComparisonCard
+                title='Ingresos Totales'
+                icon={<DollarSign className='h-4 w-4 text-muted-foreground' />}
+                data={totalRevenue}
+                isLoading={isTotalRevenueLoading}
+              />
+              <ComparisonCard
+                title='Cantidad de Cliente'
+                icon={<Users className='h-4 w-4 text-muted-foreground' />}
+                data={numberOfClientsData}
+                isLoading={isNumberOfClientsLoading}
+              />
+              <ComparisonCard
+                title='Cantidad Reservas'
+                icon={<CreditCard className='h-4 w-4 text-muted-foreground' />}
+                data={numberOfClientsData}
+                isLoading={isNumberOfClientsLoading}
+              />
+              <ComparisonCard
+                title='Algo más'
+                icon={<Activity className='h-4 w-4 text-muted-foreground' />}
+                data={totalRevenue}
+                isLoading={isTotalRevenueLoading}
+              />
             </div>
 
             <div className='sm:grid gap-8 sm:space-y-0 space-y-8 sm:grid-cols-2'>
@@ -254,7 +262,12 @@ export default function Page({
                 <ReservationsPerMonthBarChart />
               </div>
               <div className=''>
-                <VehicleTypePieChart />
+                <VehicleTypePieChart
+                  title='Reservas'
+                  description='Cantidad de reservas por mes reciente.'
+                  data={vehicleTypePieChartData}
+                  isLoading={isVehicleTypeLoading}
+                />
               </div>
             </div>
 
