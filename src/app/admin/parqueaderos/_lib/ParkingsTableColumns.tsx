@@ -155,6 +155,14 @@ const ParkingsTableColumns = ({ data }: { data: ParkingInterface[] }) => {
               >
                 Ver estado de parqueadero
               </DropdownMenuItem>
+              <DropdownMenuItem
+                className='cursor-pointer'
+                onClick={() => {
+                  router.push(`/admin/parqueaderos/${parking.id}/estadisticas`)
+                }}
+              >
+                Ver estadísticas de parqueadero
+              </DropdownMenuItem>
 
               <DropdownMenuSeparator />
 

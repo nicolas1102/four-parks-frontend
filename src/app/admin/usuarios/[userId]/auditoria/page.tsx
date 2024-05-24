@@ -82,14 +82,14 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
                 Visualiza todas las acciones del usuario.
               </p>
               <div>
-                <p className='tracking-widest'>
+                {/* <p className='tracking-widest'>
                   ID:{' '}
                   <span className='font-light'>
                     {user?.firstName + ' ' + user?.firstLastname}
                   </span>
                 </p>
                 <p className='tracking-widest'>NOMBRE:</p>
-                <p className='tracking-widest'>EMAIL:</p>
+                <p className='tracking-widest'>EMAIL:</p> */}
               </div>
             </div>
             <div className='flex gap-2 sm:flex-row flex-col'>

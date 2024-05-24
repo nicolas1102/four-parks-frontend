@@ -181,7 +181,7 @@ export default function Page({
                 }}
               >
                 <div className='flex flex-row items-center gap-2'>
-                  <Printer />
+                  <Printer strokeWidth={1.1} />
                   IMPRIMIR
                 </div>
               </Button>

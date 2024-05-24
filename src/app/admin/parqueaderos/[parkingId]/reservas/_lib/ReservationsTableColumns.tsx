@@ -174,8 +174,16 @@ const ReservationsTableColumns = ({
                 Copiar ID de usuario
               </DropdownMenuItem>
 
-              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className='cursor-pointer'
+                onClick={() => {
+                  router.push(`/admin/reservas/edit?reservationId=${reservation.id}`)
+                }}
+              >
+                Ver detalle de reserva
+              </DropdownMenuItem>
 
+              <DropdownMenuSeparator />
               {!reservation.reservationStartTime && (
                 <DropdownMenuItem
                   onClick={() => {
@@ -183,7 +191,9 @@ const ReservationsTableColumns = ({
                   }}
                   className='cursor-pointer bg-yellowFPC-200'
                 >
-                  <span className='font-medium text-black'>Iniciar reserva</span>
+                  <span className='font-medium text-black'>
+                    Iniciar reserva
+                  </span>
                 </DropdownMenuItem>
               )}
 
@@ -194,7 +204,9 @@ const ReservationsTableColumns = ({
                   }}
                   className='cursor-pointer bg-blueFPC-200'
                 >
-                  <span className=' font-medium text-black'>Terminar reserva</span>
+                  <span className=' font-medium text-black'>
+                    Terminar reserva
+                  </span>
                 </DropdownMenuItem>
               )}
 

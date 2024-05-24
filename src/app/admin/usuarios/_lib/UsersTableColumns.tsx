@@ -246,7 +246,7 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
                 >
                   Ver operaciones en el sistema
                 </DropdownMenuItem>
-                {user.roleList[0] === 'USUARIO' && user.accountBlocked && (
+                { user.accountBlocked && (
                   <DropdownMenuItem
                     onClick={async () => {
                       if (session) {

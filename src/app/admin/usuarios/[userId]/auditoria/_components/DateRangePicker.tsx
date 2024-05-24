@@ -21,13 +21,6 @@ export function DateRangePicker({
   dateRange: DateRange | undefined
   setDateRange: Dispatch<SetStateAction<DateRange | undefined>>
 }) {
-  // const [date, setDate] = useState<DateRange | undefined>({
-  //   from: new Date(dateRange.beginning),
-  //   to: addDays(new Date(2022, 0, 20), 20),
-  // })
-
-  // console.log(date)
-
   return (
     <div className={cn('grid gap-2')}>
       <Popover>

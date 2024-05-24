@@ -140,7 +140,7 @@ export function UsersTable({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Siguiete
+            Siguiente
           </Button>
         </div>
       </div>
