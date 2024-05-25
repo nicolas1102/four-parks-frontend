@@ -1,3 +1,5 @@
+'use client'
+
 import {
   PieChart,
   Pie,
@@ -6,7 +8,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts'
-import { PureComponent } from 'react'
+import { PureComponent, useEffect, useState } from 'react'
 
 import {
   Card,
@@ -19,28 +21,44 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const COLORS = ['#fde047', '#1865a2', '#c03131', '#6DB04E']
 
-export function VehicleTypePieChart({
-  title,
-  description,
-  data,
-  isLoading,
-}: {
-  title: string
-  description: string
-  data:
-    | {
-        tipo: string
-        valor: number
-      }[]
-    | null
-  isLoading: boolean
-}) {
+export interface VehicleTypeChartDataInterface {
+  tipo: string
+  valor: number
+}
+
+export function VehicleTypePieChart() {
+  const [isLoading, setisLoading] = useState(false)
+  const [vehicleTypePieChartData, setVehicleTypePieChartData] = useState<
+    VehicleTypeChartDataInterface[] | null
+  >(null)
+
+  useEffect(() => {
+    setisLoading(true)
+    const fetchNumberOfClients = () => {
+      new Promise(() => {
+        setTimeout(() => {
+          const datita = [
+            { tipo: 'Carro', valor: 156 },
+            { tipo: 'Moto', valor: 232 },
+            { tipo: 'Bicicleta', valor: 140 },
+            { tipo: 'V. Pesado', valor: 54 },
+          ]
+          setVehicleTypePieChartData(datita)
+          setisLoading(false)
+        }, 5000)
+      })
+    }
+    fetchNumberOfClients()
+  }, [])
+
   return (
     <Card className='' x-chunk='dashboard-01-chunk-4'>
       <CardHeader className='flex flex-row items-center'>
         <div className='grid gap-2'>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
+          <CardTitle>Tipo de Vehículo</CardTitle>
+          <CardDescription>
+            Cantidad de reservas por tipo de vehículo.
+          </CardDescription>
         </div>
       </CardHeader>
       <CardContent className='h-[400px] flex justify-center sm:scale-105 '>
@@ -49,7 +67,7 @@ export function VehicleTypePieChart({
             <Skeleton className='h-56 w-56 my-1 rounded-full' />
             <Skeleton className='h-5 w-52 my-1' />
           </div>
-        ) : data === null ? (
+        ) : vehicleTypePieChartData === null ? (
           <span className='font-light text-xl italic'>
             No se pudo cargar los datos
           </span>
@@ -60,14 +78,14 @@ export function VehicleTypePieChart({
               <Pie
                 dataKey='valor'
                 isAnimationActive={true}
-                data={data}
+                data={vehicleTypePieChartData}
                 cx='50%'
                 cy='50%'
                 outerRadius={110}
                 fill='#8884d8'
                 label
               >
-                {data.map((entry, index) => (
+                {vehicleTypePieChartData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}

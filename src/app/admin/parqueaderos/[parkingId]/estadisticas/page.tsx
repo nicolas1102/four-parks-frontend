@@ -25,11 +25,20 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ReservationsPerMonthBarChart } from './_components/ReservationsPerMonthBarChart'
-import { VehicleTypePieChart } from './_components/VehicleTypePieChart'
+import {
+  ReservationsPerMonthBarChart,
+  ReservationsPerMonthDataInterface,
+} from './_components/ReservationsPerMonthBarChart'
+import {
+  VehicleTypeChartDataInterface,
+  VehicleTypePieChart,
+} from './_components/VehicleTypePieChart'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { ComparisonCard } from './_components/ComparisonCard'
+import { TotalRevenueCard } from './_components/TotalRevenueCard'
+import { BestCustomersTableCard } from './_components/BestCustomersTableCard'
+import { NumberOfClientsCard } from './_components/NumberOfClientsCard'
+import { RecentReservationsTableCard } from './_components/RecentReservationsTableCard'
 
 export default function Page({
   params: { parkingId },
@@ -43,25 +52,6 @@ export default function Page({
   )
   const router = useRouter()
   const { toast } = useToast()
-  const [totalRevenue, setTotalRevenue] = useState<{
-    presentData: string
-    pastData: string
-  } | null>(null)
-  const [numberOfClientsData, setNumberOfClientsData] = useState<{
-    presentData: string
-    pastData: string
-  } | null>(null)
-  const [vehicleTypePieChartData, setVehicleTypePieChartData] = useState<
-    | {
-        tipo: string
-        valor: number
-      }[]
-    | null
-  >(null)
-  const [isTotalRevenueLoading, setIsTotalRevenueLoading] = useState(false)
-  const [isNumberOfClientsLoading, setIsNumberOfClientsLoading] =
-    useState(false)
-  const [isVehicleTypeLoading, setIsVehicleTypeLoading] = useState(false)
 
   useEffect(() => {
     const fetchStatisticsByPaking = async () => {
@@ -96,59 +86,6 @@ export default function Page({
     // }
   }, [parking, session])
 
-  useEffect(() => {
-    setIsTotalRevenueLoading(true)
-    const fetchTotalRevenue = () => {
-      new Promise(() => {
-        setTimeout(() => {
-          setIsTotalRevenueLoading(false)
-          const datita = {
-            presentData: '$45,231.89',
-            pastData: '+20.1%',
-          }
-          setTotalRevenue(datita)
-        }, 4000)
-      })
-    }
-    fetchTotalRevenue()
-  }, [])
-
-  useEffect(() => {
-    setIsNumberOfClientsLoading(true)
-    const fetchNumberOfClients = () => {
-      new Promise(() => {
-        setTimeout(() => {
-          setIsNumberOfClientsLoading(false)
-          const datita = {
-            presentData: '+2350',
-            pastData: '+180.1%',
-          }
-          setNumberOfClientsData(datita)
-        }, 2000)
-      })
-    }
-    fetchNumberOfClients()
-  }, [])
-
-  useEffect(() => {
-    setIsVehicleTypeLoading(true)
-    const fetchNumberOfClients = () => {
-      new Promise(() => {
-        setTimeout(() => {
-          setIsVehicleTypeLoading(false)
-          const datita = [
-            { tipo: 'Carro', valor: 156 },
-            { tipo: 'Moto', valor: 232 },
-            { tipo: 'Bicicleta', valor: 140 },
-            { tipo: 'V. Pesado', valor: 54 },
-          ]
-          setVehicleTypePieChartData(datita)
-        }, 5000)
-      })
-    }
-    fetchNumberOfClients()
-  }, [])
-
   const pdfRef = useRef<HTMLDivElement>(null)
 
   const downloadPDF = (parkingName: string) => {
@@ -175,6 +112,15 @@ export default function Page({
         // pdf.setTextColor('black')
         // pdf.text(text + '', textX, textY) // Add the text
 
+        pdf.addImage(
+          imgData,
+          'PNG',
+          imgX,
+          imgY,
+          imgWidth * ratio,
+          imgHeight * ratio
+        )
+        pdf.addPage()
         pdf.addImage(
           imgData,
           'PNG',
@@ -214,11 +160,11 @@ export default function Page({
                   // parking?.name && downloadPDF(parking?.name)
                   downloadPDF('goku')
                 }}
-                disabled={
-                  isTotalRevenueLoading ||
-                  isLoadingParking ||
-                  isNumberOfClientsLoading
-                }
+                // disabled={
+                //   isTotalRevenueLoading ||
+                //   isLoadingParking ||
+                //   isNumberOfClientsLoading
+                // }
               >
                 <div className='flex flex-row items-center gap-2'>
                   <Printer strokeWidth={1.1} />
@@ -230,205 +176,44 @@ export default function Page({
         </div>
         <div className=' flex flex-col relative m-6 sm:m-8'>
           <div className='flex min-h-screen  flex-col gap-8' ref={pdfRef}>
+            {/* TODO: CARD PARA INFO DE PARQUEADERO */}
             <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
-              <ComparisonCard
-                title='Ingresos Totales'
-                icon={<DollarSign className='h-4 w-4 text-muted-foreground' />}
-                data={totalRevenue}
-                isLoading={isTotalRevenueLoading}
-              />
-              <ComparisonCard
+              <TotalRevenueCard />
+              <NumberOfClientsCard />
+              <NumberOfClientsCard />
+              <TotalRevenueCard />
+              {/* <TotalRevenueCard
                 title='Cantidad de Cliente'
                 icon={<Users className='h-4 w-4 text-muted-foreground' />}
                 data={numberOfClientsData}
                 isLoading={isNumberOfClientsLoading}
               />
-              <ComparisonCard
+              <TotalRevenueCard
                 title='Cantidad Reservas'
                 icon={<CreditCard className='h-4 w-4 text-muted-foreground' />}
                 data={numberOfClientsData}
                 isLoading={isNumberOfClientsLoading}
               />
-              <ComparisonCard
+              <TotalRevenueCard
                 title='Algo más'
                 icon={<Activity className='h-4 w-4 text-muted-foreground' />}
                 data={totalRevenue}
                 isLoading={isTotalRevenueLoading}
-              />
+              /> */}
             </div>
 
-            <div className='sm:grid gap-8 sm:space-y-0 space-y-8 sm:grid-cols-2'>
+            <div className='grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3'>
               <div className=''>
-                <ReservationsPerMonthBarChart />
+                <VehicleTypePieChart />
               </div>
-              <div className=''>
-                <VehicleTypePieChart
-                  title='Reservas'
-                  description='Cantidad de reservas por mes reciente.'
-                  data={vehicleTypePieChartData}
-                  isLoading={isVehicleTypeLoading}
-                />
+              <div className='xl:col-span-2'>
+                <ReservationsPerMonthBarChart />
               </div>
             </div>
 
             <div className='grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3'>
-              <Card className='xl:col-span-2' x-chunk='dashboard-01-chunk-4'>
-                <CardHeader className='flex flex-row items-center'>
-                  <div className='grid gap-2'>
-                    <CardTitle>Mejores Clientes</CardTitle>
-                    <CardDescription>
-                      Clientes con mayor cantidad de uso de nuestros servicios.
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Cliente</TableHead>
-                        <TableHead className=''>Tiempo</TableHead>
-                        <TableHead className='text-right'>Ingresos</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell>
-                          <div className='font-medium'>Miguel Naranjo</div>
-                          <div className='hidden text-sm text-muted-foreground md:inline'>
-                            elmigue@gmail.com
-                          </div>
-                        </TableCell>
-                        <TableCell className=''>643 min.</TableCell>
-                        <TableCell className='text-right'>$145.300</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>
-                          <div className='font-medium'>Olivia Smith</div>
-                          <div className='hidden text-sm text-muted-foreground md:inline'>
-                            olivia@example.com
-                          </div>
-                        </TableCell>
-                        <TableCell className=''>643 min.</TableCell>
-                        <TableCell className='text-right'>$145.300</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>
-                          <div className='font-medium'>Noah Williams</div>
-                          <div className='hidden text-sm text-muted-foreground md:inline'>
-                            noah@example.com
-                          </div>
-                        </TableCell>
-                        <TableCell className=''>643 min.</TableCell>
-                        <TableCell className='text-right'>$145.300</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>
-                          <div className='font-medium'>Emma Brown</div>
-                          <div className='hidden text-sm text-muted-foreground md:inline'>
-                            emma@example.com
-                          </div>
-                        </TableCell>
-                        <TableCell className=''>643 min.</TableCell>
-                        <TableCell className='text-right'>$145.300</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>
-                          <div className='font-medium'>Liam Johnson</div>
-                          <div className='hidden text-sm text-muted-foreground md:inline'>
-                            liam@example.com
-                          </div>
-                        </TableCell>
-                        <TableCell className=''>643 min.</TableCell>
-                        <TableCell className='text-right'>$145.300</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-              <Card x-chunk='dashboard-01-chunk-5'>
-                <CardHeader>
-                  <CardTitle>Reservas Recientes</CardTitle>
-                </CardHeader>
-                <CardContent className='grid gap-8'>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                  <div className='flex items-center gap-4'>
-                    <div className='grid gap-1'>
-                      <p className='text-sm font-medium leading-none'>
-                        Camilo Jiménez
-                      </p>
-                      <p className='text-sm text-muted-foreground'>
-                        camilo@email.com
-                      </p>
-                    </div>
-                    <div className='ml-auto font-medium'>Carro</div>
-                  </div>
-                </CardContent>
-              </Card>
+              <BestCustomersTableCard />
+              <RecentReservationsTableCard />
             </div>
           </div>
         </div>
