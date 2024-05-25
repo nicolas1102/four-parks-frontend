@@ -150,7 +150,6 @@ export default function Page({
                 </CardHeader>
                 <CardContent className='py-6 text-sm'>
                   <div className='flex gap-8 flex-col'>
-                    {/* <div className='grid gap-4 grid-cols-2'> */}
                     <div className='grid grid-cols-4 gap-4'>
                       <TotalRevenueCard />
                       <NumberOfClientsCard />
@@ -158,10 +157,8 @@ export default function Page({
                       <TotalRevenueCard />
                     </div>
                     <VehicleTypePieChart />
-                    {/* </div> */}
 
                     <ReservationsPerMonthBarChart />
-                    {/* <BestCustomersTableCard /> */}
                   </div>
                 </CardContent>
               </Card>
