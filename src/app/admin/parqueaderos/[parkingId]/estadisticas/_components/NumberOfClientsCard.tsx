@@ -38,7 +38,7 @@ export function NumberOfClientsCard() {
         <CardTitle className='text-sm font-medium'>Cantidad de Clientes</CardTitle>
         <CreditCard className='h-4 w-4 text-muted-foreground' />
       </CardHeader>
-      <CardContent>
+      <CardContent className='overflow-hidden'>
         <div className='text-2xl font-bold'>
           {isLoading ? (
             <Skeleton className='h-6 w-56 my-1' />
