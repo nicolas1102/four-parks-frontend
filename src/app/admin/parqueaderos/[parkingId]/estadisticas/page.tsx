@@ -82,7 +82,7 @@ export default function Page({
           </div>
           <div className=' flex flex-col relative m-6 sm:m-8'>
             <div className='flex flex-col gap-8'>
-              <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
+              <div className='grid gap-4 md:gap-8 lg:grid-cols-3'>
                 <TotalRevenueCard parkingId={parkingId} />
                 <NumberOfClientsCard />
                 <NumberOfReservationsCard parkingId={parkingId} />

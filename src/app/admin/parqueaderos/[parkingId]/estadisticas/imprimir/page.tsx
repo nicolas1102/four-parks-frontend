@@ -149,14 +149,12 @@ export default function Page({
                 </CardHeader>
                 <CardContent className='py-6 text-sm'>
                   <div className='flex gap-8 flex-col'>
-                    <div className='grid grid-cols-4 gap-4'>
+                    <div className='grid grid-cols-3 gap-4'>
                       <TotalRevenueCard parkingId={parkingId} />
                       <NumberOfClientsCard />
                       <NumberOfReservationsCard parkingId={parkingId} />
-                      <TotalRevenueCard parkingId={parkingId} />
                     </div>
                     <VehicleTypePieChart parkingId={parkingId} />
-
                     <ReservationsPerMonthBarChart parkingId={parkingId} />
                   </div>
                 </CardContent>

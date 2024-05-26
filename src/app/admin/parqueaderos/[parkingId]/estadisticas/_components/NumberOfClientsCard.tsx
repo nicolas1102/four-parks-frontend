@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useStatistic } from '@/services/useStatistic'
-import { CreditCard } from 'lucide-react'
+import { CreditCard, User } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export interface ComparisonCard {
@@ -53,7 +53,7 @@ export function NumberOfClientsCard() {
         <CardTitle className='text-sm font-medium'>
           Cantidad de Clientes
         </CardTitle>
-        <CreditCard className='h-4 w-4 text-muted-foreground' />
+        <User className='h-4 w-4 text-muted-foreground' />
       </CardHeader>
       <CardContent className='overflow-hidden'>
         <div className='text-2xl font-bold'>
