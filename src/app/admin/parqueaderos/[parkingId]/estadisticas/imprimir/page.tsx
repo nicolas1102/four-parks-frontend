@@ -57,7 +57,16 @@ export default function Page({
           imgWidth * ratio,
           imgHeight * ratio
         )
-        pdf.save(`estadísticas_${parkingName}.pdf`)
+        pdf.save(
+          `estadísticas_${parkingName}_${new Date().toLocaleDateString(
+            'es-CO',
+            {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            }
+          )}.pdf`
+        )
       })
     }
   }
@@ -66,22 +75,23 @@ export default function Page({
     const fetchParking = async () => {
       setParking(await getOneParkingById(parkingId))
     }
-    fetchParking()
+    parkingId.toString() !== '-1' && fetchParking()
   }, [])
 
   return (
     <div className='m-6 sm:mx-auto sm:my-6 flex flex-col gap-4'>
       {isLoading ? (
         <Loader />
-      ) : parking === undefined ? (
+      ) : parking === undefined && parkingId.toString() !== '-1' ? (
         <NoResults />
       ) : (
         <>
           <div className='flex justify-end'>
             <Button
               onClick={() => {
-                handleExport('goku')
+                handleExport(parking ? parking.name : 'fourparks')
               }}
+              // TODO: Añadir que se bloquee el boton mientras cargan los datos
               // disabled={}
             >
               <div className='flex flex-row items-center gap-2 tracking-widest'>
@@ -96,31 +106,37 @@ export default function Page({
                 <CardHeader className='flex flex-col justify-center bg-muted/50 bg-yellowFPC-400 text-black'>
                   <CardTitle className='group flex flex-col '>
                     <h1 className='tracking-widest text-3xl mb-2'>
-                      INFORME DE PARQUEADERO
+                      INFORME{' '}
+                      {parkingId.toString() !== '-1'
+                        ? 'GENERAL'
+                        : 'DE PARQUEADERO'}
                     </h1>
                   </CardTitle>
                   <CardDescription className='text-base flex justify-between text-primary text-black'>
-                    <div>
-                      <p className='font-bold tracking-widest'>
-                        NOMBRE:{' '}
-                        <span className='font-medium'>
-                          {parking.name.toUpperCase()}
-                        </span>
-                      </p>
-                      <p className='font-bold tracking-widest'>
-                        DIRECCIÓN:{' '}
-                        <span className='font-medium'>
-                          {parking.location.address.toUpperCase()}
-                        </span>
-                      </p>
-                      <p className='font-bold tracking-widest'>
-                        CIUDAD:{' '}
-                        <span className='font-medium'>
-                          {parking.location.city.city.toUpperCase()}
-                        </span>
-                      </p>
-                    </div>
-                    <div className='text-end'>
+                    {parkingId.toString() !== '-1' && (
+                      <div>
+                        <p className='font-bold tracking-widest'>
+                          NOMBRE:{' '}
+                          <span className='font-medium'>
+                            {parking?.name.toUpperCase()}
+                          </span>
+                        </p>
+                        <p className='font-bold tracking-widest'>
+                          DIRECCIÓN:{' '}
+                          <span className='font-medium'>
+                            {parking?.location.address.toUpperCase()}
+                          </span>
+                        </p>
+                        <p className='font-bold tracking-widest'>
+                          CIUDAD:{' '}
+                          <span className='font-medium'>
+                            {parking?.location.city.city.toUpperCase()}
+                          </span>
+                        </p>
+                      </div>
+                    )}
+
+                    <div className=''>
                       <p className='font-bold tracking-widest'>
                         HORA:{' '}
                         <span className='font-medium'>

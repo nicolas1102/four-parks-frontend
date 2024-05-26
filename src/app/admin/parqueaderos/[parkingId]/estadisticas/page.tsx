@@ -28,10 +28,10 @@ export default function Page({
   const router = useRouter()
 
   useEffect(() => {
-    const fetchParking = async (id: number) => {
-      setParking(await getOneParkingById(id))
+    const fetchParking = async (parkingId: number) => {
+      setParking(await getOneParkingById(parkingId))
     }
-    fetchParking(parkingId)
+    parkingId.toString() !== '-1' && fetchParking(parkingId)
   }, [])
 
   return (
@@ -40,7 +40,7 @@ export default function Page({
         <div className='m-6'>
           <Loader />
         </div>
-      ) : !parking ? (
+      ) : !parking && parkingId.toString() !== '-1' ? (
         <div className='m-6'>
           <NoResults redirection='/admin' />
         </div>
@@ -51,20 +51,26 @@ export default function Page({
               <div className='sm:flex flex-row items-center'>
                 <div className='flex flex-row items-center'>
                   <LineChart className='h-7 w-7 sm:h-8 sm:w-8 mt-1 mr-2' />
+
                   <h2 className='tracking-widest font-normal sm:font-normal text-xl sm:text-2xl pr-4'>
-                    {parking.name.toUpperCase()}
+                    {parkingId.toString() !== '-1'
+                      ? parking?.name.toUpperCase()
+                      : 'ESTADÍSTICAS GENERALES'}
                   </h2>
                 </div>
-                <div className='gap-3 hidden sm:flex flex-row'>
-                  <span className='border-l h-6'></span>
-                  <p className='text-center text-muted-foreground'>
-                    {parking.location.address}
-                  </p>
-                  <span className='border-l h-6'></span>
-                  <p className='yext-center text-muted-foreground'>
-                    {parking.location.city.city}
-                  </p>
-                </div>
+
+                {parkingId.toString() !== '-1' && (
+                  <div className='gap-3 hidden sm:flex flex-row'>
+                    <span className='border-l h-6'></span>
+                    <p className='text-center text-muted-foreground'>
+                      {parking?.location.address}
+                    </p>
+                    <span className='border-l h-6'></span>
+                    <p className='yext-center text-muted-foreground'>
+                      {parking?.location.city.city}
+                    </p>
+                  </div>
+                )}
               </div>
               <div>
                 <Button
