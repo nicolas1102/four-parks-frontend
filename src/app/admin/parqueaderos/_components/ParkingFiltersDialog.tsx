@@ -31,14 +31,6 @@ export function ParkingFiltersDialog({
 }: {
   table: Table<ParkingInterface>
 }) {
-  // const { cities, getCities, isLoading } = useCity()
-  // useEffect(() => {
-  //   const fetchCities = async () => {
-  //     await getCities()
-  //   }
-  //   fetchCities()
-  // }, [])
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -80,37 +72,6 @@ export function ParkingFiltersDialog({
               className=' mr-2 border border-blueFPC-400'
             />
           </div>
-
-          {/* TODO: Arreglar los filtros con subinfo de interface */}
-          {/* <div className='grid gap-2 justify-around grid-cols-2'>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='city'>Ciudad</Label>
-              <Input
-              placeholder='Filtrar por nombre'
-              value={
-                (table.getColumn('city')?.getFilterValue() as string) ?? ''
-              }
-              onChange={(event) =>
-                table.getColumn('city')?.setFilterValue(event.target.value)
-              }
-              className=' mr-2 border border-blueFPC-400'
-            />
-              
-            </div>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='address'>Dirección</Label>
-              <Input
-                placeholder='Kandor Street'
-                value={
-                  (table.getColumn('address')?.getFilterValue() as string) ?? ''
-                }
-                onChange={(event) =>
-                  table.getColumn('address')?.setFilterValue(event.target.value)
-                }
-                className='mr-2 border border-blueFPC-400'
-              />
-            </div>
-          </div> */}
 
           <Separator
             lineColor='border-blueFPC-400'
@@ -167,75 +128,9 @@ export function ParkingFiltersDialog({
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              {/* <Select
-                onValueChange={(value) => {
-                  if (value === 'all') {
-                    table.getColumn('loyalty')?.setFilterValue('')
-                  } else {
-                    table
-                      .getColumn('loyalty')
-                      ?.setFilterValue(
-                        !table.getColumn('loyalty')?.getFilterValue()
-                      )
-                  }
-                }}
-                value={
-                  table.getColumn('loyalty')?.getFilterValue() !== undefined
-                    ? table.getColumn('loyalty')?.getFilterValue() + ''
-                    : 'all'
-                }
-              >
-                <SelectTrigger className=' border border-blueFPC-400'>
-                  <SelectValue placeholder='Cualquiera' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Cuenta activa</SelectLabel>
-                    <SelectItem value='all'>Cualquiera</SelectItem>
-                    <SelectItem value={'true'}>Si</SelectItem>
-                    <SelectItem value={'false'}>No</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select> */}
             </div>
           </div>
-
-          {/* <div className='grid gap-2 justify-around grid-cols-3'>
-            <div className='grid gap-1 py-2'>
-              <Label htmlFor='accountActive'>Cuenta activa</Label>
-              <Select
-                onValueChange={(value) => {
-                  if (value === 'all') {
-                    table.getColumn('accountActive')?.setFilterValue('')
-                  } else {
-                    table
-                      .getColumn('accountActive')
-                      ?.setFilterValue(
-                        !table.getColumn('accountActive')?.getFilterValue()
-                      )
-                  }
-                }}
-                value={
-                  table.getColumn('accountActive')?.getFilterValue() !==
-                  undefined
-                    ? table.getColumn('accountActive')?.getFilterValue() + ''
-                    : 'all'
-                }
-              >
-                <SelectTrigger className=' border border-blueFPC-400'>
-                  <SelectValue placeholder='Cualquiera' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Cuenta activa</SelectLabel>
-                    <SelectItem value='all'>Cualquiera</SelectItem>
-                    <SelectItem value={'true'}>Si</SelectItem>
-                    <SelectItem value={'false'}>No</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div> */}
+          
           <DialogFooter className='sm:justify-start'>
             <DialogClose asChild>
               <PrimaryButton text={'FILTRAR'} />

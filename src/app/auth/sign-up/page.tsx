@@ -12,11 +12,10 @@ import {
   TSignUpCredentialsValidator,
   SignUpCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Icons } from '@/components/Icons'
 import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import Separator from '@/components/Separator'
-import { toast } from 'sonner'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { useUser } from '@/services/useUser'
 import { UserInterface } from '@/lib/interfaces/user.interface'

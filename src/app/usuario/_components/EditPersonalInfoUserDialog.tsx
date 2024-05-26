@@ -1,4 +1,5 @@
 'use client'
+
 import {
   Dialog,
   DialogContent,
@@ -35,7 +36,6 @@ export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
     resolver: zodResolver(EditPersonalInfoValidator),
   })
 
-  // TODO: terminar el envio de datos
   const onSubmit = async ({
     firstName,
     secondName,
@@ -155,14 +155,6 @@ export function EditPersonalInfoUserDialog({ user }: { user: UserInterface }) {
               text={'CONFIRMAR DATOS PERSONALES'}
               isLoading={isLoading}
             />
-            {/* <DialogFooter className='sm:justify-start'>
-              <DialogClose asChild>
-                <PrimaryButton
-                  text={'CONFIRMAR DATOS PERSONALES'}
-                  isLoading={isLoading}
-                />
-              </DialogClose>
-            </DialogFooter> */}
           </div>
         </form>
       </DialogContent>

@@ -3,8 +3,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useStatistic } from '@/services/useStatistic'
-import { DollarSign, NotebookPen } from 'lucide-react'
-import { Suspense, useState, useEffect } from 'react'
+import { NotebookPen } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 export interface ComparisonCard {
   presentData: string
@@ -13,8 +13,7 @@ export interface ComparisonCard {
 
 export function NumberOfReservationsCard({ parkingId }: { parkingId: number }) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const {
-    getNumberOfReservationsOnDateByParkingId } = useStatistic()
+  const { getNumberOfReservationsOnDateByParkingId } = useStatistic()
   const [numberOfReservationsData, setNumberOfReservationsData] =
     useState<ComparisonCard | null>(null)
 

@@ -82,10 +82,6 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneParkingRequest(name)
-      // toast({
-      //   title: '¡Se obtuvo la información del parqueadero con éxito!',
-      //   description: '',
-      // })
       return res.data as ParkingInterface
     } catch (error: any) {
       if (error?.response?.data) {
@@ -112,10 +108,6 @@ export function ParkingProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneParkingByIdRequest(id)
-      // toast({
-      //   title: '¡Se obtuvo la información del parqueadero con éxito!',
-      //   description: '',
-      // })
       return res.data as ParkingInterface
     } catch (error: any) {
       if (error?.response?.data) {

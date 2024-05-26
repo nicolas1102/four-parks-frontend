@@ -1,6 +1,6 @@
 'use client'
 
-import { addDays, format } from 'date-fns'
+import { format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { DateRange } from 'react-day-picker'
 import { cn } from '@/lib/utils'
@@ -11,8 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { Dispatch, SetStateAction, useState } from 'react'
-import { DateRangeInterface } from '@/lib/interfaces/audit.interface'
+import { Dispatch, SetStateAction } from 'react'
 
 export function DateRangePicker({
   dateRange,

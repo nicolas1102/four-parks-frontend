@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useStatistic } from '@/services/useStatistic'
-import { CreditCard, User } from 'lucide-react'
+import { User } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export interface ComparisonCard {

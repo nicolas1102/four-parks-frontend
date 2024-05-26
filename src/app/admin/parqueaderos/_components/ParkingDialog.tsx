@@ -1,7 +1,7 @@
 'use client'
+
 import {
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,7 +14,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
-import Separator from '@/components/Separator'
 import { Toggle } from '@/components/ui/toggle'
 import { Check, CircleHelp, X } from 'lucide-react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
@@ -47,15 +46,12 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   const {
     createParkingRate,
     updateParkingRate,
-    getParkingRatesByParkingId,
-    parkingRates,
   } = useParkingRate()
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm<TParkingValidator>({
     resolver: zodResolver(ParkingValidator),
   })
@@ -194,11 +190,6 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
 
     if (
       res?.status === 200
-      // &&
-      // resCarRate?.status === 200 &&
-      // resMotorcycleRate?.status === 200 &&
-      // resBikeRate?.status === 200 &&
-      // resHeavyCarRate?.status === 200
     ) {
       if (!parking) clearForm()
         // TODO: Arreglar esto, sacamos al usuario de la pagina de usuario porque al actuzlizar, no tenemos los damos de los precios y no se mostrarían esos datos al editar un parqueadero. entonces es para que no se note.
@@ -290,6 +281,7 @@ export function ParkingDialog({ parking }: { parking?: ParkingInterface }) {
   useEffect(() => {
     setValue('loyalty', loyaltyState)
   }, [loyaltyState])
+  
   return (
     <>
       <DialogTrigger asChild>

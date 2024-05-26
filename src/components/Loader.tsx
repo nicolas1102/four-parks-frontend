@@ -1,6 +1,5 @@
 import { Loader2 } from 'lucide-react'
 import { Icons } from '@/components/Icons'
-import { ReactNode } from 'react'
 
 const Loader = () => {
   return (

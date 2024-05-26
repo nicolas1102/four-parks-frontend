@@ -20,11 +20,10 @@ import {
 import ParkingsTableColumns from '../_lib/ParkingsTableColumns'
 import { ParkingFiltersDialog } from './ParkingFiltersDialog'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
-import { useEffect } from 'react'
 
 export function ParkingsTable({ data }: { data: ParkingInterface[] }) {
-
   const { table, columns } = ParkingsTableColumns({ data })
+
   return (
     <div className='w-full gap-2'>
       <div className='flex items-center py-4'>

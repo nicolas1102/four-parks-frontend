@@ -1,8 +1,8 @@
 'use client'
 
-import { Bike, Car, ParkingSquare, Tractor } from 'lucide-react'
-import { useEffect, useState, useMemo } from 'react'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { ParkingSquare } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import ParkingItem from './_components/ParkingItem'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import GoogleMapView from './_components/GoogleMap'
@@ -11,22 +11,15 @@ import { useParkingsFilters } from './_hooks/useParkingsFilters'
 import { useParking } from '@/services/useParking'
 import { CitySelect } from './_components/CitySelect'
 import { ParkingTypeSelect } from './_components/ParkingTypeSelect'
-import FloatingButton from '@/components/CustomButtons/FloatingButton'
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
-import Separator from '@/components/Separator'
-import { Toggle } from '@/components/ui/toggle'
-import { CustomTooltip } from '@/components/CustomTooltip'
-import { PiMotorcycleFill } from 'react-icons/pi'
 import Loader from '@/components/Loader'
 
 export default function Home() {
@@ -37,17 +30,9 @@ export default function Home() {
     setFilterCity,
     filterParkingType,
     setFilterParkingType,
-    filterCarPlaces,
-    setFilterCarPlaces,
-    filterMotorcyclesPlaces,
-    setFilterMotorcyclesPlaces,
-    filterBikesPlaces,
-    setFilterBikesPlaces,
-    filterHeavyPlaces,
-    setFilterHeavyPlaces,
     filteredParkingLots,
   } = useParkingsFilters()
-  const { parkings, isLoading, getParkings } = useParking()
+  const { isLoading, getParkings } = useParking()
 
   const [selectedParkingLot, setSelectedParkingLot] =
     useState<ParkingInterface | null>(null)
@@ -95,66 +80,6 @@ export default function Home() {
               setSelectValue={setFilterParkingType}
             />
           </div>
-          {/* <span className='border-l border-primary h-auto'></span>
-          <div className='flex items-center gap-2'>
-            <p>Tipo Vehículo: </p>
-            <div className='flex items-center space-x-2'>
-              <Toggle
-                aria-label='Toggle-car-places'
-                onPressedChange={() => {
-                  setFilterCarPlaces(!filterCarPlaces)
-                }}
-                defaultPressed={filterCarPlaces}
-                className='border'
-              >
-                <CustomTooltip text='Carros'>
-                  <Car />
-                </CustomTooltip>
-              </Toggle>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Toggle
-                aria-label='Toggle-motorcycle-places'
-                onPressedChange={() => {
-                  setFilterMotorcyclesPlaces(!filterMotorcyclesPlaces)
-                }}
-                defaultPressed={filterMotorcyclesPlaces}
-                className='border '
-              >
-                <CustomTooltip text='Motos'>
-                  <PiMotorcycleFill size={22} />
-                </CustomTooltip>
-              </Toggle>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Toggle
-                aria-label='Toggle-bike-places'
-                onPressedChange={() => {
-                  setFilterBikesPlaces(!filterBikesPlaces)
-                }}
-                defaultPressed={filterBikesPlaces}
-                className='border '
-              >
-                <CustomTooltip text='Bicicletas'>
-                  <Bike size={21} />
-                </CustomTooltip>
-              </Toggle>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Toggle
-                aria-label='Toggle-heavy-places'
-                onPressedChange={() => {
-                  setFilterHeavyPlaces(!filterHeavyPlaces)
-                }}
-                defaultPressed={filterHeavyPlaces}
-                className='border '
-              >
-                <CustomTooltip text='Carga Pesada'>
-                  <Tractor size={21} />
-                </CustomTooltip>
-              </Toggle>
-            </div>
-          </div> */}
         </div>
       </div>
 

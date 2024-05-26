@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useCity } from '@/services/useCity'
-import { Dispatch, ReactNode, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 
 export function CitySelect({
   selectValue,
@@ -45,7 +45,7 @@ export function CitySelect({
         <SelectGroup>
           <SelectLabel>Ciudad</SelectLabel>
           <SelectItem value={'all'} className='italic'>
-            --- Cualquiera --
+            --- Cualquiera ---
           </SelectItem>
           {cities &&
             cities.map((cityItem) => (

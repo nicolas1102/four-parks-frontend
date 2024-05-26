@@ -4,8 +4,6 @@ import { UserLocationContext } from '@/context/UserLocationContext'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import {
   GoogleMap,
-  Marker,
-  MarkerClustererF,
   MarkerF,
   OverlayView,
   useJsApiLoader,
@@ -13,14 +11,9 @@ import {
 import {
   Dispatch,
   SetStateAction,
-  useCallback,
   useContext,
-  useEffect,
-  useMemo,
-  useState,
 } from 'react'
 import ParkingItem from './ParkingItem'
-import { useTheme } from 'next-themes'
 import Loader from '@/components/Loader'
 
 const GoogleMapView = ({
@@ -32,7 +25,7 @@ const GoogleMapView = ({
   selectedParkingLot: ParkingInterface | null
   setSelectedParkingLot: Dispatch<SetStateAction<ParkingInterface | null>>
 }) => {
-  const { userLocation, setUserLocation } = useContext(UserLocationContext)
+  const { userLocation } = useContext(UserLocationContext)
   const containerStyle = {
     width: 'auto',
     height: '715px',
@@ -42,8 +35,6 @@ const GoogleMapView = ({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyAwkHB_VUjLdIlMH7ua8MCgimHf5bIJFF8',
   })
-
-  const [map, setMap] = useState(null)
 
   return isLoaded ? (
     <GoogleMap

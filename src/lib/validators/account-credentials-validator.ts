@@ -1,5 +1,3 @@
-// validaciones del lado del cliente
-
 import { z } from 'zod'
 
 export const AuthCredentialsValidator = z.object({

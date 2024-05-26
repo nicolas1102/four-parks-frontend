@@ -2,19 +2,16 @@
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Separator } from '@/components/ui/separator'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { Bike, Car, Cloud, Tractor } from 'lucide-react'
-
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { PiMotorcycleFill } from 'react-icons/pi'
@@ -90,16 +87,6 @@ const ReservationSheet = ({
       }
     }
   }
-
-  // useEffect(() => {
-  //   if (!isLoading && parkingSlots.length !== 0) {
-  //     const availableSlots = parkingSlots.map((parkingSlotItem) => {
-  //       parkingSlotItem.vehicleTypeId.id === vehicleType &&
-  //         parkingSlotItem.slotStatusId.status === 'EMPTY' &&
-  //         parkingSlotItem.parkingId?.id === selectedParking.id
-  //     })
-  //   }
-  // }, [parkingSlots])
 
   const refactorParkingVehicleTypeData = () => {
     let data = selectedParking?.parkingRate?.map((parkingRateItem) => {

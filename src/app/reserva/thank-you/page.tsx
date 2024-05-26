@@ -3,30 +3,21 @@
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import Loader from '@/components/Loader'
 var QRCode = require('qrcode')
-
 import {
   BadgePercent,
   Car,
-  ChevronLeft,
-  ChevronRight,
   CircleDollarSign,
   Clock,
-  Copy,
   CreditCard,
   Mail,
   Map,
   MapPin,
-  MoreVertical,
   ParkingSquare,
-  Truck,
   User,
 } from 'lucide-react'
-
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,

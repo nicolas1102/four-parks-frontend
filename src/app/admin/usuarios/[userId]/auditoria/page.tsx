@@ -5,13 +5,11 @@ import Loader from '@/components/Loader'
 import { AuditsTable } from './_components/AuditsTable'
 import { useEffect, useState } from 'react'
 import { useAudit } from '@/services/useAudit'
-import { DateRangeInterface } from '@/lib/interfaces/audit.interface'
 import { DateRangePicker } from './_components/DateRangePicker'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { addDays } from 'date-fns'
 import { DateRange } from 'react-day-picker'
 import { useUser } from '@/services/useUser'
-import { useSession } from 'next-auth/react'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 
 const Page = ({ params: { userId } }: { params: { userId: number } }) => {

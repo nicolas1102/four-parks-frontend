@@ -5,31 +5,31 @@ const steps = [
     title: 'INGRESA A NUESTRO SITIO WEB.',
     description:
       'Por ahora solo podrás acceder a nuestros servicios desde esta página web, pero pronto estaremos en más plataformas para llegar a ti más fácil.',
-    image: '', // Empty image attribute
+    image: '',
   },
   {
     title: 'REGÍSTRATE EN NUESTRO SISTEMA.',
     description:
       'A través de los distintos botones de registro, podrás dirigirte al formulario de registro, donde podrás ingresar a nuestro sistema.',
-    image: '', // Empty image attribute
+    image: '',
   },
   {
     title: 'INICIA SESIÓN POR PRIMERA VEZ.',
     description:
       'Como es tu primer ingreso, deberás ingresar con la contraseña que enviamos a tu correo.',
-    image: '', // Empty image attribute
+    image: '',
   },
   {
     title: 'CREA UNA NUEVA CONTRASEÑA.',
     description:
       'Luego de ingresar por primera vez, crearás tu nueva contraseña con la que podrás acceder las próximas veces que ingreses a nuestro sistema.',
-    image: '', // Empty image attribute
+    image: '',
   },
   {
     title: 'COMIENZA A USAR FOUR PARKS.',
     description:
       'Ahora podrás reservar cualquier parqueadero para carro, moto o incluso bicicleta disponible a nivel nacional.',
-    image: '', // Empty image attribute
+    image: '',
   },
 ]
 

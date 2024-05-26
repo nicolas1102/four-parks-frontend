@@ -1,10 +1,9 @@
 'use client'
+
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -17,7 +16,6 @@ import { useUser } from '@/services/useUser'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
 import {
   ChangePasswordCredentialsValidator,
   TChangePasswordCredentialsValidator,
@@ -27,7 +25,6 @@ import { signOut } from 'next-auth/react'
 import { useEffect } from 'react'
 
 export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
-  const router = useRouter()
   const { updatePasswordUser, isLoading } = useUser()
   const {
     register,
@@ -37,8 +34,6 @@ export function EditPasswordUserDialog({ user }: { user: UserInterface }) {
   } = useForm<TChangePasswordCredentialsValidator>({
     resolver: zodResolver(ChangePasswordCredentialsValidator),
   })
-
-  // TODO: terminar el envio de datos
   const onSubmit = async ({
     email,
     oldPassword,

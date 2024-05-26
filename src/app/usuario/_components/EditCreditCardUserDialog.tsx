@@ -1,7 +1,7 @@
 'use client'
+
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -37,7 +37,6 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
     resolver: zodResolver(EditCreditCardValidator),
   })
 
-  // TODO: terminar el envio de datos
   const onSubmit = async ({
     cardNumber,
     expirationMonth,
@@ -162,12 +161,10 @@ export function EditCreditCardUserDialog({ user }: { user: UserInterface }) {
                 )}
               </div>
             </div>
-            {/* <DialogClose asChild> */}
             <PrimaryButton
               text={'CONFIRMAR DATOS PERSONALES'}
               isLoading={isLoading}
             />
-            {/* </DialogClose> */}
           </div>
         </form>
       </DialogContent>

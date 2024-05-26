@@ -1,4 +1,5 @@
 'use client'
+
 import {
   DialogContent,
   DialogDescription,
@@ -34,7 +35,6 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm<TEditUserFromManagerValidator>({
     resolver: zodResolver(EditUserFromManagerValidator),
   })
@@ -43,8 +43,6 @@ export function EditUserDialog({ user }: { user: UserInterface }) {
     secondName,
     firstLastname,
     secondLastname,
-    accountActive,
-    accountBlocked,
     loginAttempts,
   }: TEditUserFromManagerValidator) => {
     const userData = {

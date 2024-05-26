@@ -1,10 +1,9 @@
 'use client'
+
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -22,13 +21,11 @@ import {
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
 import Separator from '@/components/Separator'
 import { Toggle } from '@/components/ui/toggle'
 import { Check, X } from 'lucide-react'
 
 export function AdminDialog({ admin }: { admin?: UserInterface }) {
-  const router = useRouter()
   const [accountActive, setAccountActive] = useState(
     admin && admin?.accountActive ? true : false
   )

@@ -37,7 +37,7 @@ export function ParkingTypeSelect({
         <SelectGroup>
           <SelectLabel>Tipos de Parqueadero</SelectLabel>
           <SelectItem value={'all'} className='italic'>
-            --- Cualquiera --
+            --- Cualquiera ---
           </SelectItem>
           <SelectItem value={'DESCUBIERTO'}>Descubierto</SelectItem>
           <SelectItem value={'CUBIERTO'}>Cubierto</SelectItem>

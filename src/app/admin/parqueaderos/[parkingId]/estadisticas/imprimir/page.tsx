@@ -4,16 +4,12 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import Link from 'next/link'
-import { PDFExport } from '@progress/kendo-react-pdf'
 import { useEffect, useRef, useState } from 'react'
-import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { Button } from '@/components/ui/button'
-import { Download, Printer } from 'lucide-react'
+import { Download } from 'lucide-react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'

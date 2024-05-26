@@ -1,9 +1,9 @@
 'use client'
 
-import { ParkingSquare, User as UserIcons } from 'lucide-react'
+import { ParkingSquare } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { ParkingsTable } from './_components/ParkingsTable'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParking } from '@/services/useParking'
 import { ParkingDialog } from './_components/ParkingDialog'
 import { Dialog } from '@/components/ui/dialog'

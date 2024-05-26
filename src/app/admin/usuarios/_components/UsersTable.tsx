@@ -9,7 +9,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
 import {
   Table,
   TableBody,
@@ -20,7 +19,6 @@ import {
 } from '@/components/ui/table'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import UsersTableColumns from '../_lib/UsersTableColumns'
-import { useState } from 'react'
 import { UserFiltersDialog } from './UserFiltersDialog'
 
 export function UsersTable({

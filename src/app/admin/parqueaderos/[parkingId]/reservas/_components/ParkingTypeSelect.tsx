@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/select'
 import { ParkingTypeInterface } from '@/lib/interfaces/parkingType.interface'
 import { cn } from '@/lib/utils'
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
-import { FieldError, UseFormSetValue } from 'react-hook-form'
+import { Dispatch, SetStateAction } from 'react'
+import { FieldError } from 'react-hook-form'
 
 export function ParkingTypeSelect({
   parkingType,

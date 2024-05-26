@@ -13,8 +13,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
 import { UserInterface } from '@/lib/interfaces/user.interface'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Separator from '@/components/Separator'
 import { Table } from '@tanstack/react-table'
 import {
@@ -42,7 +40,6 @@ export function UserFiltersDialog({
         <div className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 px-4 py-5 tracking-widest border hover:bg-yellowFPC-200 dark:hover:bg-yellowFPC-400 dark:hover:text-black border-blueFPC-400 cursor-pointer'>
           FILTROS
         </div>
-        {/* <FloatingButton text='CREAR FUNCIONARIO' direction='right' /> */}
       </DialogTrigger>
       <DialogContent className='sm:max-w-md'>
         <DialogHeader>

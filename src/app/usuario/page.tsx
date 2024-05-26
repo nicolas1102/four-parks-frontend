@@ -1,5 +1,5 @@
 'use client'
-import PrimaryButton from '@/components/CustomButtons/PrimaryButton'
+
 import Loader from '@/components/Loader'
 import { UserInterface } from '@/lib/interfaces/user.interface'
 import { useUser } from '@/services/useUser'
@@ -9,17 +9,6 @@ import { EditPersonalInfoUserDialog } from './_components/EditPersonalInfoUserDi
 import { EditPasswordUserDialog } from './_components/EditPasswordUserDialog'
 import { EditCreditCardUserDialog } from './_components/EditCreditCardUserDialog'
 import NoResults from '@/components/NoResults'
-
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  MoreVertical,
-  Truck,
-} from 'lucide-react'
-
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -28,20 +17,17 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 import { useReservation } from '@/services/useReservation'
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
 import { ReservationTableItem } from './_components/ReservationTableItem'
 import { ReservationInterface } from '@/lib/interfaces/reservation.interface'
-import { Session } from 'inspector'
 
 export default function Page() {
   const { data: session } = useSession()

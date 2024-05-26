@@ -4,7 +4,6 @@ import { LineChart, Printer } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useParking } from '@/services/useParking'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { ReservationsPerMonthBarChart } from './_components/ReservationsPerMonthBarChart'
@@ -20,7 +19,6 @@ export default function Page({
 }: {
   params: { parkingId: number }
 }) {
-  const { data: session } = useSession()
   const { getOneParkingById, isLoading: isLoadingParking } = useParking()
   const [parking, setParking] = useState<ParkingInterface | null | undefined>(
     null

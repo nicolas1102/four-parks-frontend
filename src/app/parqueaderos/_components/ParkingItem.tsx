@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge'
 import { Bike, Car, Tractor } from 'lucide-react'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import ReservationSheet from './ReservationSheet'
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { cn } from '@/lib/utils'
 

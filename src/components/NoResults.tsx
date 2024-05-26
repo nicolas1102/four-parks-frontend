@@ -1,6 +1,6 @@
-import { ArrowLeft, Loader2 } from 'lucide-react'
+import { ArrowLeft
+ } from 'lucide-react'
 import { Icons } from '@/components/Icons'
-import { ReactNode } from 'react'
 import FloatingButton from './CustomButtons/FloatingButton'
 import Link from 'next/link'
 import { buttonVariants } from './ui/button'

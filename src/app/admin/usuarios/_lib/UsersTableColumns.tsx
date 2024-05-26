@@ -22,9 +22,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { UserInterface } from '@/lib/interfaces/user.interface'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useUser } from '@/services/useUser'
-import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { EditUserDialog } from '../_components/EditUserDialog'
 import { Dialog } from '@/components/ui/dialog'
@@ -188,24 +187,6 @@ const UsersTableColumns = ({ data }: { data: UserInterface[] }) => {
         </div>
       ),
     },
-    // {
-    //   accessorKey: 'role',
-    //   header: ({ column }) => {
-    //     return (
-    //       <Button
-    //         variant='ghost'
-    //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-    //       >
-    //         Rol
-    //         <ArrowUpDown className='ml-2 h-4 w-4' />
-    //       </Button>
-    //     )
-    //   },
-    //   cell: ({ row }) => {
-    //     const user = row.original
-    //     return <div className='capitalize text-center'>{'USUARIO'}</div>
-    //   },
-    // },
     {
       accessorKey: 'role',
       header: 'Rol',

@@ -1,11 +1,10 @@
 'use client'
 
-import { NotebookPen, ParkingSquare, User as UserIcons } from 'lucide-react'
+import { NotebookPen } from 'lucide-react'
 import Loader from '@/components/Loader'
 import { ReservationsTable } from './_components/ReservationsTable'
 import { useEffect, useState } from 'react'
 import { useParking } from '@/services/useParking'
-import { Dialog } from '@/components/ui/dialog'
 import NoResults from '@/components/NoResults'
 import { useReservation } from '@/services/useReservation'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
@@ -22,7 +21,6 @@ export default function Page({
   const { reservations, isLoading, getReservations, getReservationsByParking } =
     useReservation()
   const {
-    getOneParking,
     isLoading: isLoadingParking,
     getOneParkingById,
   } = useParking()

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useStatistic } from '@/services/useStatistic'
 import { DollarSign } from 'lucide-react'
-import { Suspense, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 export interface ComparisonCard {
   presentData: string

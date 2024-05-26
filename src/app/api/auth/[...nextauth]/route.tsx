@@ -6,7 +6,6 @@ const authOptions = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
-      // lo que esperamos
       credentials: {
         email: {
           label: 'Email',
@@ -19,7 +18,6 @@ const authOptions = NextAuth({
           placeholder: '**********',
         },
       },
-      // req son datos adicionales de la aplicación (ejemplo, las cookies)
       async authorize(credentials, req) {
         try {
           const { email, password } = credentials as {
@@ -33,7 +31,6 @@ const authOptions = NextAuth({
           if (userFound?.jwt) {
             const userWithRole = {
               ...userFound,
-              // expires: 'expires',
             }
             return userWithRole // lo guarda en el token (luego el token lo guarda en la sesión, esto mas abajo en el callback session)
           }

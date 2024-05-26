@@ -21,10 +21,8 @@ import { signIn } from 'next-auth/react'
 import { useUser } from '@/services/useUser'
 import Separator from '@/components/Separator'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { Suspense, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Theme } from 'next-auth'
 
 const Page = () => {
   const searchParams = useSearchParams()

@@ -148,10 +148,6 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneReservationRequest(id)
-      // toast({
-      //   title: '¡Se obtuvo la información del reserva con éxito!',
-      //   description: '',
-      // })
       return res.data as ReservationInterface
     } catch (error: any) {
       if (error?.response?.data) {
