@@ -21,57 +21,95 @@ import {
 } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useEffect, useState } from 'react'
+import { useStatistic } from '@/services/useStatistic'
 
 export interface ReservationsPerMonthDataInterface {
   mes: string
   reservas: number
 }
 
-export function ReservationsPerMonthBarChart() {
-  const [isLoading, setisLoading] = useState(false)
-  const [reservationsPerMonth, setReservationsPerMonth] = useState<
+export function ReservationsPerMonthBarChart({
+  parkingId,
+}: {
+  parkingId: number
+}) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { getNumberOfReservationsOnDateByParkingId } = useStatistic()
+  const [reservationsPerMonthData, setReservationsPerMonthData] = useState<
     ReservationsPerMonthDataInterface[] | null
   >(null)
 
   useEffect(() => {
-    setisLoading(true)
-    const fetchReservationsPerMonthData = () => {
-      new Promise(() => {
-        setTimeout(() => {
-          const datita = [
-            {
-              mes: 'Enero',
-              reservas: 30,
-            },
-            {
-              mes: 'Febrero',
-              reservas: 23,
-            },
-            {
-              mes: 'Marzo',
-              reservas: 40,
-            },
-            {
-              mes: 'Abril',
-              reservas: 20,
-            },
-            {
-              mes: 'Mayo',
-              reservas: 10,
-            },
-            {
-              mes: 'Junio',
-              reservas: 23,
-            },
-            {
-              mes: 'Julio',
-              reservas: 43,
-            },
-          ]
-          setReservationsPerMonth(datita)
-          setisLoading(false)
-        }, 7000)
-      })
+    const fetchReservationsPerMonthData = async () => {
+      setIsLoading(true)
+      const januaryData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-01-01',
+          ending: '2024-02-01',
+        }
+      )
+      const februaryData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-02-01',
+          ending: '2024-03-01',
+        }
+      )
+      const marchData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-03-01',
+          ending: '2024-04-01',
+        }
+      )
+      const aprilData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-04-01',
+          ending: '2024-05-01',
+        }
+      )
+      const mayData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-05-01',
+          ending: '2024-06-01',
+        }
+      )
+
+      if (
+        januaryData !== undefined &&
+        februaryData !== undefined &&
+        marchData !== undefined &&
+        aprilData !== undefined &&
+        mayData !== undefined
+      ) {
+        const finalData = [
+          {
+            mes: 'Enero',
+            reservas: januaryData,
+          },
+          {
+            mes: 'Febrero',
+            reservas: februaryData,
+          },
+          {
+            mes: 'Marzo',
+            reservas: marchData,
+          },
+          {
+            mes: 'Abril',
+            reservas: aprilData,
+          },
+          {
+            mes: 'Mayo',
+            reservas: mayData,
+          },
+        ]
+        setReservationsPerMonthData(finalData)
+      }
+      setIsLoading(false)
     }
     fetchReservationsPerMonthData()
   }, [])
@@ -96,7 +134,7 @@ export function ReservationsPerMonthBarChart() {
             <Skeleton className='h-60 w-full' />
             <Skeleton className='h-48 w-full' />
           </div>
-        ) : reservationsPerMonth === null ? (
+        ) : reservationsPerMonthData === null ? (
           <span className='font-light text-xl italic'>
             No se pudo cargar los datos
           </span>
@@ -105,7 +143,7 @@ export function ReservationsPerMonthBarChart() {
             <BarChart
               width={500}
               height={300}
-              data={reservationsPerMonth}
+              data={reservationsPerMonthData}
               margin={{
                 left: -32,
               }}

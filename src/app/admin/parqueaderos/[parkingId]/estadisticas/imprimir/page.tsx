@@ -21,12 +21,11 @@ import { TotalRevenueCard } from '../_components/TotalRevenueCard'
 import { NumberOfClientsCard } from '../_components/NumberOfClientsCard'
 import { VehicleTypePieChart } from '../_components/VehicleTypePieChart'
 import { ReservationsPerMonthBarChart } from '../_components/ReservationsPerMonthBarChart'
-import { BestCustomersTableCard } from '../_components/BestCustomersTableCard'
-import { RecentReservationsTableCard } from '../_components/RecentReservationsTableCard'
 import { useParking } from '@/services/useParking'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import Loader from '@/components/Loader'
 import NoResults from '@/components/NoResults'
+import { NumberOfReservationsCard } from '../_components/NumberOfReservationsCard'
 
 export default function Page({
   params: { parkingId },
@@ -151,14 +150,14 @@ export default function Page({
                 <CardContent className='py-6 text-sm'>
                   <div className='flex gap-8 flex-col'>
                     <div className='grid grid-cols-4 gap-4'>
-                      <TotalRevenueCard />
+                      <TotalRevenueCard parkingId={parkingId} />
                       <NumberOfClientsCard />
-                      <NumberOfClientsCard />
-                      <TotalRevenueCard />
+                      <NumberOfReservationsCard parkingId={parkingId} />
+                      <TotalRevenueCard parkingId={parkingId} />
                     </div>
-                    <VehicleTypePieChart />
+                    <VehicleTypePieChart parkingId={parkingId} />
 
-                    <ReservationsPerMonthBarChart />
+                    <ReservationsPerMonthBarChart parkingId={parkingId} />
                   </div>
                 </CardContent>
               </Card>

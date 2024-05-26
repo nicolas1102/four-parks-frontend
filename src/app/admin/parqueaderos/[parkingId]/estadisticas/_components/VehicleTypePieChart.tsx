@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts'
-import { PureComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Card,
@@ -18,6 +18,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useStatistic } from '@/services/useStatistic'
 
 const COLORS = ['#fde047', '#1865a2', '#c03131', '#6DB04E']
 
@@ -26,29 +27,68 @@ export interface VehicleTypeChartDataInterface {
   valor: number
 }
 
-export function VehicleTypePieChart() {
-  const [isLoading, setisLoading] = useState(false)
+export function VehicleTypePieChart({ parkingId }: { parkingId: number }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const {
+    getVehicleTypeStatisticsOnDateByParkingId:
+      getVehicleTypeStatisticsByParkingId,
+  } = useStatistic()
   const [vehicleTypePieChartData, setVehicleTypePieChartData] = useState<
     VehicleTypeChartDataInterface[] | null
   >(null)
 
   useEffect(() => {
-    setisLoading(true)
-    const fetchNumberOfClients = () => {
-      new Promise(() => {
-        setTimeout(() => {
-          const datita = [
-            { tipo: 'Carro', valor: 156 },
-            { tipo: 'Moto', valor: 232 },
-            { tipo: 'Bicicleta', valor: 140 },
-            { tipo: 'V. Pesado', valor: 54 },
-          ]
-          setVehicleTypePieChartData(datita)
-          setisLoading(false)
-        }, 5000)
-      })
+    const fetchVehicleTypePieData = async () => {
+      setIsLoading(true)
+      const carData = await getVehicleTypeStatisticsByParkingId(
+        parkingId,
+        {
+          beginning: '1800-01-01',
+          ending: '2500-01-01',
+        },
+        1
+      )
+      const motorcycleData = await getVehicleTypeStatisticsByParkingId(
+        parkingId,
+        {
+          beginning: '1800-01-01',
+          ending: '2500-01-01',
+        },
+        2
+      )
+      const bikeData = await getVehicleTypeStatisticsByParkingId(
+        parkingId,
+        {
+          beginning: '1800-01-01',
+          ending: '2500-01-01',
+        },
+        3
+      )
+      const heavyVehicleData = await getVehicleTypeStatisticsByParkingId(
+        parkingId,
+        {
+          beginning: '1800-01-01',
+          ending: '2500-01-01',
+        },
+        4
+      )
+      if (
+        carData !== undefined &&
+        motorcycleData !== undefined &&
+        bikeData !== undefined &&
+        heavyVehicleData !== undefined
+      ) {
+        const finalData = [
+          { tipo: 'Carro', valor: carData },
+          { tipo: 'Moto', valor: motorcycleData },
+          { tipo: 'Bicicleta', valor: bikeData },
+          { tipo: 'V. Pesado', valor: heavyVehicleData },
+        ]
+        setVehicleTypePieChartData(finalData)
+      }
+      setIsLoading(false)
     }
-    fetchNumberOfClients()
+    fetchVehicleTypePieData()
   }, [])
 
   return (

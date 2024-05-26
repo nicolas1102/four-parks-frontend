@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useStatistic } from '@/services/useStatistic'
 import { CreditCard } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
@@ -11,23 +12,37 @@ export interface ComparisonCard {
 }
 
 export function NumberOfClientsCard() {
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { getNumberOfUsersOnDate } = useStatistic()
   const [numberOfClientsData, setNumberOfClientsData] =
     useState<ComparisonCard | null>(null)
 
   useEffect(() => {
-    setisLoading(true)
-    const fetchNumberOfClients = () => {
-      new Promise(() => {
-        setTimeout(() => {
-          const datita = {
-            presentData: '+2350',
-            pastData: '+180.1%',
-          }
-          setNumberOfClientsData(datita)
-          setisLoading(false)
-        }, 2000)
+    const fetchNumberOfClients = async () => {
+      setIsLoading(true)
+      const lastMonthData = await getNumberOfUsersOnDate({
+        beginning: '2024-04-01',
+        ending: '2024-05-01',
       })
+      const currentMonthData = await getNumberOfUsersOnDate({
+        beginning: '2024-05-01',
+        ending: '2024-06-01',
+      })
+      if (lastMonthData !== undefined && currentMonthData !== undefined) {
+        let pastMonth = currentMonthData >= lastMonthData ? '+' : '-'
+
+        pastMonth =
+          lastMonthData > 0
+            ? pastMonth + (currentMonthData / lastMonthData) * 100 + '%'
+            : pastMonth + '0%'
+
+        const finalData = {
+          presentData: '+' + currentMonthData + ' usuarios',
+          pastData: pastMonth,
+        }
+        setNumberOfClientsData(finalData)
+      }
+      setIsLoading(false)
     }
     fetchNumberOfClients()
   }, [])
@@ -35,7 +50,9 @@ export function NumberOfClientsCard() {
   return (
     <Card x-chunk='dashboard-01-chunk-0'>
       <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Cantidad de Clientes</CardTitle>
+        <CardTitle className='text-sm font-medium'>
+          Cantidad de Clientes
+        </CardTitle>
         <CreditCard className='h-4 w-4 text-muted-foreground' />
       </CardHeader>
       <CardContent className='overflow-hidden'>

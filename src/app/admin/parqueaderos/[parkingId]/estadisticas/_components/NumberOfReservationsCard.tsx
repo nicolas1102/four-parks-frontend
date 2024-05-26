@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useStatistic } from '@/services/useStatistic'
-import { DollarSign } from 'lucide-react'
+import { DollarSign, NotebookPen } from 'lucide-react'
 import { Suspense, useState, useEffect } from 'react'
 
 export interface ComparisonCard {
@@ -11,23 +11,30 @@ export interface ComparisonCard {
   pastData: string
 }
 
-export function TotalRevenueCard({ parkingId }: { parkingId: number }) {
+export function NumberOfReservationsCard({ parkingId }: { parkingId: number }) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { getIncomesOnDateByParkingId } = useStatistic()
-  const [totalRevenueData, setTotalRevenueData] =
+  const {
+    getNumberOfReservationsOnDateByParkingId } = useStatistic()
+  const [numberOfReservationsData, setNumberOfReservationsData] =
     useState<ComparisonCard | null>(null)
 
   useEffect(() => {
-    const fetchIncomes = async () => {
+    const fetchNumberOfReservations = async () => {
       setIsLoading(true)
-      const lastMonthData = await getIncomesOnDateByParkingId(parkingId, {
-        beginning: '2024-04-01',
-        ending: '2024-05-01',
-      })
-      const currentMonthData = await getIncomesOnDateByParkingId(parkingId, {
-        beginning: '2024-05-01',
-        ending: '2024-06-01',
-      })
+      const lastMonthData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-04-01',
+          ending: '2024-05-01',
+        }
+      )
+      const currentMonthData = await getNumberOfReservationsOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-05-01',
+          ending: '2024-06-01',
+        }
+      )
       if (lastMonthData !== undefined && currentMonthData !== undefined) {
         let pastMonth = currentMonthData >= lastMonthData ? '+' : '-'
 
@@ -37,40 +44,42 @@ export function TotalRevenueCard({ parkingId }: { parkingId: number }) {
             : pastMonth + '0%'
 
         const finalData = {
-          presentData: '$' + currentMonthData,
+          presentData: '+' + currentMonthData + ' reservas',
           pastData: pastMonth,
         }
-        setTotalRevenueData(finalData)
+        setNumberOfReservationsData(finalData)
       }
       setIsLoading(false)
     }
-    fetchIncomes()
+    fetchNumberOfReservations()
   }, [])
   return (
     <Card x-chunk='dashboard-01-chunk-0'>
       <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Ingresos Totales</CardTitle>
-        <DollarSign className='h-4 w-4 text-muted-foreground' />
+        <CardTitle className='text-sm font-medium'>
+          Cantidad de Reservas
+        </CardTitle>
+        <NotebookPen className='h-4 w-4 text-muted-foreground' />
       </CardHeader>
       <CardContent className='overflow-hidden'>
         <div className='text-2xl font-bold'>
           {isLoading ? (
             <Skeleton className='h-6 w-56 my-1' />
-          ) : totalRevenueData === null ? (
+          ) : numberOfReservationsData === null ? (
             <span className='font-light text-xl italic'>
               No se pudo cargar los datos
             </span>
           ) : (
-            totalRevenueData.presentData
+            numberOfReservationsData.presentData
           )}
         </div>
         <p className='text-xs text-muted-foreground'>
           {isLoading ? (
             <Skeleton className='h-5 w-48 my-1' />
-          ) : totalRevenueData === null ? (
+          ) : numberOfReservationsData === null ? (
             <span className='font-light text-sm italic'>Intenta más tarde</span>
           ) : (
-            totalRevenueData.pastData + ' desde el mes pasado'
+            numberOfReservationsData.pastData + ' desde el mes pasado'
           )}
         </p>
       </CardContent>

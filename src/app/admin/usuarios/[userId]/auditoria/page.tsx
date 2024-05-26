@@ -60,7 +60,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
             .map((part) => part.padStart(2, '0'))
             .reverse()
             .join('-'),
-        }
+        }        
         await getAuditsByUserId(userId, dateRangeData)
       }
     }
