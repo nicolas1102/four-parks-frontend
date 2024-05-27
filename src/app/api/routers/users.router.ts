@@ -52,6 +52,11 @@ export const getOneUserByEmailRequest = async (email: string) => {
   return res;
 };
 
+export const getOneUserByIdRequest = async (id: number) => {
+  const res = await axios.get(BASE_URL + `/users/user/id/${id}`)
+  return res;
+};
+
 export const deleteUserRequest = async (email: string) => {
   const res = await axios.delete(BASE_URL + `/users/user/delete/email/${email}`)
   return res

@@ -5,6 +5,7 @@ import {
   deleteUserRequest,
   getFreeAdminsRequest,
   getOneUserByEmailRequest,
+  getOneUserByIdRequest,
   getUsersByRoleRequest,
   getUsersRequest,
   unblockUserAccountRequest,
@@ -46,6 +47,9 @@ interface UserContextType {
   getUsersByRole: (role: string) => Promise<UserInterface[]>
   getOneUserByEmail: (
     email: string
+  ) => Promise<UserInterface | undefined> | UserInterface
+  getOneUserById: (
+    id: number
   ) => Promise<UserInterface | undefined> | UserInterface
   updateUser: (
     user: UserInterface
@@ -129,6 +133,36 @@ export function UserProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const res = await getOneUserByEmailRequest(email)
+      toast({
+        title: '¡Se obtuvo la información del usuario con éxito!',
+        description: '',
+      })
+      return res.data as UserInterface
+    } catch (error: any) {
+      if (error?.response?.data) {
+        toast({
+          variant: 'destructive',
+          title:
+            'Ha ocurrido un error al intentar obtener los datos del usuario! Por favor intentalo más tarde.',
+          description: error?.response.data,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'No se ha podido conectar con el servidor.',
+          description: 'Intentalo más tarde.',
+        })
+      }
+      console.error('Error fetching user:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const getOneUserById = async (id: number) => {
+    try {
+      setIsLoading(true)
+      const res = await getOneUserByIdRequest(id)
       toast({
         title: '¡Se obtuvo la información del usuario con éxito!',
         description: '',
@@ -397,6 +431,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         getFreeAdmins,
         getUsersByRole,
         getOneUserByEmail,
+        getOneUserById,
         deleteUser,
         updateUser,
         unblockUserAccount,

@@ -11,10 +11,11 @@ import { addDays } from 'date-fns'
 import { DateRange } from 'react-day-picker'
 import { useUser } from '@/services/useUser'
 import { UserInterface } from '@/lib/interfaces/user.interface'
+import NoResults from '@/components/NoResults'
 
 const Page = ({ params: { userId } }: { params: { userId: number } }) => {
   const { audits, getAuditsByUserId, isLoading } = useAudit()
-  const { getOneUserByEmail, isLoading: isUseUserLoading } = useUser()
+  const { getOneUserById, isLoading: isUseUserLoading } = useUser()
   const [user, setUser] = useState<UserInterface>()
   const [isFistTime, setIsFistTime] = useState(true)
 
@@ -25,10 +26,10 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
 
   useEffect(() => {
     const fetchUser = async (userId: number) => {
-      // const userData = await getOneUserById(userId)
-      // userData && setUser(userData)
+      const userData = await getOneUserById(userId)
+      userData && setUser(userData)
     }
-    userId && fetchUser(userId)
+    userId.toString() !== '-1' && fetchUser(userId)
   }, [])
 
   const onSubmit = () => {
@@ -58,7 +59,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
             .map((part) => part.padStart(2, '0'))
             .reverse()
             .join('-'),
-        }        
+        }
         await getAuditsByUserId(userId, dateRangeData)
       }
     }
@@ -68,6 +69,8 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
     <div className=' flex flex-col relative m-6 sm:m-10'>
       {isLoading || isUseUserLoading ? (
         <Loader />
+      ) : user === undefined && userId.toString() !== '-1' ? (
+        <NoResults />
       ) : (
         <>
           <div className='flex sm:flex-row sm:justify-between justify-center flex-col  gap-y-3'>
@@ -79,16 +82,23 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
               <p className='text-sm tracking-wider'>
                 Visualiza todas las acciones del usuario.
               </p>
-              <div>
-                {/* <p className='tracking-widest'>
-                  ID:{' '}
-                  <span className='font-light'>
-                    {user?.firstName + ' ' + user?.firstLastname}
-                  </span>
-                </p>
-                <p className='tracking-widest'>NOMBRE:</p>
-                <p className='tracking-widest'>EMAIL:</p> */}
-              </div>
+              {userId.toString() !== '-1' && (
+                <div>
+                  <p className='tracking-widest'>
+                    NOMBRE:{' '}
+                    <span className='font-light'>
+                      {user?.firstName + ' ' + user?.firstLastname}
+                    </span>
+                  </p>
+                  <p className='tracking-widest'>
+                    EMAIL: <span className='font-light'>{user?.email}</span>
+                  </p>
+                  <p className='tracking-widest'>
+                    ROLE:{' '}
+                    {/* <span className='font-light'>{user?.roleList[0]}</span> */}
+                  </p>
+                </div>
+              )}
             </div>
             <div className='flex gap-2 sm:flex-row flex-col'>
               <DateRangePicker
