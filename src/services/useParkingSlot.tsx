@@ -17,7 +17,9 @@ interface ParkingSlotContextType {
   setParkingSlots: Dispatch<SetStateAction<ParkingSlotInterface[]>>
   isLoading: boolean
   setIsLoading: (isLoading: boolean) => void
-  getParkingSlotsFromParkingByParkingId: (parkingId: number) => Promise<void>
+  getParkingSlotsFromParkingByParkingId: (
+    parkingId: number
+  ) => Promise<ParkingSlotInterface[]>
 }
 
 const ParkingSlotContext = createContext<ParkingSlotContextType | null>(null)
@@ -41,6 +43,7 @@ export function ParkingSlotProvider({ children }: { children: ReactNode }) {
       const res = await getParkingSlotsFromOneParkingByParkingIdRequest(
         parkingId
       )
+      return res.data
       setParkingSlots(res.data)
     } catch (error: any) {
       if (error?.response?.data) {

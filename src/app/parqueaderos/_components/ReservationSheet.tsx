@@ -56,15 +56,20 @@ const ReservationSheet = ({
         variant: 'destructive',
         title: 'Selecciona un tipo de vehículo válido.',
       })
+      return
     } else if (vehicleType === -1) {
       toast({
         variant: 'destructive',
         title: 'Ya quisiera usted tener una nube voladora.',
       })
-    } else if (session && vehicleType) {
-      await getParkingSlotsFromParkingByParkingId(selectedParking.id!)
+      return
+    }
+    if (session && vehicleType) {
+      const parkingSlotsData = await getParkingSlotsFromParkingByParkingId(
+        selectedParking.id!
+      )
 
-      const availableSlots = parkingSlots.filter((parkingSlotItem) => {
+      const availableSlots = parkingSlotsData.filter((parkingSlotItem) => {
         if (
           parkingSlotItem.vehicleTypeId?.id === vehicleType &&
           parkingSlotItem.slotStatusId?.status === 'EMPTY' &&
