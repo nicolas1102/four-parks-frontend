@@ -43,13 +43,13 @@ const Page = () => {
 
   const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
     try {
-      if (!stateCaptcha) {
-        toast({
-          variant: 'destructive',
-          title: 'Recuerda llenar el captcha.',
-        })
-        return
-      }
+      // if (!stateCaptcha) {
+      //   toast({
+      //     variant: 'destructive',
+      //     title: 'Recuerda llenar el captcha.',
+      //   })
+      //   return
+      // }
 
       setIsLoading(true)
       // usamos metodo de next-auth para inicio de sesioon
@@ -149,13 +149,13 @@ const Page = () => {
                 )}
               </div>
               <div className='flex justify-center sm:w-[407px] h-[78px]'>
-                <ReCAPTCHA
+                {/* <ReCAPTCHA
                   className=''
                   size='normal'
                   theme={theme === 'light' ? 'light' : 'dark'}
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                   onChange={setStateCaptcha}
-                />
+                /> */}
               </div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />
