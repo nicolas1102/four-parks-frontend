@@ -124,20 +124,20 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
       const res = await getFinishedReservationsByUserIdRequest(userId)
       setReservations(res.data)
     } catch (error: any) {
-      if (error?.response?.data) {
-        toast({
-          variant: 'destructive',
-          title:
-            'Ha ocurrido un error al intentar obtener las reservas! Por favor intentalo más tarde.',
-          description: error?.response.data,
-        })
-      } else {
-        toast({
-          variant: 'destructive',
-          title: 'No se ha podido conectar con el servidor.',
-          description: 'Intentalo más tarde.',
-        })
-      }
+      // if (error?.response?.data) {
+      //   toast({
+      //     variant: 'destructive',
+      //     title:
+      //       'Ha ocurrido un error al intentar obtener las reservas! Por favor intentalo más tarde.',
+      //     description: error?.response.data,
+      //   })
+      // } else {
+      //   toast({
+      //     variant: 'destructive',
+      //     title: 'No se ha podido conectar con el servidor.',
+      //     description: 'Intentalo más tarde.',
+      //   })
+      // }
       console.error('Error fetching reservations:', error)
     } finally {
       setIsLoading(false)
@@ -176,20 +176,20 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
       const res = await getActiveReservationByUserIdRequest(userId)
       return res.data[0] as ReservationInterface
     } catch (error: any) {
-      if (error?.response?.data) {
-        toast({
-          variant: 'destructive',
-          title:
-            'Ha ocurrido un error al intentar obtener los datos de la reserva! Por favor intentalo más tarde.',
-          description: error?.response.data,
-        })
-      } else {
-        toast({
-          variant: 'destructive',
-          title: 'No se ha podido conectar con el servidor.',
-          description: 'Intentalo más tarde.',
-        })
-      }
+      // if (error?.response?.data) {
+      //   toast({
+      //     variant: 'destructive',
+      //     title:
+      //       'Ha ocurrido un error al intentar obtener los datos de la reserva! Por favor intentalo más tarde.',
+      //     description: error?.response.data,
+      //   })
+      // } else {
+      //   toast({
+      //     variant: 'destructive',
+      //     title: 'No se ha podido conectar con el servidor.',
+      //     description: 'Intentalo más tarde.',
+      //   })
+      // }
       console.error('Error fetching user:', error)
     } finally {
       setIsLoading(false)
