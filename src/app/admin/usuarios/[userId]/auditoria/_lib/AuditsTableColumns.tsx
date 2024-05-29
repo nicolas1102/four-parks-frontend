@@ -45,9 +45,9 @@ const AuditsTableColumns = ({ data }: { data: AuditInterface[] }) => {
         const audit = row.original
         return (
           <div className=''>
-            <p>{audit.userDto.firstName + ' ' + audit.userDto.firstLastname}</p>
+            <p>{audit.userShowable.firstName + ' ' + audit.userShowable.firstLastname}</p>
             <p className='italic text-muted-foreground'>
-              {audit.userDto.email}
+              {audit.userShowable.email}
             </p>
           </div>
         )
@@ -58,7 +58,7 @@ const AuditsTableColumns = ({ data }: { data: AuditInterface[] }) => {
       header: 'Actividad',
       cell: ({ row }) => {
         const audit = row.original
-        return <div className=''>{audit.activity.name}</div>
+        return <div className=''>{audit.activityShowable.name}</div>
       },
     },
     {
@@ -111,8 +111,8 @@ const AuditsTableColumns = ({ data }: { data: AuditInterface[] }) => {
                 <DropdownMenuItem
                   className='cursor-pointer'
                   onClick={() => {
-                    if (audit?.userDto)
-                      navigator.clipboard.writeText(audit.userDto.id + '')
+                    if (audit?.userShowable)
+                      navigator.clipboard.writeText(audit.userShowable.id + '')
                   }}
                 >
                   Copiar ID de usuario
@@ -120,8 +120,8 @@ const AuditsTableColumns = ({ data }: { data: AuditInterface[] }) => {
                 <DropdownMenuItem
                   className='cursor-pointer'
                   onClick={() => {
-                    if (audit?.userDto)
-                      navigator.clipboard.writeText(audit.userDto.email + '')
+                    if (audit?.userShowable)
+                      navigator.clipboard.writeText(audit.userShowable.email + '')
                   }}
                 >
                   Copiar email de usuario

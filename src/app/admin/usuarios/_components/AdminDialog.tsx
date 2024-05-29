@@ -66,8 +66,6 @@ export function AdminDialog({ admin }: { admin?: UserInterface }) {
     const res = admin
       ? await updateUser(adminData)
       : await createAdmin(adminData)
-
-    // const res = await updateUser(adminData)
     // if (res?.status === 200) {
     //   router.push('/admin/usuarios')
     //   router.refresh()

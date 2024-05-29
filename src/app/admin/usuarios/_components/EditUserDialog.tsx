@@ -27,8 +27,12 @@ import { Check, X } from 'lucide-react'
 
 export function EditUserDialog({ user }: { user: UserInterface }) {
   const router = useRouter()
-  const [accountActiveState, setAccountActiveState] = useState(user.accountActive)
-  const [accountBlockedState, setAccountBlockedState] = useState(user.accountBlocked)
+  const [accountActiveState, setAccountActiveState] = useState(
+    user.accountActive
+  )
+  const [accountBlockedState, setAccountBlockedState] = useState(
+    user.accountBlocked
+  )
   const { updateUser, isLoading } = useUser()
   const {
     register,

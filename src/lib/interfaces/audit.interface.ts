@@ -4,8 +4,8 @@ export interface AuditInterface {
   id?: number
   ip?: string
   happening_date: string
-  activity: ActivityInterface
-  userDto: UserInterface
+  activityShowable: ActivityInterface
+  userShowable: UserInterface
 }
 
 export interface ActivityInterface {
