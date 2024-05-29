@@ -36,6 +36,8 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
     if (isFistTime === true) setIsFistTime(false)
     const fetchAudits = async () => {
       if (dateRange?.from !== undefined && dateRange?.to !== undefined) {
+        const nextDay = new Date(dateRange.to)
+        nextDay.setDate(nextDay.getDate() + 1)
         const dateRangeData = {
           beginning: dateRange?.from
             ?.toLocaleDateString('es-CO', {
@@ -48,7 +50,7 @@ const Page = ({ params: { userId } }: { params: { userId: number } }) => {
             .map((part) => part.padStart(2, '0'))
             .reverse()
             .join('-'),
-          ending: dateRange?.to
+          ending: nextDay
             ?.toLocaleDateString('es-CO', {
               year: 'numeric',
               month: 'numeric',
