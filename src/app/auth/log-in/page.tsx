@@ -149,13 +149,13 @@ const Page = () => {
                 )}
               </div>
               <div className='flex justify-center sm:w-[407px] h-[78px]'>
-                {/* <ReCAPTCHA
+                <ReCAPTCHA
                   className=''
                   size='normal'
                   theme={theme === 'light' ? 'light' : 'dark'}
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                   onChange={setStateCaptcha}
-                /> */}
+                />
               </div>
 
               <PrimaryButton text={'INGRESAR'} isLoading={isLoading} />

@@ -9,20 +9,25 @@ import { AdminDialog } from './_components/AdminDialog'
 import NoResults from '@/components/NoResults'
 
 const Page = () => {
-  const { users, isLoading, getUsersByRole, setUsers } = useUser()
+  const { users,
+          isLoading,
+          getUsersByRole,
+          setUsers
+        } = useUser()
+
   const [role, setRole] = useState('ALL')
 
   useEffect(() => {
     const fetchUsers = async () => {
       if (role === 'ALL') {
-        const mangersData = await getUsersByRole('2')
+        const managersData = await getUsersByRole('2')
         const usersData = await getUsersByRole('3')
         if (
           usersData &&
-          mangersData &&
-          (mangersData.length > 0 || usersData.length > 0)
+          managersData &&
+          (managersData.length > 0 || usersData.length > 0)
         ) {
-          setUsers([...mangersData, ...usersData])
+          setUsers([...managersData, ...usersData])
         }
       } else if (role === 'USUARIO') {
         const usersData = await getUsersByRole('3')
