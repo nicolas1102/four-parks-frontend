@@ -5,6 +5,7 @@ import { DateRangeInterface } from '@/lib/interfaces/statistic.interface'
 import {
   getIncomesOnDateByParkingIdRequest,
   getNumberOfReservationsOnDateByParkingIdRequest,
+  getNumberOfUsersOnDateByParkingRequest,
   getNumberOfUsersOnDateRequest,
   getVehicleTypeStatisticsByParkingIdRequest,
 } from '@/app/api/routers/statistics.router'
@@ -22,6 +23,10 @@ interface StatisticContextType {
     dateRange: DateRangeInterface
   ) => Promise<number | undefined>
   getNumberOfUsersOnDate: (
+    dateRange: DateRangeInterface
+  ) => Promise<number | undefined>
+  getNumberOfUsersOnDateByParkingId: (
+    parkingId: number,
     dateRange: DateRangeInterface
   ) => Promise<number | undefined>
   getIncomesOnDateByParkingId: (
@@ -85,6 +90,26 @@ export function StatisticProvider({ children }: { children: ReactNode }) {
     setIsLoading(true)
     try {
       const res = await getNumberOfUsersOnDateRequest(dateRange)
+      console.log(res.data)
+
+      return res.data.length as number
+    } catch (error: any) {
+      console.error('Error fetching NumberOfUsersOnDateByParkingId:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const getNumberOfUsersOnDateByParkingId = async (
+    parkingId: number,
+    dateRange: DateRangeInterface
+  ) => {
+    setIsLoading(true)
+    try {
+      const res = await getNumberOfUsersOnDateByParkingRequest(
+        parkingId,
+        dateRange
+      )
       return res.data.length as number
     } catch (error: any) {
       console.error('Error fetching NumberOfUsersOnDateByParkingId:', error)
@@ -116,6 +141,7 @@ export function StatisticProvider({ children }: { children: ReactNode }) {
         getVehicleTypeStatisticsOnDateByParkingId,
         getNumberOfReservationsOnDateByParkingId,
         getNumberOfUsersOnDate,
+        getNumberOfUsersOnDateByParkingId,
         getIncomesOnDateByParkingId,
       }}
     >

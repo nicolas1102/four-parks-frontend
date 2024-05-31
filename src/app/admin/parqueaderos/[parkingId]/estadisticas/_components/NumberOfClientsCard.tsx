@@ -11,23 +11,27 @@ export interface ComparisonCard {
   pastData: string
 }
 
-export function NumberOfClientsCard() {
+export function NumberOfClientsCard({ parkingId }: { parkingId: number }) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { getNumberOfUsersOnDate } = useStatistic()
+  const { getNumberOfUsersOnDate, getNumberOfUsersOnDateByParkingId } =
+    useStatistic()
   const [numberOfClientsData, setNumberOfClientsData] =
     useState<ComparisonCard | null>(null)
 
   useEffect(() => {
     const fetchNumberOfClients = async () => {
       setIsLoading(true)
-      const lastMonthData = await getNumberOfUsersOnDate({
+      const lastMonthData = await getNumberOfUsersOnDateByParkingId(parkingId, {
         beginning: '2024-04-01',
         ending: '2024-05-01',
       })
-      const currentMonthData = await getNumberOfUsersOnDate({
-        beginning: '2024-05-01',
-        ending: '2024-06-01',
-      })
+      const currentMonthData = await getNumberOfUsersOnDateByParkingId(
+        parkingId,
+        {
+          beginning: '2024-05-01',
+          ending: '2024-06-01',
+        }
+      )
       if (lastMonthData !== undefined && currentMonthData !== undefined) {
         let pastMonth = currentMonthData >= lastMonthData ? '+' : '-'
 

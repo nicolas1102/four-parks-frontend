@@ -77,9 +77,7 @@ export function AuditProvider({ children }: { children: ReactNode }) {
   ) => {
     try {
       setIsLoading(true)
-      const res = await getAuditsByUserIdRequest(userId, dateRange)
-      console.log(res);
-      
+      const res = await getAuditsByUserIdRequest(userId, dateRange)    
       setAudits(res.data)
     } catch (error: any) {
       if (error?.response?.data) {

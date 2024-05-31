@@ -22,6 +22,11 @@ export const getNumberOfUsersOnDateRequest = async (dateRange: DateRangeInterfac
   return res
 }
 
+export const getNumberOfUsersOnDateByParkingRequest = async (parkingId: number, dateRange: DateRangeInterface) => {
+  const res = await axios.post(BASE_URL + `/stats/getUsersForParking/${parkingId}`, dateRange)
+  return res
+}
+
 export const getIncomesOnDateByParkingIdRequest = async (parkingId: number, dateRange: DateRangeInterface) => {
   const res = await axios.post(BASE_URL + `/stats/incomesOnDate/${parkingId}`, dateRange)
   return res
