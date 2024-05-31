@@ -43,13 +43,13 @@ const Page = () => {
 
   const onSubmit = async ({ email, password }: TAuthCredentialsValidator) => {
     try {
-      // if (!stateCaptcha) {
-      //   toast({
-      //     variant: 'destructive',
-      //     title: 'Recuerda llenar el captcha.',
-      //   })
-      //   return
-      // }
+      if (!stateCaptcha) {
+        toast({
+          variant: 'destructive',
+          title: 'Recuerda llenar el captcha.',
+        })
+        return
+      }
 
       setIsLoading(true)
       // usamos metodo de next-auth para inicio de sesioon
