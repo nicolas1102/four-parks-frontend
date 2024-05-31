@@ -163,7 +163,7 @@ export default function Page({
                   <div className='flex gap-8 flex-col'>
                     <div className='grid grid-cols-3 gap-4'>
                       <TotalRevenueCard parkingId={parkingId} />
-                      <NumberOfClientsCard />
+                      <NumberOfClientsCard parkingId={parkingId} />
                       <NumberOfReservationsCard parkingId={parkingId} />
                     </div>
                     <VehicleTypePieChart parkingId={parkingId} />
