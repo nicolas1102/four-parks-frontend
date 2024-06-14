@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Four Parks Colombia
+Four Parks Colombia is an advanced national parking reservation system. This system is designed to facilitate the search and reservation of parking spaces quickly and easily. In addition, it has a complete management and administration module, which allows administrators to efficiently manage all aspects related to parking, including availability, rates, and access control. With its intuitive interface and robust functionalities, Four Parks Colombia is positioned as the ideal solution to optimize the parking experience for both users and administrators.
 
-## Getting Started
+# Features
+## General
+### Landing
+![](./public/screenshots/Landing.png)
+### Responsive
+#### Responsive - Landing
+![](./public/screenshots/ResponsiveLanding.png)
+#### Responsive - Login
+![](./public/screenshots/ResponsiveLogin.png)
+#### Responsive - Select Parkings
+![](./public/screenshots/ResponsiveParkings.png)
 
-First, run the development server:
+### Theme
+#### Dark Theme - Login
+![](./public/screenshots/DarkThemeLogin.png)
+#### Light Theme - Login
+![](./public/screenshots/LightTheme-Login.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Users
+### Select Parkings
+![](./public/screenshots/Parkings.png)
+### Reservation
+![](./public/screenshots/ResponsiveReservation.png)
+### Profile
+![](./public/screenshots/Profile.png)
+### Reservation History
+![](./public/screenshots/ReservationHistory.png)
+### Reservation Resume
+![](./public/screenshots/ReservationResume.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Manager
+### Manager Menu
+![](./public/screenshots/ManagerMenu.png)
+### Manage Users
+![](./public/screenshots/Landing.png)
+#### Create Users
+![](./public/screenshots/ManageUsers.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Manage Parkings
+![](./public/screenshots/ManageParkings.png)
+### Stats
+![](./public/screenshots/Stats.png)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
