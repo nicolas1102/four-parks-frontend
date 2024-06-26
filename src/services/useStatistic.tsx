@@ -125,7 +125,7 @@ export function StatisticProvider({ children }: { children: ReactNode }) {
     setIsLoading(true)
     try {
       const res = await getIncomesOnDateByParkingIdRequest(parkingId, dateRange)
-      return res.data as number
+      return res.data.toFixed(2) as number
     } catch (error: any) {
       console.error('Error fetching IncomesOnDateByParkingId:', error)
     } finally {

@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const FOOTER = 'FOUR PARKS, DONDE TU VEHÍCULO SIEMPRE ESTARÁ SEGURO.'
@@ -14,11 +15,19 @@ const Footer = async () => {
             <span className='text-redFPC-400'>ia</span>
           </p>
           <p className=' sm:text-2xl text-xl tracking-tighter leading-none sm:leading-none'>
-            by Grupo C
+            by Los Papirriquís
           </p>
+          <div className='pt-4 pl-10'>
+            <Image
+              src={'/layout/migue.png'}
+              alt='migue polla'
+              width={110}
+              height={110}
+            />
+          </div>
         </div>
 
-        <div className='col-span-6 sm:px-28  flex flex-col'>
+        <div className='col-span-6 sm:px-28 pt-8 flex flex-col'>
           <Link
             href='/auth/sign-up'
             className='tracking-widest border-b border-blueFPC-400 px-2 py-2 hover:bg-blueFPC-200 duration-700 dark:hover:text-black'
@@ -39,7 +48,7 @@ const Footer = async () => {
           </Link>
         </div>
 
-        <div className='col-span-3'>
+        <div className='col-span-3 pt-8 '>
           <h3 className='tracking-widest sm:text-xl text-lg font-medium pb-1'>
             CONTÁCTANOS
           </h3>

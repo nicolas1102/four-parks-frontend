@@ -22,6 +22,7 @@ import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import Loader from '@/components/Loader'
 import NoResults from '@/components/NoResults'
 import { NumberOfReservationsCard } from '../_components/NumberOfReservationsCard'
+import { Icons } from '@/components/Icons'
 
 export default function Page({
   params: { parkingId },
@@ -99,65 +100,73 @@ export default function Page({
           <ScrollArea className='p-6 border border-yellowFPC-400 '>
             <div ref={pdfExportComponent} className='w-[1000px]'>
               <Card className='overflow-hidden'>
-                <CardHeader className='flex flex-col justify-center bg-muted/50 bg-yellowFPC-400 text-black'>
-                  <CardTitle className='group flex flex-col '>
-                    <h1 className='tracking-widest text-3xl mb-2'>
-                      INFORME{' '}
-                      {parkingId.toString() !== '-1'
-                        ? 'GENERAL'
-                        : 'DE PARQUEADERO'}
-                    </h1>
-                  </CardTitle>
-                  <CardDescription className='text-base flex justify-between text-primary text-black'>
-                    {parkingId.toString() !== '-1' && (
-                      <div>
+                <CardHeader className='flex flex-row justify-between bg-muted/50 bg-yellowFPC-400 text-black'>
+                  <div>
+                    <CardTitle className='group flex flex-col '>
+                      <h1 className='tracking-widest text-3xl mb-2'>
+                        INFORME{' '}
+                        {parkingId.toString() !== '-1'
+                          ? 'GENERAL'
+                          : 'DE PARQUEADERO'}
+                      </h1>
+                    </CardTitle>
+                    <CardDescription className='text-base flex justify-between text-primary text-black'>
+                      {parkingId.toString() !== '-1' && (
+                        <div>
+                          <p className='font-bold tracking-widest'>
+                            NOMBRE:{' '}
+                            <span className='font-medium'>
+                              {parking?.name.toUpperCase()}
+                            </span>
+                          </p>
+                          <p className='font-bold tracking-widest'>
+                            DIRECCIÓN:{' '}
+                            <span className='font-medium'>
+                              {parking?.location.address.toUpperCase()}
+                            </span>
+                          </p>
+                          <p className='font-bold tracking-widest'>
+                            CIUDAD:{' '}
+                            <span className='font-medium'>
+                              {parking?.location.city.city.toUpperCase()}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+
+                      <div className=''>
                         <p className='font-bold tracking-widest'>
-                          NOMBRE:{' '}
+                          HORA:{' '}
                           <span className='font-medium'>
-                            {parking?.name.toUpperCase()}
+                            {new Date()
+                              .toLocaleTimeString('es-CO', {
+                                hour: 'numeric',
+                                minute: 'numeric',
+                              })
+                              .toUpperCase()}
                           </span>
                         </p>
                         <p className='font-bold tracking-widest'>
-                          DIRECCIÓN:{' '}
+                          FECHA:{' '}
                           <span className='font-medium'>
-                            {parking?.location.address.toUpperCase()}
-                          </span>
-                        </p>
-                        <p className='font-bold tracking-widest'>
-                          CIUDAD:{' '}
-                          <span className='font-medium'>
-                            {parking?.location.city.city.toUpperCase()}
+                            {new Date()
+                              .toLocaleDateString('es-CO', {
+                                year: 'numeric',
+                                month: 'numeric',
+                                day: 'numeric',
+                              })
+                              .toUpperCase()}
                           </span>
                         </p>
                       </div>
-                    )}
-
-                    <div className=''>
-                      <p className='font-bold tracking-widest'>
-                        HORA:{' '}
-                        <span className='font-medium'>
-                          {new Date()
-                            .toLocaleTimeString('es-CO', {
-                              hour: 'numeric',
-                              minute: 'numeric',
-                            })
-                            .toUpperCase()}
-                        </span>
-                      </p>
-                      <p className='font-bold tracking-widest'>
-                        FECHA:{' '}
-                        <span className='font-medium'>
-                          {new Date()
-                            .toLocaleDateString('es-CO', {
-                              year: 'numeric',
-                              month: 'numeric',
-                              day: 'numeric',
-                            })
-                            .toUpperCase()}
-                        </span>
-                      </p>
-                    </div>
-                  </CardDescription>
+                    </CardDescription>
+                  </div>
+                  <div className='w-24'>
+                    <Icons.logo className='text-black' />
+                    <p className='text-2xl tracking-tighter font-bold leading-none text-center'>
+                      FourParks
+                    </p>
+                  </div>
                 </CardHeader>
                 <CardContent className='py-6 text-sm'>
                   <div className='flex gap-8 flex-col'>

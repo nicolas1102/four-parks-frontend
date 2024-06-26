@@ -2,9 +2,11 @@ import { Badge } from '@/components/ui/badge'
 import { Bike, Car, Tractor } from 'lucide-react'
 import { PiMotorcycleFill } from 'react-icons/pi'
 import ReservationSheet from './ReservationSheet'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { ParkingInterface } from '@/lib/interfaces/parking.interface'
 import { cn } from '@/lib/utils'
+import { UserLocationContext } from '@/context/UserLocationContext'
+import Link from 'next/link'
 
 const ParkingItem = ({
   parkingData,
@@ -15,6 +17,7 @@ const ParkingItem = ({
   isSelected?: boolean
   setSelectedParkingLot: Dispatch<SetStateAction<ParkingInterface | null>>
 }) => {
+  const { userLocation } = useContext(UserLocationContext)
   return (
     <div
       className={`duration-500 border border-primary pt-1 pb-2 px-2 sm:p-4 ${
@@ -132,8 +135,17 @@ const ParkingItem = ({
             })}
           </div>
 
-          <div className='pt-3'>
+          <div className='pt-3 flex flex-col gap-1'>
             <ReservationSheet selectedParking={parkingData} />
+
+            <Link
+              className='tracking-widest dark:font-semibold hover:bg-yellowFPC-400 bg-yellow-200 dark:border-primary hover:border-primary dark:text-black dark:bg-yellowFPC-200 border border-primary w-full text-center p-1 text-base'
+              href={`https://www.google.com/maps/dir/${parkingData.location.latitude},${parkingData.location.longitude}/${userLocation.lat},${userLocation.lng}/@${userLocation.lat},${userLocation.lng}z?entry=ttu`}
+              target='_blank'
+            >
+              ¿CÓMO LLEGAR?
+            </Link>
+            {/* <SecondaryButton text='¿CÓMO LLEGAR?' onClick={() => {}} />*/}
           </div>
         </div>
       </div>
