@@ -86,7 +86,6 @@ const Features = () => {
             ))}
           </div>
 
-          <ScrollBar orientation='horizontal' />
         </ScrollArea>
       </div>
     </div>
