@@ -13,16 +13,16 @@ import Autoplay from 'embla-carousel-autoplay'
 
 const experiences = [
   {
-    name: 'Hernesto',
+    name: 'Michael',
     experience:
       'Me encantó la opción de reservar mi lugar de estacionamiento con anticipación. Esto me ahorró mucho tiempo y estrés.',
-    image: '/landing/experiences/1.jpg',
+    image: '/landing/experiences/veneco.png',
   },
   {
-    name: 'Pancracio',
+    name: 'Donatelo',
     experience:
       'El sistema de navegación me guio directamente al parqueadero, sin necesidad de dar vueltas. ¡Muy útil!',
-    image: '/landing/experiences/3.jpg',
+    image: '/landing/experiences/danielo.png',
   },
   {
     name: 'Andrés',
@@ -37,10 +37,10 @@ const experiences = [
     image: '/landing/experiences/alejandro.png',
   },
   {
-    name: 'Shara',
+    name: 'Justine',
     experience:
-      'El personal del parqueadero fue muy amable y servicial. Me ayudaron con mi equipaje y me proporcionaron información sobre la zona.',
-    image: '/landing/experiences/2.jpg',
+      'Este es un parqueadero para los mas capos... #LosMasCapitos.',
+    image: '/landing/experiences/jhostyn.png',
   },
 ]
 
