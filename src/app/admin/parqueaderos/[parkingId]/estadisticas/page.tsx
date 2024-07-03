@@ -13,6 +13,7 @@ import { NumberOfClientsCard } from './_components/NumberOfClientsCard'
 import Loader from '@/components/Loader'
 import NoResults from '@/components/NoResults'
 import { NumberOfReservationsCard } from './_components/NumberOfReservationsCard'
+import { ReservationsPerMonthByVehicleTypeLineChart } from './_components/ReservationsPerMonthByVehicleTypeLineChart'
 
 export default function Page({
   params: { parkingId },
@@ -99,6 +100,11 @@ export default function Page({
                 <div className='xl:col-span-2'>
                   <ReservationsPerMonthBarChart parkingId={parkingId} />
                 </div>
+              </div>
+              <div>
+                <ReservationsPerMonthByVehicleTypeLineChart
+                  parkingId={parkingId}
+                />
               </div>
             </div>
           </div>

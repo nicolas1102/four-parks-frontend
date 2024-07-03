@@ -23,6 +23,7 @@ import Loader from '@/components/Loader'
 import NoResults from '@/components/NoResults'
 import { NumberOfReservationsCard } from '../_components/NumberOfReservationsCard'
 import { Icons } from '@/components/Icons'
+import { ReservationsPerMonthByVehicleTypeLineChart } from '../_components/ReservationsPerMonthByVehicleTypeLineChart'
 
 export default function Page({
   params: { parkingId },
@@ -177,6 +178,10 @@ export default function Page({
                     </div>
                     <VehicleTypePieChart parkingId={parkingId} />
                     <ReservationsPerMonthBarChart parkingId={parkingId} />
+
+                    <ReservationsPerMonthByVehicleTypeLineChart
+                      parkingId={parkingId}
+                    />
                   </div>
                 </CardContent>
               </Card>
